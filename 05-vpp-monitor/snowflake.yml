@@ -1,0 +1,27 @@
+definition_version: "2"
+
+entities:
+  EPOWER_VPP_MONITOR:
+    type: snowflake-app
+    identifier:
+      name: EPOWER_VPP_MONITOR
+      database: SNOWFLAKE_APPS
+      schema: PUBLIC
+    artifacts:
+      - src: ./*
+        dest: ./
+        ignore:
+          - node_modules
+          - .env*
+          - __pycache__
+          - "*.pyc"
+          - .next
+          - .git
+          - snowflake.log
+
+    query_warehouse: SNOWFLAKE_APPS_QUERY_WH
+    build_compute_pool:
+      name: SYSTEM_COMPUTE_POOL_CPU
+    service_compute_pool:
+      name: SYSTEM_COMPUTE_POOL_CPU
+    code_stage: EPOWER_VPP_MONITOR_CODE

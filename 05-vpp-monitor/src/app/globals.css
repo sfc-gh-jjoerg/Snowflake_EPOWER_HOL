@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-sm p-5;
+  }
+
+  .filter-chip {
+    @apply px-3 py-1.5 text-sm rounded-lg border border-slate-700 bg-slate-800/60
+           text-slate-300 hover:border-slate-500 hover:text-slate-100
+           transition-all cursor-pointer select-none;
+  }
+
+  .filter-chip-active {
+    @apply border-cyan-500/60 bg-cyan-950/40 text-cyan-300;
+  }
+}

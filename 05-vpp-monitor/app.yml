@@ -1,0 +1,4 @@
+profile:
+  label: "EPOWER VPP Monitor"
+  description: "Real-time Virtual Power Plant performance dashboard showing fleet capacity, day-ahead price optimization, and financial margins across regions and customer segments."
+  icon: public/icon.svg
