@@ -27,3 +27,7 @@ epower_dbt/logs/
 
 # Cortex Code session artifacts
 .snowflake/
+
+# Node.js
+node_modules/
+.next/
