@@ -1,6 +1,6 @@
 # EPOWER Energy Intelligence Demo
 
-![EPOWER](images/epower_wimmel.jpg)
+![EPOWER](images/epower_wimmel_v4.png)
 
 **A hands-on lab for building an Agentic AI application grounded in enterprise data — powered by Snowflake.**
 
@@ -710,7 +710,7 @@ Snowflake_EPOWER_HOL/
 │   └── wimmel-prompt.md             # Prompt used to generate the header image
 │
 └── images/
-    └── epower_wimmel.jpg            # Header image for README
+    └── epower_wimmel_v4.png         # Header image for README
 ```
 
 ### Key Assets
