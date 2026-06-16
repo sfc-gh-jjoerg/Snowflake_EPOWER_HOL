@@ -39,17 +39,47 @@ Before deploying this module, ensure the following are in place:
 
 2. **Paid Snowflake account** — App Runtime is not available on trial accounts.
 
-3. **Snowflake CLI 3.19+** — The `snow app` commands for App Runtime require version 3.19 or later. If you're using **Cortex Code Desktop** or **Cortex Code CLI**, the Snowflake CLI is already bundled — just verify the version. Otherwise, install or upgrade manually:
-   ```bash
-   # macOS (Homebrew) — only needed if not using Cortex Code
-   brew install snowflake-cli    # or: brew upgrade snowflake-cli
+3. **Snowflake CLI 3.19+** — The [Snowflake CLI](https://docs.snowflake.com/en/developer-guide/snowflake-cli) (`snow`) is a command-line tool for managing Snowflake resources, including app deployment. Version 3.19+ is required for `snow app` commands — older versions will fail silently or produce confusing errors.
 
-   # Verify (works regardless of how it was installed)
-   snow --version                # must show 3.19.0 or higher
-   snow app setup --help         # should display App Runtime options
+   The easiest way to get started is to install **Cortex Code**, which bundles the Snowflake CLI and handles connection setup for you:
+   - [Cortex Code Desktop](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code-desktop) — VS Code-based IDE with built-in Snowflake integration
+   - [Cortex Code CLI](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code-cli) — terminal-based agent with Snowflake CLI included
+
+   If you prefer to install the Snowflake CLI standalone:
+   ```bash
+   # macOS (Homebrew)
+   brew install snowflake-cli
+
+   # pip
+   pip install snowflake-cli
    ```
 
+   **Check your version:**
+   ```bash
+   snow --version    # must show 3.19.0 or higher
+   ```
+
+   **Upgrade:**
+   ```bash
+   brew upgrade snowflake-cli    # Homebrew
+   pip install --upgrade snowflake-cli    # pip
+   ```
+
+   > **Tip:** If `snow --version` shows an older version despite upgrading, you may have multiple installations. Run `which snow` to confirm which binary is being used.
+
+4. **Snowflake connection configured** — The Snowflake CLI needs a configured connection to your account. If you're using Cortex Code, this is handled during setup. If you installed the CLI standalone, run `snow connection add` to create a connection, or refer to the [CLI connection docs](https://docs.snowflake.com/en/developer-guide/snowflake-cli/connecting/configure-cli).
+
+5. **ACCOUNTADMIN access** — Needed once for initial account setup (Step 1).
+
 > **Important:** Unlike Modules 1-4 (which deploy via SQL in Snowsight notebooks/worksheets), Module 5 requires the **Snowflake CLI on your local machine**. App Runtime apps involve a build step (compiling TypeScript, bundling CSS, packaging Node.js) that cannot be expressed as SQL — the CLI orchestrates the upload-build-deploy pipeline. There is currently no "deploy from Snowsight" option for App Runtime apps.
+
+### What You'll Learn
+
+By completing this module, you'll gain hands-on experience with:
+
+- **Snowflake App Runtime** — deploying a full-stack web app with a single `snow app deploy` command, no Dockerfile needed
+- **SPCS Authentication** — zero-credential data access via OAuth session tokens and Snowflake SSO for end users
+- **Next.js on Snowflake** — server-side API routes querying Snowflake directly, combined with a React + Recharts + Tailwind CSS frontend
 
 ---
 
@@ -136,6 +166,36 @@ Browser -> HTTPS -> SPCS Service (your Next.js app)
 ```
 
 No passwords, no connection strings, no secrets management. The token is injected into the container by the runtime and refreshed automatically.
+
+### Roles & Access Control
+
+App Runtime separates three concerns:
+
+| Concern | Who controls it | What it governs |
+|---------|----------------|-----------------|
+| **Deploying** | Deploy role (e.g. `SYSADMIN`) | Who can push code via `snow app deploy` |
+| **App access** | Any role granted `USAGE` | Who can open the app URL and interact with it |
+| **Data access** | Logged-in user's active role | Which tables/views the app can query at runtime |
+
+These are independent — you deploy once with your deploy role, then grant access to as many other roles as needed.
+
+**Grant another role access to the app:**
+
+```sql
+GRANT USAGE ON DATABASE SNOWFLAKE_APPS TO ROLE analyst_role;
+GRANT USAGE ON SCHEMA SNOWFLAKE_APPS.PUBLIC TO ROLE analyst_role;
+GRANT USAGE ON APPLICATION SERVICE SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR TO ROLE analyst_role;
+```
+
+**Additional privileges (optional):**
+
+| Privilege | Effect |
+|-----------|--------|
+| `USAGE` | Open and use the app |
+| `OPERATE` | Suspend, resume, and upgrade the app |
+| `MONITOR` | View runtime status and container logs |
+
+> **Note:** Users granted `USAGE` on the app still need appropriate privileges on the underlying tables/views (`EPOWER_DEMO.EPOWER_GOLD.*`) for the dashboard to display data. If a user's role lacks `SELECT` on those views, the app loads but shows empty charts.
 
 ### SPCS Concepts (Reference)
 
