@@ -146,21 +146,24 @@ def generate_domain_data(session):
 
     def rd_seasonal_sales(s, e, product_keys):
         """Generate date with seasonality: Solar peaks Mar-Jun, HP peaks Sep-Nov."""
+        import calendar
         d = rd_with_trend(s, e)
         month = d.month
-        # Check if any product is solar (6,7,8) or HP (9,10)
         is_solar = any(pk in sol for pk in product_keys) if isinstance(product_keys, (list, set)) else product_keys in sol
         is_hp = any(pk in hp for pk in product_keys) if isinstance(product_keys, (list, set)) else product_keys in hp
 
-        # Rejection sampling for seasonality (soft — ~60% compliance)
+        def safe_replace_month(dt, new_month):
+            max_day = calendar.monthrange(dt.year, new_month)[1]
+            return dt.replace(month=new_month, day=min(dt.day, max_day))
+
         if is_solar:
             solar_weight = {1: 0.4, 2: 0.6, 3: 0.9, 4: 1.0, 5: 1.0, 6: 0.9, 7: 0.7, 8: 0.6, 9: 0.5, 10: 0.4, 11: 0.3, 12: 0.3}
             if random.random() > solar_weight.get(month, 0.5):
-                d = d.replace(month=random.choice([3, 4, 5, 6]))
+                d = safe_replace_month(d, random.choice([3, 4, 5, 6]))
         elif is_hp:
             hp_weight = {1: 0.5, 2: 0.4, 3: 0.3, 4: 0.3, 5: 0.3, 6: 0.3, 7: 0.4, 8: 0.6, 9: 0.9, 10: 1.0, 11: 0.9, 12: 0.7}
             if random.random() > hp_weight.get(month, 0.5):
-                d = d.replace(month=random.choice([9, 10, 11]))
+                d = safe_replace_month(d, random.choice([9, 10, 11]))
         return d
 
     def ds(d):
