@@ -22,6 +22,15 @@ Business rules preserved:
   - Billing includes seasonal patterns and product-specific consumption adjustments
   - Service tickets have realistic sentiment/priority based on description keywords
 
+Data realism enhancements (v2):
+  - Regional product specialization (South=Solar, North=HeatPump, West=Gewerbe)
+  - YoY growth trend (+15%) and seasonal sales patterns
+  - Segment-dependent contract values (Gewerbe >> Kleingewerbe >> Privat)
+  - Realistic contracts per customer (Privat: 1-3, Kleingewerbe: 2-4, Gewerbe: 3-6)
+  - Regional service clusters (East: installation complaints from fast growth)
+  - Temporal service trends (winter = heat pump issues)
+  - HR with stable department assignments and realistic career paths
+
 Usage:
   This module is uploaded to @EPOWER_OPS.EPOWER_STAGE/code/ and referenced via
   IMPORTS in the CREATE PROCEDURE statement. The handler function is called by:
@@ -55,6 +64,12 @@ def generate_domain_data(session):
     product_df = session.table("EPOWER_DEMO.EPOWER_GOLD.PRODUCT_DIM").to_pandas()
     employee_df = session.table("EPOWER_DEMO.EPOWER_GOLD.EMPLOYEE_DIM").to_pandas()
 
+    # Region keys: 400=North, 401=South, 402=West, 403=East
+    REGION_NORTH = 400
+    REGION_SOUTH = 401
+    REGION_WEST = 402
+    REGION_EAST = 403
+
     PRODUCT_PRICING = {
         1:  {'cmin': 0,     'cmax': 0,     'omin': 900,  'omax': 1200},
         2:  {'cmin': 0,     'cmax': 0,     'omin': 1200, 'omax': 1500},
@@ -73,6 +88,13 @@ def generate_domain_data(session):
         15: {'cmin': 0,     'cmax': 0,     'omin': 600,  'omax': 1200},
     }
 
+    # Segment-specific contract value multipliers
+    SEGMENT_MULTIPLIER = {
+        'Privatkunde': 1.0,
+        'Kleingewerbe': 2.5,
+        'Gewerbekunde': 6.0,
+    }
+
     elec = [1, 2, 3]
     gas = [4, 5]
     sol = [6, 7, 8]
@@ -83,18 +105,63 @@ def generate_domain_data(session):
     # Customer segmentation (deterministic via seed)
     all_customers = list(range(1, NUM_CUSTOMERS + 1))
     random.shuffle(all_customers)
-    ns = int(NUM_CUSTOMERS * 0.70)
-    nh = int(NUM_CUSTOMERS * 0.70)
-    no = int(NUM_CUSTOMERS * 0.60)
-    solar_customers = set(all_customers[:ns])
-    hp_pool = all_customers[:no] + all_customers[ns:ns + (nh - no)]
-    hp_customers = set(hp_pool)
-    gas_customers = set(all_customers) - hp_customers
 
     cl = customer_df.set_index('CUSTOMER_KEY')
 
+    # Regional product assignment — Solar more likely in South, HP in North
+    solar_customers = set()
+    hp_customers = set()
+    gas_customers = set()
+
+    for cust in all_customers:
+        try:
+            region = int(cl.loc[cust]['REGION_KEY'])
+        except (KeyError, TypeError):
+            region = REGION_WEST
+
+        # Solar probability by region
+        solar_prob = {REGION_SOUTH: 0.85, REGION_WEST: 0.70, REGION_EAST: 0.65, REGION_NORTH: 0.55}
+        # Heat pump probability by region
+        hp_prob = {REGION_NORTH: 0.80, REGION_EAST: 0.75, REGION_WEST: 0.68, REGION_SOUTH: 0.60}
+
+        if random.random() < solar_prob.get(region, 0.70):
+            solar_customers.add(cust)
+        if random.random() < hp_prob.get(region, 0.70):
+            hp_customers.add(cust)
+
+    # Customers without heat pump get gas
+    gas_customers = set(all_customers) - hp_customers
+
     def rd(s, e):
         return s + timedelta(days=random.randint(0, max((e - s).days, 1)))
+
+    def rd_with_trend(s, e):
+        """Generate a date with YoY growth trend — more recent dates more likely."""
+        total_days = (e - s).days
+        if total_days <= 0:
+            return s
+        # Use a power distribution: exponent > 1 skews toward recent
+        r = random.random() ** 0.7  # mild bias toward recent
+        return s + timedelta(days=int(r * total_days))
+
+    def rd_seasonal_sales(s, e, product_keys):
+        """Generate date with seasonality: Solar peaks Mar-Jun, HP peaks Sep-Nov."""
+        d = rd_with_trend(s, e)
+        month = d.month
+        # Check if any product is solar (6,7,8) or HP (9,10)
+        is_solar = any(pk in sol for pk in product_keys) if isinstance(product_keys, (list, set)) else product_keys in sol
+        is_hp = any(pk in hp for pk in product_keys) if isinstance(product_keys, (list, set)) else product_keys in hp
+
+        # Rejection sampling for seasonality (soft — ~60% compliance)
+        if is_solar:
+            solar_weight = {1: 0.4, 2: 0.6, 3: 0.9, 4: 1.0, 5: 1.0, 6: 0.9, 7: 0.7, 8: 0.6, 9: 0.5, 10: 0.4, 11: 0.3, 12: 0.3}
+            if random.random() > solar_weight.get(month, 0.5):
+                d = d.replace(month=random.choice([3, 4, 5, 6]))
+        elif is_hp:
+            hp_weight = {1: 0.5, 2: 0.4, 3: 0.3, 4: 0.3, 5: 0.3, 6: 0.3, 7: 0.4, 8: 0.6, 9: 0.9, 10: 1.0, 11: 0.9, 12: 0.7}
+            if random.random() > hp_weight.get(month, 0.5):
+                d = d.replace(month=random.choice([9, 10, 11]))
+        return d
 
     def ds(d):
         return d.isoformat() if isinstance(d, date) else str(d)[:10]
@@ -105,88 +172,165 @@ def generate_domain_data(session):
     contracts = []
     cid = 1
 
+    # Determine contracts per customer based on segment
+    customer_contract_budget = {}
+    for cust in all_customers:
+        try:
+            ctype = cl.loc[cust]['CUSTOMER_TYPE']
+        except (KeyError, TypeError):
+            ctype = 'Privatkunde'
+
+        if ctype == 'Gewerbekunde':
+            n = random.choices([3, 4, 5, 6], weights=[0.20, 0.35, 0.30, 0.15])[0]
+        elif ctype == 'Kleingewerbe':
+            n = random.choices([2, 3, 4], weights=[0.30, 0.45, 0.25])[0]
+        else:  # Privatkunde
+            n = random.choices([1, 2, 3], weights=[0.30, 0.45, 0.25])[0]
+        customer_contract_budget[cust] = n
+
+    # Phase 1: Mandatory products (solar, hp, gas)
     for cust in solar_customers:
         c = cl.loc[cust]
-        pk = random.choice(sol)
+        region = int(c['REGION_KEY'])
+        ctype = c['CUSTOMER_TYPE']
+        mult = SEGMENT_MULTIPLIER.get(ctype, 1.0)
+        # South gets premium solar (product 8 more likely)
+        if region == REGION_SOUTH:
+            pk = random.choices(sol, weights=[0.2, 0.3, 0.5])[0]
+        else:
+            pk = random.choice(sol)
         p = PRODUCT_PRICING[pk]
+        amt = round(random.uniform(p['cmin'], p['cmax']) * mult, 2)
         contracts.append({
-            'SALE_ID': cid, 'DATE': ds(rd(sales_start, sales_end)),
+            'SALE_ID': cid, 'DATE': ds(rd_seasonal_sales(sales_start, sales_end, pk)),
             'CUSTOMER_KEY': cust, 'PRODUCT_KEY': pk,
             'SALES_REP_KEY': random.randint(1, 500),
-            'REGION_KEY': int(c['REGION_KEY']),
+            'REGION_KEY': region,
             'VENDOR_KEY': random.randint(1, 200),
-            'AMOUNT': round(random.uniform(p['cmin'], p['cmax']), 2),
-            'UNITS': 1
+            'AMOUNT': amt, 'UNITS': 1
         })
         cid += 1
 
     for cust in hp_customers:
         c = cl.loc[cust]
-        pk = random.choice(hp)
+        region = int(c['REGION_KEY'])
+        ctype = c['CUSTOMER_TYPE']
+        mult = SEGMENT_MULTIPLIER.get(ctype, 1.0)
+        # North gets premium HP (product 10 more likely)
+        if region == REGION_NORTH:
+            pk = random.choices(hp, weights=[0.3, 0.7])[0]
+        else:
+            pk = random.choice(hp)
         p = PRODUCT_PRICING[pk]
+        amt = round(random.uniform(p['cmin'], p['cmax']) * mult, 2)
         contracts.append({
-            'SALE_ID': cid, 'DATE': ds(rd(sales_start, sales_end)),
+            'SALE_ID': cid, 'DATE': ds(rd_seasonal_sales(sales_start, sales_end, pk)),
             'CUSTOMER_KEY': cust, 'PRODUCT_KEY': pk,
             'SALES_REP_KEY': random.randint(1, 500),
-            'REGION_KEY': int(c['REGION_KEY']),
+            'REGION_KEY': region,
             'VENDOR_KEY': random.randint(1, 200),
-            'AMOUNT': round(random.uniform(p['cmin'], p['cmax']), 2),
-            'UNITS': 1
+            'AMOUNT': amt, 'UNITS': 1
         })
         cid += 1
 
     for cust in gas_customers:
         c = cl.loc[cust]
+        region = int(c['REGION_KEY'])
+        ctype = c['CUSTOMER_TYPE']
+        mult = SEGMENT_MULTIPLIER.get(ctype, 1.0)
         pk = random.choice(gas)
         p = PRODUCT_PRICING[pk]
+        amt = round(random.uniform(p['omin'], p['omax']) * mult, 2)
         contracts.append({
-            'SALE_ID': cid, 'DATE': ds(rd(sales_start, sales_end)),
+            'SALE_ID': cid, 'DATE': ds(rd_with_trend(sales_start, sales_end)),
             'CUSTOMER_KEY': cust, 'PRODUCT_KEY': pk,
             'SALES_REP_KEY': random.randint(1, 500),
-            'REGION_KEY': int(c['REGION_KEY']),
+            'REGION_KEY': region,
             'VENDOR_KEY': random.randint(1, 200),
-            'AMOUNT': round(random.uniform(p['omin'], p['omax']), 2),
-            'UNITS': random.randint(10000, 25000)
+            'AMOUNT': amt, 'UNITS': random.randint(10000, 25000)
         })
         cid += 1
 
-    remaining = NUM_CONTRACTS - len(contracts)
-    for _ in range(remaining):
-        ck = random.randint(1, NUM_CUSTOMERS)
-        c = cl.loc[ck]
-        is_hp = ck in hp_customers
+    # Phase 2: Fill remaining contracts respecting per-customer budgets
+    # Count existing contracts per customer
+    existing_counts = {}
+    for con in contracts:
+        ck = con['CUSTOMER_KEY']
+        existing_counts[ck] = existing_counts.get(ck, 0) + 1
 
-        if is_hp:
-            pt = random.choices(['e', 'sh', 'ev', 'e'], weights=[0.55, 0.20, 0.15, 0.10])[0]
+    remaining = NUM_CONTRACTS - len(contracts)
+    # Weighted customer selection: customers below their budget get more contracts
+    eligible = [(cust, max(customer_contract_budget[cust] - existing_counts.get(cust, 0), 0))
+                for cust in all_customers]
+    eligible = [(c, w) for c, w in eligible if w > 0]
+
+    for _ in range(remaining):
+        if not eligible:
+            ck = random.randint(1, NUM_CUSTOMERS)
         else:
-            pt = random.choices(['e', 'g', 'sh', 'ev', 'e'], weights=[0.40, 0.25, 0.15, 0.12, 0.08])[0]
+            # Weighted selection — customers needing more contracts get priority
+            if random.random() < 0.7 and eligible:
+                idx = random.randint(0, len(eligible) - 1)
+                ck = eligible[idx][0]
+                # Reduce weight
+                new_w = eligible[idx][1] - 1
+                if new_w <= 0:
+                    eligible.pop(idx)
+                else:
+                    eligible[idx] = (ck, new_w)
+            else:
+                ck = random.randint(1, NUM_CUSTOMERS)
+
+        c = cl.loc[ck]
+        region = int(c['REGION_KEY'])
+        ctype = c['CUSTOMER_TYPE']
+        mult = SEGMENT_MULTIPLIER.get(ctype, 1.0)
+        is_hp_cust = ck in hp_customers
+
+        # West has more E-Mobility (urban), East has more Smart Home
+        if region == REGION_WEST:
+            if is_hp_cust:
+                pt = random.choices(['e', 'sh', 'ev', 'e'], weights=[0.40, 0.15, 0.30, 0.15])[0]
+            else:
+                pt = random.choices(['e', 'g', 'sh', 'ev', 'e'], weights=[0.30, 0.20, 0.15, 0.25, 0.10])[0]
+        elif region == REGION_EAST:
+            if is_hp_cust:
+                pt = random.choices(['e', 'sh', 'ev', 'e'], weights=[0.45, 0.30, 0.15, 0.10])[0]
+            else:
+                pt = random.choices(['e', 'g', 'sh', 'ev', 'e'], weights=[0.35, 0.25, 0.25, 0.08, 0.07])[0]
+        else:
+            if is_hp_cust:
+                pt = random.choices(['e', 'sh', 'ev', 'e'], weights=[0.55, 0.20, 0.15, 0.10])[0]
+            else:
+                pt = random.choices(['e', 'g', 'sh', 'ev', 'e'], weights=[0.40, 0.25, 0.15, 0.12, 0.08])[0]
 
         if pt == 'e':
             pk = random.choice(elec)
             p = PRODUCT_PRICING[pk]
-            amt = round(random.uniform(p['omin'], p['omax']), 2)
-            u = random.randint(2000, 6000)
+            amt = round(random.uniform(p['omin'], p['omax']) * mult, 2)
+            u = int(random.gauss(3500, 1000) * mult) if ctype == 'Privatkunde' else int(random.gauss(12000, 5000))
+            u = max(u, 1500)
         elif pt == 'g':
             pk = random.choice(gas)
             p = PRODUCT_PRICING[pk]
-            amt = round(random.uniform(p['omin'], p['omax']), 2)
+            amt = round(random.uniform(p['omin'], p['omax']) * mult, 2)
             u = random.randint(10000, 25000)
         elif pt == 'sh':
             pk = random.choice(sh)
             p = PRODUCT_PRICING[pk]
-            amt = round(random.uniform(p['cmin'], p['cmax']), 2) if p['cmax'] > 0 else 0
+            amt = round(random.uniform(p['cmin'], p['cmax']) * mult, 2) if p['cmax'] > 0 else 0
             u = 1
         else:
             pk = random.choice(ev)
             p = PRODUCT_PRICING[pk]
-            amt = round(random.uniform(p['cmin'], p['cmax']), 2) if p['cmax'] > 0 else round(random.uniform(p['omin'], p['omax']), 2)
+            amt = round((random.uniform(p['cmin'], p['cmax']) if p['cmax'] > 0 else random.uniform(p['omin'], p['omax'])) * mult, 2)
             u = 1
 
         contracts.append({
-            'SALE_ID': cid, 'DATE': ds(rd(sales_start, sales_end)),
+            'SALE_ID': cid, 'DATE': ds(rd_seasonal_sales(sales_start, sales_end, pk)),
             'CUSTOMER_KEY': ck, 'PRODUCT_KEY': pk,
             'SALES_REP_KEY': random.randint(1, 500),
-            'REGION_KEY': int(c['REGION_KEY']),
+            'REGION_KEY': region,
             'VENDOR_KEY': random.randint(1, 200),
             'AMOUNT': round(amt, 2), 'UNITS': u
         })
@@ -242,11 +386,26 @@ def generate_domain_data(session):
             cu = cl.loc[ck]
         except KeyError:
             continue
+
         housing = cu['HOUSING_TYPE']
-        be = {'Einfamilienhaus': 4200, 'Reihenhaus': 3200, 'Wohnung': 2000,
-              'Mehrfamilienhaus': 2800, 'Gewerbeimmobilie': 12000}.get(housing, 3000)
-        bg = {'Einfamilienhaus': 16000, 'Reihenhaus': 12000, 'Wohnung': 6000,
-              'Mehrfamilienhaus': 10000, 'Gewerbeimmobilie': 30000}.get(housing, 15000)
+        ctype = cu['CUSTOMER_TYPE']
+
+        # Base consumption depends on segment
+        if ctype == 'Gewerbekunde':
+            be = {'Einfamilienhaus': 25000, 'Reihenhaus': 20000, 'Wohnung': 15000,
+                  'Mehrfamilienhaus': 18000, 'Gewerbeimmobilie': 45000}.get(housing, 30000)
+            bg = {'Einfamilienhaus': 50000, 'Reihenhaus': 40000, 'Wohnung': 25000,
+                  'Mehrfamilienhaus': 35000, 'Gewerbeimmobilie': 80000}.get(housing, 50000)
+        elif ctype == 'Kleingewerbe':
+            be = {'Einfamilienhaus': 8000, 'Reihenhaus': 7000, 'Wohnung': 5000,
+                  'Mehrfamilienhaus': 6000, 'Gewerbeimmobilie': 18000}.get(housing, 8000)
+            bg = {'Einfamilienhaus': 22000, 'Reihenhaus': 18000, 'Wohnung': 10000,
+                  'Mehrfamilienhaus': 14000, 'Gewerbeimmobilie': 40000}.get(housing, 20000)
+        else:  # Privatkunde
+            be = {'Einfamilienhaus': 4200, 'Reihenhaus': 3200, 'Wohnung': 2000,
+                  'Mehrfamilienhaus': 2800, 'Gewerbeimmobilie': 12000}.get(housing, 3000)
+            bg = {'Einfamilienhaus': 16000, 'Reihenhaus': 12000, 'Wohnung': 6000,
+                  'Mehrfamilienhaus': 10000, 'Gewerbeimmobilie': 30000}.get(housing, 15000)
 
         hhp = ck in hps
         hsl = ck in ss
@@ -335,13 +494,45 @@ def generate_domain_data(session):
         'Speicher': ['Batteriespeicher Stoerung', 'Speicher laedt nicht', 'Kapazitaet gesunken'],
     }
 
+    # Regional ticket type weights — East has more installation complaints (fast growth)
+    region_ticket_weights = {
+        REGION_EAST: {'Smart Meter': 0.20, 'Rechnung': 0.10, 'Waermepumpe': 0.15, 'Solar': 0.20, 'Tarif': 0.10, 'Wallbox': 0.05, 'Allgemein': 0.10, 'Speicher': 0.10},
+        REGION_NORTH: {'Smart Meter': 0.10, 'Rechnung': 0.15, 'Waermepumpe': 0.25, 'Solar': 0.10, 'Tarif': 0.12, 'Wallbox': 0.08, 'Allgemein': 0.12, 'Speicher': 0.08},
+        REGION_SOUTH: {'Smart Meter': 0.10, 'Rechnung': 0.15, 'Waermepumpe': 0.10, 'Solar': 0.25, 'Tarif': 0.12, 'Wallbox': 0.10, 'Allgemein': 0.10, 'Speicher': 0.08},
+        REGION_WEST: {'Smart Meter': 0.12, 'Rechnung': 0.15, 'Waermepumpe': 0.12, 'Solar': 0.12, 'Tarif': 0.12, 'Wallbox': 0.15, 'Allgemein': 0.12, 'Speicher': 0.08},
+    }
+
     svc_start = today - timedelta(days=3 * 365)
     svc_end = today - timedelta(days=1)
     svl = []
 
     for lid in range(1, NUM_SERVICE_LOGS + 1):
+        # Seasonal: more tickets in winter (HP issues) and summer (solar issues)
         ld = rd(svc_start, svc_end)
-        topic, cat = random.choice(ticket_types)
+        month = ld.month
+
+        ck = random.randint(1, NUM_CUSTOMERS)
+        try:
+            region = int(cl.loc[ck]['REGION_KEY'])
+        except (KeyError, TypeError):
+            region = REGION_WEST
+
+        # Select topic based on region weights
+        weights = region_ticket_weights.get(region, region_ticket_weights[REGION_WEST])
+        topics = list(weights.keys())
+        topic_weights = list(weights.values())
+
+        # Seasonal adjustment: boost HP in winter, Solar in summer
+        adj_weights = list(topic_weights)
+        if month in [11, 12, 1, 2]:
+            hp_idx = topics.index('Waermepumpe')
+            adj_weights[hp_idx] *= 1.8
+        elif month in [6, 7, 8]:
+            sol_idx = topics.index('Solar')
+            adj_weights[sol_idx] *= 1.5
+
+        topic = random.choices(topics, weights=adj_weights)[0]
+        cat = dict(ticket_types)[topic]
         desc = random.choice(desc_map[topic])
 
         if 'defekt' in desc or 'Stoerung' in desc or 'Beschwerde' in desc or 'nicht' in desc:
@@ -354,9 +545,14 @@ def generate_domain_data(session):
             sent = random.choices(['Positiv', 'Neutral', 'Negativ'], weights=[0.15, 0.65, 0.20])[0]
             pri = random.choices(['Niedrig', 'Mittel', 'Hoch', 'Kritisch'], weights=[0.3, 0.5, 0.15, 0.05])[0]
 
+        # East region: higher negative sentiment (growing pains)
+        if region == REGION_EAST and sent == 'Neutral' and random.random() < 0.25:
+            sent = 'Negativ'
+            pri = random.choices(['Mittel', 'Hoch', 'Kritisch'], weights=[0.4, 0.4, 0.2])[0]
+
         rdd = random.randint(0, 14) if pri in ['Niedrig', 'Mittel'] else random.randint(0, 7)
         svl.append({
-            'LOG_ID': lid, 'CUSTOMER_KEY': random.randint(1, NUM_CUSTOMERS),
+            'LOG_ID': lid, 'CUSTOMER_KEY': ck,
             'LOG_DATE': ds(ld), 'TOPIC': topic, 'CATEGORY': cat,
             'DESCRIPTION': desc, 'SENTIMENT': sent,
             'CHANNEL': random.choice(['Telefon', 'Email', 'Chat', 'App']),
@@ -432,6 +628,11 @@ def generate_domain_data(session):
         except (ValueError, TypeError):
             hd = today - timedelta(days=1000)
 
+        # Stable department/job based on employee key (not random each snapshot)
+        dept_key = 10 + (hash(f"dept_{ek}") % 31)
+        job_key = 800 + (hash(f"job_{ek}") % 16)
+        loc_key = 900 + (hash(f"loc_{ek}") % 12)
+
         sal = 35000 + (hash(f"salary_{ek}") % 50000)
         lft = (hash(f"left_{ek}") % 100) < 15
         pl = hd + timedelta(days=180)
@@ -442,21 +643,26 @@ def generate_domain_data(session):
                 ld = pl + timedelta(days=hash(f"leave_day_{ek}") % lr)
 
         cd = hd
+        promotion_count = 0
         while cd < today:
             att = 1 if ld and cd == ld else 0
             hrl.append({
                 'HR_FACT_ID': hid, 'DATE': ds(cd), 'EMPLOYEE_KEY': ek,
-                'DEPARTMENT_KEY': random.randint(10, 40),
-                'JOB_KEY': random.choice([800, 801, 802, 803, 804, 805, 806, 807, 808, 809, 810, 811, 812, 813, 814, 815]),
-                'LOCATION_KEY': random.randint(900, 911),
+                'DEPARTMENT_KEY': dept_key,
+                'JOB_KEY': job_key + promotion_count,  # Advance job level on promotion
+                'LOCATION_KEY': loc_key,
                 'SALARY': sal, 'ATTRITION_FLAG': att
             })
             hid += 1
             if att == 1:
                 break
             cd += timedelta(days=random.randint(180, 360))
-            if random.random() < 0.1:
-                sal = int(sal * random.uniform(1.03, 1.10))
+            # Promotion: 15% chance per period (realistic career progression)
+            if random.random() < 0.15:
+                sal = int(sal * random.uniform(1.05, 1.15))
+                promotion_count = min(promotion_count + 1, 5)
+            elif random.random() < 0.08:
+                sal = int(sal * random.uniform(1.02, 1.04))  # Cost of living raise
 
     hdf = pd.DataFrame(hrl)
     session.sql("TRUNCATE TABLE EPOWER_DEMO.EPOWER_GOLD.HR_EMPLOYEE_FACT").collect()

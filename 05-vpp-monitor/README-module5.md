@@ -491,3 +491,88 @@ Browser (Dark Mode Dashboard)
 | Auth | SPCS Session Token (OAuth) | Zero-credential server-side authentication |
 | Deploy | Snowflake App Runtime | Single-command container deployment |
 | Infra | SPCS Managed Compute Pool | Container execution inside Snowflake |
+
+---
+
+## Live-Erweiterung mit Cortex Code (Demo-Showcase)
+
+Dieses Szenario zeigt, wie mächtig Cortex Code Desktop ist: Eine produktionsreife App wird live um ein neues Feature erweitert und in unter 3 Minuten deployed.
+
+### Szenario: VPP Preis-Signal hinzufügen
+
+Die bestehende App zeigt historische Daten. Wir erweitern sie um eine **Echtzeit-Preis-Ampel**, die den aktuellen Strompreis anzeigt und farblich signalisiert, ob die Batterien gerade laden oder entladen sollten.
+
+**Ergebnis:**
+```
++-----------------------------------------------------------+
+|  ⚡ VPP Preis-Signal            Aktuell: 87,40 EUR/MWh    |
+|                                                           |
+|  🔴 HOCH — Batterien entladen (Erlös-Optimierung aktiv)  |
+|                                                           |
+|  Ø heute: 62,30 EUR/MWh | Ø 7 Tage: 58,10 EUR/MWh      |
++-----------------------------------------------------------+
+```
+
+### Demo-Ablauf
+
+**Schritt 1: App zeigen**
+
+Die deployed App im Browser öffnen und kurz die bestehenden Features zeigen (KPIs, Charts, Filter).
+
+```bash
+snow app open
+```
+
+**Schritt 2: Feature anfordern (in Cortex Code Desktop)**
+
+Prompt an Cortex Code:
+
+> *„Erweitere die VPP Monitor App um eine Preis-Signal-Komponente. Sie soll:*
+> - *Den aktuellen Strompreis aus der letzten verfügbaren Stunde anzeigen*
+> - *Farblich signalisieren: grün (<40 EUR/MWh = laden), gelb (40-80 = halten), rot (>80 = entladen)*
+> - *Den Tagesdurchschnitt und 7-Tage-Durchschnitt als Kontext anzeigen*
+> - *Einen neuen API-Endpoint /api/signal erstellen*
+> - *Die Komponente oberhalb der KPI-Cards in page.tsx einbinden"*
+
+**Was Cortex Code erzeugt** (3 Dateien):
+
+1. `src/app/api/signal/route.ts` — API-Endpoint: holt aktuellen Preis + Durchschnitte aus `V_VPP_MONITOR_TIMESERIES`
+2. `src/components/PriceSignal.tsx` — React-Komponente: farbige Status-Card mit Ampel-Logik
+3. `src/app/page.tsx` — Import + Einbindung der neuen Komponente
+
+**Schritt 3: Deploy**
+
+```bash
+cd 05-vpp-monitor
+snow app deploy
+```
+
+Redeploy dauert ~2 Minuten (Layer-Caching). Während der Build läuft, kann man erklären, was im Hintergrund passiert (Remote Docker Build, SPCS Service Update).
+
+**Schritt 4: Ergebnis zeigen**
+
+Browser refreshen — die Preis-Ampel erscheint oberhalb der KPI-Cards.
+
+### Warum dieses Feature ideal für die Live-Demo ist
+
+| Aspekt | Vorteil |
+|--------|---------|
+| **Umfang** | 3 Dateien, keine neue Library, kein `npm install` |
+| **Visuell** | Sofort sichtbar (große farbige Card), kein Scrollen nötig |
+| **Geschäftslogik** | Einfache Schwellwerte — jeder versteht die Ampel-Metapher |
+| **Kein Risiko** | Nutzt nur bestehende View (`V_VPP_MONITOR_TIMESERIES`), keine Schema-Änderung |
+| **Cortex Code zeigt Stärke** | Generiert TypeScript + React + Tailwind + SQL-Query in einem Schritt |
+
+### Fallback bei Problemen
+
+Falls der Deploy fehlschlägt oder zu lange dauert:
+- `snow app events --last 50` zeigt die Build-Logs
+- Häufigster Fehler: TypeScript-Kompilierung — Cortex Code kann den Fehler direkt fixen
+- Alternative: Feature lokal zeigen mit `npm run dev` (localhost:3000), Deploy später
+
+### Vorbereitungs-Checkliste
+
+- [ ] App ist bereits deployed und läuft (`snow app open` funktioniert)
+- [ ] Cortex Code Desktop ist geöffnet mit dem `05-vpp-monitor`-Verzeichnis
+- [ ] Snowflake CLI Verbindung ist aktiv (`snow connection status`)
+- [ ] Terminal ist im richtigen Verzeichnis (`cd 05-vpp-monitor`)
