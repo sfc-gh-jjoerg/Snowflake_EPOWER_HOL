@@ -76,6 +76,7 @@ instructions:
     - HR data → hr_analyst
     - Electricity market prices, day-ahead → epulse_prices_analyst
     - VPP telemetry, solar yield, battery SOC, grid import/export → vpp_telemetry_analyst
+    - Sending content via email, delivering a report → send_email
 tools:
   - tool_spec: {type: cortex_analyst_text_to_sql, name: energy_sales_analyst, description: "Contracts, products, sales, revenue"}
   - tool_spec: {type: cortex_analyst_text_to_sql, name: billing_analyst, description: "Consumption, billing, payments"}
@@ -89,6 +90,23 @@ tools:
   - tool_spec: {type: cortex_search, name: service_docs_search, description: "Service handbook"}
   - tool_spec: {type: cortex_search, name: service_logs_search, description: "Historical tickets"}
   - tool_spec: {type: data_to_chart, name: data_to_chart, description: "Generate visualizations"}
+  - tool_spec:
+      type: generic
+      name: send_email
+      description: "Send an email to the current user. Use this when the user asks to email, send, or deliver content to them."
+      input_schema:
+        type: object
+        properties:
+          SUBJECT:
+            type: string
+            description: "Email subject line"
+          BODY:
+            type: string
+            description: "Email body as plain text"
+        required:
+          - SUBJECT
+          - BODY
+  - tool_spec: {type: code_execution, name: code_execution}
 tool_resources:
   energy_sales_analyst: {semantic_view: "EPOWER_DEMO.EPOWER_GOLD.ENERGY_SALES_SEMANTIC_VIEW", execution_environment: {type: warehouse, warehouse: EPOWER_COMPUTE}}
   billing_analyst: {semantic_view: "EPOWER_DEMO.EPOWER_GOLD.BILLING_SEMANTIC_VIEW", execution_environment: {type: warehouse, warehouse: EPOWER_COMPUTE}}
@@ -101,6 +119,11 @@ tool_resources:
   product_docs_search: {search_service: "EPOWER_DEMO.EPOWER_GOLD.SEARCH_PRODUCT_DOCS", max_results: 5}
   service_docs_search: {search_service: "EPOWER_DEMO.EPOWER_GOLD.SEARCH_SERVICE_DOCS", max_results: 5}
   service_logs_search: {search_service: "EPOWER_DEMO.EPOWER_GOLD.SEARCH_SERVICE_LOGS", max_results: 5}
+  send_email:
+    type: function
+    identifier: "EPOWER_DEMO.EPOWER_OPS.SEND_EMAIL_TO_CURRENT_USER"
+    execution_environment: {type: warehouse, warehouse: EPOWER_COMPUTE}
+  code_execution:
 $$;
 
 SELECT 'Module 2 Snowflake cleanup completed. Agent restored to Module 1 state.' AS status;

@@ -88,11 +88,15 @@ def generate_domain_data(session):
         15: {'cmin': 0,     'cmax': 0,     'omin': 600,  'omax': 1200},
     }
 
-    # Segment-specific contract value multipliers
-    SEGMENT_MULTIPLIER = {
-        'Privatkunde': 1.0,
-        'Kleingewerbe': 2.5,
-        'Gewerbekunde': 6.0,
+    # Segment-specific sizing: Gewerbe buys larger installations (more units, higher project value)
+    # Instead of multiplying the same product price, we model larger projects:
+    # - Privatkunde: 1x base (10 kWp solar, 1 wallbox, standard HP)
+    # - Kleingewerbe: 2-3x base (25 kWp solar, 2 wallboxes, larger HP)
+    # - Gewerbekunde: 5-8x base (50+ kWp solar, 5 wallboxes, industrial HP)
+    SEGMENT_SIZING = {
+        'Privatkunde': {'capex_mult': 1.0, 'opex_mult': 1.0, 'units_mult': 1},
+        'Kleingewerbe': {'capex_mult': 2.5, 'opex_mult': 1.8, 'units_mult': 3},
+        'Gewerbekunde': {'capex_mult': 6.0, 'opex_mult': 3.5, 'units_mult': 8},
     }
 
     elec = [1, 2, 3]
@@ -176,6 +180,7 @@ def generate_domain_data(session):
     cid = 1
 
     # Determine contracts per customer based on segment
+    # Budgets are TOTAL desired contracts (including the mandatory Phase 1 contracts)
     customer_contract_budget = {}
     for cust in all_customers:
         try:
@@ -184,11 +189,11 @@ def generate_domain_data(session):
             ctype = 'Privatkunde'
 
         if ctype == 'Gewerbekunde':
-            n = random.choices([3, 4, 5, 6], weights=[0.20, 0.35, 0.30, 0.15])[0]
+            n = random.choices([5, 6, 7, 8], weights=[0.20, 0.35, 0.30, 0.15])[0]
         elif ctype == 'Kleingewerbe':
-            n = random.choices([2, 3, 4], weights=[0.30, 0.45, 0.25])[0]
+            n = random.choices([3, 4, 5, 6], weights=[0.25, 0.40, 0.25, 0.10])[0]
         else:  # Privatkunde
-            n = random.choices([1, 2, 3], weights=[0.30, 0.45, 0.25])[0]
+            n = random.choices([2, 3, 4], weights=[0.35, 0.45, 0.20])[0]
         customer_contract_budget[cust] = n
 
     # Phase 1: Mandatory products (solar, hp, gas)
@@ -196,21 +201,22 @@ def generate_domain_data(session):
         c = cl.loc[cust]
         region = int(c['REGION_KEY'])
         ctype = c['CUSTOMER_TYPE']
-        mult = SEGMENT_MULTIPLIER.get(ctype, 1.0)
+        sizing = SEGMENT_SIZING.get(ctype, SEGMENT_SIZING['Privatkunde'])
         # South gets premium solar (product 8 more likely)
         if region == REGION_SOUTH:
             pk = random.choices(sol, weights=[0.2, 0.3, 0.5])[0]
         else:
             pk = random.choice(sol)
         p = PRODUCT_PRICING[pk]
-        amt = round(random.uniform(p['cmin'], p['cmax']) * mult, 2)
+        # CAPEX product: larger installation for Gewerbe (project value = base price * sizing)
+        amt = round(random.uniform(p['cmin'], p['cmax']) * sizing['capex_mult'], 2)
         contracts.append({
             'SALE_ID': cid, 'DATE': ds(rd_seasonal_sales(sales_start, sales_end, pk)),
             'CUSTOMER_KEY': cust, 'PRODUCT_KEY': pk,
             'SALES_REP_KEY': random.randint(1, 500),
             'REGION_KEY': region,
             'VENDOR_KEY': random.randint(1, 200),
-            'AMOUNT': amt, 'UNITS': 1
+            'AMOUNT': amt, 'UNITS': sizing['units_mult']
         })
         cid += 1
 
@@ -218,21 +224,21 @@ def generate_domain_data(session):
         c = cl.loc[cust]
         region = int(c['REGION_KEY'])
         ctype = c['CUSTOMER_TYPE']
-        mult = SEGMENT_MULTIPLIER.get(ctype, 1.0)
+        sizing = SEGMENT_SIZING.get(ctype, SEGMENT_SIZING['Privatkunde'])
         # North gets premium HP (product 10 more likely)
         if region == REGION_NORTH:
             pk = random.choices(hp, weights=[0.3, 0.7])[0]
         else:
             pk = random.choice(hp)
         p = PRODUCT_PRICING[pk]
-        amt = round(random.uniform(p['cmin'], p['cmax']) * mult, 2)
+        amt = round(random.uniform(p['cmin'], p['cmax']) * sizing['capex_mult'], 2)
         contracts.append({
             'SALE_ID': cid, 'DATE': ds(rd_seasonal_sales(sales_start, sales_end, pk)),
             'CUSTOMER_KEY': cust, 'PRODUCT_KEY': pk,
             'SALES_REP_KEY': random.randint(1, 500),
             'REGION_KEY': region,
             'VENDOR_KEY': random.randint(1, 200),
-            'AMOUNT': amt, 'UNITS': 1
+            'AMOUNT': amt, 'UNITS': sizing['units_mult']
         })
         cid += 1
 
@@ -240,17 +246,17 @@ def generate_domain_data(session):
         c = cl.loc[cust]
         region = int(c['REGION_KEY'])
         ctype = c['CUSTOMER_TYPE']
-        mult = SEGMENT_MULTIPLIER.get(ctype, 1.0)
+        sizing = SEGMENT_SIZING.get(ctype, SEGMENT_SIZING['Privatkunde'])
         pk = random.choice(gas)
         p = PRODUCT_PRICING[pk]
-        amt = round(random.uniform(p['omin'], p['omax']) * mult, 2)
+        amt = round(random.uniform(p['omin'], p['omax']) * sizing['opex_mult'], 2)
         contracts.append({
             'SALE_ID': cid, 'DATE': ds(rd_with_trend(sales_start, sales_end)),
             'CUSTOMER_KEY': cust, 'PRODUCT_KEY': pk,
             'SALES_REP_KEY': random.randint(1, 500),
             'REGION_KEY': region,
             'VENDOR_KEY': random.randint(1, 200),
-            'AMOUNT': amt, 'UNITS': random.randint(10000, 25000)
+            'AMOUNT': amt, 'UNITS': random.randint(10000, 25000) * sizing['units_mult']
         })
         cid += 1
 
@@ -287,7 +293,7 @@ def generate_domain_data(session):
         c = cl.loc[ck]
         region = int(c['REGION_KEY'])
         ctype = c['CUSTOMER_TYPE']
-        mult = SEGMENT_MULTIPLIER.get(ctype, 1.0)
+        sizing = SEGMENT_SIZING.get(ctype, SEGMENT_SIZING['Privatkunde'])
         is_hp_cust = ck in hp_customers
 
         # West has more E-Mobility (urban), East has more Smart Home
@@ -310,24 +316,26 @@ def generate_domain_data(session):
         if pt == 'e':
             pk = random.choice(elec)
             p = PRODUCT_PRICING[pk]
-            amt = round(random.uniform(p['omin'], p['omax']) * mult, 2)
-            u = int(random.gauss(3500, 1000) * mult) if ctype == 'Privatkunde' else int(random.gauss(12000, 5000))
+            amt = round(random.uniform(p['omin'], p['omax']) * sizing['opex_mult'], 2)
+            u = int(random.gauss(3500, 1000)) * sizing['units_mult']
             u = max(u, 1500)
         elif pt == 'g':
             pk = random.choice(gas)
             p = PRODUCT_PRICING[pk]
-            amt = round(random.uniform(p['omin'], p['omax']) * mult, 2)
-            u = random.randint(10000, 25000)
+            amt = round(random.uniform(p['omin'], p['omax']) * sizing['opex_mult'], 2)
+            u = random.randint(10000, 25000) * sizing['units_mult']
         elif pt == 'sh':
             pk = random.choice(sh)
             p = PRODUCT_PRICING[pk]
-            amt = round(random.uniform(p['cmin'], p['cmax']) * mult, 2) if p['cmax'] > 0 else 0
-            u = 1
+            base_amt = random.uniform(p['cmin'], p['cmax']) if p['cmax'] > 0 else 0
+            amt = round(base_amt * sizing['capex_mult'], 2)
+            u = sizing['units_mult']
         else:
             pk = random.choice(ev)
             p = PRODUCT_PRICING[pk]
-            amt = round((random.uniform(p['cmin'], p['cmax']) if p['cmax'] > 0 else random.uniform(p['omin'], p['omax'])) * mult, 2)
-            u = 1
+            base_amt = random.uniform(p['cmin'], p['cmax']) if p['cmax'] > 0 else random.uniform(p['omin'], p['omax'])
+            amt = round(base_amt * sizing['capex_mult'], 2)
+            u = sizing['units_mult']
 
         contracts.append({
             'SALE_ID': cid, 'DATE': ds(rd_seasonal_sales(sales_start, sales_end, pk)),
