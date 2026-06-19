@@ -7,9 +7,9 @@
 This demo comes with a notebook (`01-agentic-ai-foundation/epower_hol_main.ipynb`) that walks you through building an end-to-end Agentic AI application on Snowflake. The notebook creates all database objects, loads data, deploys the dbt project, and configures the Intelligence Agent. By completing the lab, you gain practical experience with:
 
 - **Snowflake Data Engineering** — dbt projects deployed natively in Snowflake, medallion / lakehouse architecture (Bronze → Silver → Gold), scheduled tasks for pipeline execution, and real-time API ingestion
-- **Snowflake AI for Agentic Applications** — making enterprise data AI-ready and leveraging Cortex Agent, Semantic Views (text-to-SQL), Cortex Search (RAG), and Custom Tools (email notifications) to build an intelligent agent that is grounded in governed enterprise data and can take actions
+- **Snowflake AI for Agentic Applications** — making enterprise data AI-ready and leveraging Cortex Agent, Semantic Views (text-to-SQL), and Cortex Search (RAG) to build an intelligent agent that is grounded in governed enterprise data
 
-The result: a fully functional **EPOWER Intelligence Agent** that delivers deep insights and task-oriented outcomes — from natural language questions to precise, data-grounded answers across sales, billing, service, HR, and real-time VPP analytics. The agent can also take actions such as sending analysis results via email to the current user.
+The result: a fully functional **EPOWER Intelligence Agent** that delivers deep insights and task-oriented outcomes — from natural language questions to precise, data-grounded answers across sales, billing, service, HR, and real-time VPP analytics.
 
 ---
 
@@ -44,7 +44,7 @@ The setup notebook (`01-agentic-ai-foundation/epower_hol_main.ipynb`) requires e
 | `CREATE ROLE` | Create `EPOWER_ROLE` | §1 |
 | `CREATE WAREHOUSE` | Create `EPOWER_COMPUTE` warehouse | §1 |
 | `MANAGE GRANTS` | Grant `CREATE DATABASE`, `EXECUTE TASK` on account; grant role/warehouse/integration usage | §1, §2, §10 |
-| `CREATE INTEGRATION` | Create external access integrations for API egress and email notification integration | §2, §10 |
+| `CREATE INTEGRATION` | Create external access integrations for API egress | §2 |
 | `CREATE SNOWFLAKE INTELLIGENCE` | Create the default Snowflake Intelligence object | §1 |
 | `MODIFY` on Snowflake Intelligence object | Register the agent with Snowflake Intelligence | §10 |
 
@@ -279,7 +279,6 @@ graph TD
         direction LR
         SV["<b>SEMANTIC VIEWS</b><br/>Text-to-SQL<br/><br/>• Sales • Billing<br/>• Service • Customer Energy<br/>• HR • VPP Telemetry<br/>• Market Prices"]
         CS["<b>CORTEX SEARCH</b><br/>RAG<br/><br/>• Energy Docs • Product Docs<br/>• Service Docs • Service Logs<br/>• 5 Column-Lookup Services"]
-        ACT["<b>ACTIONS</b><br/>Custom Tools<br/><br/>• Email Reports<br/>• Code Execution"]
     end
 
     subgraph Data["DATA LAYER"]
@@ -291,7 +290,6 @@ graph TD
 
     AGENT --> SV
     AGENT --> CS
-    AGENT --> ACT
     SV --> GOLD
     CS --> DOCS
     DBT --> GOLD
@@ -299,7 +297,6 @@ graph TD
     style AGENT fill:#1a73e8,stroke:#1557b0,color:#fff
     style SV fill:#34a853,stroke:#2d8f47,color:#fff
     style CS fill:#34a853,stroke:#2d8f47,color:#fff
-    style ACT fill:#9c27b0,stroke:#7b1fa2,color:#fff
     style GOLD fill:#fbbc04,stroke:#d9a003,color:#333
     style DOCS fill:#fbbc04,stroke:#d9a003,color:#333
     style DBT fill:#ea4335,stroke:#c5352b,color:#fff
@@ -316,8 +313,7 @@ Each Snowflake feature in the architecture serves a specific role in enabling EP
 
 | Feature | Business Domain | Role in Architecture |
 |---------|----------------|---------------------|
-| **Cortex Agent** | All domains | Orchestrates across Sales, Billing, Service, HR, VPP, and Market data — routing natural language questions to the right tool. Includes custom tools for email delivery and code execution |
-| **Email Notifications** | All domains | `SYSTEM$SEND_EMAIL` via notification integration — enables the agent to send analysis results, reports, and summaries directly to the current user's verified email address |
+| **Cortex Agent** | All domains | Orchestrates across Sales, Billing, Service, HR, VPP, and Market data — routing natural language questions to the right tool |
 | **Semantic Views** | Sales, Billing, Service, HR, VPP, Market Prices | 7 domain-specific data models that translate business questions into SQL (one per domain) |
 | **Cortex Search** | Service, Products, Energy | 9 services — 4 document RAG services for policy/handbook retrieval + 5 high-cardinality column lookup services for Semantic View filter values |
 | **dbt on Snowflake** | VPP, Market Prices | Native dbt execution (6 models, medallion architecture) transforming raw IoT telemetry and market prices into business-ready analytics |
@@ -327,7 +323,6 @@ Each Snowflake feature in the architecture serves a specific role in enabling EP
 | **Git Integration** | All domains | Repository connected directly to Snowflake Workspace — code, data, notebooks, and dbt project in one place |
 | **Snowflake Compute** | All domains | `EPOWER_COMPUTE` virtual warehouse (SMALL, auto-suspend 300s) — single compute cluster for all workloads |
 | **MCP Server** | All domains | Snowflake-managed MCP server exposing 12 tools (1 agent + 7 analyst + 4 search) via Model Context Protocol for external AI clients |
-| **Custom Tools** | All domains | Stored procedures registered as agent tools — `SEND_EMAIL_TO_CURRENT_USER` resolves the caller's email and delivers content via Snowflake's managed email service |
 
 ---
 
