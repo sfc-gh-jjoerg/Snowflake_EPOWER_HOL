@@ -19,6 +19,7 @@ The dashboard provides three integrated views of VPP fleet performance:
 | Section | Metrics |
 |---------|---------|
 | **KPI Cards** | Active devices, battery SOC %, solar yield (kW), day-ahead price (EUR/MWh), customer margin, EPOWER margin |
+| **VPP Cluster Map** | Geographic visualization of 9 German clusters showing real-time import/export status with hour-of-day slider |
 | **Time-Series Chart** | Dual-axis: battery SOC + solar yield vs. day-ahead electricity price (daily aggregation, 60-day window) |
 | **Battery Actions** | Stacked bar: CHARGE / DISCHARGE / SELF_CONSUME / MAX_CHARGE distribution over time |
 | **Revenue Breakdown** | Customer margin vs. EPOWER margin by region |
@@ -276,10 +277,11 @@ The app queries pre-aggregated views that join the VPP data. Open `sql/create_vi
 
 > The script contains `USE ROLE` and `USE WAREHOUSE` statements which are not permitted via `snow sql`. Running in Snowsight ensures the correct role and context are applied.
 
-This creates three views in `EPOWER_DEMO.EPOWER_GOLD`:
+This creates four views in `EPOWER_DEMO.EPOWER_GOLD`:
 - `V_VPP_MONITOR_TIMESERIES` — hourly capacity + day-ahead prices
 - `V_VPP_MONITOR_ACTIONS` — battery action distribution with margins
 - `V_VPP_MONITOR_KPI` — summary KPIs by day/region/customer type
+- `V_VPP_MONITOR_MAP` — hourly cluster-level aggregation for the geographic map
 
 ### Step 4: Initialize the App
 
@@ -380,6 +382,7 @@ DROP STAGE IF EXISTS SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR_CODE;
 DROP VIEW IF EXISTS EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_TIMESERIES;
 DROP VIEW IF EXISTS EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_ACTIONS;
 DROP VIEW IF EXISTS EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_KPI;
+DROP VIEW IF EXISTS EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_MAP;
 ```
 
 > Module 5 cleanup is also included in the main `01-agentic-ai-foundation/epower_cleanup.sql` script.
