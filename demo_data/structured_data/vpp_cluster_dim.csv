@@ -1,0 +1,10 @@
+cluster_id,cluster_name,centroid_lat,centroid_lng,region_character,compass_region
+munich_metro,Muenchen Metro,48.14,11.58,"Urban, high solar yield",South
+hamburg_metro,Hamburg Metro,53.55,9.99,"Urban, coastal wind",North
+berlin_metro,Berlin Metro,52.52,13.41,"Urban, mixed generation",East
+rhine_ruhr,Rhein-Ruhr,51.23,6.78,"Urban, industrial high load",West
+frankfurt_main,Frankfurt/Rhein-Main,50.11,8.68,"Urban, commercial load",West
+stuttgart_metro,Stuttgart Metro,48.78,9.18,"Suburban, industrial",South
+lower_saxony,Niedersachsen/Nord,52.65,9.2,"Rural, wind-heavy generation",North
+bavaria_south,Bayern Sued,47.85,11.9,"Rural, high solar yield",South
+saxony_east,Sachsen/Ost,51.05,13.74,"Suburban, mixed generation",East

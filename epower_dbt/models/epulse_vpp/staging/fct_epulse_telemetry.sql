@@ -5,6 +5,7 @@ SELECT
     d.customer_name,
     d.city,
     d.region,
+    d.cluster_id,
     d.customer_type,
     d.is_vpp_enrolled,
     t.solar_yield_kw,

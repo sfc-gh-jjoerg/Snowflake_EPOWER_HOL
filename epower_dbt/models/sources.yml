@@ -17,7 +17,9 @@ sources:
     schema: EPOWER_GOLD
     tables:
       - name: customer_dim
-        description: Existing EPOWER customer dimension (20K customers)
+        description: Existing EPOWER customer dimension (20K customers with VPP cluster assignment)
+      - name: vpp_cluster_dim
+        description: VPP geographic cluster definitions with centroid coordinates
       - name: customer_products
         description: Existing customer product ownership data
       - name: product_dim

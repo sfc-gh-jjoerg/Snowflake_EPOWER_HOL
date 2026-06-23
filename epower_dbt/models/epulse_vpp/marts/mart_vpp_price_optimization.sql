@@ -13,6 +13,7 @@ WITH telemetry AS (
         customer_name,
         city,
         region,
+        cluster_id,
         is_vpp_enrolled,
         AVG(solar_yield_kw) AS avg_solar_kw,
         AVG(battery_soc_pct) AS avg_battery_soc_pct,
@@ -25,7 +26,7 @@ WITH telemetry AS (
     {% if is_incremental() %}
         AND DATE_TRUNC('HOUR', ts) > (SELECT MAX(hour) FROM {{ this }})
     {% endif %}
-    GROUP BY 1, 2, 3, 4, 5, 6
+    GROUP BY 1, 2, 3, 4, 5, 6, 7
 ),
 
 prices AS (
@@ -51,6 +52,7 @@ joined AS (
         t.customer_name,
         t.city,
         t.region,
+        t.cluster_id,
         t.avg_solar_kw,
         t.avg_battery_soc_pct,
         t.avg_heatpump_kw,

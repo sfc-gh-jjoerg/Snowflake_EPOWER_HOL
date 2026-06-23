@@ -405,10 +405,21 @@ CREATE OR REPLACE TABLE customer_dim (
     vertical VARCHAR(50),
     address VARCHAR(200),
     city VARCHAR(100),
-    state VARCHAR(50),
     zip VARCHAR(20),
+    state VARCHAR(50),
+    cluster_id VARCHAR(20),
     region_key INT
-) COMMENT = 'German energy customers with housing type for consumption analysis';"""
+) COMMENT = 'German energy customers with housing type and VPP cluster assignment';
+
+-- VPP Cluster Dimension (geographic cluster definitions with centroids)
+CREATE OR REPLACE TABLE vpp_cluster_dim (
+    cluster_id VARCHAR(20) PRIMARY KEY,
+    cluster_name VARCHAR(100),
+    centroid_lat FLOAT,
+    centroid_lng FLOAT,
+    region_character VARCHAR(200),
+    compass_region VARCHAR(10)
+) COMMENT = 'VPP geographic clusters with centroid coordinates for map visualization';"""
 })
 
 cells.append({

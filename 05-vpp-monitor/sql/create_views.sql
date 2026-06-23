@@ -91,3 +91,28 @@ SELECT
 FROM MART_VPP_PRICE_OPTIMIZATION o
 JOIN CUSTOMER_DIM c ON o.CUSTOMER_KEY = c.CUSTOMER_KEY
 GROUP BY 1, 2, 3;
+
+-- -----------------------------------------------------------------------------
+-- 4. V_VPP_MONITOR_MAP
+--    Hourly cluster-level aggregation for the geographic map visualization.
+--    Joins cluster metrics with VPP_CLUSTER_DIM for centroid coordinates.
+-- -----------------------------------------------------------------------------
+CREATE OR REPLACE VIEW V_VPP_MONITOR_MAP AS
+SELECT
+    m.HOUR,
+    m.CLUSTER_ID,
+    cl.CLUSTER_NAME,
+    cl.CENTROID_LAT,
+    cl.CENTROID_LNG,
+    cl.REGION_CHARACTER,
+    cl.COMPASS_REGION,
+    m.ACTIVE_DEVICES,
+    m.AVG_SOC_PCT,
+    m.AVG_SOLAR_KW,
+    m.TOTAL_IMPORT_KWH,
+    m.TOTAL_EXPORT_KWH,
+    m.NET_FLOW_KWH,
+    m.AVG_PRICE_EUR_MWH,
+    CASE WHEN m.NET_FLOW_KWH > 0 THEN 'importing' ELSE 'exporting' END AS FLOW_DIRECTION
+FROM MART_VPP_CLUSTER_MAP m
+JOIN VPP_CLUSTER_DIM cl ON m.CLUSTER_ID = cl.CLUSTER_ID;

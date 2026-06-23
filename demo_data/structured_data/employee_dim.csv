@@ -1,1001 +1,1001 @@
 employee_key,employee_name,gender,hire_date
-1,Hans Georg Kobelt-Otto,M,2025-02-27
-2,Patrik Schmiedt B.A.,F,2021-05-20
-3,Ignatz Ring,F,2023-04-05
-4,Carl-Heinz Wulf,M,2017-07-24
-5,Alexandra Spieß MBA.,M,2024-01-19
-6,Heribert Ortmann,M,2020-11-14
-7,Ing. Ferdi Trub,F,2024-09-06
-8,Nadia Möchlichen,M,2024-07-18
-9,Annegret Dobes B.A.,F,2019-08-17
-10,Rosalie Wende,M,2024-10-05
-11,Prof. Sarina Neuschäfer,F,2023-04-20
-12,Carmelo Huhn,F,2018-06-23
-13,Frida Schinke,M,2017-12-09
-14,Dr. Lea Holt,F,2023-08-14
-15,Gundi Peukert,F,2026-01-11
-16,Ronald Aumann,F,2018-07-03
-17,Drago Kensy,F,2024-05-14
-18,Johanna Trub,M,2021-11-30
-19,Cordula Stiffel-Gotthard,M,2021-02-16
-20,Ing. Amalia Gotthard MBA.,M,2023-04-26
-21,Hans-Ludwig Jäkel-Gorlitz,M,2022-09-14
-22,Dierk Heinz,F,2017-06-21
-23,Rosemarie Fröhlich B.Sc.,M,2021-11-11
-24,Dipl.-Ing. Valeri Walter,M,2021-04-02
-25,Lara Nohlmans,M,2025-04-10
-26,Leonore Tröst,M,2016-10-13
-27,Karl-Otto Lachmann,F,2022-07-28
-28,Doreen Weinhage,M,2022-12-30
-29,Ing. Harro Fechner B.A.,M,2022-12-26
-30,Diedrich Briemer,M,2022-03-06
-31,Thilo Pechel,M,2025-04-06
-32,Wolf-Dietrich Adolph,F,2021-01-30
-33,Dietrich Eckbauer-Blümel,F,2016-10-07
-34,Philip Geisel-Berger,M,2019-12-15
-35,Prof. Oscar Klemt MBA.,M,2021-10-13
-36,Josef Rudolph,M,2026-03-23
-37,Hildegund Kraus,M,2021-08-25
-38,Berit Austermühle B.Sc.,F,2017-01-27
-39,Ing. Rouven Mohaupt,F,2019-03-24
-40,Raphael Eberhardt,M,2024-08-10
-41,Karlheinz Beyer MBA.,F,2025-05-30
-42,Patrik Kusch,M,2020-07-21
-43,Irmgard Trupp,F,2021-07-07
-44,Dirk Mohaupt,F,2020-08-29
-45,Burghard Löffler B.Sc.,M,2025-11-05
-46,Anka Fliegner,M,2018-10-02
-47,Agnieszka Kreusel,M,2023-04-03
-48,Carl Weihmann MBA.,M,2024-08-03
-49,Vlado Stumpf,F,2024-03-18
-50,Carola Höfig,M,2023-04-26
-51,Prof. Rosemarie Hertrampf,F,2025-07-07
-52,Hülya Jacob,M,2024-02-22
-53,Dipl.-Ing. Irmtraut Kruschwitz,M,2020-03-07
-54,Henri Schmiedecke,F,2024-02-05
-55,Fredi Gehringer,F,2024-12-07
-56,Adriane Bachmann,F,2023-07-05
-57,Sergio Thanel,F,2016-06-01
-58,Elma Grein Groth MBA.,M,2017-06-18
-59,Univ.Prof. Ariane Bachmann MBA.,F,2021-06-21
-60,Dr. Wolf Girschner,F,2018-10-08
-61,Dr. Ilias Loos B.A.,M,2017-11-02
-62,Sönke Häring-Tschentscher,M,2022-10-15
-63,Angela Drub,F,2018-09-20
-64,Hubert Nohlmans,F,2019-10-16
-65,Kati Linke MBA.,M,2020-05-31
-66,Alfonso Bähr,F,2017-02-24
-67,Slavko Eberhardt,F,2025-03-28
-68,Cathrin Seifert-Wagenknecht,M,2021-08-30
-69,Prof. Ekkehart Schomber B.A.,F,2019-01-18
-70,Friedhold Blümel,M,2025-12-08
-71,Wibke Hecker-Christoph,M,2017-08-25
-72,Magdalene Killer,F,2025-12-15
-73,Marten Bähr,M,2023-02-16
-74,Jessica Wirth,F,2021-05-26
-75,Arzu Stumpf,F,2019-10-02
-76,Univ.Prof. Othmar Rohleder B.A.,F,2018-06-27
-77,Frau Marianne Weihmann B.Eng.,F,2025-09-28
-78,Kathleen Schweitzer-Juncken,F,2019-02-10
-79,Mahmut Riehl B.Sc.,M,2016-07-13
-80,Milena Stey,F,2018-10-24
-81,Karl Jessel,F,2019-05-08
-82,Dr. Willibald Kusch B.Eng.,F,2018-02-19
-83,Angelika Bolzmann MBA.,F,2026-04-10
-84,Elfie Hein MBA.,F,2024-12-25
-85,Andre Löchel,F,2022-12-23
-86,Angela Kensy-Hornig,F,2019-12-24
-87,Frau Cläre Mühle B.A.,M,2024-04-06
-88,Jovan Förster,F,2017-02-26
-89,Univ.Prof. Markus Nerger,F,2025-02-23
-90,Univ.Prof. Lilo auch Schlauchin,F,2021-01-16
-91,Heinz-Günther Täsche,F,2023-05-27
-92,Janos Lübs,M,2016-08-02
-93,Änne Schmidt-Klingelhöfer,F,2022-07-12
-94,August Walter,M,2020-03-17
-95,Prof. Kilian Ehlert,M,2024-12-17
-96,Ilias Johann,F,2024-12-31
-97,Dora Klingelhöfer,M,2021-05-23
-98,Herr Klaus-Jürgen Nohlmans B.Eng.,F,2021-12-26
-99,Murat Kostolzin B.A.,F,2018-08-07
-100,Leonore Eimer,M,2017-06-30
-101,Prof. Antonietta Plath,M,2021-05-19
-102,Maurizio Mülichen,M,2023-03-24
-103,Kirstin Löwer-Harloff,M,2019-07-25
-104,Margrit Höfig,F,2018-11-14
-105,Valerie Holt-Stahr,F,2024-05-08
-106,Herr Hartmuth Wilmsen,F,2023-03-17
-107,Gunther Wohlgemut-Karz,M,2022-01-16
-108,Herr Adolf Gumprich B.Eng.,F,2021-08-26
-109,Gudula Lachmann B.A.,M,2021-09-17
-110,Lucia Dietz,F,2018-11-27
-111,Janusz Pohl,F,2023-07-22
-112,Ing. Karl-Heinrich Ritter B.A.,M,2019-11-05
-113,Dipl.-Ing. Otmar Fröhlich,M,2025-07-30
-114,Jolanta Ziegert B.A.,F,2025-09-21
-115,Prof. Selma Striebitz B.A.,M,2019-04-02
-116,Walter Roht,F,2017-09-28
-117,Frau Tanja Noack MBA.,M,2017-04-03
-118,Ada Hecker,F,2023-01-08
-119,Herr Wolfram Noack,M,2019-03-18
-120,Frau Jessica Jockel,F,2025-01-30
-121,Aysel Mühle,M,2019-07-24
-122,Jan-Peter Heydrich,F,2022-08-19
-123,Albert Zorbach,F,2022-10-03
-124,Thaddäus Conradi,F,2016-12-27
-125,Serge Striebitz,M,2018-08-23
-126,Frederic Rogge,M,2022-09-30
-127,Traudl Anders,M,2022-04-03
-128,Univ.Prof. Kaspar Fritsch B.Sc.,F,2017-03-01
-129,Klaus Dieter Fischer,F,2019-12-02
-130,Dr. Else Hövel B.A.,M,2021-01-10
-131,Ing. Friedlinde Kostolzin,F,2022-10-25
-132,Hilma Rörricht,F,2017-02-13
-133,Hans-Günter Stroh,F,2022-02-06
-134,Edward Kruschwitz B.Eng.,F,2022-09-19
-135,Francesca Neuschäfer B.Sc.,F,2022-07-30
-136,Fritz Pieper,M,2025-09-02
-137,Ladislaus Gorlitz,M,2020-12-23
-138,Stjepan Pergande,F,2023-05-04
-139,Prof. Till Eigenwillig MBA.,F,2024-04-01
-140,Karlfried Möchlichen,M,2019-11-04
-141,Kira Boucsein-Ernst,F,2021-09-17
-142,Univ.Prof. Lucia Salz,F,2020-02-19
-143,Univ.Prof. Ortwin Mielcarek,F,2017-07-19
-144,Miguel Paffrath,F,2025-01-21
-145,Univ.Prof. Raisa Kohl,F,2024-06-25
-146,Ursula Renner,F,2019-12-01
-147,Sibel Schenk,M,2023-09-13
-148,Linda Mitschke,F,2020-11-12
-149,Dr. Marta Stadelmann B.Sc.,F,2021-04-09
-150,Frieda Beer MBA.,M,2016-10-04
-151,Matthias Wagenknecht B.A.,M,2021-08-11
-152,Dr. Karl-Wilhelm Henck B.Eng.,M,2024-03-02
-153,Marlis Davids,F,2021-01-15
-154,Dipl.-Ing. Jacob Rörricht,M,2025-08-18
-155,Ingrid Birnbaum,M,2021-05-14
-156,Ellinor Kusch,F,2020-10-31
-157,Carolin Butte,M,2016-05-25
-158,Cengiz Börner B.A.,F,2026-02-04
-159,Juliane Mangold,M,2018-07-18
-160,Univ.Prof. Jaroslav Pruschke,F,2023-03-03
-161,Univ.Prof. Reimund Stey,M,2025-03-28
-162,Gerda Wulf,F,2025-10-15
-163,Dipl.-Ing. Ludmila Wernecke B.A.,F,2023-11-19
-164,Jacob Stolze B.Sc.,M,2016-12-01
-165,Sepp Täsche,F,2020-10-01
-166,Hartwig Eckbauer,F,2023-02-02
-167,Hajo Weihmann,F,2018-04-02
-168,Evelyne Scholz,F,2019-03-09
-169,Ing. Sylvia Metz B.Sc.,F,2017-02-25
-170,Katy Weimer,F,2022-09-30
-171,Bertram Tlustek,F,2020-05-02
-172,Ing. Leo Rädel,F,2020-10-06
-173,Editha Hertrampf-Gutknecht,M,2022-09-05
-174,Zdravko Schmiedt,M,2020-08-03
-175,Dr. Magda Textor,F,2018-11-15
-176,Wiebke Meyer-Gieß,M,2024-02-28
-177,Catrin Römer-Stadelmann,M,2019-01-10
-178,Tilman Trüb,F,2021-04-16
-179,Hans-Gerhard Kruschwitz,M,2018-10-31
-180,Anto Stey,F,2020-08-08
-181,Jens-Peter Mohaupt,F,2025-01-08
-182,Adalbert Heuser,F,2017-07-21
-183,Univ.Prof. Tilman Bien,F,2024-03-23
-184,Uli Plath,M,2021-02-16
-185,Conrad Gerlach,F,2025-01-11
-186,Karl-Georg Säuberlich,F,2017-02-25
-187,Gert Beer,M,2022-11-04
-188,Hanne-Lore Dörr,M,2018-04-10
-189,Hüseyin Hellwig,M,2025-01-17
-190,Univ.Prof. Elizabeth Cichorius B.Eng.,F,2019-04-27
-191,Grete Jacob,F,2020-06-10
-192,Dr. Stefano Haering,F,2019-08-23
-193,Grete Schaaf,M,2025-09-13
-194,Natascha Scholl,F,2017-02-11
-195,Dipl.-Ing. Cornelia Barth,M,2017-03-28
-196,Dagmar Heintze-Peukert,M,2023-04-08
-197,Josefine Kuhl,M,2020-06-26
-198,Hellmuth Hornig,M,2019-09-11
-199,Cindy Junck,F,2018-12-26
-200,Anton Rosenow,F,2024-11-02
-201,Dörte Kruschwitz,F,2017-03-30
-202,Ronald Kreusel,F,2018-12-18
-203,Univ.Prof. Polina Stiebitz,M,2022-11-17
-204,Salvatore Hänel,F,2021-03-01
-205,Renata Karz,F,2019-01-05
-206,Klaudia Löwer,M,2017-11-11
-207,Miroslaw Jopich,M,2019-02-11
-208,Kaspar Bachmann,M,2018-07-12
-209,Wolfhard Killer B.Sc.,F,2023-01-19
-210,Anastasia Kostolzin,M,2024-09-12
-211,Kuno Trub-Hertrampf,F,2025-09-30
-212,Grete Dippel-Zahn,F,2022-09-26
-213,Valentin Meyer-Caspar,M,2025-05-29
-214,Ludmila Sölzer,M,2016-11-09
-215,Dipl.-Ing. Ramazan Wulff,F,2022-03-12
-216,Prof. Franjo Wernecke MBA.,F,2019-03-03
-217,Kenneth Freudenberger,F,2023-06-24
-218,Angelique auch Schlauchin,M,2022-11-02
-219,Sina Hahn-Henck,M,2017-04-26
-220,Maurice Henk-Krein,M,2022-01-12
-221,Dr. Sören Rohleder MBA.,F,2017-08-21
-222,Bertold Täsche,F,2019-12-24
-223,Univ.Prof. Gabriel Ruppersberger,M,2024-12-29
-224,Jens-Peter Wilmsen-Weimer,M,2023-10-19
-225,Abdullah Bauer MBA.,M,2025-06-19
-226,Prof. Birger Peukert B.A.,M,2018-02-05
-227,Ing. Hans-Christian Drub,M,2025-06-24
-228,Istvan Mende,M,2020-07-05
-229,Frau Jasmina Scholl,M,2020-05-13
-230,Hubertus Faust,F,2024-06-18
-231,Ernest Heidrich-Tlustek,F,2022-06-30
-232,Falko Wagenknecht,F,2019-08-18
-233,Athanasios Köster B.A.,F,2018-06-18
-234,Univ.Prof. Pietro Ring,M,2019-11-21
-235,Oscar Jockel-Klapp,F,2024-12-12
-236,Raymund Heydrich,M,2023-05-07
-237,Kenan Herrmann,M,2023-07-21
-238,Marianne Oestrovsky B.Sc.,M,2017-05-27
-239,Prof. Centa Reichmann,F,2023-12-05
-240,Herr Juergen Siering,F,2023-01-10
-241,Hannelore Rogge,M,2017-08-26
-242,Hans-Werner Gude,F,2017-12-23
-243,Frau Diana Preiß MBA.,M,2020-02-13
-244,Mareen Textor,F,2024-11-24
-245,Susann Heinrich B.A.,F,2025-12-21
-246,Dr. Torsten Etzold,M,2026-01-27
-247,Caterina Löwer,M,2025-12-11
-248,Hans-Peter Peukert B.Sc.,M,2018-05-14
-249,Aynur Hornig,M,2017-12-14
-250,Volker Pölitz-Wulff,M,2019-10-16
-251,Ivonne Kensy,M,2021-03-20
-252,Ella Mohaupt,F,2022-06-23
-253,Heinz-Willi Löffler,F,2019-03-13
-254,Elzbieta Buchholz,M,2019-06-28
-255,Liesa Jacob B.Sc.,M,2016-05-26
-256,Clarissa Wende,F,2020-03-26
-257,Prof. Fabian Schüler,M,2019-11-12
-258,Selma Heuser,F,2017-08-25
-259,Ing. Ottmar Köster B.Sc.,M,2022-12-29
-260,Friedericke Adolph,F,2022-02-18
-261,Janet Junck B.Eng.,M,2023-11-25
-262,Peer Jungfer,F,2021-04-22
-263,Ulrich Lorch,F,2023-01-20
-264,Regine Trüb,M,2020-08-07
-265,Dr. Constance Bauer,M,2016-05-15
-266,Ingeborg Ebert B.Eng.,M,2019-05-17
-267,Klothilde Mülichen,F,2022-06-29
-268,Lidija Ehlert,M,2018-01-06
-269,Christiane Pohl,M,2020-08-30
-270,Herr Gottfried Weitzel MBA.,M,2025-01-29
-271,Stefano Römer,F,2021-11-10
-272,Herr Othmar Mühle,M,2024-12-01
-273,Konstantin Otto,F,2022-10-12
-274,Dr. Alfonso Salz,F,2021-07-05
-275,Cilli Schomber,F,2024-08-20
-276,Oxana Fechner,F,2017-07-08
-277,Mariola Heser,M,2018-04-28
-278,Ehrenfried Binner,F,2021-04-11
-279,Prof. Birgitta Schaaf B.Sc.,F,2023-08-31
-280,Aleksandar Austermühle,M,2018-01-15
-281,Dr. Igor Scheuermann,M,2024-04-26
-282,Sigfried Klingelhöfer-Mitschke,F,2021-12-24
-283,Ing. Richard Schmidtke B.Eng.,F,2022-02-01
-284,Dipl.-Ing. Rico Beer,F,2025-08-25
-285,Ing. Andree Rohleder,M,2018-09-08
-286,Isabelle Segebahn B.Sc.,M,2016-05-30
-287,Prof. Aynur Noack B.Sc.,M,2016-06-28
-288,Tino Kramer,M,2024-03-27
-289,Gabriel Kranz-Aumann,F,2021-10-14
-290,Rotraud Ruppert,F,2021-06-05
-291,Justus Junken,F,2017-12-25
-292,Annette Zahn,M,2017-07-15
-293,Dipl.-Ing. Wera Bien,F,2018-03-27
-294,Wilhelmine Stumpf B.Eng.,M,2016-07-31
-295,Bernd-Dieter Wulff,M,2022-02-22
-296,Liane Bolander,M,2020-10-14
-297,Sarah Otto,M,2018-09-18
-298,Dipl.-Ing. Calogero Textor B.Eng.,M,2023-07-28
-299,Pietro Döring,M,2022-07-03
-300,Prof. Erna Pölitz,F,2017-10-29
-301,Olav Hein,M,2023-04-06
-302,Katrin Speer MBA.,F,2023-05-09
-303,Gundolf Jockel,M,2022-08-27
-304,Univ.Prof. Salvatore Rosenow,F,2026-02-22
-305,Mariele Scholl,F,2023-04-07
-306,Romana Neureuther,F,2025-08-06
-307,Imke Steckel,F,2017-03-08
-308,Frau Angela Mosemann B.Sc.,M,2025-01-22
-309,Pawel Seifert,M,2022-05-14
-310,Erhardt Kobelt,M,2023-05-31
-311,Rosi Hauffer-Keudel,M,2018-04-02
-312,Luigi Möchlichen,M,2022-08-10
-313,Agata Kambs,F,2018-02-28
-314,Hans-Gerhard Jungfer,F,2023-11-25
-315,Dipl.-Ing. Eleonore Dörschner,M,2021-09-11
-316,Marica Hartung,F,2026-03-14
-317,Hans-H. Dörschner,F,2021-10-14
-318,Camilla Drub,F,2017-01-03
-319,Lore Hertrampf,M,2017-06-28
-320,Ludger Finke,F,2022-05-04
-321,Gabriele Steckel-Salz,F,2023-08-14
-322,Dr. Edda Kreusel MBA.,M,2019-09-22
-323,Fredo Hauffer,F,2020-08-05
-324,Tatjana Hettner B.Sc.,F,2017-04-01
-325,Niels Davids,M,2026-04-11
-326,Tilman Drub,M,2022-01-13
-327,Tobias Lange,M,2024-08-15
-328,Dr. Fred Hiller,M,2018-11-05
-329,Gesine Wirth-Hettner,M,2018-09-19
-330,Annemarie Stahr,F,2026-01-07
-331,Marijan Sager,F,2021-07-03
-332,Sina Junk,F,2021-03-27
-333,Lilo Dowerg B.Eng.,F,2017-01-06
-334,Dipl.-Ing. Klaus Roht B.Sc.,F,2019-03-20
-335,Franz Josef Kobelt B.Eng.,M,2025-04-16
-336,Alexander Hölzenbecher B.Eng.,F,2021-09-14
-337,Leander Bohnbach,F,2016-11-10
-338,Hartmuth Schaaf,F,2016-09-13
-339,Ladislaus Reising,F,2019-08-17
-340,Volker Grein Groth B.Sc.,F,2023-05-19
-341,Dipl.-Ing. Roger Krause,F,2020-05-04
-342,Univ.Prof. Andreas Matthäi B.Eng.,F,2019-04-01
-343,Matthias Losekann,M,2016-05-24
-344,Ansgar Kohl,M,2019-02-23
-345,Kenneth Döhn,F,2020-11-02
-346,Gunda Dippel-Bähr,F,2020-10-12
-347,Lisette Fröhlich,F,2024-05-30
-348,Jurij Kranz,M,2024-08-29
-349,Ing. Leopoldine Heydrich B.Eng.,M,2019-08-25
-350,Konstantin Graf B.Sc.,F,2023-04-09
-351,Dipl.-Ing. Nada Trupp,M,2021-08-14
-352,Ing. Valerij Misicher B.Sc.,M,2019-09-09
-353,Prof. Klothilde Pieper,F,2024-04-18
-354,Horst-Günter Schottin,F,2023-09-08
-355,Melissa Schottin-Steckel,F,2025-08-03
-356,Arthur Scheuermann,F,2018-10-01
-357,Aleksandar Noack B.Sc.,F,2021-01-03
-358,Dr. Elfie Trupp,F,2021-01-03
-359,Trude Radisch,F,2018-02-04
-360,Marko Weihmann,F,2021-10-22
-361,Darko Walter,F,2023-07-14
-362,Frau Susi Klotz,M,2020-10-06
-363,Helmuth Paffrath,F,2024-11-16
-364,Bianka Hesse,F,2024-12-17
-365,Univ.Prof. Renata Bähr,M,2020-04-03
-366,Roman Kaul-Schlosser,F,2016-12-23
-367,Ing. Jennifer Davids,M,2020-10-20
-368,Fanny Killer,M,2018-03-15
-369,Laila Stadelmann B.Eng.,M,2021-10-25
-370,Anne Hermighausen-Ruppersberger,M,2017-03-30
-371,Zdravko Börner,M,2024-11-25
-372,Alla Süßebier,F,2026-03-25
-373,Gunar Jähn,M,2025-02-24
-374,Franka Rudolph,M,2025-09-03
-375,Bärbel Dörschner,F,2020-08-04
-376,Prof. Tony Schmiedecke MBA.,M,2020-07-29
-377,Roberto Säuberlich B.Sc.,M,2024-07-13
-378,Hedda Weimer-Kühnert,M,2020-12-09
-379,Sigmund Hertrampf-Seifert,F,2021-03-24
-380,Yilmaz Hendriks,F,2019-05-05
-381,Jana Schacht,M,2017-05-28
-382,Hansjoachim Kensy,F,2022-04-21
-383,Bernd Eigenwillig,F,2024-03-14
-384,Robin Mühle,M,2019-02-21
-385,Dipl.-Ing. Engin Junken B.Sc.,F,2020-09-28
-386,Univ.Prof. Judith Biggen,M,2023-02-14
-387,Claus Mies-Dussen van,F,2025-02-09
-388,Dipl.-Ing. Christiana Haering,M,2024-01-03
-389,Ing. Dimitri Lindner B.Sc.,F,2024-12-06
-390,Christin Lindau B.Eng.,F,2017-03-19
-391,Severin Haase,M,2019-09-22
-392,Frau Cordula Käster,F,2017-08-21
-393,Vanessa Ernst,F,2022-12-03
-394,Athanasios Steckel,F,2024-08-13
-395,Eitel Gutknecht-Seidel,M,2026-03-28
-396,Marius Schottin-Bohlander,F,2024-02-10
-397,Sofia Stolze,M,2016-11-18
-398,Sandra Ullrich,M,2018-08-05
-399,Albina Zahn,M,2020-05-10
-400,Doreen Heintze,F,2020-11-23
-401,Gustav Kusch,M,2017-07-01
-402,Ing. Silvio Liebelt B.A.,F,2019-04-26
-403,Gerti Gröttner B.Sc.,M,2025-11-15
-404,Kerstin Hellwig,F,2024-02-18
-405,Kunigunda Flantz,F,2018-09-29
-406,Salih Tlustek-Schaaf,F,2017-06-22
-407,Waldtraut Pölitz,M,2020-07-07
-408,Hans-Henning Kraus,M,2021-01-12
-409,Oscar Biggen B.A.,M,2018-04-22
-410,Herr Heinz-Günther Werner,F,2026-04-24
-411,Holm Adler,F,2026-03-09
-412,Sylvio Carsten-Thies,F,2017-04-28
-413,Gerlind Niemeier,F,2024-08-07
-414,Tom Eimer,F,2018-12-29
-415,Astrid Gieß,M,2025-11-04
-416,Wolfgang Süßebier B.A.,M,2017-05-28
-417,Horst-Günter Ruppert,F,2019-04-09
-418,Else Thanel,M,2023-07-02
-419,Susi Mühle,M,2023-06-16
-420,Urte Salz-Wende,F,2025-04-27
-421,H.-Dieter Gutknecht-Langern,M,2023-06-24
-422,Bernd Neureuther,M,2020-11-17
-423,Anastasios Heidrich-Jäkel,M,2017-08-05
-424,Univ.Prof. Elwira Eberhardt MBA.,M,2026-02-12
-425,Zofia Schönland,F,2019-10-10
-426,Dr. Achim Biggen,M,2023-07-30
-427,Ing. Dietmar Ehlert,F,2025-09-18
-428,Antoinette Kusch MBA.,F,2018-09-04
-429,Maxim Vollbrecht B.A.,M,2019-06-24
-430,Traute Caspar,M,2023-09-22
-431,Luzie Weimer B.A.,F,2024-06-23
-432,Apostolos Junck,M,2025-07-17
-433,Dipl.-Ing. Phillip Anders,M,2017-09-13
-434,Otmar Blümel MBA.,M,2024-09-30
-435,Univ.Prof. Elizabeth Eberth,M,2024-06-25
-436,Otto Wirth,F,2016-11-03
-437,Herr Aloys Buchholz B.Sc.,M,2017-04-20
-438,Alexandros Stiffel,M,2022-06-29
-439,Amalie Biggen-Kabus,M,2024-01-10
-440,Gerold Sauer,M,2018-03-24
-441,Tanja Lindau-Reinhardt,M,2019-10-09
-442,Anny Bärer,F,2024-06-21
-443,Denise Mude,F,2018-05-15
-444,Dr. Hermann Josef Wirth,F,2023-03-22
-445,Prof. Torsten Gnatz B.Sc.,M,2023-06-05
-446,Dimitrios Jäntsch B.Eng.,F,2018-01-12
-447,Ismail Wirth,F,2021-08-27
-448,Ing. Irmgard Mühle,F,2026-05-04
-449,Franziska Hamann,M,2024-04-22
-450,Prof. Karlfried Ditschlerin,M,2022-01-31
-451,Herr David Sölzer B.Eng.,F,2018-12-06
-452,Ing. Henrik Heß B.Sc.,F,2019-10-16
-453,Alwine Vogt-Pechel,F,2025-11-09
-454,Kirsten Stiffel B.Sc.,M,2019-01-08
-455,Darius Hamann-Seifert,M,2021-12-11
-456,Magret Ruppersberger,F,2023-07-03
-457,Insa Zirme,F,2024-05-07
-458,Kathleen Jähn,F,2024-05-29
-459,Philomena Scholl-Zorbach,M,2021-08-14
-460,Felicia Jüttner,F,2025-01-31
-461,Cilli Drubin,F,2017-03-03
-462,Britt Scholl B.Sc.,F,2022-08-29
-463,Mina Blümel-Naser,F,2018-12-07
-464,Rico Sager B.Sc.,M,2017-01-03
-465,Heinz-Werner Kusch-Zimmer,M,2019-01-24
-466,Benita Wilms-Eigenwillig,M,2019-03-08
-467,Friedlinde Hettner,F,2018-06-25
-468,Tino Käster-Ullrich,M,2020-01-13
-469,Sergio Hänel,M,2022-01-28
-470,Samir Lehmann,F,2020-10-12
-471,Malgorzata Stahr B.A.,M,2024-04-21
-472,Krystyna Bauer B.A.,M,2016-12-20
-473,Ferenc Kuhl MBA.,F,2024-11-22
-474,Ing. Wiltrud Hahn B.Sc.,M,2017-12-22
-475,Rainer Sorgatz,F,2024-07-13
-476,Karl Franke B.Sc.,F,2024-03-13
-477,Thomas Ullrich B.Eng.,M,2021-06-19
-478,Prof. James Jähn B.Eng.,F,2016-07-01
-479,Amanda Krein,M,2019-10-06
-480,Antonietta Stolze,M,2021-06-17
-481,Dr. Irmela Paffrath,F,2017-03-26
-482,Dr. Annekatrin Möchlichen,F,2019-09-14
-483,Ursula Fritsch-Steuer,M,2025-09-17
-484,Ing. Erdogan Pärtzelt,M,2020-12-26
-485,Elzbieta Klotz,F,2024-08-24
-486,Annett Tröst,F,2020-06-17
-487,Lilian Schleich,M,2024-10-28
-488,Martin Beer B.Sc.,M,2020-11-21
-489,Nermin Hahn-Henk,M,2019-04-30
-490,Gabriela Hölzenbecher,F,2021-10-22
-491,Balthasar Eberth,M,2019-09-14
-492,Arndt Schmiedt-Striebitz,F,2022-12-02
-493,Kristina Ditschlerin,M,2024-05-12
-494,Zeljko Bloch-Klemt,F,2018-05-30
-495,Herr Karl-Ernst Ruppersberger B.A.,F,2025-02-15
-496,Mato Gorlitz-Flantz,F,2016-08-08
-497,Univ.Prof. Witold Jessel,F,2023-06-28
-498,Dipl.-Ing. Helma Zänker MBA.,M,2025-02-18
-499,Stefania Radisch-Gutknecht,M,2016-10-27
-500,Prof. Dariusz Kostolzin,F,2023-05-02
-501,Evangelia Bonbach B.Sc.,F,2023-06-10
-502,Dipl.-Ing. Dorina Junken B.Eng.,M,2023-01-11
-503,Dr. Gretl Stadelmann,M,2022-03-03
-504,Lili Bähr,F,2024-08-28
-505,Baptist Harloff-Knappe,M,2023-09-03
-506,Andres Drubin B.A.,M,2019-09-09
-507,Marjan Gumprich,F,2019-09-30
-508,Hatice Lorch,F,2020-09-06
-509,Annaliese Loos MBA.,M,2022-03-07
-510,Ing. Evelin Barkholz,F,2022-09-17
-511,Frank-Peter Pieper,M,2018-06-21
-512,Arndt Scholl,F,2018-02-13
-513,Walentina Wende,F,2023-08-21
-514,Herr Tilman Kensy,F,2023-05-06
-515,Dr. Bernard Kruschwitz B.Eng.,M,2020-02-12
-516,Frida Ackermann,F,2025-02-26
-517,Reni Koch,F,2017-11-27
-518,Ottmar Krein B.Sc.,F,2016-07-03
-519,Karl-Josef Paffrath-Holzapfel,M,2020-12-28
-520,Wolf-Dietrich Sager B.A.,M,2024-03-07
-521,Dipl.-Ing. Jolanda Sager,M,2024-04-19
-522,Alexandros Kuhl,M,2021-08-25
-523,Veronica Wilmsen,F,2022-09-09
-524,Prof. H.-Dieter Hölzenbecher,F,2025-04-04
-525,Alexei Johann B.A.,M,2025-11-30
-526,Frau Virginia Hermighausen,F,2022-12-20
-527,Heinz-Gerd Zirme,M,2025-01-17
-528,Univ.Prof. Helge Bähr MBA.,F,2025-09-10
-529,Ing. Melita Etzold B.Sc.,M,2022-09-29
-530,Anka Gnatz,F,2016-10-25
-531,Romy Zimmer,F,2022-11-12
-532,Larissa Schmiedecke B.A.,M,2016-05-31
-533,Isolde Wagner B.Sc.,F,2022-05-21
-534,Josefa Koch II,F,2016-11-02
-535,Patrizia Schenk,F,2022-03-22
-536,Songül Hettner,M,2016-08-12
-537,Kriemhild Wernecke,F,2018-01-27
-538,Magdalene Beyer,F,2020-11-01
-539,Jessika Döhn,F,2019-06-13
-540,Janine Rust B.Eng.,F,2018-12-20
-541,Gotthard Thanel,M,2024-11-01
-542,Dr. Knud Drewes,F,2025-10-11
-543,Herbert Schüler B.Sc.,F,2025-09-18
-544,Kreszentia Pruschke-Holzapfel,F,2022-08-26
-545,Maya Müller,M,2023-02-09
-546,Dr. Adolf Zahn B.Eng.,M,2024-10-31
-547,Gerhard Dobes,F,2021-01-27
-548,Prof. Gerd Etzler,F,2025-05-27
-549,Jasmin Meyer-Holsten,M,2021-01-14
-550,Eileen Wulff,M,2017-05-23
-551,Univ.Prof. Gönül Wiek,F,2020-10-23
-552,Sabrina Lindner,F,2025-12-29
-553,Augusta Kostolzin B.Eng.,M,2018-06-05
-554,Mathias Trapp,F,2018-09-24
-555,Rosa Pohl-Koch,F,2017-07-02
-556,Susann Etzler,M,2022-03-30
-557,Frau Hulda Preiß MBA.,M,2019-06-22
-558,Ing. Hansjürgen Schweitzer,M,2019-05-17
-559,Dierk Junk B.Sc.,M,2018-11-05
-560,Alessandro Gehringer,F,2016-06-19
-561,Necati Drubin B.Eng.,F,2022-12-12
-562,Franz Josef Buchholz,F,2022-01-30
-563,Pawel Ehlert,F,2016-11-24
-564,Marko Metz,F,2016-10-26
-565,Ella Thies B.Sc.,F,2024-06-27
-566,Prof. Ilonka Dietz B.Eng.,M,2026-04-26
-567,Reinhard Otto B.Sc.,F,2025-03-24
-568,Diedrich Hertrampf,F,2018-03-24
-569,Francis Zahn-Müller,M,2019-08-03
-570,Philip Ortmann,M,2023-11-11
-571,Dipl.-Ing. Jochem Seifert,F,2016-10-18
-572,Elzbieta Wagenknecht B.A.,F,2024-03-25
-573,Catrin Jüttner,M,2020-06-18
-574,Mariola Misicher,M,2019-02-10
-575,Dipl.-Ing. Ludwig Dörr,M,2016-12-21
-576,Heiderose Lachmann,M,2022-08-29
-577,Veli Ackermann-Nette,M,2020-09-23
-578,Prof. Hermann Josef Fischer,F,2024-02-12
-579,Univ.Prof. Bogdan Tschentscher MBA.,M,2017-09-06
-580,Univ.Prof. Ehrentraud Hänel,F,2026-02-16
-581,Notburga Wagner,M,2024-08-23
-582,Prof. Heinz-Walter Klingelhöfer B.Sc.,M,2019-02-18
-583,Mohammed Gute,M,2021-11-08
-584,Hatice Thies,F,2025-11-28
-585,Wojciech Etzler,F,2024-12-07
-586,Adelgunde Fliegner,F,2021-12-08
-587,Hassan Süßebier B.A.,M,2020-11-15
-588,Lucie Hübel,M,2022-12-15
-589,Rosalie Mielcarek,F,2017-06-15
-590,Eva-Maria Meyer,F,2022-05-12
-591,Edeltraud Noack,F,2019-08-18
-592,Dipl.-Ing. Timm Schweitzer,M,2022-09-11
-593,Frau Tabea Reuter,F,2016-07-18
-594,Faruk Stoll-Plath,F,2024-01-26
-595,Ahmed Stoll,F,2017-10-31
-596,Prof. Adriane Linke MBA.,F,2022-09-24
-597,Luigi Heuser-Löchel,M,2023-09-03
-598,Dana Adolph,M,2019-07-04
-599,Dimitrios Geißler-Dussen van,F,2022-06-18
-600,Hans-Walter Scholz,F,2017-08-23
-601,Roswita Reising,F,2016-07-29
-602,Univ.Prof. Tino Fischer,F,2024-07-23
-603,Dr. Dorota Jäkel B.Eng.,M,2018-08-23
-604,Tomas Wilmsen,M,2017-09-30
-605,Jobst Hamann,F,2025-03-05
-606,Ferdinand Wernecke,M,2021-12-05
-607,Katy Staude,F,2021-10-19
-608,Dr. Mohamed Gröttner,F,2018-01-12
-609,Hildegunde Wende,F,2017-08-20
-610,Berta Schleich-Säuberlich,M,2024-12-10
-611,Anatoli Pechel,F,2022-01-13
-612,Cynthia Finke-Dörschner,M,2023-06-09
-613,Dipl.-Ing. Waldemar Weller B.Eng.,M,2018-10-07
-614,Herr Reinhard Heß,M,2023-07-10
-615,Sabina Jacobi Jäckel,M,2019-10-24
-616,Curt Müller-Baum,F,2018-12-09
-617,Justina Schmidt,M,2023-07-06
-618,Ing. Patrizia Hermighausen B.A.,F,2025-07-19
-619,Lotte Stoll,M,2025-06-14
-620,Alexei Harloff MBA.,M,2024-12-19
-621,Marga Birnbaum,M,2018-11-24
-622,Sevim Heuser B.A.,M,2021-08-12
-623,Philippe Birnbaum,M,2017-10-25
-624,Selim Seifert,F,2020-05-14
-625,Herr Marcus Metz MBA.,F,2024-03-08
-626,Univ.Prof. Marianna Kranz,M,2018-10-19
-627,Wally Patberg,F,2021-03-12
-628,Theda Neuschäfer B.Sc.,F,2019-12-04
-629,Irmtrud Heintze,F,2023-08-21
-630,Doris Otto,M,2018-08-18
-631,Ditmar Hentschel,F,2018-06-26
-632,Rabea Steuer,F,2021-09-15
-633,Prof. Monja Hoffmann,M,2016-12-04
-634,Halina Wiek B.Sc.,M,2023-02-26
-635,Dipl.-Ing. Walter Warmer,F,2025-11-19
-636,Cosimo Weimer,F,2025-03-24
-637,Herrmann auch Schlauchin,F,2023-02-17
-638,Fredy Reuter-Beier,F,2022-09-08
-639,Caterina Freudenberger,M,2025-02-27
-640,Pietro Metz-Junken,F,2018-12-27
-641,Milica Henschel MBA.,M,2020-08-19
-642,Ibrahim Vogt,M,2017-11-17
-643,Anton Dowerg,M,2023-04-19
-644,Geraldine Täsche,M,2020-10-29
-645,Steffi Hornig MBA.,F,2020-04-12
-646,Anastasios Lindner,F,2018-11-04
-647,Sonja Huhn,M,2020-11-24
-648,René Tröst,M,2018-12-21
-649,Niklas Kuhl,F,2021-04-10
-650,Prof. Tabea Warmer B.Sc.,M,2021-03-31
-651,Ing. Philippe Ruppert,M,2018-09-19
-652,Univ.Prof. Mijo Vollbrecht B.Sc.,M,2024-11-07
-653,Karl-Josef Hamann,M,2026-02-23
-654,Tom Reinhardt,F,2018-08-11
-655,Reinhardt Juncken,M,2021-03-01
-656,Rouven Gunpf,F,2023-06-08
-657,Andrzej Wulf B.A.,M,2022-07-15
-658,Donald Weitzel,F,2021-06-17
-659,Bernfried Hering MBA.,M,2020-01-22
-660,Constantin Trub,F,2023-09-21
-661,Roberto Wohlgemut,M,2022-01-29
-662,Raymund Schmiedt,F,2019-01-27
-663,Käte Rosemann,M,2021-10-11
-664,Necati Gierschner-Segebahn,F,2020-12-27
-665,Prof. Ana Scholtz B.A.,M,2022-03-14
-666,Univ.Prof. Maximilian Ruppert MBA.,F,2025-06-09
-667,Magnus Bender,M,2018-06-22
-668,Frederik Lorch,F,2020-07-24
-669,Dr. Theres Benthin,F,2024-09-01
-670,Slavko Kraushaar,M,2024-01-19
-671,Kirstin Kreusel,F,2022-02-25
-672,Margaret Kramer MBA.,M,2021-02-28
-673,Emma Höfig,F,2024-10-31
-674,Jörn Killer,M,2022-03-26
-675,Günther Hesse,F,2017-03-08
-676,Philomena Gertz B.Eng.,F,2023-01-20
-677,Dragica Austermühle B.Sc.,M,2019-09-16
-678,Jonathan Oderwald,F,2026-04-14
-679,Christine Hauffer,F,2017-09-21
-680,Univ.Prof. Pascal Mülichen,M,2016-07-13
-681,Dipl.-Ing. Murat Köhler,M,2025-08-22
-682,Sibille Geisler,F,2017-12-12
-683,Erol Bohnbach-Dussen van,M,2021-03-28
-684,Ing. Antonius Vogt MBA.,M,2023-05-18
-685,Prof. Dan Lindau MBA.,F,2020-03-15
-686,Reinhilde Säuberlich,M,2020-10-03
-687,Ines Mohaupt B.Sc.,F,2020-10-03
-688,Helma Bauer,F,2022-11-25
-689,Walentina Kreusel,M,2019-11-22
-690,Malgorzata Mans,F,2025-07-20
-691,Leonhard Kranz,M,2019-03-26
-692,Ing. Murat Seifert MBA.,M,2024-04-15
-693,Frau Hiltraud Täsche B.Eng.,F,2024-03-06
-694,Rebecca Freudenberger-Schmiedecke,F,2023-12-07
-695,Ralf-Dieter Oestrovsky,F,2017-08-16
-696,Hans-Ludwig Wilmsen B.Sc.,F,2021-03-03
-697,Utz Ring,M,2019-08-16
-698,Reinhold Aumann,F,2025-06-19
-699,Univ.Prof. Isabell Reuter B.A.,M,2016-08-07
-700,Sergio Pohl,F,2026-02-03
-701,Univ.Prof. Harald Haase,M,2024-09-06
-702,Annegrete Schaaf,M,2021-02-17
-703,Edwin Gnatz,F,2021-10-07
-704,Pasquale Pieper,F,2018-03-24
-705,Erhard Scholz B.A.,M,2017-04-02
-706,Margaret Hornich,M,2017-12-22
-707,Margrit Täsche,F,2025-02-06
-708,Paola Holzapfel,M,2019-11-13
-709,Dipl.-Ing. Joerg Oderwald,M,2025-06-27
-710,Ing. Friedemann Mangold,F,2023-06-16
-711,Ulla Bruder MBA.,F,2024-07-12
-712,Dipl.-Ing. Kristiane Kraushaar,F,2019-06-26
-713,Bianca Adolph,F,2020-11-10
-714,Bertha Harloff-Mude,F,2023-03-06
-715,Dr. Henning Kohl,F,2020-08-27
-716,Giorgio Tschentscher-Schleich,F,2017-03-21
-717,Ulrich Becker MBA.,F,2024-12-06
-718,Prof. Alma Schinke B.Sc.,F,2021-07-17
-719,Diethelm Carsten,M,2018-02-18
-720,Dolores Jopich-Trüb,F,2025-10-16
-721,Hans-Dieter Lübs,F,2024-03-30
-722,Dierk Krebs,M,2021-02-23
-723,Nuran Wähner,F,2018-01-29
-724,Drago Junck MBA.,M,2017-05-22
-725,Evelin Hein,F,2017-09-02
-726,Prof. Ditmar Otto,M,2021-03-28
-727,Sven Geisel,F,2018-11-28
-728,Angelo Beyer-Hettner,M,2019-11-30
-729,Karl-Otto Bohnbach,M,2018-10-27
-730,Cosimo Hornich,F,2021-10-10
-731,Margret Lindner-Losekann,F,2021-03-07
-732,Juliana Haering B.Sc.,M,2025-06-25
-733,Ioannis Geisler,F,2018-04-17
-734,Anika Schmiedecke,F,2022-05-02
-735,Ing. Annemarie Hamann MBA.,M,2022-06-17
-736,Katerina Dowerg,M,2020-07-10
-737,Olaf Scheibe,M,2019-05-25
-738,Prof. Lotti Ditschlerin B.Eng.,M,2023-09-23
-739,Ludger Fliegner,F,2024-06-30
-740,Luisa Weiß,M,2016-05-24
-741,Prof. Gunnar Conradi B.Eng.,M,2020-08-18
-742,Katja Hoffmann-Weller,F,2016-10-04
-743,Necati Herrmann B.Sc.,F,2023-03-14
-744,Andre Misicher,F,2025-09-21
-745,Prof. Henning Trommler,F,2020-01-01
-746,Dr. Brita Kambs MBA.,F,2024-07-03
-747,Angelina Eckbauer,M,2024-03-21
-748,Lucia Hering,F,2025-06-16
-749,Maxim Franke,M,2025-04-23
-750,Dipl.-Ing. Dennis Köhler,F,2025-03-24
-751,Marika Wulff,M,2019-01-21
-752,Uschi Jopich,F,2022-01-25
-753,Univ.Prof. Ahmad Mentzel B.Eng.,M,2022-08-14
-754,Elif Zänker,M,2021-10-28
-755,Carin Hellwig MBA.,M,2020-08-23
-756,Prof. Corina Rose B.Sc.,F,2020-10-13
-757,Sylvie Butte,F,2025-12-18
-758,Hans-Wilhelm Loos,M,2020-06-08
-759,Prof. Ulla Jacob B.Sc.,M,2018-03-06
-760,Hermann Josef Hänel,M,2022-06-15
-761,Denny Schönland-Ullrich,F,2021-01-12
-762,Emmi Reichmann-Austermühle,M,2017-06-24
-763,Friedhold Schulz,M,2018-07-17
-764,Felizitas Hermann,F,2023-01-16
-765,Prof. Arnulf Schmidtke,M,2016-08-14
-766,Alena Stadelmann,F,2019-12-27
-767,Kristina Jacob,M,2024-08-26
-768,Laura Gieß,F,2017-01-28
-769,Ing. Olaf Kühnert B.Sc.,M,2024-06-11
-770,Severin Scheel-Heintze,M,2023-06-16
-771,Artur Spieß,M,2026-02-13
-772,Susann Pergande,F,2021-03-29
-773,Hartmut Scholtz B.A.,F,2022-09-18
-774,Hanni Renner,M,2025-08-15
-775,Hüseyin Albers,M,2018-11-24
-776,Dragica Kallert,M,2022-12-23
-777,Ingmar Köster,M,2023-01-26
-778,Heinz-Otto Fritsch,F,2022-06-05
-779,Theodoros Beer,F,2020-08-02
-780,Gabriella Kruschwitz,M,2021-10-11
-781,Piotr Hermann,F,2018-05-17
-782,Aynur Wilms-Gieß,M,2020-10-31
-783,Jose Reising,F,2020-08-01
-784,Ing. Gerhild Pärtzelt B.Eng.,M,2023-06-25
-785,Prof. Lioba Stahr MBA.,M,2018-04-24
-786,Heino Trub,M,2026-04-23
-787,Ludger Lachmann,M,2020-07-23
-788,Kenan Rogner,M,2019-09-01
-789,Eva Seifert B.Eng.,F,2025-12-10
-790,Riza Girschner B.Sc.,F,2023-06-02
-791,Josefine Wieloch B.Eng.,M,2021-02-10
-792,Eva Müller MBA.,F,2019-04-20
-793,Johann Winkler,M,2016-08-07
-794,Nadine Kambs,M,2022-09-28
-795,Gerolf Reuter B.Eng.,M,2021-11-20
-796,Nina Tschentscher,F,2024-12-25
-797,Dipl.-Ing. Nikolaos Knappe,F,2018-09-06
-798,Ottfried Jungfer,M,2019-06-13
-799,Hugo Metz-Birnbaum,F,2020-08-15
-800,Rosita Kraus,M,2025-07-02
-801,Swetlana Wernecke-Scholz,F,2017-12-26
-802,Juri Bohlander,M,2022-01-04
-803,Hendrik Schaaf-Fischer,M,2024-08-02
-804,Elisabeth Kruschwitz,F,2016-08-18
-805,Heimo Tschentscher,F,2018-09-30
-806,Valentina Trüb,F,2023-12-25
-807,Hans-Werner Striebitz,F,2025-08-17
-808,Kunigunde Wulff,F,2020-05-20
-809,Dr. Imre Käster,F,2018-05-17
-810,Joachim Pölitz B.A.,M,2019-08-28
-811,Dr. Mato Cichorius B.Eng.,F,2023-08-16
-812,Hans Jörg Hörle-Pergande,F,2022-03-07
-813,Prof. Rolf Schuchhardt,M,2019-08-12
-814,Wenzel Kreusel,F,2018-02-07
-815,Daria Heser,M,2020-08-30
-816,Traute Thanel B.Sc.,M,2021-05-13
-817,Albrecht Flantz,M,2016-09-18
-818,Abbas Benthin,M,2024-10-22
-819,Univ.Prof. Hasan Kuhl,M,2016-07-24
-820,Holm Rörricht,M,2020-06-16
-821,Renata Hertrampf-Jäntsch,M,2016-06-30
-822,Hans-Michael Fechner,M,2023-04-22
-823,Dipl.-Ing. Gesa Adler B.A.,F,2025-11-24
-824,Valeri Wieloch,M,2024-12-31
-825,Rafael Caspar,M,2017-12-25
-826,Hans-Albert Gutknecht,M,2017-11-27
-827,Gaby Sauer B.A.,M,2020-01-19
-828,Wolf Scheel,F,2026-02-16
-829,Natascha Kreusel-Drub,F,2021-01-02
-830,Brigitta auch Schlauchin,M,2020-02-16
-831,Ehrhard Radisch B.Sc.,M,2023-11-21
-832,Ralf-Peter Weitzel,F,2017-06-17
-833,Bogdan Mangold,F,2021-02-09
-834,Franca Kroker,F,2020-12-22
-835,Ing. Karl-Hermann Kohl B.Eng.,M,2016-07-25
-836,Univ.Prof. Gabi Anders MBA.,M,2022-02-10
-837,Bela Eigenwillig B.A.,M,2021-11-03
-838,Silva Stoll,F,2018-08-05
-839,Dipl.-Ing. Christin Dobes MBA.,M,2018-08-18
-840,Siegfried Weller,M,2019-03-27
-841,Dipl.-Ing. Halil Döhn B.Eng.,F,2026-01-12
-842,Kristine Wagner,F,2017-06-06
-843,Katalin Stolze-Rust,F,2023-09-25
-844,Leo Trupp MBA.,M,2021-12-18
-845,Winfried Seifert B.A.,M,2023-02-08
-846,Aloisia Freudenberger-Putz,F,2020-10-26
-847,Dr. Swantje Klingelhöfer,F,2019-04-07
-848,Margita Stahr,M,2020-01-11
-849,Christopher Bolzmann,M,2026-03-14
-850,Francis Stey,F,2022-12-10
-851,Birgitt Jungfer,M,2022-04-15
-852,Leokadia Kobelt,F,2018-04-12
-853,Attila Wohlgemut,F,2018-09-25
-854,Emine Roskoth,F,2022-02-02
-855,Gunnar Zorbach,F,2023-09-02
-856,Yasemin Hertrampf,M,2025-12-30
-857,Folkert Johann,F,2019-12-22
-858,Abram Etzler,M,2017-11-04
-859,Jann Ritter MBA.,F,2016-09-28
-860,Anneke Hentschel MBA.,F,2016-05-20
-861,Veronique Eigenwillig,F,2016-08-02
-862,Roman Albers,M,2017-01-12
-863,Prof. Janette Schlosser,F,2016-09-14
-864,Arthur Benthin-Bonbach,M,2021-01-30
-865,Ing. Fatima Gertz,F,2021-08-17
-866,Meral Löwer,F,2019-11-02
-867,Roselinde Faust-Gnatz,M,2025-10-10
-868,Willy Weinhold,M,2018-01-08
-869,Eugenia Dehmel,M,2022-10-19
-870,Hakan Kranz,M,2020-12-18
-871,Lorenzo Hande-Thanel,F,2021-05-06
-872,Prof. Selma Beckmann,M,2025-01-15
-873,Serge Kramer,F,2021-01-08
-874,Dr. Milena Hendriks B.Eng.,M,2018-11-17
-875,Wilhelm Rörricht B.Eng.,F,2023-12-14
-876,Magrit Etzold,F,2017-03-11
-877,Janet Barkholz B.Sc.,F,2016-11-28
-878,Nicolas Albers MBA.,F,2019-06-06
-879,Stilla Hering B.A.,F,2020-04-09
-880,Jürgen Franke MBA.,F,2019-12-26
-881,Dina Roht,M,2024-10-16
-882,Olga Fritsch-Eckbauer,F,2018-09-16
-883,Dr. Filiz Radisch,M,2019-09-27
-884,Univ.Prof. Milos Warmer B.A.,F,2018-06-23
-885,Herr Armin Heß MBA.,M,2025-04-26
-886,Ing. Urszula Wulff B.Sc.,M,2018-12-07
-887,Roberto Schleich,M,2018-11-09
-888,Tanja Caspar,F,2026-02-22
-889,Herr Ehrhard Sauer,F,2021-10-12
-890,Rudolph Dussen van,F,2021-04-25
-891,Frederic Wende,M,2023-04-15
-892,Alfonso Knappe B.Sc.,M,2019-01-26
-893,Saban Salz,M,2022-03-16
-894,Ing. Alwin Spieß MBA.,F,2022-03-29
-895,Ottokar Rädel,F,2023-05-02
-896,Johanna Hornich-Stahr,F,2025-08-06
-897,Gaby Pölitz,M,2021-08-19
-898,Danny Killer-Gorlitz,M,2023-01-27
-899,Hedda Preiß B.Eng.,M,2024-11-10
-900,Martha Lübs,M,2021-01-15
-901,Franziska Faust,M,2024-10-12
-902,Dipl.-Ing. Gertraude Barkholz B.Sc.,F,2022-03-06
-903,Roman Klingelhöfer-Ehlert,F,2022-05-25
-904,Franziska Schmidt B.Eng.,F,2023-06-12
-905,Dr. Baptist Löffler,M,2017-09-28
-906,Christina Grein Groth,F,2020-03-21
-907,Zoltan Höfig,F,2021-06-16
-908,Annelie Stroh B.Eng.,M,2022-06-16
-909,Paolo Thies,F,2018-03-08
-910,Irene Ortmann,F,2018-08-04
-911,Herr Diether Herrmann B.Sc.,F,2020-11-10
-912,Prof. Hans-Joachim Trub B.A.,M,2019-04-07
-913,Herr Vassilios Noack B.Eng.,F,2020-02-12
-914,Elmar Wagenknecht MBA.,M,2022-10-04
-915,Tina Nette,M,2018-05-14
-916,Dr. Annaliese Wohlgemut,F,2026-03-12
-917,Ing. Zenta Reising,M,2023-07-15
-918,Henrik Losekann-Klemm,F,2019-12-05
-919,Silvia Scholtz-Schaaf,F,2019-05-14
-920,Marija Schweitzer,F,2026-03-29
-921,Dr. Magrit Baum B.A.,F,2025-03-03
-922,Katalin Dobes,F,2023-06-28
-923,Maja Eberth,F,2025-07-24
-924,Harald Reichmann MBA.,M,2025-10-23
-925,Hermann-Josef Johann,F,2020-06-18
-926,Annelise Dippel-Trubin,M,2016-08-08
-927,Grete Dietz,M,2019-11-02
-928,Rosa-Maria Scheibe,F,2016-10-19
-929,Karl-Ludwig Pölitz,M,2022-08-15
-930,Svenja Döhn-Christoph,F,2020-05-18
-931,Anton Neuschäfer,F,2020-02-02
-932,Sarina Eberth MBA.,F,2017-01-31
-933,Ottokar Gotthard,M,2025-05-27
-934,Marijan Drub B.Eng.,M,2025-03-09
-935,Univ.Prof. Süleyman Heß,F,2023-12-13
-936,Angelique Köster-Schwital,F,2018-03-24
-937,Reiner Dietz,M,2025-02-16
-938,Dipl.-Ing. Ljudmila Atzler B.Eng.,M,2020-05-27
-939,Ortrud Flantz,M,2019-01-09
-940,Patrick Wulf-Börner,F,2024-11-28
-941,Meta Meister,M,2022-05-31
-942,Muzaffer Eigenwillig,F,2017-03-15
-943,Dipl.-Ing. Nikolas Döhn,M,2023-01-10
-944,Dr. Bianka Karge MBA.,M,2016-09-08
-945,Burckhard Girschner-Henck,F,2020-01-08
-946,Steffen Jacob B.Sc.,F,2024-06-25
-947,Waltraud Haase,F,2019-08-12
-948,Heinz-Willi Etzler,F,2026-04-22
-949,Paul Bohlander,M,2024-02-12
-950,Sibel Kroker,M,2022-10-29
-951,Rigo Boucsein,F,2018-06-18
-952,Olga Vollbrecht-Metz,M,2021-08-13
-953,Karl-Wilhelm Renner,F,2025-01-29
-954,Hanni Bärer B.Eng.,F,2021-04-25
-955,Greta Scholl,F,2019-05-17
-956,Emmerich Dehmel,M,2018-04-06
-957,Telse Margraf,M,2017-11-07
-958,Dr. Elizabeth Dobes B.A.,M,2016-05-27
-959,Vladimir Karz,F,2019-12-11
-960,Helmuth Langern,M,2019-02-24
-961,Frau Margareta Röhricht MBA.,M,2018-11-28
-962,Corinna Lange,M,2023-04-14
-963,Donald Cichorius,F,2021-11-06
-964,Theda Heintze,M,2019-04-28
-965,Kornelia Seip,M,2023-11-26
-966,Sandy Eimer B.Sc.,M,2016-06-13
-967,Ortrud Reichmann B.Eng.,F,2024-07-19
-968,Marica Pohl,F,2023-08-29
-969,Anke Gierschner,M,2019-02-19
-970,Mira Nette MBA.,F,2017-09-08
-971,Ben Röhrdanz-Bloch,M,2023-03-24
-972,Dipl.-Ing. Bianka Käster,M,2020-08-07
-973,Philippe Vogt B.Eng.,F,2018-02-18
-974,Gina Eberhardt,M,2018-11-29
-975,Hansjörg Mans,M,2023-06-27
-976,Antonino Wagner-Albers,F,2021-04-03
-977,Ahmet Liebelt B.A.,F,2024-11-14
-978,Dagmar van der Dussen,M,2023-08-09
-979,Mirko Steckel,F,2021-04-07
-980,Ing. Helge Vogt,F,2021-07-21
-981,Concetta Hein,F,2026-05-04
-982,Ing. Egon Stroh B.Eng.,F,2020-12-19
-983,Bianca Jockel MBA.,M,2022-01-08
-984,Darko Fritsch B.Eng.,F,2021-07-26
-985,Ing. Aleksej Gorlitz B.A.,M,2024-11-07
-986,Ellinor Siering MBA.,M,2020-11-02
-987,Dursun Hein,M,2022-10-06
-988,Frau Dora Müller B.Sc.,M,2021-07-18
-989,Univ.Prof. Michaela Noack B.Eng.,F,2019-10-05
-990,Herr Silvester Stoll,F,2017-10-08
-991,Univ.Prof. Udo Bien,M,2025-04-01
-992,Agatha Schulz,F,2016-09-13
-993,Blanka Biggen,M,2017-11-13
-994,Univ.Prof. Denise Röhrdanz B.Eng.,F,2018-03-30
-995,Hans Jürgen Beckmann B.Sc.,M,2020-02-04
-996,Mariana Vogt,F,2017-08-14
-997,Hans-Wolfgang Kostolzin MBA.,M,2020-06-24
-998,Hansjürgen Kambs MBA.,F,2022-01-09
-999,Lucia Boucsein,F,2023-09-03
-1000,Prof. Martine Jungfer B.Sc.,F,2022-06-04
+1,Vlado Täsche,F,2024-04-26
+2,Carola Höfig,M,2023-06-04
+3,Prof. Rosemarie Hertrampf,M,2025-08-15
+4,Hülya Jacob,M,2024-04-01
+5,Dipl.-Ing. Irmtraut Kuhl,M,2020-04-15
+6,Henri Schmiedt,F,2024-03-15
+7,Fredi Gehringer,F,2025-01-15
+8,Adriane Bachmann,M,2023-08-13
+9,Sergio Tintzmann,M,2016-07-10
+10,Elma Grein Groth MBA.,M,2017-07-27
+11,Univ.Prof. Ariane Bachmann MBA.,F,2021-07-30
+12,Dr. Wolf Girschner,F,2018-11-16
+13,Dr. Ilias Lorch B.A.,M,2017-12-11
+14,Sönke Häring-Ullrich,F,2022-11-23
+15,Angela Drub,F,2018-10-29
+16,Hubert Oderwald,M,2019-11-24
+17,Kati Löchel MBA.,M,2020-07-09
+18,Alfonso Bähr,F,2017-04-04
+19,Slavko Eberhardt,F,2025-05-06
+20,Cathrin Seidel-Wähner,M,2021-10-08
+21,Prof. Ekkehart Schottin B.A.,M,2019-02-26
+22,Friedhold Blümel,M,2026-01-16
+23,Wibke Hecker-Christoph,F,2017-10-03
+24,Magdalene Killer,F,2026-01-23
+25,Marten Bähr,M,2023-03-27
+26,Jessica Wulf,F,2021-07-04
+27,Arzu Täsche,M,2019-11-10
+28,Univ.Prof. Othmar Röhrdanz B.A.,M,2018-08-05
+29,Frau Marianne Weinhage B.Eng.,F,2025-11-06
+30,Kathleen Schwital-Juncken,F,2019-03-21
+31,Mahmut Ring B.Sc.,F,2016-08-21
+32,Milena Stiffel,F,2018-12-02
+33,Karl Jessel,M,2019-06-16
+34,Dr. Willibald Lachmann B.Eng.,M,2018-03-30
+35,Angelika Bolzmann MBA.,M,2026-05-19
+36,Elfie Hein MBA.,M,2025-02-02
+37,Andre Löffler,F,2023-01-31
+38,Angela Kensy-Hornig,M,2020-02-01
+39,Frau Cläre Mülichen B.A.,F,2024-05-15
+40,Jovan Förster,M,2017-04-06
+41,Univ.Prof. Markus Nette,M,2025-04-03
+42,Univ.Prof. Lilo Schlosser,M,2021-02-24
+43,Heinz-Günther Thanel,F,2023-07-05
+44,Janos Mälzer,F,2016-09-10
+45,Änne Schmidtke-Klingelhöfer,M,2022-08-20
+46,August Weihmann,F,2020-04-25
+47,Prof. Kilian Ehlert,M,2025-01-25
+48,Ilias Johann,M,2025-02-08
+49,Dora Klingelhöfer,M,2021-07-01
+50,Herr Klaus-Jürgen Oderwald B.Eng.,F,2022-02-03
+51,Murat Kostolzin B.A.,F,2018-09-15
+52,Leonore Eimer,M,2017-08-08
+53,Prof. Antonietta Pohl,M,2021-06-27
+54,Maurizio Müller,M,2023-05-02
+55,Kirstin Lübs-Harloff,F,2019-09-02
+56,Margrit Höfig,M,2018-12-23
+57,Valerie Holt-Staude,F,2024-06-16
+58,Herr Hartmuth Wirth,M,2023-04-25
+59,Gunther Wulff-Karz,M,2022-02-24
+60,Herr Adolf Gumprich B.Eng.,M,2021-10-04
+61,Gudula Ladeck B.A.,F,2021-10-26
+62,Lucia Dietz,F,2019-01-05
+63,Janusz Pölitz,M,2023-08-30
+64,Ing. Karl-Heinrich Rogge B.A.,F,2019-12-14
+65,Dipl.-Ing. Otmar Fröhlich,F,2025-09-07
+66,Jolanta Zirme B.A.,M,2025-10-30
+67,Prof. Selma Stumpf B.A.,M,2019-05-11
+68,Walter Römer,F,2017-11-06
+69,Frau Tanja Nohlmans MBA.,M,2017-05-12
+70,Ada Hecker,F,2023-02-16
+71,Herr Wolfram Nohlmans,M,2019-04-26
+72,Frau Jessica Jockel,F,2025-03-10
+73,Aysel Mülichen,F,2019-09-01
+74,Jan-Peter Heydrich,F,2022-09-27
+75,Albert Bolander,M,2022-11-11
+76,Thaddäus Conradi,M,2016-10-03
+77,Serge Stumpf,F,2018-10-01
+78,Frederic Rogner,M,2022-11-08
+79,Traudl Anders,M,2022-05-12
+80,Univ.Prof. Kaspar Fritsch B.Sc.,M,2017-04-09
+81,Klaus Dieter Fischer,M,2020-01-10
+82,Dr. Else Hövel B.A.,M,2021-02-18
+83,Ing. Friedlinde Kostolzin,M,2022-12-03
+84,Hilma Rose,F,2017-03-24
+85,Hans-Günter Süßebier,M,2022-03-17
+86,Edward Kuhl B.Eng.,M,2022-10-28
+87,Francesca Niemeier B.Sc.,M,2022-09-07
+88,Fritz Plath,M,2025-10-11
+89,Ladislaus Gorlitz,F,2021-01-31
+90,Stjepan Peukert,M,2023-06-12
+91,Prof. Till Eigenwillig MBA.,M,2024-05-10
+92,Karlfried Mude,M,2019-12-13
+93,Kira Boucsein-Ernst,F,2021-10-26
+94,Univ.Prof. Lucia Säuberlich,F,2020-03-29
+95,Univ.Prof. Ortwin Mies,F,2017-08-27
+96,Miguel Pärtzelt,F,2025-03-01
+97,Univ.Prof. Raisa Kohl,M,2024-08-03
+98,Ursula Reuter,F,2020-01-09
+99,Sibel Scheuermann,F,2023-10-22
+100,Linda Mohaupt,M,2020-12-21
+101,Dr. Marta Stahr B.Sc.,F,2021-05-18
+102,Frieda Beer MBA.,F,2016-11-12
+103,Matthias Wähner B.A.,F,2021-09-19
+104,Dr. Karl-Wilhelm Henck B.Eng.,M,2024-04-10
+105,Marlis Davids,F,2021-02-23
+106,Dipl.-Ing. Jacob Rose,M,2025-09-26
+107,Ingrid Birnbaum,F,2021-06-22
+108,Ellinor Lachmann,M,2020-12-09
+109,Carolin Butte,M,2016-07-03
+110,Cengiz Börner B.A.,M,2026-03-15
+111,Juliane Mans,F,2018-08-26
+112,Univ.Prof. Jaroslav Putz,F,2023-04-11
+113,Univ.Prof. Reimund Stiffel,F,2025-05-06
+114,Gerda Zahn,F,2025-11-23
+115,Dipl.-Ing. Ludmila Wesack B.A.,F,2023-12-28
+116,Jacob Stroh B.Sc.,M,2017-01-09
+117,Sepp Thanel,M,2020-11-09
+118,Hartwig Eckbauer,F,2023-03-13
+119,Hajo Weinhage,M,2018-05-11
+120,Evelyne Schomber,M,2019-04-17
+121,Ing. Sylvia Meyer B.Sc.,M,2017-04-05
+122,Katy Weinhold,F,2022-11-08
+123,Bertram Trommler,M,2020-06-10
+124,Ing. Leo Radisch,F,2020-11-14
+125,Editha Hertrampf-Gutknecht,F,2022-10-14
+126,Zdravko Schönland,M,2020-09-11
+127,Dr. Magda Thies,M,2018-12-24
+128,Wiebke Mielcarek-Gieß,M,2024-04-07
+129,Catrin Rörricht-Stahr,F,2019-02-18
+130,Tilman Trupp,M,2021-05-25
+131,Hans-Gerhard Kuhl,F,2018-12-09
+132,Anto Stiffel,F,2020-09-16
+133,Jens-Peter Mosemann,M,2025-02-16
+134,Adalbert Heuser,F,2017-08-29
+135,Univ.Prof. Tilman Bien,M,2024-05-01
+136,Uli Pohl,M,2021-03-27
+137,Conrad Gerlach,F,2025-02-19
+138,Karl-Georg Sauer,M,2017-04-05
+139,Gert Beer,M,2022-12-13
+140,Hanne-Lore Dörr,M,2018-05-19
+141,Hüseyin Hellwig,F,2025-02-25
+142,Univ.Prof. Elizabeth Cichorius B.Eng.,M,2019-06-05
+143,Grete Jacob,M,2020-07-19
+144,Dr. Stefano Haering,F,2019-10-01
+145,Grete Schacht,F,2025-10-22
+146,Natascha Scholtz,F,2017-03-22
+147,Dipl.-Ing. Cornelia Barth,F,2017-05-06
+148,Dagmar Heintze-Pieper,F,2023-05-17
+149,Josefine Kühnert,M,2020-08-04
+150,Hellmuth Hornig,F,2019-10-20
+151,Cindy Junck,F,2019-02-03
+152,Anton Roskoth,F,2024-12-11
+153,Dörte Kuhl,F,2017-05-08
+154,Ronald Kroker,M,2019-01-26
+155,Univ.Prof. Polina Stoll,F,2022-12-26
+156,Salvatore Hänel,M,2021-04-09
+157,Renata Karz,M,2019-02-13
+158,Klaudia Lübs,M,2017-12-20
+159,Miroslaw Jopich,M,2019-03-22
+160,Kaspar Bachmann,M,2018-08-20
+161,Wolfhard Killer B.Sc.,F,2023-02-27
+162,Anastasia Kostolzin,F,2024-10-21
+163,Kuno Trubin-Hertrampf,F,2025-11-08
+164,Grete Dippel-Ziegert,M,2022-11-04
+165,Valentin Mielcarek-Caspar,F,2025-07-07
+166,Ludmila Sontag,F,2016-12-18
+167,Dipl.-Ing. Ramazan Zänker,F,2022-04-20
+168,Prof. Franjo Wesack MBA.,F,2019-04-11
+169,Kenneth Freudenberger,F,2023-08-02
+170,Angelique Schlosser,F,2022-12-11
+171,Sina Hahn-Henck,F,2017-06-04
+172,Maurice Henk-Kreusel,F,2022-02-20
+173,Dr. Sören Röhrdanz MBA.,F,2017-09-29
+174,Bertold Thanel,F,2020-02-01
+175,Univ.Prof. Gabriel Ruppert,F,2025-02-06
+176,Jens-Peter Wirth-Weinhold,F,2023-11-27
+177,Abdullah Bauer MBA.,F,2025-07-28
+178,Prof. Birger Pieper B.A.,M,2018-03-16
+179,Ing. Hans-Christian Drub,F,2025-08-02
+180,Istvan Mentzel,M,2020-08-13
+181,Frau Jasmina Scholtz,F,2020-06-21
+182,Hubertus Faust,F,2024-07-27
+183,Ernest Heidrich-Trommler,F,2022-08-08
+184,Falko Wähner,F,2019-09-26
+185,Athanasios Köster B.A.,M,2018-07-27
+186,Univ.Prof. Pietro Ritter,F,2019-12-30
+187,Oscar Jockel-Klapp,M,2025-01-20
+188,Raymund Heydrich,M,2023-06-15
+189,Kenan Herrmann,M,2023-08-29
+190,Marianne Ortmann B.Sc.,F,2017-07-05
+191,Prof. Centa Reinhardt,F,2024-01-13
+192,Herr Juergen Söding,M,2023-02-18
+193,Hannelore Rogner,M,2017-10-04
+194,Hans-Werner Gude,F,2018-01-31
+195,Frau Diana Pruschke MBA.,F,2020-03-23
+196,Mareen Thies,M,2025-01-02
+197,Susann Heinrich B.A.,M,2026-01-29
+198,Dr. Torsten Etzold,F,2026-03-07
+199,Caterina Lübs,F,2026-01-19
+200,Hans-Peter Pieper B.Sc.,F,2018-06-22
+201,Aynur Hornig,M,2018-01-22
+202,Volker Preiß-Zänker,F,2019-11-24
+203,Ivonne Kensy,F,2021-04-28
+204,Ella Mosemann,F,2022-08-01
+205,Heinz-Willi Loos,M,2019-04-21
+206,Elzbieta Buchholz,M,2019-08-06
+207,Liesa Jacob B.Sc.,F,2016-07-04
+208,Clarissa Werner,F,2020-05-04
+209,Prof. Fabian Schulz,M,2019-12-21
+210,Selma Heuser,F,2017-10-03
+211,Ing. Ottmar Köster B.Sc.,M,2023-02-06
+212,Friedericke Adolph,F,2022-03-29
+213,Janet Junck B.Eng.,F,2024-01-03
+214,Peer Jungfer,F,2021-05-31
+215,Ulrich Losekann,M,2023-02-28
+216,Regine Trupp,M,2020-09-15
+217,Dr. Constance Bauer,M,2016-06-23
+218,Ingeborg Ebert B.Eng.,M,2019-06-25
+219,Klothilde Müller,F,2022-08-07
+220,Lidija Ehlert,F,2018-02-14
+221,Christiane Pölitz,M,2020-10-08
+222,Herr Gottfried Wende MBA.,F,2025-03-09
+223,Stefano Rörricht,F,2021-12-19
+224,Herr Othmar Mülichen,F,2025-01-09
+225,Konstantin Paffrath,M,2022-11-20
+226,Dr. Alfonso Säuberlich,M,2021-08-13
+227,Cilli Schottin,M,2024-09-28
+228,Oxana Fechner,M,2017-08-16
+229,Mariola Heser,F,2018-06-06
+230,Ehrenfried Binner,M,2021-05-20
+231,Prof. Birgitta Schacht B.Sc.,M,2023-10-09
+232,Aleksandar Austermühle,M,2018-02-23
+233,Dr. Igor Schinke,M,2024-06-04
+234,Sigfried Klingelhöfer-Mohaupt,M,2022-02-01
+235,Ing. Richard Schmiedecke B.Eng.,F,2022-03-12
+236,Dipl.-Ing. Rico Beer,M,2025-10-03
+237,Ing. Andree Röhrdanz,M,2018-10-17
+238,Isabelle Seifert B.Sc.,M,2016-07-08
+239,Prof. Aynur Nohlmans B.Sc.,F,2016-08-06
+240,Tino Kramer,M,2024-05-05
+241,Gabriel Kranz-Aumann,M,2021-11-22
+242,Rotraud Rust,F,2021-07-14
+243,Justus Junken,M,2018-02-02
+244,Annette Ziegert,M,2017-08-23
+245,Dipl.-Ing. Wera Bien,F,2018-05-05
+246,Wilhelmine Täsche B.Eng.,F,2016-09-08
+247,Bernd-Dieter Zänker,F,2022-04-02
+248,Liane Bolander,M,2020-11-22
+249,Sarah Paffrath,M,2018-10-27
+250,Dipl.-Ing. Calogero Thies B.Eng.,M,2023-09-05
+251,Pietro Döring,F,2022-08-11
+252,Prof. Erna Preiß,F,2017-12-07
+253,Olav Hein,F,2023-05-15
+254,Katrin Spieß MBA.,F,2023-06-17
+255,Gundolf Jockel,F,2022-10-05
+256,Univ.Prof. Salvatore Roskoth,F,2026-04-02
+257,Mariele Scholtz,M,2023-05-16
+258,Romana Neuschäfer,M,2025-09-14
+259,Imke Steinberg,M,2017-04-16
+260,Frau Angela Möchlichen B.Sc.,M,2025-03-02
+261,Pawel Seidel,M,2022-06-22
+262,Erhardt Kobelt,F,2023-07-09
+263,Rosi Hauffer-Keudel,M,2018-05-11
+264,Luigi Mude,F,2022-09-18
+265,Agata Kambs,M,2018-04-08
+266,Hans-Gerhard Jungfer,M,2024-01-03
+267,Dipl.-Ing. Eleonore Dörschner,F,2021-10-20
+268,Marica Hartung,F,2026-04-22
+269,Hans-H. Dörschner,M,2021-11-22
+270,Camilla Drub,F,2017-02-11
+271,Lore Hertrampf,M,2017-08-06
+272,Ludger Finke,M,2022-06-12
+273,Gabriele Steinberg-Säuberlich,F,2023-09-22
+274,Dr. Edda Kroker MBA.,F,2019-10-31
+275,Fredo Hauffer,M,2020-09-13
+276,Tatjana Hettner B.Sc.,M,2017-05-10
+277,Niels Davids,M,2026-05-20
+278,Tilman Drub,M,2022-02-21
+279,Tobias Langern,M,2024-09-23
+280,Dr. Fred Hiller,M,2018-12-14
+281,Gesine Wulf-Hettner,F,2018-10-28
+282,Annemarie Staude,M,2026-02-15
+283,Marijan Salz,F,2021-08-11
+284,Sina Junk,F,2021-05-05
+285,Lilo Dowerg B.Eng.,M,2017-02-14
+286,Dipl.-Ing. Klaus Römer B.Sc.,F,2019-04-28
+287,Franz Josef Kobelt B.Eng.,M,2025-05-25
+288,Alexander Hölzenbecher B.Eng.,M,2021-10-23
+289,Leander Bohnbach,F,2016-12-19
+290,Hartmuth Schacht,F,2016-10-22
+291,Ladislaus Renner,F,2019-09-25
+292,Volker Grein Groth B.Sc.,M,2023-06-27
+293,Dipl.-Ing. Roger Kraushaar,M,2020-06-12
+294,Univ.Prof. Andreas Meister B.Eng.,F,2019-05-10
+295,Matthias Löwer,M,2016-07-02
+296,Ansgar Kohl,F,2019-04-03
+297,Kenneth Döhn,F,2020-12-11
+298,Gunda Dippel-Bähr,M,2020-11-20
+299,Lisette Fröhlich,F,2024-07-08
+300,Jurij Kranz,F,2024-10-07
+301,Ing. Leopoldine Heydrich B.Eng.,F,2019-10-03
+302,Konstantin Graf B.Sc.,M,2023-05-18
+303,Dipl.-Ing. Nada Ullmann,M,2021-09-22
+304,Ing. Valerij Mitschke B.Sc.,M,2019-10-18
+305,Prof. Klothilde Plath,F,2024-05-27
+306,Horst-Günter Schuchhardt,F,2023-10-17
+307,Melissa Schuchhardt-Steinberg,F,2025-09-11
+308,Arthur Schinke,F,2018-11-09
+309,Aleksandar Nohlmans B.Sc.,M,2021-02-11
+310,Dr. Elfie Ullmann,F,2021-02-11
+311,Trude Reichmann,M,2018-03-15
+312,Marko Weinhage,F,2021-11-30
+313,Darko Weihmann,F,2023-08-22
+314,Frau Susi Klotz,F,2020-11-14
+315,Helmuth Pärtzelt,F,2024-12-25
+316,Bianka Hesse,M,2025-01-25
+317,Univ.Prof. Renata Bähr,F,2020-05-12
+318,Roman Kaul-Schmidt,F,2017-01-31
+319,Ing. Jennifer Davids,M,2020-11-28
+320,Fanny Killer,F,2018-04-23
+321,Laila Stahr B.Eng.,F,2021-12-03
+322,Anne Hermighausen-Ruppert,F,2017-05-08
+323,Zdravko Börner,M,2025-01-03
+324,Alla Textor,F,2026-05-03
+325,Gunar Jähn,F,2025-04-04
+326,Franka Ruppersberger,F,2025-10-12
+327,Bärbel Dörschner,F,2020-09-12
+328,Prof. Tony Schmiedt MBA.,F,2020-09-06
+329,Roberto Sauer B.Sc.,M,2024-08-21
+330,Hedda Weinhold-Kusch,M,2021-01-17
+331,Sigmund Hertrampf-Seidel,M,2021-05-02
+332,Yilmaz Hendriks,M,2019-06-13
+333,Jana Schäfer,M,2017-07-06
+334,Hansjoachim Kensy,F,2022-05-30
+335,Bernd Eigenwillig,M,2024-04-22
+336,Robin Mülichen,F,2019-04-01
+337,Dipl.-Ing. Engin Junken B.Sc.,F,2020-11-06
+338,Univ.Prof. Judith Biggen,M,2023-03-25
+339,Claus Misicher-Dussen van,F,2025-03-20
+340,Dipl.-Ing. Christiana Haering,M,2024-02-11
+341,Ing. Dimitri Linke B.Sc.,F,2025-01-14
+342,Christin Lindner B.Eng.,F,2017-04-27
+343,Severin Haase,F,2019-10-31
+344,Frau Cordula Käster,F,2017-09-29
+345,Vanessa Ernst,M,2023-01-11
+346,Athanasios Steinberg,F,2024-09-21
+347,Eitel Gutknecht-Seifert,F,2026-05-06
+348,Marius Schuchhardt-Bohlander,F,2024-03-20
+349,Sofia Stroh,M,2016-12-27
+350,Sandra Vogt,M,2018-09-13
+351,Albina Ziegert,F,2020-06-18
+352,Doreen Heintze,M,2021-01-01
+353,Gustav Lachmann,M,2017-08-09
+354,Ing. Silvio Lindau B.A.,M,2019-06-04
+355,Gerti Gröttner B.Sc.,F,2025-12-24
+356,Kerstin Hellwig,M,2024-03-28
+357,Kunigunda Flantz,F,2018-11-07
+358,Salih Trommler-Schacht,M,2017-07-31
+359,Waldtraut Preiß,M,2020-08-15
+360,Hans-Henning Krause,F,2021-02-20
+361,Oscar Biggen B.A.,F,2018-05-31
+362,Herr Heinz-Günther Wiek,F,2026-06-02
+363,Holm Adler,F,2026-04-17
+364,Sylvio Carsten-Tlustek,M,2017-06-06
+365,Gerlind Noack,F,2024-09-15
+366,Tom Eimer,F,2019-02-06
+367,Astrid Gieß,M,2025-12-13
+368,Wolfgang Textor B.A.,F,2017-07-06
+369,Horst-Günter Rust,F,2019-05-18
+370,Else Tintzmann,M,2023-08-10
+371,Susi Mülichen,M,2023-07-25
+372,Urte Säuberlich-Werner,M,2025-06-05
+373,H.-Dieter Gutknecht-Lehmann,M,2023-08-02
+374,Bernd Neuschäfer,M,2020-12-26
+375,Anastasios Heidrich-Jäkel,M,2017-09-13
+376,Univ.Prof. Elwira Eberhardt MBA.,F,2026-03-23
+377,Zofia Scholl,F,2019-11-18
+378,Dr. Achim Biggen,F,2023-09-07
+379,Ing. Dietmar Ehlert,F,2025-10-27
+380,Antoinette Lachmann MBA.,F,2018-10-13
+381,Maxim Wagner B.A.,F,2019-08-02
+382,Traute Caspar,M,2023-10-31
+383,Luzie Weinhold B.A.,F,2024-08-01
+384,Apostolos Junck,F,2025-08-25
+385,Dipl.-Ing. Phillip Anders,F,2017-10-22
+386,Otmar Blümel MBA.,M,2024-11-08
+387,Univ.Prof. Elizabeth Eberth,M,2024-08-03
+388,Otto Wulf,F,2016-12-12
+389,Herr Aloys Buchholz B.Sc.,M,2017-05-29
+390,Alexandros Stolze,F,2022-08-07
+391,Amalie Biggen-Kabus,F,2024-02-18
+392,Gerold Schaaf,F,2018-05-02
+393,Tanja Lindner-Reising,F,2019-11-17
+394,Anny Bärer,F,2024-07-30
+395,Denise Mühle,F,2018-06-23
+396,Dr. Hermann Josef Wulf,M,2023-04-30
+397,Prof. Torsten Gnatz B.Sc.,F,2023-07-14
+398,Dimitrios Jäntsch B.Eng.,M,2018-02-20
+399,Ismail Wulf,M,2021-10-05
+400,Ing. Irmgard Mülichen,M,2026-06-12
+401,Franziska Hamann,M,2024-05-31
+402,Prof. Karlfried Ditschlerin,M,2022-03-11
+403,Herr David Sontag B.Eng.,F,2019-01-14
+404,Ing. Henrik Heß B.Sc.,F,2019-11-24
+405,Alwine Wagenknecht-Pergande,F,2025-12-18
+406,Kirsten Stolze B.Sc.,F,2019-02-16
+407,Darius Hamann-Seidel,F,2022-01-19
+408,Magret Ruppert,F,2023-08-11
+409,Insa Zorbach,M,2024-06-15
+410,Kathleen Jähn,M,2024-07-07
+411,Philomena Scholtz-Warmer,M,2021-09-22
+412,Annemarie Tlustek,M,2019-07-30
+413,Magnus Koch,F,2019-02-05
+414,Fernando Eigenwillig,F,2021-02-08
+415,Ilhan Bolnbach,F,2020-04-07
+416,Franz Josef Heintze,F,2018-09-01
+417,Heinz-Werner Lachmann-Zobel,M,2025-07-04
+418,Benita Winkler-Eigenwillig,M,2019-04-16
+419,Friedlinde Hettner,M,2018-08-03
+420,Tino Käster-Vogt,F,2020-02-21
+421,Sergio Hänel,F,2022-03-08
+422,Samir Liebelt,F,2020-11-20
+423,Malgorzata Staude B.A.,M,2024-05-30
+424,Krystyna Bauer B.A.,F,2017-01-28
+425,Ferenc Kühnert MBA.,F,2024-12-31
+426,Ing. Wiltrud Hahn B.Sc.,M,2018-01-30
+427,Rainer Speer,M,2024-08-21
+428,Karl Franke B.Sc.,M,2024-04-21
+429,Thomas Vogt B.Eng.,M,2021-07-28
+430,Prof. James Jähn B.Eng.,F,2016-08-09
+431,Amanda Kreusel,F,2019-11-14
+432,Antonietta Stroh,M,2021-07-26
+433,Dr. Irmela Pärtzelt,F,2017-05-04
+434,Dr. Annekatrin Mude,F,2019-10-23
+435,Ursula Fritsch-Stiebitz,M,2025-10-26
+436,Ing. Erdogan Patberg,M,2021-02-03
+437,Elzbieta Klotz,M,2024-10-02
+438,Annett Trüb,F,2020-07-26
+439,Lilian Schleich,M,2024-12-06
+440,Martin Beer B.Sc.,F,2020-12-30
+441,Nermin Hahn-Henk,F,2019-06-08
+442,Gabriela Hölzenbecher,M,2021-11-30
+443,Balthasar Eberth,F,2019-10-23
+444,Arndt Schönland-Stumpf,F,2023-01-10
+445,Kristina Ditschlerin,M,2024-06-20
+446,Zeljko Bloch-Klemt,M,2018-07-08
+447,Herr Karl-Ernst Ruppert B.A.,F,2025-03-26
+448,Mato Gorlitz-Flantz,F,2016-09-16
+449,Univ.Prof. Witold Jessel,M,2023-08-06
+450,Dipl.-Ing. Helma Zimmer MBA.,M,2025-03-29
+451,Stefania Reichmann-Gutknecht,F,2016-12-05
+452,Prof. Dariusz Kostolzin,F,2023-06-10
+453,Evangelia Bonbach B.Sc.,M,2023-07-19
+454,Dipl.-Ing. Dorina Junken B.Eng.,F,2023-02-19
+455,Dr. Gretl Stahr,F,2022-04-11
+456,Lili Bähr,M,2024-10-06
+457,Baptist Harloff-Knappe,M,2023-10-12
+458,Andres Drubin B.A.,M,2019-10-18
+459,Marjan Gumprich,F,2019-11-08
+460,Hatice Losekann,F,2020-10-15
+461,Annaliese Lorch MBA.,M,2022-04-15
+462,Ing. Evelin Barkholz,M,2022-10-26
+463,Frank-Peter Plath,F,2018-07-30
+464,Arndt Scholtz,M,2018-03-24
+465,Walentina Werner,F,2023-09-29
+466,Herr Tilman Kensy,F,2023-06-14
+467,Dr. Bernard Kuhl B.Eng.,F,2020-03-22
+468,Frida Ackermann,M,2025-04-06
+469,Reni Koch,M,2018-01-05
+470,Ottmar Kreusel B.Sc.,F,2016-08-11
+471,Karl-Josef Pärtzelt-Holzapfel,M,2021-02-05
+472,Wolf-Dietrich Salz B.A.,M,2024-04-15
+473,Dipl.-Ing. Jolanda Salz,M,2024-05-28
+474,Alexandros Kühnert,M,2021-10-03
+475,Veronica Wirth,F,2022-10-18
+476,Prof. H.-Dieter Hölzenbecher,M,2025-05-13
+477,Alexei Johann B.A.,M,2026-01-08
+478,Frau Virginia Hermighausen,F,2023-01-28
+479,Heinz-Gerd Zorbach,F,2025-02-25
+480,Univ.Prof. Helge Bähr MBA.,F,2025-10-19
+481,Ing. Melita Etzold B.Sc.,F,2022-11-07
+482,Anka Gnatz,M,2016-12-03
+483,Romy Zobel,M,2022-12-21
+484,Larissa Schmiedt B.A.,M,2016-07-09
+485,Isolde Walter B.Sc.,F,2022-06-29
+486,Josefa Koch II,M,2016-12-11
+487,Patrizia Scheuermann,M,2022-04-30
+488,Songül Hettner,M,2016-09-20
+489,Kriemhild Wesack,F,2018-03-07
+490,Magdalene Beyer,M,2020-12-10
+491,Jessika Döhn,M,2019-07-22
+492,Janine Sager B.Eng.,M,2019-01-28
+493,Gotthard Tintzmann,F,2024-12-10
+494,Dr. Knud Drewes,F,2025-11-19
+495,Herbert Schulz B.Sc.,F,2025-10-27
+496,Kreszentia Putz-Holzapfel,M,2022-10-04
+497,Maya Naser,M,2023-03-20
+498,Dr. Adolf Ziegert B.Eng.,M,2024-12-09
+499,Gerhard Dobes,M,2021-03-07
+500,Prof. Gerd Etzler,M,2025-07-05
+501,Jasmin Mielcarek-Holsten,M,2021-02-22
+502,Eileen Zänker,M,2017-07-01
+503,Univ.Prof. Gönül Wilms,F,2020-12-01
+504,Sabrina Linke,F,2026-02-06
+505,Augusta Kostolzin B.Eng.,M,2018-07-14
+506,Mathias Tröst,M,2018-11-02
+507,Rosa Pölitz-Koch,M,2017-08-10
+508,Susann Etzler,F,2022-05-08
+509,Frau Hulda Pruschke MBA.,F,2019-07-31
+510,Ing. Hansjürgen Schwital,M,2019-06-25
+511,Dierk Junk B.Sc.,M,2018-12-14
+512,Alessandro Gehringer,M,2016-07-28
+513,Necati Drubin B.Eng.,F,2023-01-20
+514,Franz Josef Buchholz,F,2022-03-10
+515,Pawel Ehlert,M,2017-01-02
+516,Marko Meyer,M,2016-12-04
+517,Ella Tlustek B.Sc.,F,2024-08-05
+518,Prof. Ilonka Dietz B.Eng.,M,2026-06-04
+519,Reinhard Paffrath B.Sc.,M,2025-05-02
+520,Diedrich Hertrampf,M,2018-05-02
+521,Francis Ziegert-Naser,F,2019-09-11
+522,Philip Otto,F,2023-12-20
+523,Dipl.-Ing. Jochem Seidel,M,2016-11-26
+524,Elzbieta Wähner B.A.,M,2024-05-03
+525,Catrin Jüttner,F,2020-07-27
+526,Mariola Mitschke,M,2019-03-21
+527,Dipl.-Ing. Ludwig Dörr,M,2017-01-29
+528,Heiderose Ladeck,M,2022-10-07
+529,Veli Ackermann-Neureuther,M,2020-11-01
+530,Prof. Hermann Josef Fischer,M,2024-03-22
+531,Univ.Prof. Bogdan Ullrich MBA.,F,2017-10-15
+532,Univ.Prof. Ehrentraud Hänel,F,2026-03-27
+533,Notburga Walter,M,2024-10-01
+534,Prof. Heinz-Walter Klingelhöfer B.Sc.,F,2019-03-29
+535,Mohammed Gute,M,2021-12-17
+536,Hatice Tlustek,M,2026-01-06
+537,Wojciech Etzler,F,2025-01-15
+538,Adelgunde Fliegner,M,2022-01-16
+539,Hassan Textor B.A.,F,2020-12-24
+540,Lucie Hübel,M,2023-01-23
+541,Rosalie Mies,F,2017-07-24
+542,Eva-Maria Mielcarek,M,2022-06-20
+543,Edeltraud Nohlmans,F,2019-09-26
+544,Dipl.-Ing. Timm Schwital,M,2022-10-20
+545,Frau Tabea Riehl,M,2016-08-26
+546,Faruk Striebitz-Pohl,F,2024-03-05
+547,Ahmed Striebitz,F,2017-12-09
+548,Prof. Adriane Löchel MBA.,M,2022-11-02
+549,Luigi Heuser-Löffler,M,2023-10-12
+550,Dana Adolph,F,2019-08-12
+551,Dimitrios Geißler-Dussen van,F,2022-07-27
+552,Hans-Walter Schomber,F,2017-10-01
+553,Roswita Renner,F,2016-09-06
+554,Univ.Prof. Tino Fischer,M,2024-08-31
+555,Dr. Dorota Jäkel B.Eng.,M,2018-10-01
+556,Tomas Wirth,F,2017-11-08
+557,Jobst Hamann,F,2025-04-13
+558,Ferdinand Wesack,M,2022-01-13
+559,Katy Steckel,F,2021-11-27
+560,Dr. Mohamed Gröttner,M,2018-02-20
+561,Hildegunde Werner,F,2017-09-28
+562,Berta Schleich-Sauer,F,2025-01-18
+563,Anatoli Pergande,M,2022-02-21
+564,Cynthia Finke-Dörschner,F,2023-07-18
+565,Dipl.-Ing. Waldemar Wernecke B.Eng.,F,2018-11-15
+566,Herr Reinhard Heß,F,2023-08-18
+567,Sabina Jacobi Jäckel,M,2019-12-02
+568,Curt Naser-Baum,F,2019-01-17
+569,Justina Schmidtke,M,2023-08-14
+570,Ing. Patrizia Hermighausen B.A.,M,2025-08-27
+571,Lotte Striebitz,F,2025-07-23
+572,Alexei Harloff MBA.,F,2025-01-27
+573,Marga Birnbaum,M,2019-01-02
+574,Sevim Heuser B.A.,F,2021-09-20
+575,Philippe Birnbaum,M,2017-12-03
+576,Selim Seip,M,2020-06-22
+577,Herr Marcus Meyer MBA.,F,2024-04-16
+578,Univ.Prof. Marianna Kranz,F,2018-11-27
+579,Wally Pechel,M,2021-04-20
+580,Theda Niemeier B.Sc.,M,2020-01-12
+581,Irmtrud Heintze,M,2023-09-29
+582,Doris Paffrath,M,2018-09-26
+583,Ditmar Hentschel,M,2018-08-04
+584,Rabea Stiebitz,M,2021-10-24
+585,Prof. Monja Hoffmann,M,2017-01-12
+586,Halina Wilms B.Sc.,M,2023-04-06
+587,Dipl.-Ing. Walter Weimer,F,2025-12-28
+588,Cosimo Weinhold,F,2025-05-02
+589,Herrmann Schlosser,M,2023-03-28
+590,Fredy Riehl-Beier,F,2022-10-17
+591,Caterina Freudenberger,F,2025-04-07
+592,Pietro Meyer-Junken,F,2019-02-04
+593,Milica Henschel MBA.,M,2020-09-27
+594,Ibrahim Wagenknecht,M,2017-12-26
+595,Anton Dowerg,M,2023-05-28
+596,Geraldine Thanel,F,2020-12-07
+597,Steffi Hornig MBA.,F,2020-05-21
+598,Anastasios Linke,F,2018-12-13
+599,Sonja Huhn,F,2021-01-02
+600,René Trüb,F,2019-01-29
+601,Niklas Kühnert,M,2021-05-19
+602,Prof. Tabea Weimer B.Sc.,M,2021-05-09
+603,Ing. Philippe Rust,M,2018-10-28
+604,Univ.Prof. Mijo Wagner B.Sc.,F,2024-12-16
+605,Karl-Josef Hamann,F,2026-04-03
+606,Tom Reising,F,2018-09-19
+607,Reinhardt Juncken,F,2021-04-09
+608,Rouven Gunpf,F,2023-07-17
+609,Andrzej Zahn B.A.,M,2022-08-23
+610,Donald Wende,M,2021-07-26
+611,Bernfried Hering MBA.,F,2020-03-01
+612,Constantin Trubin,M,2023-10-30
+613,Roberto Wulff,F,2022-03-09
+614,Raymund Schönland,F,2019-03-07
+615,Käte Rosenow,M,2021-11-19
+616,Necati Gierschner-Seifert,F,2021-02-04
+617,Prof. Ana Scholz B.A.,M,2022-04-22
+618,Univ.Prof. Maximilian Rust MBA.,F,2025-07-18
+619,Magnus Bender,M,2018-07-31
+620,Frederik Losekann,F,2020-09-01
+621,Dr. Theres Benthin,F,2024-10-10
+622,Slavko Krebs,F,2024-02-27
+623,Kirstin Kroker,M,2022-04-05
+624,Margaret Kramer MBA.,M,2021-04-08
+625,Emma Höfig,M,2024-12-09
+626,Jörn Killer,M,2022-05-04
+627,Günther Hesse,F,2017-04-16
+628,Philomena Gertz B.Eng.,F,2023-02-28
+629,Dragica Austermühle B.Sc.,M,2019-10-25
+630,Jonathan Oestrovsky,M,2026-05-23
+631,Christine Hauffer,M,2017-10-30
+632,Univ.Prof. Pascal Müller,M,2016-08-21
+633,Dipl.-Ing. Murat Köhler,F,2025-09-30
+634,Sibille Geisler,F,2018-01-20
+635,Erol Bohnbach-Dussen van,F,2021-05-06
+636,Ing. Antonius Wagenknecht MBA.,F,2023-06-26
+637,Prof. Dan Lindner MBA.,F,2020-04-23
+638,Reinhilde Sauer,F,2020-11-11
+639,Ines Mosemann B.Sc.,M,2020-11-11
+640,Helma Bauer,F,2023-01-03
+641,Walentina Kroker,F,2019-12-31
+642,Malgorzata Margraf,M,2025-08-28
+643,Leonhard Kranz,F,2019-05-04
+644,Ing. Murat Seip MBA.,F,2024-05-24
+645,Frau Hiltraud Thanel B.Eng.,M,2024-04-14
+646,Rebecca Freudenberger-Schmiedt,F,2024-01-15
+647,Ralf-Dieter Ortmann,M,2017-09-24
+648,Hans-Ludwig Wirth B.Sc.,M,2021-04-11
+649,Utz Ritter,M,2019-09-24
+650,Reinhold Aumann,F,2025-07-28
+651,Univ.Prof. Isabell Riehl B.A.,F,2016-09-15
+652,Sergio Pölitz,F,2026-03-14
+653,Univ.Prof. Harald Haase,M,2024-10-15
+654,Annegrete Schacht,M,2021-03-28
+655,Edwin Gnatz,F,2021-11-15
+656,Pasquale Plath,F,2018-05-02
+657,Erhard Schomber B.A.,M,2017-05-11
+658,Margaret Hornich,M,2018-01-30
+659,Margrit Thanel,F,2025-03-17
+660,Paola Holzapfel,M,2019-12-22
+661,Dipl.-Ing. Joerg Oestrovsky,M,2025-08-05
+662,Ing. Friedemann Mans,F,2023-07-25
+663,Ulla Bruder MBA.,M,2024-08-20
+664,Dipl.-Ing. Kristiane Krebs,F,2019-08-04
+665,Bianca Adolph,M,2020-12-19
+666,Bertha Harloff-Mühle,M,2023-04-14
+667,Dr. Henning Kohl,M,2020-10-05
+668,Giorgio Ullrich-auch Schlauchin,M,2017-04-29
+669,Ulrich Becker MBA.,F,2025-01-14
+670,Prof. Alma Schleich B.Sc.,F,2021-08-25
+671,Diethelm Carsten,F,2018-03-29
+672,Dolores Jopich-Trupp,F,2025-11-24
+673,Hans-Dieter Mälzer,M,2024-05-08
+674,Dierk Krein,M,2021-04-03
+675,Nuran Warmer,F,2018-03-09
+676,Drago Junck MBA.,F,2017-06-30
+677,Evelin Hein,F,2017-10-11
+678,Prof. Ditmar Paffrath,M,2021-05-06
+679,Sven Geisel,F,2019-01-06
+680,Angelo Beyer-Hettner,F,2020-01-08
+681,Karl-Otto Bohnbach,F,2018-12-05
+682,Cosimo Hornich,M,2021-11-18
+683,Margret Linke-Löwer,F,2021-04-15
+684,Juliana Haering B.Sc.,F,2025-08-03
+685,Ioannis Geisler,F,2018-05-26
+686,Anika Schmiedt,F,2022-06-10
+687,Ing. Annemarie Hamann MBA.,F,2022-07-26
+688,Katerina Dowerg,M,2020-08-18
+689,Olaf Schenk,F,2019-07-03
+690,Prof. Lotti Ditschlerin B.Eng.,M,2023-11-01
+691,Ludger Fliegner,F,2024-08-08
+692,Luisa Weller,F,2016-07-02
+693,Prof. Gunnar Conradi B.Eng.,F,2020-09-26
+694,Katja Hoffmann-Wernecke,F,2016-11-12
+695,Necati Herrmann B.Sc.,F,2023-04-22
+696,Andre Mitschke,F,2025-10-30
+697,Prof. Henning Trub,M,2020-02-09
+698,Dr. Brita Kambs MBA.,F,2024-08-11
+699,Angelina Eckbauer,F,2024-04-29
+700,Lucia Hering,F,2025-07-25
+701,Maxim Franke,M,2025-06-01
+702,Dipl.-Ing. Dennis Köhler,F,2025-05-02
+703,Marika Zänker,F,2019-03-01
+704,Uschi Jopich,M,2022-03-05
+705,Univ.Prof. Ahmad Metz B.Eng.,F,2022-09-22
+706,Elif Zimmer,M,2021-12-06
+707,Carin Hellwig MBA.,M,2020-10-01
+708,Prof. Corina Rosemann B.Sc.,F,2020-11-21
+709,Sylvie Butte,F,2026-01-26
+710,Hans-Wilhelm Lorch,F,2020-07-17
+711,Prof. Ulla Jacob B.Sc.,M,2018-04-14
+712,Hermann Josef Hänel,M,2022-07-24
+713,Denny Scholl-Vogt,M,2021-02-20
+714,Emmi Reinhardt-Austermühle,F,2017-08-02
+715,Friedhold Schuster,F,2018-08-25
+716,Felizitas Hermann,M,2023-02-24
+717,Prof. Arnulf Schmiedecke,F,2016-09-22
+718,Alena Stahr,M,2020-02-04
+719,Kristina Jacob,F,2024-10-04
+720,Laura Gieß,F,2017-03-08
+721,Ing. Olaf Kusch B.Sc.,F,2024-07-20
+722,Severin Scheibe-Heintze,M,2023-07-25
+723,Artur Stadelmann,F,2026-03-24
+724,Susann Peukert,M,2021-05-07
+725,Hartmut Scholz B.A.,M,2022-10-27
+726,Hanni Reuter,F,2025-09-23
+727,Hüseyin Albers,F,2019-01-02
+728,Dragica Kallert,M,2023-01-31
+729,Ingmar Köster,M,2023-03-06
+730,Heinz-Otto Fritsch,M,2022-07-14
+731,Theodoros Beer,M,2020-09-10
+732,Gabriella Kuhl,F,2021-11-19
+733,Piotr Hermann,M,2018-06-25
+734,Aynur Winkler-Gieß,F,2020-12-09
+735,Jose Renner,M,2020-09-09
+736,Ing. Gerhild Patberg B.Eng.,M,2023-08-03
+737,Prof. Lioba Staude MBA.,M,2018-06-02
+738,Heino Trubin,M,2026-06-01
+739,Ludger Ladeck,F,2020-08-31
+740,Kenan Rohleder,F,2019-10-10
+741,Eva Seidel B.Eng.,M,2026-01-18
+742,Riza Girschner B.Sc.,F,2023-07-11
+743,Josefine Wilmsen B.Eng.,M,2021-03-21
+744,Eva Naser MBA.,F,2019-05-29
+745,Johann Wohlgemut,M,2016-09-15
+746,Nadine Kambs,M,2022-11-06
+747,Gerolf Riehl B.Eng.,M,2021-12-29
+748,Nina Ullrich,M,2025-02-02
+749,Dipl.-Ing. Nikolaos Knappe,F,2018-10-15
+750,Ottfried Jungfer,F,2019-07-22
+751,Hugo Meyer-Birnbaum,M,2020-09-23
+752,Rosita Krause,M,2025-08-10
+753,Swetlana Wesack-Schomber,F,2018-02-03
+754,Juri Bohlander,F,2022-02-12
+755,Hendrik Schacht-Fischer,F,2024-09-10
+756,Elisabeth Kuhl,F,2016-09-26
+757,Heimo Ullrich,M,2018-11-08
+758,Valentina Trupp,F,2024-02-02
+759,Hans-Werner Stumpf,M,2025-09-25
+760,Kunigunde Zänker,M,2020-06-28
+761,Dr. Imre Käster,F,2018-06-25
+762,Joachim Preiß B.A.,M,2019-10-06
+763,Dr. Mato Cichorius B.Eng.,F,2023-09-24
+764,Hans Jörg Hörle-Peukert,F,2022-04-15
+765,Prof. Rolf Schüler,M,2019-09-20
+766,Wenzel Kroker,F,2018-03-18
+767,Daria Heser,M,2020-10-08
+768,Traute Tintzmann B.Sc.,F,2021-06-21
+769,Albrecht Flantz,M,2016-10-27
+770,Abbas Benthin,M,2024-11-30
+771,Univ.Prof. Hasan Kühnert,M,2016-09-01
+772,Holm Rose,F,2020-07-25
+773,Renata Hertrampf-Jäntsch,F,2016-08-08
+774,Hans-Michael Fechner,F,2023-05-31
+775,Dipl.-Ing. Gesa Adler B.A.,M,2026-01-02
+776,Valeri Wilmsen,F,2025-02-08
+777,Rafael Caspar,M,2018-02-02
+778,Hans-Albert Gutknecht,M,2018-01-05
+779,Gaby Schaaf B.A.,M,2020-02-27
+780,Wolf Scheibe,M,2026-03-27
+781,Natascha Kroker-Drub,M,2021-02-10
+782,Brigitta Schlosser,F,2020-03-26
+783,Ehrhard Reichmann B.Sc.,M,2023-12-30
+784,Ralf-Peter Wende,F,2017-07-26
+785,Bogdan Mans,M,2021-03-20
+786,Franca Kruschwitz,M,2021-01-30
+787,Ing. Karl-Hermann Kohl B.Eng.,M,2016-09-02
+788,Univ.Prof. Gabi Anders MBA.,F,2022-03-21
+789,Bela Eigenwillig B.A.,F,2021-12-12
+790,Silva Striebitz,M,2018-09-13
+791,Dipl.-Ing. Christin Dobes MBA.,M,2018-09-26
+792,Siegfried Wernecke,F,2019-05-05
+793,Dipl.-Ing. Halil Döhn B.Eng.,M,2026-02-20
+794,Kristine Walter,M,2017-07-15
+795,Katalin Stroh-Sager,F,2023-11-03
+796,Leo Ullmann MBA.,M,2022-01-26
+797,Winfried Seip B.A.,F,2023-03-19
+798,Aloisia Freudenberger-Rädel,F,2020-12-04
+799,Dr. Swantje Klingelhöfer,F,2019-05-16
+800,Margita Staude,F,2020-02-19
+801,Christopher Bolzmann,M,2026-04-22
+802,Francis Stiffel,M,2023-01-18
+803,Birgitt Jungfer,F,2022-05-24
+804,Leokadia Kobelt,F,2018-05-21
+805,Attila Wulff,F,2018-11-03
+806,Emine Rudolph,F,2022-03-13
+807,Gunnar Schomber,M,2023-10-11
+808,Grazyna Stoll,M,2025-01-26
+809,Folkert Johann,F,2023-02-05
+810,Abram Etzler,F,2017-12-13
+811,Jann Rogge MBA.,F,2016-11-06
+812,Anneke Hentschel MBA.,F,2016-06-28
+813,Veronique Eigenwillig,F,2016-09-10
+814,Roman Albers,F,2017-02-20
+815,Prof. Janette Schmidt,F,2016-10-23
+816,Arthur Benthin-Bonbach,M,2021-03-10
+817,Ing. Fatima Gertz,F,2021-09-25
+818,Meral Lübs,M,2019-12-11
+819,Roselinde Faust-Gnatz,M,2025-11-18
+820,Willy Weitzel,F,2018-02-16
+821,Eugenia Dehmel,F,2022-11-27
+822,Hakan Kranz,M,2021-01-26
+823,Lorenzo Hande-Tintzmann,M,2021-06-14
+824,Prof. Selma Beckmann,M,2025-02-23
+825,Serge Kramer,M,2021-02-16
+826,Dr. Milena Hendriks B.Eng.,F,2018-12-26
+827,Wilhelm Rose B.Eng.,F,2024-01-22
+828,Magrit Etzold,M,2017-04-19
+829,Janet Barkholz B.Sc.,F,2017-01-06
+830,Nicolas Albers MBA.,F,2019-07-15
+831,Stilla Hering B.A.,F,2020-05-18
+832,Jürgen Franke MBA.,F,2020-02-03
+833,Dina Römer,M,2024-11-24
+834,Olga Fritsch-Eckbauer,M,2018-10-25
+835,Dr. Filiz Reichmann,F,2019-11-05
+836,Univ.Prof. Milos Weimer B.A.,M,2018-08-01
+837,Herr Armin Heß MBA.,M,2025-06-04
+838,Ing. Urszula Zänker B.Sc.,F,2019-01-15
+839,Roberto Schleich,F,2018-12-18
+840,Tanja Caspar,M,2026-04-02
+841,Herr Ehrhard Schaaf,F,2021-11-20
+842,Rudolph Dussen van,M,2021-06-03
+843,Frederic Werner,M,2023-05-24
+844,Alfonso Knappe B.Sc.,F,2019-03-06
+845,Saban Säuberlich,F,2022-04-24
+846,Ing. Alwin Stadelmann MBA.,F,2022-05-07
+847,Ottokar Radisch,F,2023-06-10
+848,Johanna Hornich-Staude,F,2025-09-14
+849,Gaby Preiß,F,2021-09-27
+850,Danny Killer-Gorlitz,F,2023-03-07
+851,Hedda Pruschke B.Eng.,M,2024-12-19
+852,Martha Mälzer,M,2021-02-23
+853,Franziska Faust,F,2024-11-20
+854,Dipl.-Ing. Gertraude Barkholz B.Sc.,M,2022-04-14
+855,Roman Klingelhöfer-Ehlert,M,2022-07-03
+856,Franziska Schmidtke B.Eng.,F,2023-07-21
+857,Dr. Baptist Loos,F,2017-11-06
+858,Christina Grein Groth,F,2020-04-29
+859,Zoltan Höfig,M,2021-07-25
+860,Annelie Süßebier B.Eng.,F,2022-07-25
+861,Paolo Tlustek,F,2018-04-16
+862,Irene Otto,M,2018-09-12
+863,Herr Diether Herrmann B.Sc.,M,2020-12-19
+864,Prof. Hans-Joachim Trubin B.A.,M,2019-05-16
+865,Herr Vassilios Nohlmans B.Eng.,M,2020-03-22
+866,Elmar Wähner MBA.,M,2022-11-12
+867,Tina Neureuther,F,2018-06-22
+868,Dr. Annaliese Wulff,M,2026-04-20
+869,Ing. Zenta Renner,F,2023-08-23
+870,Henrik Löwer-Klemm,F,2020-01-13
+871,Silvia Scholz-Schacht,M,2019-06-22
+872,Marija Schwital,F,2026-05-07
+873,Dr. Magrit Baum B.A.,F,2025-04-11
+874,Katalin Dobes,M,2023-08-06
+875,Maja Eberth,F,2025-09-01
+876,Harald Reinhardt MBA.,F,2025-12-01
+877,Hermann-Josef Johann,F,2020-07-27
+878,Annelise Dippel-Tschentscher,M,2016-09-16
+879,Grete Dietz,F,2019-12-11
+880,Rosa-Maria Schenk,F,2016-11-27
+881,Karl-Ludwig Preiß,M,2022-09-23
+882,Svenja Döhn-Christoph,F,2020-06-26
+883,Anton Niemeier,M,2020-03-12
+884,Sarina Eberth MBA.,M,2017-03-11
+885,Ottokar Gotthard,M,2025-07-05
+886,Marijan Drub B.Eng.,F,2025-04-17
+887,Univ.Prof. Süleyman Heß,M,2024-01-21
+888,Angelique Köster-Segebahn,M,2018-05-02
+889,Reiner Dietz,M,2025-03-27
+890,Dipl.-Ing. Ljudmila Atzler B.Eng.,F,2020-07-05
+891,Ortrud Flantz,F,2019-02-17
+892,Patrick Zahn-Börner,M,2025-01-06
+893,Meta Mende,F,2022-07-09
+894,Muzaffer Eigenwillig,F,2017-04-23
+895,Dipl.-Ing. Nikolas Döhn,F,2023-02-18
+896,Dr. Bianka Karge MBA.,F,2016-10-17
+897,Burckhard Girschner-Henck,M,2020-02-16
+898,Steffen Jacob B.Sc.,F,2024-08-03
+899,Waltraud Haase,F,2019-09-20
+900,Heinz-Willi Etzler,M,2026-05-31
+901,Paul Bohlander,F,2024-03-22
+902,Sibel Kruschwitz,F,2022-12-07
+903,Rigo Boucsein,F,2018-07-27
+904,Olga Wagner-Meyer,M,2021-09-21
+905,Karl-Wilhelm Reuter,M,2025-03-09
+906,Hanni Bärer B.Eng.,F,2021-06-03
+907,Greta Scholtz,F,2019-06-25
+908,Emmerich Dehmel,M,2018-05-15
+909,Telse Martin,M,2017-12-16
+910,Dr. Elizabeth Dobes B.A.,M,2016-07-05
+911,Vladimir Karz,F,2020-01-19
+912,Helmuth Lehmann,M,2019-04-04
+913,Frau Margareta Roht MBA.,M,2019-01-06
+914,Corinna Langern,M,2023-05-23
+915,Donald Cichorius,F,2021-12-15
+916,Theda Heintze,M,2019-06-06
+917,Kornelia Siering,F,2024-01-04
+918,Sandy Eimer B.Sc.,M,2016-07-22
+919,Ortrud Reinhardt B.Eng.,F,2024-08-27
+920,Marica Pölitz,F,2023-10-07
+921,Anke Gierschner,M,2019-03-30
+922,Mira Neureuther MBA.,F,2017-10-17
+923,Ben Röhricht-Bloch,M,2023-05-02
+924,Dipl.-Ing. Bianka Käster,F,2020-09-15
+925,Philippe Wagenknecht B.Eng.,M,2018-03-29
+926,Gina Eberhardt,M,2019-01-07
+927,Hansjörg Margraf,F,2023-08-05
+928,Antonino Walter-Albers,M,2021-05-12
+929,Ahmet Lindau B.A.,M,2024-12-23
+930,Dagmar Vollbrecht,F,2023-09-17
+931,Mirko Steinberg,F,2021-05-16
+932,Ing. Helge Wagenknecht,F,2021-08-29
+933,Concetta Hein,F,2026-06-12
+934,Ing. Egon Süßebier B.Eng.,M,2021-01-27
+935,Bianca Jockel MBA.,F,2022-02-16
+936,Darko Fritsch B.Eng.,F,2021-09-03
+937,Ing. Aleksej Gorlitz B.A.,F,2024-12-16
+938,Ellinor Söding MBA.,M,2020-12-11
+939,Dursun Hein,F,2022-11-14
+940,Frau Dora Naser B.Sc.,M,2021-08-26
+941,Univ.Prof. Michaela Nohlmans B.Eng.,M,2019-11-13
+942,Herr Silvester Striebitz,M,2017-11-16
+943,Univ.Prof. Udo Bien,F,2025-05-10
+944,Agatha Schuster,F,2016-10-22
+945,Blanka Biggen,F,2017-12-22
+946,Univ.Prof. Denise Röhricht B.Eng.,F,2018-05-08
+947,Hans Jürgen Beckmann B.Sc.,F,2020-03-14
+948,Mariana Wagenknecht,M,2017-09-22
+949,Hans-Wolfgang Kostolzin MBA.,F,2020-08-02
+950,Hansjürgen Kambs MBA.,F,2022-02-17
+951,Lucia Boucsein,F,2023-10-12
+952,Prof. Martine Jungfer B.Sc.,M,2022-07-13
+953,Evelyne Jopich,F,2024-11-13
+954,Univ.Prof. Danilo Scheuermann MBA.,M,2023-09-24
+955,Ismail Jopich B.Eng.,M,2021-06-14
+956,Justus Häring-Cichorius,F,2025-03-10
+957,Babette Kuhl-Linke,M,2021-07-04
+958,Ing. Dittmar Pieper B.Sc.,F,2020-06-21
+959,Guntram Heser,M,2022-07-03
+960,Josephine Gerlach-Hübel,F,2023-10-15
+961,Irene Adolph B.Eng.,F,2022-07-12
+962,Marica Ruppert,M,2023-03-31
+963,Svea Beckmann,F,2017-08-11
+964,Ing. Marcella Hiller,F,2025-11-28
+965,Gisa Dehmel-Girschner,M,2026-05-07
+966,Dipl.-Ing. Maritta Segebahn,F,2025-10-02
+967,Zenta Scheuermann,F,2024-07-01
+968,Gitte Hecker B.Eng.,F,2025-05-20
+969,Ing. Volkmar Kobelt MBA.,M,2017-06-27
+970,Emin Jacobi Jäckel B.Eng.,F,2018-02-11
+971,Babette Käster,M,2020-09-09
+972,Curt Trommler-Hamann,M,2023-05-25
+973,Janina Kusch,F,2024-12-06
+974,Dipl.-Ing. Helmtrud Weimer,M,2016-11-01
+975,Frau Charlotte Heydrich,F,2024-08-30
+976,Erdogan Wulff B.Eng.,M,2022-02-12
+977,Hannah Neuschäfer,F,2019-01-21
+978,Lia Wähner-Weimer,M,2024-06-17
+979,Hans-Gerd Stey-Gehringer,F,2024-03-24
+980,Ronald Hörle,F,2024-12-12
+981,Dipl.-Ing. Wladimir Hamann B.Eng.,M,2022-11-24
+982,Prof. Andre Pölitz,F,2022-11-12
+983,Raimund Walter,M,2025-10-25
+984,Marlene Speer-Plath,F,2017-04-11
+985,Svetlana Hesse,M,2020-09-09
+986,Karolin Mangold MBA.,M,2024-04-04
+987,Heribert Bolnbach,M,2018-06-20
+988,Hansgeorg Schönland,M,2021-10-16
+989,Mehdi Rogner,F,2019-01-02
+990,Nina Schleich-Otto,M,2026-04-28
+991,Jann Tschentscher,F,2025-11-22
+992,Olaf Drewes,M,2024-02-05
+993,Elwira Bärer B.Eng.,M,2019-11-26
+994,Kilian Bolzmann,F,2023-12-27
+995,Mina Tintzmann,M,2022-04-20
+996,Margitta Zorbach,F,2022-06-27
+997,Uwe Nette,M,2017-09-08
+998,Annelore Jockel-Eigenwillig,F,2019-05-12
+999,Francoise Baum B.Eng.,F,2017-11-22
+1000,Dr. Jonas Stolze,F,2020-01-19

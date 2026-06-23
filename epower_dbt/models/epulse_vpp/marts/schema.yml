@@ -12,6 +12,8 @@ models:
         description: German region (North, South, East, West)
         tests:
           - not_null
+      - name: cluster_id
+        description: VPP geographic cluster identifier
       - name: active_vpp_devices
         description: Count of active VPP devices in this hour/region
       - name: total_battery_soc
@@ -39,6 +41,8 @@ models:
         description: Customer identifier
         tests:
           - not_null
+      - name: cluster_id
+        description: VPP geographic cluster identifier
       - name: price_zone
         description: "Price classification: NEGATIVE, LOW, MEDIUM, HIGH, NO_PRICE_DATA"
       - name: battery_action
@@ -57,3 +61,31 @@ models:
         description: Customer share of margin (70%)
       - name: epower_margin_eur
         description: EPOWER share of margin (30%)
+
+  - name: mart_vpp_cluster_map
+    description: >
+      Hourly VPP cluster aggregation for geographic map visualization.
+      Aggregates import/export flows, device counts, and KPIs per cluster per hour.
+    columns:
+      - name: hour
+        description: Hour timestamp
+        tests:
+          - not_null
+      - name: cluster_id
+        description: VPP geographic cluster identifier
+        tests:
+          - not_null
+      - name: active_devices
+        description: Count of distinct active VPP devices in this cluster/hour
+      - name: avg_soc_pct
+        description: Average battery state-of-charge percentage
+      - name: avg_solar_kw
+        description: Average solar yield per device
+      - name: total_import_kwh
+        description: Total grid import in kWh
+      - name: total_export_kwh
+        description: Total grid export in kWh
+      - name: net_flow_kwh
+        description: Net grid flow (positive = importing, negative = exporting)
+      - name: avg_price_eur_mwh
+        description: Average day-ahead price in EUR/MWh

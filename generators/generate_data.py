@@ -30,55 +30,162 @@ NUM_CUSTOMERS = 20000
 NUM_CONTRACTS = 80000
 NUM_SERVICE_LOGS = 10000
 
+# =============================================================================
+# VPP CLUSTER DEFINITIONS
+# 9 clusters based on real German metropolitan/regional areas.
+# Each cluster has a compass region (backward compat), centroid, and share weight.
+# =============================================================================
+VPP_CLUSTERS = {
+    'munich_metro':    {'name': 'Muenchen Metro',       'compass_region': 'South', 'centroid_lat': 48.14, 'centroid_lng': 11.58, 'character': 'Urban, high solar yield',       'share': 0.15},
+    'hamburg_metro':   {'name': 'Hamburg Metro',        'compass_region': 'North', 'centroid_lat': 53.55, 'centroid_lng': 9.99,  'character': 'Urban, coastal wind',            'share': 0.12},
+    'berlin_metro':    {'name': 'Berlin Metro',         'compass_region': 'East',  'centroid_lat': 52.52, 'centroid_lng': 13.41, 'character': 'Urban, mixed generation',        'share': 0.15},
+    'rhine_ruhr':      {'name': 'Rhein-Ruhr',           'compass_region': 'West',  'centroid_lat': 51.23, 'centroid_lng': 6.78,  'character': 'Urban, industrial high load',    'share': 0.14},
+    'frankfurt_main':  {'name': 'Frankfurt/Rhein-Main', 'compass_region': 'West',  'centroid_lat': 50.11, 'centroid_lng': 8.68,  'character': 'Urban, commercial load',         'share': 0.10},
+    'stuttgart_metro': {'name': 'Stuttgart Metro',      'compass_region': 'South', 'centroid_lat': 48.78, 'centroid_lng': 9.18,  'character': 'Suburban, industrial',           'share': 0.10},
+    'lower_saxony':    {'name': 'Niedersachsen/Nord',   'compass_region': 'North', 'centroid_lat': 52.65, 'centroid_lng': 9.20,  'character': 'Rural, wind-heavy generation',   'share': 0.08},
+    'bavaria_south':   {'name': 'Bayern Sued',          'compass_region': 'South', 'centroid_lat': 47.85, 'centroid_lng': 11.90, 'character': 'Rural, high solar yield',        'share': 0.08},
+    'saxony_east':     {'name': 'Sachsen/Ost',          'compass_region': 'East',  'centroid_lat': 51.05, 'centroid_lng': 13.74, 'character': 'Suburban, mixed generation',     'share': 0.08},
+}
+
+# =============================================================================
+# PLZ-CITY LOOKUP TABLE
+# Real German PLZ-to-city mappings, organized by cluster.
+# Used only at generation time to assign geographically correct data.
+# =============================================================================
+PLZ_CITY_LOOKUP = [
+    # munich_metro — PLZ prefixes 80, 81, 82, 85
+    ('80331', 'München', 'munich_metro'),
+    ('80539', 'München', 'munich_metro'),
+    ('80796', 'München', 'munich_metro'),
+    ('81241', 'München', 'munich_metro'),
+    ('81669', 'München', 'munich_metro'),
+    ('81927', 'München', 'munich_metro'),
+    ('82031', 'Grünwald', 'munich_metro'),
+    ('82049', 'Pullach', 'munich_metro'),
+    ('82166', 'Gräfelfing', 'munich_metro'),
+    ('85221', 'Dachau', 'munich_metro'),
+    ('85354', 'Freising', 'munich_metro'),
+    ('85748', 'Garching', 'munich_metro'),
+    # hamburg_metro — PLZ prefixes 20, 21, 22
+    ('20095', 'Hamburg', 'hamburg_metro'),
+    ('20249', 'Hamburg', 'hamburg_metro'),
+    ('20357', 'Hamburg', 'hamburg_metro'),
+    ('20535', 'Hamburg', 'hamburg_metro'),
+    ('21029', 'Hamburg', 'hamburg_metro'),
+    ('21073', 'Hamburg', 'hamburg_metro'),
+    ('21109', 'Hamburg', 'hamburg_metro'),
+    ('22041', 'Hamburg', 'hamburg_metro'),
+    ('22143', 'Hamburg', 'hamburg_metro'),
+    ('22297', 'Hamburg', 'hamburg_metro'),
+    ('22453', 'Hamburg', 'hamburg_metro'),
+    # berlin_metro — PLZ prefixes 10, 12, 13, 14
+    ('10115', 'Berlin', 'berlin_metro'),
+    ('10243', 'Berlin', 'berlin_metro'),
+    ('10405', 'Berlin', 'berlin_metro'),
+    ('10623', 'Berlin', 'berlin_metro'),
+    ('10785', 'Berlin', 'berlin_metro'),
+    ('12043', 'Berlin', 'berlin_metro'),
+    ('12347', 'Berlin', 'berlin_metro'),
+    ('12555', 'Berlin', 'berlin_metro'),
+    ('13187', 'Berlin', 'berlin_metro'),
+    ('13353', 'Berlin', 'berlin_metro'),
+    ('14052', 'Berlin', 'berlin_metro'),
+    ('14467', 'Potsdam', 'berlin_metro'),
+    # rhine_ruhr — PLZ prefixes 40, 44, 45, 47, 50
+    ('40210', 'Düsseldorf', 'rhine_ruhr'),
+    ('40477', 'Düsseldorf', 'rhine_ruhr'),
+    ('40589', 'Düsseldorf', 'rhine_ruhr'),
+    ('44135', 'Dortmund', 'rhine_ruhr'),
+    ('44263', 'Dortmund', 'rhine_ruhr'),
+    ('45127', 'Essen', 'rhine_ruhr'),
+    ('45239', 'Essen', 'rhine_ruhr'),
+    ('47051', 'Duisburg', 'rhine_ruhr'),
+    ('50667', 'Köln', 'rhine_ruhr'),
+    ('50823', 'Köln', 'rhine_ruhr'),
+    ('50937', 'Köln', 'rhine_ruhr'),
+    ('51065', 'Köln', 'rhine_ruhr'),
+    # frankfurt_main — PLZ prefixes 60, 61, 63, 65
+    ('60311', 'Frankfurt am Main', 'frankfurt_main'),
+    ('60486', 'Frankfurt am Main', 'frankfurt_main'),
+    ('60594', 'Frankfurt am Main', 'frankfurt_main'),
+    ('61118', 'Bad Vilbel', 'frankfurt_main'),
+    ('61440', 'Oberursel', 'frankfurt_main'),
+    ('63065', 'Offenbach am Main', 'frankfurt_main'),
+    ('63225', 'Langen', 'frankfurt_main'),
+    ('65183', 'Wiesbaden', 'frankfurt_main'),
+    ('65428', 'Rüsselsheim', 'frankfurt_main'),
+    # stuttgart_metro — PLZ prefixes 70, 71, 72, 73, 76
+    ('70173', 'Stuttgart', 'stuttgart_metro'),
+    ('70376', 'Stuttgart', 'stuttgart_metro'),
+    ('70563', 'Stuttgart', 'stuttgart_metro'),
+    ('71032', 'Böblingen', 'stuttgart_metro'),
+    ('71065', 'Sindelfingen', 'stuttgart_metro'),
+    ('72070', 'Tübingen', 'stuttgart_metro'),
+    ('72764', 'Reutlingen', 'stuttgart_metro'),
+    ('73728', 'Esslingen', 'stuttgart_metro'),
+    ('76131', 'Karlsruhe', 'stuttgart_metro'),
+    ('76227', 'Karlsruhe', 'stuttgart_metro'),
+    # lower_saxony — PLZ prefixes 26, 28, 29, 30, 31
+    ('26122', 'Oldenburg', 'lower_saxony'),
+    ('26382', 'Wilhelmshaven', 'lower_saxony'),
+    ('26721', 'Emden', 'lower_saxony'),
+    ('28195', 'Bremen', 'lower_saxony'),
+    ('28355', 'Bremen', 'lower_saxony'),
+    ('29221', 'Celle', 'lower_saxony'),
+    ('30159', 'Hannover', 'lower_saxony'),
+    ('30449', 'Hannover', 'lower_saxony'),
+    ('30559', 'Hannover', 'lower_saxony'),
+    ('31134', 'Hildesheim', 'lower_saxony'),
+    # bavaria_south — PLZ prefixes 83, 84, 86, 87
+    ('83022', 'Rosenheim', 'bavaria_south'),
+    ('83278', 'Traunstein', 'bavaria_south'),
+    ('83512', 'Wasserburg am Inn', 'bavaria_south'),
+    ('84028', 'Landshut', 'bavaria_south'),
+    ('84503', 'Altötting', 'bavaria_south'),
+    ('86150', 'Augsburg', 'bavaria_south'),
+    ('86368', 'Gersthofen', 'bavaria_south'),
+    ('86609', 'Donauwörth', 'bavaria_south'),
+    ('87435', 'Kempten', 'bavaria_south'),
+    ('87527', 'Sonthofen', 'bavaria_south'),
+    # saxony_east — PLZ prefixes 01, 04, 06, 07, 09
+    ('01067', 'Dresden', 'saxony_east'),
+    ('01187', 'Dresden', 'saxony_east'),
+    ('01309', 'Dresden', 'saxony_east'),
+    ('04103', 'Leipzig', 'saxony_east'),
+    ('04229', 'Leipzig', 'saxony_east'),
+    ('04317', 'Leipzig', 'saxony_east'),
+    ('06108', 'Halle', 'saxony_east'),
+    ('06217', 'Merseburg', 'saxony_east'),
+    ('07743', 'Jena', 'saxony_east'),
+    ('09111', 'Chemnitz', 'saxony_east'),
+]
+
+# Build a cluster-indexed lookup for fast sampling
+_CLUSTER_PLZ_MAP = {}
+for _plz, _city, _cid in PLZ_CITY_LOOKUP:
+    _CLUSTER_PLZ_MAP.setdefault(_cid, []).append((_plz, _city))
+
+# Legacy compat: map compass regions to region keys
+REGION_KEYS = {'North': 400, 'South': 401, 'West': 402, 'East': 403}
+
+# Keep GERMAN_CITIES for backward compat (location_dim, vendor_dim)
 GERMAN_CITIES = {
     'North': [
-        ('Hamburg', '20', 1850000),
-        ('Bremen', '28', 570000),
-        ('Kiel', '24', 250000),
-        ('Lübeck', '23', 220000),
-        ('Hannover', '30', 535000),
-        ('Rostock', '18', 210000),
-        ('Oldenburg', '26', 170000),
-        ('Osnabrück', '49', 165000),
-        ('Braunschweig', '38', 250000),
-        ('Wolfsburg', '38', 125000),
+        ('Hamburg', '20', 1850000), ('Bremen', '28', 570000),
+        ('Hannover', '30', 535000), ('Oldenburg', '26', 170000),
     ],
     'South': [
-        ('München', '80', 1490000),
-        ('Stuttgart', '70', 635000),
-        ('Nürnberg', '90', 520000),
-        ('Augsburg', '86', 300000),
-        ('Freiburg', '79', 230000),
-        ('Ulm', '89', 130000),
-        ('Regensburg', '93', 155000),
-        ('Würzburg', '97', 130000),
-        ('Ingolstadt', '85', 140000),
-        ('Karlsruhe', '76', 310000),
+        ('München', '80', 1490000), ('Stuttgart', '70', 635000),
+        ('Augsburg', '86', 300000), ('Karlsruhe', '76', 310000),
     ],
     'West': [
-        ('Köln', '50', 1080000),
-        ('Düsseldorf', '40', 620000),
-        ('Dortmund', '44', 590000),
-        ('Essen', '45', 580000),
-        ('Duisburg', '47', 500000),
-        ('Bonn', '53', 330000),
-        ('Wuppertal', '42', 355000),
-        ('Bochum', '44', 365000),
-        ('Münster', '48', 315000),
-        ('Aachen', '52', 250000),
+        ('Köln', '50', 1080000), ('Düsseldorf', '40', 620000),
+        ('Dortmund', '44', 590000), ('Essen', '45', 580000),
     ],
     'East': [
-        ('Berlin', '10', 3650000),
-        ('Dresden', '01', 560000),
-        ('Leipzig', '04', 600000),
-        ('Potsdam', '14', 180000),
-        ('Magdeburg', '39', 240000),
-        ('Chemnitz', '09', 245000),
-        ('Halle', '06', 240000),
-        ('Erfurt', '99', 215000),
-        ('Jena', '07', 110000),
-        ('Cottbus', '03', 100000),
-    ]
+        ('Berlin', '10', 3650000), ('Dresden', '01', 560000),
+        ('Leipzig', '04', 600000), ('Chemnitz', '09', 245000),
+    ],
 }
 
 def get_city_weights(region):
@@ -88,7 +195,18 @@ def get_city_weights(region):
     return [p / total for p in populations]
 
 def generate_german_zip(city_prefix):
+    """Legacy fallback for vendor_dim generation."""
     return f"{city_prefix}{random.randint(100, 999)}"
+
+def pick_cluster():
+    """Pick a cluster weighted by household share."""
+    cluster_ids = list(VPP_CLUSTERS.keys())
+    weights = [VPP_CLUSTERS[c]['share'] for c in cluster_ids]
+    return random.choices(cluster_ids, weights=weights)[0]
+
+def pick_plz_city(cluster_id):
+    """Sample a real (PLZ, city) pair from a cluster."""
+    return random.choice(_CLUSTER_PLZ_MAP[cluster_id])
 
 def generate_german_street():
     street_types = ['Straße', 'Weg', 'Allee', 'Platz', 'Ring', 'Gasse']
@@ -209,19 +327,17 @@ account_dim = pd.DataFrame({
 })
 account_dim.to_csv(f'{OUTPUT_DIR}/account_dim.csv', index=False)
 
-print(f"9. Generating customer_dim ({NUM_CUSTOMERS:,} German customers)...")
-region_keys = {'North': 400, 'South': 401, 'West': 402, 'East': 403}
-region_weights = [0.22, 0.28, 0.30, 0.20]
+print(f"9. Generating customer_dim ({NUM_CUSTOMERS:,} German customers with VPP clusters)...")
 customer_types = ['Privatkunde', 'Kleingewerbe', 'Gewerbekunde']
 housing_types_private = ['Einfamilienhaus', 'Reihenhaus', 'Wohnung', 'Mehrfamilienhaus']
 housing_types_business = ['Gewerbeimmobilie']
 
 customers = []
 for i in range(1, NUM_CUSTOMERS + 1):
-    region = random.choices(list(GERMAN_CITIES.keys()), weights=region_weights)[0]
-    cities = GERMAN_CITIES[region]
-    city_idx = random.choices(range(len(cities)), weights=get_city_weights(region))[0]
-    city, zip_prefix, _ = cities[city_idx]
+    cluster_id = pick_cluster()
+    cluster = VPP_CLUSTERS[cluster_id]
+    plz, city = pick_plz_city(cluster_id)
+    compass_region = cluster['compass_region']
     
     customer_type = random.choices(customer_types, weights=[0.75, 0.18, 0.07])[0]
     if customer_type == 'Gewerbekunde':
@@ -241,12 +357,27 @@ for i in range(1, NUM_CUSTOMERS + 1):
         'vertical': 'Energy',
         'address': generate_german_street(),
         'city': city,
-        'state': region,
-        'zip': generate_german_zip(zip_prefix),
-        'region_key': region_keys[region]
+        'zip': plz,
+        'state': compass_region,
+        'cluster_id': cluster_id,
+        'region_key': REGION_KEYS[compass_region]
     })
 customer_dim = pd.DataFrame(customers)
 customer_dim.to_csv(f'{OUTPUT_DIR}/customer_dim.csv', index=False)
+
+print("   Generating vpp_cluster_dim...")
+cluster_rows = []
+for cid, info in VPP_CLUSTERS.items():
+    cluster_rows.append({
+        'cluster_id': cid,
+        'cluster_name': info['name'],
+        'centroid_lat': info['centroid_lat'],
+        'centroid_lng': info['centroid_lng'],
+        'region_character': info['character'],
+        'compass_region': info['compass_region']
+    })
+vpp_cluster_dim = pd.DataFrame(cluster_rows)
+vpp_cluster_dim.to_csv(f'{OUTPUT_DIR}/vpp_cluster_dim.csv', index=False)
 
 print("10. Generating vendor_dim...")
 vendor_types = [

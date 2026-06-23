@@ -2,13 +2,15 @@ version: 2
 
 models:
   - name: stg_devices
-    description: Device registry joined with existing customer_dim
+    description: Device registry joined with existing customer_dim (includes VPP cluster assignment)
     columns:
       - name: customer_key
         description: Unique customer identifier (FK to EPOWER_GOLD.customer_dim)
         tests:
           - unique
           - not_null
+      - name: cluster_id
+        description: VPP geographic cluster identifier
       - name: gateway_id
         description: IoT gateway identifier
         tests:

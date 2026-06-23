@@ -1,11 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import FilterBar from '@/components/FilterBar';
 import KpiCard from '@/components/KpiCard';
 import PriceCapacityChart from '@/components/PriceCapacityChart';
 import BatteryActionsChart from '@/components/BatteryActionsChart';
 import RevenueChart from '@/components/RevenueChart';
+
+const ClusterMap = dynamic(() => import('@/components/ClusterMap'), { ssr: false });
 
 const REGIONS = ['North', 'South', 'East', 'West'];
 const CUSTOMER_TYPES = ['Privatkunde', 'Kleingewerbe', 'Gewerbekunde'];
@@ -40,7 +43,11 @@ export default function Dashboard() {
   const [kpis, setKpis] = useState<KpiData>({});
   const [timeseries, setTimeseries] = useState<unknown[]>([]);
   const [actions, setActions] = useState<unknown[]>([]);
+  const [mapData, setMapData] = useState<unknown[]>([]);
+  const [mapHours, setMapHours] = useState<string[]>([]);
+  const [selectedMapHour, setSelectedMapHour] = useState<string>('');
   const [loading, setLoading] = useState(true);
+  const [mapLoading, setMapLoading] = useState(true);
 
   const buildParams = useCallback(() => {
     const params = new URLSearchParams();
@@ -81,6 +88,43 @@ export default function Dashboard() {
 
     fetchData();
   }, [buildParams]);
+
+  // Fetch map hours on mount
+  useEffect(() => {
+    const fetchMapHours = async () => {
+      try {
+        const res = await fetch('/api/map-hours');
+        const hours = await res.json();
+        const hourList = hours.map((h: { HOUR: string }) => h.HOUR);
+        setMapHours(hourList);
+        if (hourList.length > 0) {
+          setSelectedMapHour(hourList[Math.floor(hourList.length / 2)]);
+        }
+      } catch (error) {
+        console.error('Failed to fetch map hours:', error);
+      }
+    };
+    fetchMapHours();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Fetch map data when hour changes
+  useEffect(() => {
+    if (!selectedMapHour) return;
+    const fetchMapData = async () => {
+      setMapLoading(true);
+      try {
+        const res = await fetch(`/api/map?hour=${encodeURIComponent(selectedMapHour)}`);
+        const data = await res.json();
+        setMapData(data);
+      } catch (error) {
+        console.error('Failed to fetch map data:', error);
+      } finally {
+        setMapLoading(false);
+      }
+    };
+    fetchMapData();
+  }, [selectedMapHour]);
 
   const formatNum = (n?: number, decimals = 0) =>
     n != null ? n.toLocaleString('de-DE', { maximumFractionDigits: decimals }) : '—';
@@ -159,6 +203,15 @@ export default function Dashboard() {
           subvalue="total period"
         />
       </div>
+
+      {/* VPP Cluster Map */}
+      <ClusterMap
+        data={mapData as never[]}
+        loading={mapLoading}
+        selectedHour={selectedMapHour}
+        availableHours={mapHours}
+        onHourChange={setSelectedMapHour}
+      />
 
       {/* Main Chart: Price vs Capacity */}
       <PriceCapacityChart

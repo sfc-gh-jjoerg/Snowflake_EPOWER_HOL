@@ -3,6 +3,7 @@ SELECT
     c.customer_name,
     c.city,
     c.state AS region,
+    c.cluster_id,
     c.customer_type,
     d.gateway_id,
     d.has_solar,
