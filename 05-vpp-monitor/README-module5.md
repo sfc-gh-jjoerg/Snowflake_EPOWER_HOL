@@ -19,7 +19,7 @@ The dashboard provides three integrated views of VPP fleet performance:
 | Section | Metrics |
 |---------|---------|
 | **KPI Cards** | Active devices, battery SOC %, solar yield (kW), day-ahead price (EUR/MWh), customer margin, EPOWER margin |
-| **VPP Cluster Map** | Geographic visualization of 9 German clusters showing real-time import/export status with hour-of-day slider |
+| **Regional Comparison** | Horizontal bar chart comparing net energy flow across 9 German VPP clusters (green=exporting, red=importing) |
 | **Time-Series Chart** | Dual-axis: battery SOC + solar yield vs. day-ahead electricity price (daily aggregation, 60-day window) |
 | **Battery Actions** | Stacked bar: CHARGE / DISCHARGE / SELF_CONSUME / MAX_CHARGE distribution over time |
 | **Revenue Breakdown** | Customer margin vs. EPOWER margin by region |
@@ -416,7 +416,7 @@ Open http://localhost:3000. The app detects it's not in SPCS (no `/snowflake/ses
 ```
 Browser (Dark Mode Dashboard)
        |
-       |  fetch /api/kpis, /api/timeseries, /api/actions
+       |  fetch /api/kpis, /api/timeseries, /api/actions, /api/map
        v
 +------------------------------------------------------------------+
 |  Next.js App (SPCS Container)                                    |
@@ -424,6 +424,7 @@ Browser (Dark Mode Dashboard)
 |  +-- src/app/api/kpis/route.ts   <- Server-side, queries SF      |
 |  +-- src/app/api/timeseries/     <- Server-side, queries SF      |
 |  +-- src/app/api/actions/        <- Server-side, queries SF      |
+|  +-- src/app/api/map/            <- Cluster regional data        |
 |                                                                  |
 |  Authentication: /snowflake/session/token (OAuth)                |
 +------------------------------------------------------------------+
@@ -435,6 +436,7 @@ Browser (Dark Mode Dashboard)
 |  +-- V_VPP_MONITOR_TIMESERIES   (capacity + prices, hourly)     |
 |  +-- V_VPP_MONITOR_ACTIONS      (battery actions, aggregated)   |
 |  +-- V_VPP_MONITOR_KPI          (summary metrics)               |
+|  +-- V_VPP_MONITOR_MAP          (hourly cluster aggregation)    |
 |                                                                  |
 |  Base tables:                                                    |
 |  +-- MART_VPP_CAPACITY_HOURLY   (5,760 rows)                    |
@@ -468,9 +470,11 @@ Browser (Dark Mode Dashboard)
 |   |       +-- kpis/route.ts     # KPI summary endpoint
 |   |       +-- timeseries/route.ts # Time-series endpoint
 |   |       +-- actions/route.ts  # Battery actions + margins endpoint
+|   |       +-- map/route.ts      # Regional cluster data endpoint
 |   +-- components/
 |   |   +-- FilterBar.tsx         # Region, type, date range filters
 |   |   +-- KpiCard.tsx           # Metric card with colored accent
+|   |   +-- RegionalChart.tsx     # Horizontal bar chart: net flow by cluster
 |   |   +-- PriceCapacityChart.tsx # Dual-axis line/area chart
 |   |   +-- BatteryActionsChart.tsx # Stacked bar chart
 |   |   +-- RevenueChart.tsx      # Margin comparison bar chart
