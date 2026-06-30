@@ -72,13 +72,7 @@ export default function RegionalChart({ data, loading }: RegionalChartProps) {
           <Tooltip
             contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px' }}
             labelStyle={{ color: '#e2e8f0', fontWeight: 600 }}
-            formatter={(value: number, _name: string, props: { payload: ClusterRow }) => {
-              const row = props.payload;
-              return [
-                `${value > 0 ? '+' : ''}${value.toFixed(1)} kWh`,
-                `Net Flow | Devices: ${row.active_devices} | SOC: ${row.avg_soc_pct.toFixed(1)}%`,
-              ];
-            }}
+            formatter={(value: number) => [`${value > 0 ? '+' : ''}${value.toFixed(1)} kWh`, 'Net Flow']}
           />
           <Bar dataKey="net_flow_kwh" radius={[0, 4, 4, 0]}>
             {sorted.map((entry, idx) => (

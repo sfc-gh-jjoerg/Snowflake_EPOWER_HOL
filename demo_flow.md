@@ -46,6 +46,26 @@
 
 ---
 
+**4b — VPP: Regionale Cluster-Analyse** *(NEU — Cluster-Dimension)*
+
+> *„Vergleiche die durchschnittliche Solarleistung und den Netzfluss zwischen den Clustern Munich Metro, Hamburg Metro und Rhein-Ruhr. Welches Cluster exportiert am meisten?"*
+
+| Tools | `vpp_telemetry_analyst` |
+|-------|------------------------|
+| Aha-Effekt | Agent nutzt `CLUSTER_NAME` und `COMPASS_REGION` aus der neuen VPP_CLUSTER_DIM. Zeigt regionale Unterschiede in der VPP-Performance — urbane Cluster (Munich, Stuttgart) verhalten sich anders als ländliche (Lower Saxony, Bavaria South). |
+
+**Weitere Cluster-Fragen (Follow-ups):**
+
+| Frage | Was es zeigt |
+|-------|-------------|
+| *„Welches Cluster hat den höchsten Netzexport?"* | GROUP BY cluster_name mit NET_GRID_FLOW |
+| *„Vergleiche den Batterie-Ladezustand zwischen urbanen und ländlichen Standorten"* | Nutzt `REGION_CHARACTER` (Urban/dense vs. Rural) |
+| *„Zeige die Solarleistung aller Cluster im Süden"* | Filtert `COMPASS_REGION = 'South'` |
+| *„Top 3 Cluster nach Heatpump-Verbrauch"* | Ranking über cluster_name + AVG_HEATPUMP_CONSUMPTION |
+| *„Wie unterscheiden sich Privatkunden und Gewerbe im Munich Metro Cluster?"* | Kombination cluster_name + customer_type |
+
+---
+
 **5 — Upsell-Strategie** *(cross-domain, handlungsorientiert)*
 
 > *„Analysiere VPP-Effizienz und Umsatztrend. Welche Kunden ohne Batterie haben das größte Potenzial? Erstelle eine Strategie."*
@@ -74,6 +94,7 @@
 | 2 | Kunden, Produkt-Docs | x | x | |
 | 3 | Service | | | x |
 | 4 | VPP, Marktpreise | x | | |
+| 4b | VPP (Cluster) | | | |
 | 5 | VPP, Sales, Kunden | x | | x |
 | 6 | Sales, VPP, Service, HR, Docs | x | x | x |
 
@@ -94,6 +115,7 @@
 | Dimension | Erwartetes Muster |
 |-----------|-------------------|
 | **Regionen** | South = Solar-Champion (85%), North = HP-stark (80%), West = E-Mobility/Gewerbe, East = Wachstum + Installationsprobleme |
+| **VPP-Cluster** | 9 Metro/Rural-Cluster (munich_metro, hamburg_metro, berlin_metro, rhine_ruhr, frankfurt_main, stuttgart_metro, lower_saxony, bavaria_south, saxony_east). Urban: höhere Gerätedichte. Rural: höhere Solarleistung pro Gerät. |
 | **Segmente** | Gewerbe: 6x Vertragswert, 3-6 Verträge. Privat: 1-3 Verträge |
 | **Zeittrends** | YoY-Wachstum, Solar-Peak Frühjahr, HP-Peak Herbst |
 | **Service** | East: negatives Sentiment-Cluster. Winter: HP-Beschwerden +80% |
@@ -105,7 +127,7 @@
 | Komponente | Details |
 |-----------|---------|
 | **Agent** | `EPOWER_AGENT` (12 Tools: 7 Analyst + 4 Search + 1 Chart) |
-| **Semantic Views** | 7 (Sales, Billing, Service, Customer Energy, HR, VPP, Market Prices) |
+| **Semantic Views** | 7 (Sales, Billing, Service, Customer Energy, HR, VPP + Cluster-DIM, Market Prices) |
 | **Cortex Search** | 9 Services (4 Dokument-RAG + 5 Column Lookup) |
 | **Datenbank** | `EPOWER_DEMO` (Medallion: Bronze → Silver → Gold) |
 | **MCP Server** | `EPOWER_MCP_SERVER` |

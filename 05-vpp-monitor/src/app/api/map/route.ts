@@ -9,9 +9,6 @@ export async function GET(request: NextRequest) {
     SELECT
       CLUSTER_ID,
       CLUSTER_NAME,
-      CENTROID_LAT,
-      CENTROID_LNG,
-      REGION_CHARACTER,
       COMPASS_REGION,
       ACTIVE_DEVICES,
       AVG_SOC_PCT,
@@ -19,8 +16,7 @@ export async function GET(request: NextRequest) {
       TOTAL_IMPORT_KWH,
       TOTAL_EXPORT_KWH,
       NET_FLOW_KWH,
-      AVG_PRICE_EUR_MWH,
-      FLOW_DIRECTION
+      AVG_PRICE_EUR_MWH
     FROM EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_MAP
   `;
 
