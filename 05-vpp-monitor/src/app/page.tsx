@@ -41,9 +41,7 @@ export default function Dashboard() {
   const [kpis, setKpis] = useState<KpiData>({});
   const [timeseries, setTimeseries] = useState<unknown[]>([]);
   const [actions, setActions] = useState<unknown[]>([]);
-  const [regionalData, setRegionalData] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
-  const [regionalLoading, setRegionalLoading] = useState(true);
 
   const buildParams = useCallback(() => {
     const params = new URLSearchParams();
@@ -84,23 +82,6 @@ export default function Dashboard() {
 
     fetchData();
   }, [buildParams]);
-
-  // Fetch regional cluster data on mount
-  useEffect(() => {
-    const fetchRegional = async () => {
-      setRegionalLoading(true);
-      try {
-        const res = await fetch('/api/map');
-        const data = await res.json();
-        setRegionalData(data);
-      } catch (error) {
-        console.error('Failed to fetch regional data:', error);
-      } finally {
-        setRegionalLoading(false);
-      }
-    };
-    fetchRegional();
-  }, []);
 
   const formatNum = (n?: number, decimals = 0) =>
     n != null ? n.toLocaleString('de-DE', { maximumFractionDigits: decimals }) : '—';
@@ -145,46 +126,44 @@ export default function Dashboard() {
           label="Active Devices"
           value={formatNum(kpis.avg_active_devices)}
           color="battery"
+          subvalue="avg batteries in VPP"
         />
         <KpiCard
           label="Avg Battery SOC"
           value={formatNum(kpis.avg_battery_soc_pct, 1)}
           unit="%"
           color="battery"
+          subvalue="state of charge"
         />
         <KpiCard
           label="Avg Solar Yield"
           value={formatNum(kpis.avg_solar_kw, 1)}
           unit="kW"
           color="solar"
+          subvalue="generation per device"
         />
         <KpiCard
-          label="Avg Price"
+          label="Spot Price"
           value={formatNum(kpis.avg_price_eur_mwh, 1)}
           unit="EUR/MWh"
           color="price"
+          subvalue="avg day-ahead market"
         />
         <KpiCard
-          label="Customer Margin"
+          label="Customer Savings"
           value={formatEur(kpis.total_customer_margin)}
           unit="EUR"
           color="margin"
-          subvalue="total period"
+          subvalue="VPP participation revenue"
         />
         <KpiCard
-          label="EPOWER Margin"
+          label="EPOWER Revenue"
           value={formatEur(kpis.total_epower_margin)}
           unit="EUR"
           color="margin"
-          subvalue="total period"
+          subvalue="platform trading margin"
         />
       </div>
-
-      {/* Regional Comparison */}
-      <RegionalChart
-        data={regionalData as never[]}
-        loading={regionalLoading}
-      />
 
       {/* Main Chart: Price vs Capacity */}
       <PriceCapacityChart
@@ -203,6 +182,9 @@ export default function Dashboard() {
           loading={loading}
         />
       </div>
+
+      {/* Regional Comparison with time slider */}
+      <RegionalChart />
 
       {/* Footer */}
       <footer className="text-center text-xs text-slate-600 pt-4 border-t border-slate-800/50">
