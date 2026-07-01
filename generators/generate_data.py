@@ -36,15 +36,25 @@ NUM_SERVICE_LOGS = 10000
 # Each cluster has a compass region (backward compat), centroid, and share weight.
 # =============================================================================
 VPP_CLUSTERS = {
-    'munich_metro':    {'name': 'Muenchen Metro',       'compass_region': 'South', 'centroid_lat': 48.14, 'centroid_lng': 11.58, 'character': 'Urban, high solar yield',       'share': 0.15},
-    'hamburg_metro':   {'name': 'Hamburg Metro',        'compass_region': 'North', 'centroid_lat': 53.55, 'centroid_lng': 9.99,  'character': 'Urban, coastal wind',            'share': 0.12},
-    'berlin_metro':    {'name': 'Berlin Metro',         'compass_region': 'East',  'centroid_lat': 52.52, 'centroid_lng': 13.41, 'character': 'Urban, mixed generation',        'share': 0.15},
-    'rhine_ruhr':      {'name': 'Rhein-Ruhr',           'compass_region': 'West',  'centroid_lat': 51.23, 'centroid_lng': 6.78,  'character': 'Urban, industrial high load',    'share': 0.14},
-    'frankfurt_main':  {'name': 'Frankfurt/Rhein-Main', 'compass_region': 'West',  'centroid_lat': 50.11, 'centroid_lng': 8.68,  'character': 'Urban, commercial load',         'share': 0.10},
-    'stuttgart_metro': {'name': 'Stuttgart Metro',      'compass_region': 'South', 'centroid_lat': 48.78, 'centroid_lng': 9.18,  'character': 'Suburban, industrial',           'share': 0.10},
-    'lower_saxony':    {'name': 'Niedersachsen/Nord',   'compass_region': 'North', 'centroid_lat': 52.65, 'centroid_lng': 9.20,  'character': 'Rural, wind-heavy generation',   'share': 0.08},
-    'bavaria_south':   {'name': 'Bayern Sued',          'compass_region': 'South', 'centroid_lat': 47.85, 'centroid_lng': 11.90, 'character': 'Rural, high solar yield',        'share': 0.08},
-    'saxony_east':     {'name': 'Sachsen/Ost',          'compass_region': 'East',  'centroid_lat': 51.05, 'centroid_lng': 13.74, 'character': 'Suburban, mixed generation',     'share': 0.08},
+    # fmt: cluster_id: {name, compass_region, centroid_lat, centroid_lng, character, share, solar_multiplier, solar_peak_kw, hp_multiplier, grid_bias}
+    # solar_multiplier: relative solar irradiation (1.0 = German average ~1050 kWh/m2/yr)
+    # solar_peak_kw: max solar output per device (varies by typical panel size & orientation)
+    # hp_multiplier: heat pump demand factor (>1 = colder climate, <1 = milder)
+    # grid_bias: tendency to import (+) or export (-) in kW
+    'freiburg_oberrhein': {'name': 'Freiburg/Oberrhein',  'compass_region': 'South', 'centroid_lat': 47.99, 'centroid_lng': 7.85,  'character': 'Rural, peak solar irradiation',       'share': 0.05, 'solar_multiplier': 1.35, 'solar_peak_kw': 9.5, 'hp_multiplier': 0.7, 'grid_bias': -1.5},
+    'bavaria_south':      {'name': 'Bayern Sued',         'compass_region': 'South', 'centroid_lat': 47.85, 'centroid_lng': 11.90, 'character': 'Rural, high solar yield',              'share': 0.06, 'solar_multiplier': 1.25, 'solar_peak_kw': 8.5, 'hp_multiplier': 0.9, 'grid_bias': -1.0},
+    'munich_metro':       {'name': 'Muenchen Metro',      'compass_region': 'South', 'centroid_lat': 48.14, 'centroid_lng': 11.58, 'character': 'Urban, high solar yield',              'share': 0.10, 'solar_multiplier': 1.15, 'solar_peak_kw': 7.5, 'hp_multiplier': 1.0, 'grid_bias': -0.5},
+    'stuttgart_metro':    {'name': 'Stuttgart Metro',     'compass_region': 'South', 'centroid_lat': 48.78, 'centroid_lng': 9.18,  'character': 'Suburban, industrial',                 'share': 0.08, 'solar_multiplier': 1.10, 'solar_peak_kw': 7.2, 'hp_multiplier': 1.0, 'grid_bias': -0.3},
+    'nuernberg_franken':  {'name': 'Nuernberg/Franken',   'compass_region': 'South', 'centroid_lat': 49.45, 'centroid_lng': 11.08, 'character': 'Urban, moderate solar, industrial',    'share': 0.06, 'solar_multiplier': 1.05, 'solar_peak_kw': 7.0, 'hp_multiplier': 1.1, 'grid_bias': 0.0},
+    'frankfurt_main':     {'name': 'Frankfurt/Rhein-Main','compass_region': 'West',  'centroid_lat': 50.11, 'centroid_lng': 8.68,  'character': 'Urban, commercial load',               'share': 0.08, 'solar_multiplier': 0.95, 'solar_peak_kw': 6.5, 'hp_multiplier': 1.0, 'grid_bias': 0.3},
+    'koeln_bonn':         {'name': 'Koeln/Bonn',          'compass_region': 'West',  'centroid_lat': 50.94, 'centroid_lng': 6.96,  'character': 'Urban, service-sector, moderate load', 'share': 0.07, 'solar_multiplier': 0.90, 'solar_peak_kw': 6.0, 'hp_multiplier': 1.0, 'grid_bias': 0.5},
+    'rhine_ruhr':         {'name': 'Rhein-Ruhr',          'compass_region': 'West',  'centroid_lat': 51.23, 'centroid_lng': 6.78,  'character': 'Urban, industrial high load',          'share': 0.09, 'solar_multiplier': 0.85, 'solar_peak_kw': 5.5, 'hp_multiplier': 1.1, 'grid_bias': 1.0},
+    'berlin_metro':       {'name': 'Berlin Metro',        'compass_region': 'East',  'centroid_lat': 52.52, 'centroid_lng': 13.41, 'character': 'Urban, mixed generation',              'share': 0.12, 'solar_multiplier': 0.90, 'solar_peak_kw': 6.0, 'hp_multiplier': 1.2, 'grid_bias': 0.5},
+    'leipzig_halle':      {'name': 'Leipzig/Halle',       'compass_region': 'East',  'centroid_lat': 51.34, 'centroid_lng': 12.38, 'character': 'Suburban, growing renewables',         'share': 0.05, 'solar_multiplier': 0.88, 'solar_peak_kw': 5.8, 'hp_multiplier': 1.3, 'grid_bias': 0.7},
+    'saxony_east':        {'name': 'Sachsen/Ost',         'compass_region': 'East',  'centroid_lat': 51.05, 'centroid_lng': 13.74, 'character': 'Suburban, mixed generation',           'share': 0.05, 'solar_multiplier': 0.85, 'solar_peak_kw': 5.5, 'hp_multiplier': 1.3, 'grid_bias': 0.8},
+    'hamburg_metro':      {'name': 'Hamburg Metro',       'compass_region': 'North', 'centroid_lat': 53.55, 'centroid_lng': 9.99,  'character': 'Urban, coastal wind',                  'share': 0.09, 'solar_multiplier': 0.75, 'solar_peak_kw': 5.0, 'hp_multiplier': 1.1, 'grid_bias': 0.8},
+    'bremen_weser':       {'name': 'Bremen/Weser',        'compass_region': 'North', 'centroid_lat': 53.08, 'centroid_lng': 8.80,  'character': 'Urban, port logistics, offshore wind', 'share': 0.05, 'solar_multiplier': 0.70, 'solar_peak_kw': 4.8, 'hp_multiplier': 1.1, 'grid_bias': 0.5},
+    'lower_saxony':       {'name': 'Niedersachsen/Nord',  'compass_region': 'North', 'centroid_lat': 52.65, 'centroid_lng': 9.20,  'character': 'Rural, wind-heavy generation',         'share': 0.05, 'solar_multiplier': 0.70, 'solar_peak_kw': 4.5, 'hp_multiplier': 1.0, 'grid_bias': 0.3},
 }
 
 # =============================================================================
@@ -53,6 +63,17 @@ VPP_CLUSTERS = {
 # Used only at generation time to assign geographically correct data.
 # =============================================================================
 PLZ_CITY_LOOKUP = [
+    # freiburg_oberrhein — PLZ prefixes 77, 78, 79
+    ('79098', 'Freiburg', 'freiburg_oberrhein'),
+    ('79111', 'Freiburg', 'freiburg_oberrhein'),
+    ('79312', 'Emmendingen', 'freiburg_oberrhein'),
+    ('79539', 'Lörrach', 'freiburg_oberrhein'),
+    ('79618', 'Rheinfelden', 'freiburg_oberrhein'),
+    ('77652', 'Offenburg', 'freiburg_oberrhein'),
+    ('77694', 'Kehl', 'freiburg_oberrhein'),
+    ('79761', 'Waldshut-Tiengen', 'freiburg_oberrhein'),
+    ('79189', 'Bad Krozingen', 'freiburg_oberrhein'),
+    ('79252', 'Stegen', 'freiburg_oberrhein'),
     # munich_metro — PLZ prefixes 80, 81, 82, 85
     ('80331', 'München', 'munich_metro'),
     ('80539', 'München', 'munich_metro'),
@@ -91,7 +112,7 @@ PLZ_CITY_LOOKUP = [
     ('13353', 'Berlin', 'berlin_metro'),
     ('14052', 'Berlin', 'berlin_metro'),
     ('14467', 'Potsdam', 'berlin_metro'),
-    # rhine_ruhr — PLZ prefixes 40, 44, 45, 47, 50
+    # rhine_ruhr — PLZ prefixes 40, 44, 45, 47 (Köln moved to koeln_bonn)
     ('40210', 'Düsseldorf', 'rhine_ruhr'),
     ('40477', 'Düsseldorf', 'rhine_ruhr'),
     ('40589', 'Düsseldorf', 'rhine_ruhr'),
@@ -100,10 +121,20 @@ PLZ_CITY_LOOKUP = [
     ('45127', 'Essen', 'rhine_ruhr'),
     ('45239', 'Essen', 'rhine_ruhr'),
     ('47051', 'Duisburg', 'rhine_ruhr'),
-    ('50667', 'Köln', 'rhine_ruhr'),
-    ('50823', 'Köln', 'rhine_ruhr'),
-    ('50937', 'Köln', 'rhine_ruhr'),
-    ('51065', 'Köln', 'rhine_ruhr'),
+    ('42103', 'Wuppertal', 'rhine_ruhr'),
+    ('44787', 'Bochum', 'rhine_ruhr'),
+    ('45879', 'Gelsenkirchen', 'rhine_ruhr'),
+    # koeln_bonn — PLZ prefixes 50, 51, 53 (split from rhine_ruhr)
+    ('50667', 'Köln', 'koeln_bonn'),
+    ('50823', 'Köln', 'koeln_bonn'),
+    ('50937', 'Köln', 'koeln_bonn'),
+    ('51065', 'Köln', 'koeln_bonn'),
+    ('53111', 'Bonn', 'koeln_bonn'),
+    ('53225', 'Bonn', 'koeln_bonn'),
+    ('51373', 'Leverkusen', 'koeln_bonn'),
+    ('51465', 'Bergisch Gladbach', 'koeln_bonn'),
+    ('53840', 'Troisdorf', 'koeln_bonn'),
+    ('50126', 'Bergheim', 'koeln_bonn'),
     # frankfurt_main — PLZ prefixes 60, 61, 63, 65
     ('60311', 'Frankfurt am Main', 'frankfurt_main'),
     ('60486', 'Frankfurt am Main', 'frankfurt_main'),
@@ -114,6 +145,17 @@ PLZ_CITY_LOOKUP = [
     ('63225', 'Langen', 'frankfurt_main'),
     ('65183', 'Wiesbaden', 'frankfurt_main'),
     ('65428', 'Rüsselsheim', 'frankfurt_main'),
+    # nuernberg_franken — PLZ prefixes 90, 91, 95, 96, 97
+    ('90402', 'Nürnberg', 'nuernberg_franken'),
+    ('90491', 'Nürnberg', 'nuernberg_franken'),
+    ('90762', 'Fürth', 'nuernberg_franken'),
+    ('91052', 'Erlangen', 'nuernberg_franken'),
+    ('91054', 'Erlangen', 'nuernberg_franken'),
+    ('96047', 'Bamberg', 'nuernberg_franken'),
+    ('97070', 'Würzburg', 'nuernberg_franken'),
+    ('95444', 'Bayreuth', 'nuernberg_franken'),
+    ('91522', 'Ansbach', 'nuernberg_franken'),
+    ('91207', 'Lauf an der Pegnitz', 'nuernberg_franken'),
     # stuttgart_metro — PLZ prefixes 70, 71, 72, 73, 76
     ('70173', 'Stuttgart', 'stuttgart_metro'),
     ('70376', 'Stuttgart', 'stuttgart_metro'),
@@ -125,17 +167,28 @@ PLZ_CITY_LOOKUP = [
     ('73728', 'Esslingen', 'stuttgart_metro'),
     ('76131', 'Karlsruhe', 'stuttgart_metro'),
     ('76227', 'Karlsruhe', 'stuttgart_metro'),
-    # lower_saxony — PLZ prefixes 26, 28, 29, 30, 31
+    # bremen_weser — PLZ prefixes 27, 28 (split from lower_saxony)
+    ('28195', 'Bremen', 'bremen_weser'),
+    ('28355', 'Bremen', 'bremen_weser'),
+    ('28203', 'Bremen', 'bremen_weser'),
+    ('28719', 'Bremen', 'bremen_weser'),
+    ('27568', 'Bremerhaven', 'bremen_weser'),
+    ('27570', 'Bremerhaven', 'bremen_weser'),
+    ('27749', 'Delmenhorst', 'bremen_weser'),
+    ('27211', 'Bassum', 'bremen_weser'),
+    ('28832', 'Achim', 'bremen_weser'),
+    ('27283', 'Verden', 'bremen_weser'),
+    # lower_saxony — PLZ prefixes 26, 29, 30, 31 (Bremen moved out)
     ('26122', 'Oldenburg', 'lower_saxony'),
     ('26382', 'Wilhelmshaven', 'lower_saxony'),
     ('26721', 'Emden', 'lower_saxony'),
-    ('28195', 'Bremen', 'lower_saxony'),
-    ('28355', 'Bremen', 'lower_saxony'),
     ('29221', 'Celle', 'lower_saxony'),
     ('30159', 'Hannover', 'lower_saxony'),
     ('30449', 'Hannover', 'lower_saxony'),
     ('30559', 'Hannover', 'lower_saxony'),
     ('31134', 'Hildesheim', 'lower_saxony'),
+    ('38100', 'Braunschweig', 'lower_saxony'),
+    ('49074', 'Osnabrück', 'lower_saxony'),
     # bavaria_south — PLZ prefixes 83, 84, 86, 87
     ('83022', 'Rosenheim', 'bavaria_south'),
     ('83278', 'Traunstein', 'bavaria_south'),
@@ -147,17 +200,28 @@ PLZ_CITY_LOOKUP = [
     ('86609', 'Donauwörth', 'bavaria_south'),
     ('87435', 'Kempten', 'bavaria_south'),
     ('87527', 'Sonthofen', 'bavaria_south'),
-    # saxony_east — PLZ prefixes 01, 04, 06, 07, 09
+    # leipzig_halle — PLZ prefixes 04, 06, 07, 99 (split from saxony_east)
+    ('04103', 'Leipzig', 'leipzig_halle'),
+    ('04229', 'Leipzig', 'leipzig_halle'),
+    ('04317', 'Leipzig', 'leipzig_halle'),
+    ('06108', 'Halle', 'leipzig_halle'),
+    ('06217', 'Merseburg', 'leipzig_halle'),
+    ('07743', 'Jena', 'leipzig_halle'),
+    ('06844', 'Dessau-Roßlau', 'leipzig_halle'),
+    ('99423', 'Weimar', 'leipzig_halle'),
+    ('04600', 'Altenburg', 'leipzig_halle'),
+    ('06110', 'Halle', 'leipzig_halle'),
+    # saxony_east — PLZ prefixes 01, 09 (Leipzig/Halle/Jena moved out)
     ('01067', 'Dresden', 'saxony_east'),
     ('01187', 'Dresden', 'saxony_east'),
     ('01309', 'Dresden', 'saxony_east'),
-    ('04103', 'Leipzig', 'saxony_east'),
-    ('04229', 'Leipzig', 'saxony_east'),
-    ('04317', 'Leipzig', 'saxony_east'),
-    ('06108', 'Halle', 'saxony_east'),
-    ('06217', 'Merseburg', 'saxony_east'),
-    ('07743', 'Jena', 'saxony_east'),
     ('09111', 'Chemnitz', 'saxony_east'),
+    ('09112', 'Chemnitz', 'saxony_east'),
+    ('02625', 'Bautzen', 'saxony_east'),
+    ('08056', 'Zwickau', 'saxony_east'),
+    ('01796', 'Pirna', 'saxony_east'),
+    ('02826', 'Görlitz', 'saxony_east'),
+    ('01662', 'Meißen', 'saxony_east'),
 ]
 
 # Build a cluster-indexed lookup for fast sampling
@@ -374,7 +438,11 @@ for cid, info in VPP_CLUSTERS.items():
         'centroid_lat': info['centroid_lat'],
         'centroid_lng': info['centroid_lng'],
         'region_character': info['character'],
-        'compass_region': info['compass_region']
+        'compass_region': info['compass_region'],
+        'solar_multiplier': info['solar_multiplier'],
+        'solar_peak_kw': info['solar_peak_kw'],
+        'hp_multiplier': info['hp_multiplier'],
+        'grid_bias': info['grid_bias']
     })
 vpp_cluster_dim = pd.DataFrame(cluster_rows)
 vpp_cluster_dim.to_csv(f'{OUTPUT_DIR}/vpp_cluster_dim.csv', index=False)

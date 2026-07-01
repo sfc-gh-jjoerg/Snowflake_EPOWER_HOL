@@ -1,7 +1,7 @@
 """
-EPOWER Domain Data Generator — Snowflake Stored Procedure Handler
+EPOWER Fact Table Populator — Snowflake Stored Procedure Handler
 
-Generates all fact/transactional tables with dates anchored to CURRENT_DATE(),
+Populates all fact/transactional tables with dates anchored to CURRENT_DATE(),
 ensuring temporal overlap with VPP telemetry (last 60 days).
 
 Tables generated:
@@ -34,7 +34,7 @@ Data realism enhancements (v2):
 Usage:
   This module is uploaded to @EPOWER_OPS.EPOWER_STAGE/code/ and referenced via
   IMPORTS in the CREATE PROCEDURE statement. The handler function is called by:
-    CALL EPOWER_DEMO.EPOWER_OPS.GENERATE_DOMAIN_DATA();
+    CALL EPOWER_DEMO.EPOWER_OPS.POPULATE_FACT_TABLES();
 """
 
 import pandas as pd
@@ -43,7 +43,7 @@ from datetime import date, timedelta
 import random
 
 
-def generate_domain_data(session):
+def populate_fact_tables(session):
     random.seed(42)
     np.random.seed(42)
 

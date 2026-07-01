@@ -1,10 +1,15 @@
-cluster_id,cluster_name,centroid_lat,centroid_lng,region_character,compass_region
-munich_metro,Muenchen Metro,48.14,11.58,"Urban, high solar yield",South
-hamburg_metro,Hamburg Metro,53.55,9.99,"Urban, coastal wind",North
-berlin_metro,Berlin Metro,52.52,13.41,"Urban, mixed generation",East
-rhine_ruhr,Rhein-Ruhr,51.23,6.78,"Urban, industrial high load",West
-frankfurt_main,Frankfurt/Rhein-Main,50.11,8.68,"Urban, commercial load",West
-stuttgart_metro,Stuttgart Metro,48.78,9.18,"Suburban, industrial",South
-lower_saxony,Niedersachsen/Nord,52.65,9.2,"Rural, wind-heavy generation",North
-bavaria_south,Bayern Sued,47.85,11.9,"Rural, high solar yield",South
-saxony_east,Sachsen/Ost,51.05,13.74,"Suburban, mixed generation",East
+cluster_id,cluster_name,centroid_lat,centroid_lng,region_character,compass_region,solar_multiplier,solar_peak_kw,hp_multiplier,grid_bias
+freiburg_oberrhein,Freiburg/Oberrhein,47.99,7.85,"Rural, peak solar irradiation",South,1.35,9.5,0.7,-1.5
+bavaria_south,Bayern Sued,47.85,11.9,"Rural, high solar yield",South,1.25,8.5,0.9,-1.0
+munich_metro,Muenchen Metro,48.14,11.58,"Urban, high solar yield",South,1.15,7.5,1.0,-0.5
+stuttgart_metro,Stuttgart Metro,48.78,9.18,"Suburban, industrial",South,1.1,7.2,1.0,-0.3
+nuernberg_franken,Nuernberg/Franken,49.45,11.08,"Urban, moderate solar, industrial",South,1.05,7.0,1.1,0.0
+frankfurt_main,Frankfurt/Rhein-Main,50.11,8.68,"Urban, commercial load",West,0.95,6.5,1.0,0.3
+koeln_bonn,Koeln/Bonn,50.94,6.96,"Urban, service-sector, moderate load",West,0.9,6.0,1.0,0.5
+rhine_ruhr,Rhein-Ruhr,51.23,6.78,"Urban, industrial high load",West,0.85,5.5,1.1,1.0
+berlin_metro,Berlin Metro,52.52,13.41,"Urban, mixed generation",East,0.9,6.0,1.2,0.5
+leipzig_halle,Leipzig/Halle,51.34,12.38,"Suburban, growing renewables",East,0.88,5.8,1.3,0.7
+saxony_east,Sachsen/Ost,51.05,13.74,"Suburban, mixed generation",East,0.85,5.5,1.3,0.8
+hamburg_metro,Hamburg Metro,53.55,9.99,"Urban, coastal wind",North,0.75,5.0,1.1,0.8
+bremen_weser,Bremen/Weser,53.08,8.8,"Urban, port logistics, offshore wind",North,0.7,4.8,1.1,0.5
+lower_saxony,Niedersachsen/Nord,52.65,9.2,"Rural, wind-heavy generation",North,0.7,4.5,1.0,0.3
