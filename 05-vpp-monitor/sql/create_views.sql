@@ -16,40 +16,9 @@ USE SCHEMA EPOWER_DEMO.EPOWER_GOLD;
 
 -- -----------------------------------------------------------------------------
 -- 0. VPP_CLUSTER_DIM & CITY_CLUSTER_MAP
---    Reference tables for the 14 VPP regional clusters.
---    Maps each city in the dataset to its corresponding cluster.
+--    VPP_CLUSTER_DIM is already created and loaded in Module 1 (10 columns).
+--    Here we only create the CITY_CLUSTER_MAP that links cities to clusters.
 -- -----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS VPP_CLUSTER_DIM (
-    CLUSTER_ID      VARCHAR(30) PRIMARY KEY,
-    CLUSTER_NAME    VARCHAR(50),
-    COMPASS_REGION  VARCHAR(10),
-    CENTROID_LAT    FLOAT,
-    CENTROID_LNG    FLOAT
-);
-
-MERGE INTO VPP_CLUSTER_DIM t USING (
-    SELECT * FROM VALUES
-        ('freiburg_oberrhein', 'Freiburg/Oberrhein',  'South', 47.99, 7.85),
-        ('bavaria_south',      'Bayern Sued',         'South', 47.85, 11.90),
-        ('munich_metro',       'Muenchen Metro',      'South', 48.14, 11.58),
-        ('stuttgart_metro',    'Stuttgart Metro',     'South', 48.78, 9.18),
-        ('nuernberg_franken',  'Nuernberg/Franken',   'South', 49.45, 11.08),
-        ('frankfurt_main',     'Frankfurt/Rhein-Main','West',  50.11, 8.68),
-        ('koeln_bonn',         'Koeln/Bonn',          'West',  50.94, 6.96),
-        ('rhine_ruhr',         'Rhein-Ruhr',          'West',  51.23, 6.78),
-        ('berlin_metro',       'Berlin Metro',        'East',  52.52, 13.41),
-        ('leipzig_halle',      'Leipzig/Halle',       'East',  51.34, 12.38),
-        ('saxony_east',        'Sachsen/Ost',         'East',  51.05, 13.74),
-        ('hamburg_metro',      'Hamburg Metro',       'North', 53.55, 9.99),
-        ('bremen_weser',       'Bremen/Weser',        'North', 53.08, 8.80),
-        ('lower_saxony',       'Niedersachsen/Nord',  'North', 52.65, 9.20)
-    AS s(CLUSTER_ID, CLUSTER_NAME, COMPASS_REGION, CENTROID_LAT, CENTROID_LNG)
-) s ON t.CLUSTER_ID = s.CLUSTER_ID
-WHEN MATCHED THEN UPDATE SET
-    CLUSTER_NAME = s.CLUSTER_NAME, COMPASS_REGION = s.COMPASS_REGION,
-    CENTROID_LAT = s.CENTROID_LAT, CENTROID_LNG = s.CENTROID_LNG
-WHEN NOT MATCHED THEN INSERT VALUES
-    (s.CLUSTER_ID, s.CLUSTER_NAME, s.COMPASS_REGION, s.CENTROID_LAT, s.CENTROID_LNG);
 
 -- City-to-cluster mapping for all 40 cities in MART_VPP_PRICE_OPTIMIZATION
 CREATE OR REPLACE TABLE CITY_CLUSTER_MAP (
