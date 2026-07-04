@@ -656,7 +656,7 @@ def populate_fact_tables(session):
         cd = hd
         promotion_count = 0
         while cd < today:
-            att = 1 if ld and cd == ld else 0
+            att = 1 if ld and cd >= ld else 0
             hrl.append({
                 'HR_FACT_ID': hid, 'DATE': ds(cd), 'EMPLOYEE_KEY': ek,
                 'DEPARTMENT_KEY': dept_key,

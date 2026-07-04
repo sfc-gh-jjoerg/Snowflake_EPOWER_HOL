@@ -834,7 +834,7 @@ for emp_key in range(1, 1001):
         leave_date = fake.date_between(start_date=potential_leave, end_date=datetime(2025, 6, 30))
     
     while current_date < datetime(2025, 7, 1):
-        attrition = 1 if leave_date and current_date.date() == leave_date else 0
+        attrition = 1 if leave_date and current_date.date() >= leave_date else 0
         hr_facts.append({
             'hr_fact_id': hr_id, 'date': current_date.strftime('%Y-%m-%d'), 'employee_key': emp_key,
             'department_key': random.randint(10, 40), 'job_key': random.choice([800,801,802,803,804,805,806,807,808,809,810,811,812,813,814,815]),
