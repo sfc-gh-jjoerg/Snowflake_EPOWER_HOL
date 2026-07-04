@@ -6,10 +6,21 @@ import pandas as pd
 
 st.set_page_config(page_title="EPOWER Assistant", layout="wide")
 
-AGENT_PATH = "/api/v2/databases/EPOWER_DEMO/schemas/EPOWER_GOLD/agents/EPOWER_AGENT:run"
-THREADS_URL_BASE = f"https://{os.getenv('SNOWFLAKE_HOST')}/api/v2/cortex/threads"
+# Agent registry — maps display name to Snowflake object name
+AGENT_OPTIONS = {
+    "EPOWER Intelligence (All Domains)": "EPOWER_AGENT",
+    "Operations (VPP & Energy Market)": "EPOWER_OPS_AGENT",
+    "Commercial (Sales & Service)": "EPOWER_COMMERCIAL_AGENT",
+    "People (HR & Workforce)": "EPOWER_PEOPLE_AGENT",
+}
+
 SNOWFLAKE_HOST = os.getenv("SNOWFLAKE_HOST")
-AGENT_URL = f"https://{SNOWFLAKE_HOST}{AGENT_PATH}"
+THREADS_URL_BASE = f"https://{SNOWFLAKE_HOST}/api/v2/cortex/threads"
+
+
+def get_agent_url(agent_name: str) -> str:
+    path = f"/api/v2/databases/EPOWER_DEMO/schemas/EPOWER_GOLD/agents/{agent_name}:run"
+    return f"https://{SNOWFLAKE_HOST}{path}"
 
 
 def get_token():
@@ -184,7 +195,16 @@ with tab_dashboard:
 # ─────────────────────────────────────────────────────────────────────────────
 with tab_chat:
     st.title("EPOWER Agent Chat")
-    st.caption("Ask questions about sales, billing, VPP telemetry, energy prices, or search company documents.")
+
+    # Agent selector
+    selected_agent_label = st.selectbox(
+        "Select Agent",
+        options=list(AGENT_OPTIONS.keys()),
+        index=0,
+        help="Choose a domain-specific agent or the all-in-one agent.",
+    )
+    selected_agent_name = AGENT_OPTIONS[selected_agent_label]
+    st.caption(f"Chatting with **{selected_agent_label}** (`{selected_agent_name}`)")
 
     if "chat_messages" not in st.session_state:
         st.session_state.chat_messages = []
@@ -198,6 +218,18 @@ with tab_chat:
         st.session_state.parent_message_id = 0
     if "_processing" not in st.session_state:
         st.session_state._processing = False
+    if "active_agent" not in st.session_state:
+        st.session_state.active_agent = selected_agent_name
+
+    # Reset conversation when user switches agents
+    if st.session_state.active_agent != selected_agent_name:
+        st.session_state.active_agent = selected_agent_name
+        st.session_state.chat_messages = []
+        st.session_state.thread_id = None
+        st.session_state.parent_message_id = 0
+        st.session_state.last_request = None
+        st.session_state.last_response_raw = None
+        st.rerun()
 
     # Toolbar: New Conversation + REST toggle
     toolbar_left, toolbar_right = st.columns([1, 3])
@@ -259,15 +291,16 @@ with tab_chat:
                     ],
                     "stream": True,
                 }
+                agent_url = get_agent_url(selected_agent_name)
                 st.session_state.last_request = {
                     "method": "POST",
-                    "url": AGENT_PATH,
+                    "url": agent_url,
                     "body": request_body,
                 }
 
                 headers = get_headers()
                 headers["Accept"] = "text/event-stream"
-                response = requests.post(AGENT_URL, headers=headers, json=request_body, stream=True)
+                response = requests.post(agent_url, headers=headers, json=request_body, stream=True)
                 response.raise_for_status()
 
                 # Streaming placeholder for real-time text output

@@ -9,7 +9,7 @@ This demo comes with a notebook (`01-agentic-ai-foundation/epower_hol_main.ipynb
 - **Snowflake Data Engineering** — dbt projects deployed natively in Snowflake, medallion / lakehouse architecture (Bronze → Silver → Gold), scheduled tasks for pipeline execution, and real-time API ingestion
 - **Snowflake AI for Agentic Applications** — making enterprise data AI-ready and leveraging Cortex Agent, Semantic Views (text-to-SQL), and Cortex Search (RAG) to build an intelligent agent that is grounded in governed enterprise data
 
-The result: a fully functional **EPOWER Intelligence Agent** that delivers deep insights and task-oriented outcomes — from natural language questions to precise, data-grounded answers across sales, billing, service, HR, and real-time VPP analytics.
+The result: a set of **EPOWER Intelligence Agents** — a monolithic all-in-one agent plus 3 focused domain agents (Operations, Commercial, People) — that deliver deep insights and task-oriented outcomes from natural language questions to precise, data-grounded answers across sales, billing, service, HR, and real-time VPP analytics.
 
 ---
 
@@ -21,7 +21,7 @@ The EPOWER Agent answers questions across 6 business domains (Sales, Billing, Se
 
 | Module | What You Build | Key Snowflake Features | Time |
 |--------|---------------|----------------------|------|
-| **1. Agentic AI Foundation** (required) | Intelligence Agent with 12 tools spanning 6 business domains | Cortex Agent, Semantic Views, Cortex Search, dbt, Tasks, External Access | ~15 min |
+| **1. Agentic AI Foundation** (required) | 4 Intelligence Agents (1 monolithic + 3 domain-specific) spanning 6 business domains | Cortex Agent, Semantic Views, Cortex Search, dbt, Tasks, External Access | ~15 min |
 | **2. Postgres Zero-ETL** (optional) | Zero-ETL pipeline from operational Postgres to analytics | Snowflake Postgres, pg_lake, Iceberg, Catalog Integration | ~10 min |
 | **3. dbt with Cortex Code** (optional) | AI-assisted dbt pipeline extension (churn + NPS analytics) | Cortex Code (CoCo), dbt project extension | ~15 min |
 | **4. Agent REST App** (optional) | Streamlit dashboard with streaming Agent REST API chat | Container Runtime (SPCS), Cortex Agent REST API, SSE | ~5 min |
@@ -322,7 +322,7 @@ Each Snowflake feature in the architecture serves a specific role in enabling EP
 | **Snowflake Tasks** | VPP, Market Prices | Scheduled daily pipeline (5:00 PM CET): fetch next-day prices → generate telemetry → run dbt — keeping VPP analytics current |
 | **Git Integration** | All domains | Repository connected directly to Snowflake Workspace — code, data, notebooks, and dbt project in one place |
 | **Snowflake Compute** | All domains | `EPOWER_COMPUTE` virtual warehouse (SMALL, auto-suspend 300s) — single compute cluster for all workloads |
-| **MCP Server** | All domains | Snowflake-managed MCP server exposing 12 tools (1 agent + 7 analyst + 4 search) via Model Context Protocol for external AI clients |
+| **MCP Server** | All domains | Snowflake-managed MCP server exposing 15 tools (4 agents + 7 analyst + 4 search) via Model Context Protocol for external AI clients |
 
 ---
 
@@ -479,6 +479,9 @@ The demo includes a **Snowflake-managed MCP server** (`EPOWER_MCP_SERVER`) that 
 | Tool Name | Type | Description |
 |-----------|------|-------------|
 | `epower-agent` | `CORTEX_AGENT_RUN` | Full Intelligence Agent — orchestrates across all domains |
+| `epower-ops-agent` | `CORTEX_AGENT_RUN` | Operations Agent — VPP fleet, energy market, energy docs |
+| `epower-commercial-agent` | `CORTEX_AGENT_RUN` | Commercial Agent — sales, billing, service, product docs |
+| `epower-people-agent` | `CORTEX_AGENT_RUN` | People Agent — HR workforce analytics |
 | `energy-sales-analyst` | `CORTEX_ANALYST_MESSAGE` | Contracts, products, sales revenue |
 | `billing-analyst` | `CORTEX_ANALYST_MESSAGE` | Consumption, billing, payments |
 | `service-analyst` | `CORTEX_ANALYST_MESSAGE` | Service tickets, complaints |

@@ -8,7 +8,7 @@ Demonstrates the **Cortex Agent REST API** with streaming responses inside a Str
 | Tab | Description |
 |-----|-------------|
 | **Dashboard** | Sales KPIs, monthly revenue trends, product category breakdown, VPP fleet status (solar/battery/grid), and day-ahead electricity prices |
-| **Agent Chat** | Natural-language chat with the EPOWER Agent via streaming SSE. Supports text, tables, and chart responses. Optional REST payload viewer for inspecting request/response bodies |
+| **Agent Chat** | Natural-language chat with selectable domain-specific agents via streaming SSE. Agent selector switches between Operations, Commercial, People, and the all-in-one agent. Supports text, tables, and chart responses. Optional REST payload viewer |
 
 ## Prerequisites
 
@@ -18,7 +18,10 @@ Run the `01-agentic-ai-foundation/epower_hol_main.ipynb` notebook first. This ap
 - `EPOWER_DEMO.EPOWER_GOLD.PRODUCT_DIM` / `PRODUCT_CATEGORY_DIM` / `REGION_DIM`
 - `EPOWER_DEMO.EPOWER_GOLD.MART_VPP_CAPACITY_HOURLY`
 - `EPOWER_DEMO.EPOWER_GOLD.MART_DAY_AHEAD_PRICES`
-- `EPOWER_DEMO.EPOWER_GOLD.EPOWER_AGENT`
+- `EPOWER_DEMO.EPOWER_GOLD.EPOWER_AGENT` (monolithic, all domains)
+- `EPOWER_DEMO.EPOWER_GOLD.EPOWER_OPS_AGENT` (VPP operations & energy market)
+- `EPOWER_DEMO.EPOWER_GOLD.EPOWER_COMMERCIAL_AGENT` (sales, billing, service)
+- `EPOWER_DEMO.EPOWER_GOLD.EPOWER_PEOPLE_AGENT` (HR & workforce)
 
 ## Setup (Snowsight Workspace)
 
@@ -53,8 +56,12 @@ Browser → Streamlit Container (SPCS)
               │
               ├── SQL queries → EPOWER_COMPUTE warehouse → EPOWER_GOLD tables
               │
-              └── REST API (SSE) → Cortex Agent → Semantic Views / Cortex Search
-                                     └── EPOWER_COMPUTE warehouse (execution_environment)
+              └── REST API (SSE) → Cortex Agent(s) → Semantic Views / Cortex Search
+                                     │                  └── EPOWER_COMPUTE warehouse
+                                     ├── EPOWER_AGENT (all 12 tools)
+                                     ├── EPOWER_OPS_AGENT (VPP + prices + energy docs)
+                                     ├── EPOWER_COMMERCIAL_AGENT (sales + billing + service)
+                                     └── EPOWER_PEOPLE_AGENT (HR)
 ```
 
 The app authenticates to the Agent REST API using the container's session token (`/snowflake/session/token`) with OAuth bearer authentication.
@@ -84,7 +91,22 @@ USE ROLE EPOWER_ROLE;
 DROP STREAMLIT IF EXISTS EPOWER_DEMO.EPOWER_GOLD.EPOWER_ASSISTANT;
 ```
 
-No other objects are created by Module 4 — the app only reads from existing tables and calls the existing agent. The full cleanup script (`01-agentic-ai-foundation/epower_cleanup.sql`) handles this automatically when dropping the `EPOWER_DEMO` database.
+No other objects are created by Module 4 — the app only reads from existing tables and calls the existing agents. The full cleanup script (`01-agentic-ai-foundation/epower_cleanup.sql`) handles this automatically when dropping the `EPOWER_DEMO` database.
+
+---
+
+## Multi-Agent Architecture
+
+The app includes an **Agent Selector** dropdown in the Chat tab:
+
+| Agent | Focus | Tools |
+|-------|-------|-------|
+| EPOWER Intelligence | All domains (monolithic) | 12 tools |
+| Operations | VPP fleet, energy market, energy policy docs | 4 tools |
+| Commercial | Sales, billing, service, product/service docs | 8 tools |
+| People | HR workforce analytics | 2 tools |
+
+Switching agents resets the conversation thread. Each agent has specialized instructions and vocabulary tuned to its audience (energy traders vs. sales managers vs. HR partners).
 
 ---
 
