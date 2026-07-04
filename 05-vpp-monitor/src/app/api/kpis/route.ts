@@ -3,10 +3,11 @@ import { executeQuery } from '@/lib/snowflake';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const region = searchParams.get('region');         // comma-separated: "North,South"
-  const customerType = searchParams.get('type');     // comma-separated: "Privatkunde,Kleingewerbe"
-  const from = searchParams.get('from');             // YYYY-MM-DD
-  const to = searchParams.get('to');                 // YYYY-MM-DD
+  const region = searchParams.get('region');
+  const cluster = searchParams.get('cluster');
+  const customerType = searchParams.get('type');
+  const from = searchParams.get('from');
+  const to = searchParams.get('to');
 
   let sql = `
     SELECT
@@ -27,6 +28,10 @@ export async function GET(request: NextRequest) {
   if (region) {
     const regions = region.split(',').map(r => `'${r.trim()}'`).join(',');
     conditions.push(`REGION IN (${regions})`);
+  }
+  if (cluster) {
+    const clusters = cluster.split(',').map(c => `'${c.trim()}'`).join(',');
+    conditions.push(`CLUSTER_ID IN (${clusters})`);
   }
   if (customerType) {
     const types = customerType.split(',').map(t => `'${t.trim()}'`).join(',');

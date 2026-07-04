@@ -31,7 +31,11 @@ interface DateRange {
   max_date: string;
 }
 
-export default function RegionalChart() {
+interface RegionalChartProps {
+  selectedClusters?: string[];
+}
+
+export default function RegionalChart({ selectedClusters = [] }: RegionalChartProps) {
   const [data, setData] = useState<ClusterRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [dateRange, setDateRange] = useState<DateRange | null>(null);
@@ -53,7 +57,7 @@ export default function RegionalChart() {
     fetchRange();
   }, []);
 
-  // Fetch cluster data when date/hour changes
+  // Fetch cluster data when date/hour/clusters change
   useEffect(() => {
     if (!selectedDate) return;
 
@@ -62,6 +66,7 @@ export default function RegionalChart() {
       try {
         const params = new URLSearchParams({ date: selectedDate });
         if (selectedHour != null) params.set('hour', String(selectedHour));
+        if (selectedClusters.length > 0) params.set('cluster', selectedClusters.join(','));
         const res = await fetch(`/api/map?${params}`);
         const rows: ClusterRow[] = await res.json();
         setData(rows);
@@ -72,7 +77,7 @@ export default function RegionalChart() {
       }
     };
     fetchData();
-  }, [selectedDate, selectedHour]);
+  }, [selectedDate, selectedHour, selectedClusters]);
 
   if (!dateRange) {
     return (

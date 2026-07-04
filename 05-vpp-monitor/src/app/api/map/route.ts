@@ -3,13 +3,17 @@ import { executeQuery } from '@/lib/snowflake';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const date = searchParams.get('date');   // YYYY-MM-DD
-  const hour = searchParams.get('hour');   // 0-23 (used with date) or full ISO timestamp (legacy)
+  const date = searchParams.get('date');
+  const hour = searchParams.get('hour');
+  const cluster = searchParams.get('cluster');
+
+  const clusterCondition = cluster
+    ? `AND CLUSTER_ID IN (${cluster.split(',').map(c => `'${c.trim()}'`).join(',')})`
+    : '';
 
   let sql: string;
 
   if (date && hour != null) {
-    // Specific hour on a specific day
     const hourNum = parseInt(hour, 10);
     sql = `
       SELECT
@@ -18,10 +22,10 @@ export async function GET(request: NextRequest) {
         TOTAL_IMPORT_KWH, TOTAL_EXPORT_KWH, NET_FLOW_KWH, AVG_PRICE_EUR_MWH
       FROM EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_MAP
       WHERE HOUR = '${date}T${String(hourNum).padStart(2, '0')}:00:00'::TIMESTAMP_NTZ
+      ${clusterCondition}
       ORDER BY CLUSTER_ID
     `;
   } else if (date) {
-    // Aggregate all hours of a day
     sql = `
       SELECT
         CLUSTER_ID, CLUSTER_NAME, COMPASS_REGION,
@@ -34,11 +38,11 @@ export async function GET(request: NextRequest) {
         ROUND(AVG(AVG_PRICE_EUR_MWH), 2) AS AVG_PRICE_EUR_MWH
       FROM EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_MAP
       WHERE HOUR::DATE = '${date}'
+      ${clusterCondition}
       GROUP BY CLUSTER_ID, CLUSTER_NAME, COMPASS_REGION
       ORDER BY CLUSTER_ID
     `;
   } else {
-    // Default: latest hour
     sql = `
       SELECT
         CLUSTER_ID, CLUSTER_NAME, COMPASS_REGION,
@@ -46,6 +50,7 @@ export async function GET(request: NextRequest) {
         TOTAL_IMPORT_KWH, TOTAL_EXPORT_KWH, NET_FLOW_KWH, AVG_PRICE_EUR_MWH
       FROM EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_MAP
       WHERE HOUR = (SELECT MAX(HOUR) FROM EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_MAP)
+      ${clusterCondition}
       ORDER BY CLUSTER_ID
     `;
   }

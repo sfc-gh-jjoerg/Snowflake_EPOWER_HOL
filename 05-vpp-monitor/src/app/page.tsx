@@ -11,6 +11,31 @@ import RevenueChart from '@/components/RevenueChart';
 const REGIONS = ['North', 'South', 'East', 'West'];
 const CUSTOMER_TYPES = ['Privatkunde', 'Kleingewerbe', 'Gewerbekunde'];
 
+// Cluster definitions: id → { name, compassRegion }
+const CLUSTERS: Record<string, { name: string; compassRegion: string }> = {
+  freiburg_oberrhein: { name: 'Freiburg/Oberrhein', compassRegion: 'South' },
+  bavaria_south:      { name: 'Bayern Sued', compassRegion: 'South' },
+  munich_metro:       { name: 'Muenchen Metro', compassRegion: 'South' },
+  stuttgart_metro:    { name: 'Stuttgart Metro', compassRegion: 'South' },
+  nuernberg_franken:  { name: 'Nuernberg/Franken', compassRegion: 'South' },
+  frankfurt_main:     { name: 'Frankfurt/Rhein-Main', compassRegion: 'West' },
+  koeln_bonn:         { name: 'Koeln/Bonn', compassRegion: 'West' },
+  rhine_ruhr:         { name: 'Rhein-Ruhr', compassRegion: 'West' },
+  berlin_metro:       { name: 'Berlin Metro', compassRegion: 'East' },
+  leipzig_halle:      { name: 'Leipzig/Halle', compassRegion: 'East' },
+  saxony_east:        { name: 'Sachsen/Ost', compassRegion: 'East' },
+  hamburg_metro:      { name: 'Hamburg Metro', compassRegion: 'North' },
+  bremen_weser:       { name: 'Bremen/Weser', compassRegion: 'North' },
+  lower_saxony:       { name: 'Niedersachsen/Nord', compassRegion: 'North' },
+};
+
+function getClustersForRegions(regions: string[]): string[] {
+  if (regions.length === 0) return [];
+  return Object.entries(CLUSTERS)
+    .filter(([, c]) => regions.includes(c.compassRegion))
+    .map(([id]) => id);
+}
+
 // Default date range: last 30 days
 function defaultFrom() {
   const d = new Date();
@@ -34,6 +59,7 @@ interface KpiData {
 
 export default function Dashboard() {
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+  const [selectedClusters, setSelectedClusters] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [dateFrom, setDateFrom] = useState(defaultFrom);
   const [dateTo, setDateTo] = useState(defaultTo);
@@ -43,14 +69,25 @@ export default function Dashboard() {
   const [actions, setActions] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // When regions change, auto-select all clusters in those regions
+  const handleRegionsChange = useCallback((regions: string[]) => {
+    setSelectedRegions(regions);
+    if (regions.length > 0) {
+      setSelectedClusters(getClustersForRegions(regions));
+    } else {
+      setSelectedClusters([]);
+    }
+  }, []);
+
   const buildParams = useCallback(() => {
     const params = new URLSearchParams();
     if (selectedRegions.length > 0) params.set('region', selectedRegions.join(','));
+    if (selectedClusters.length > 0) params.set('cluster', selectedClusters.join(','));
     if (selectedTypes.length > 0) params.set('type', selectedTypes.join(','));
     if (dateFrom) params.set('from', dateFrom);
     if (dateTo) params.set('to', dateTo);
     return params.toString();
-  }, [selectedRegions, selectedTypes, dateFrom, dateTo]);
+  }, [selectedRegions, selectedClusters, selectedTypes, dateFrom, dateTo]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -110,7 +147,10 @@ export default function Dashboard() {
       <FilterBar
         regions={REGIONS}
         selectedRegions={selectedRegions}
-        onRegionsChange={setSelectedRegions}
+        onRegionsChange={handleRegionsChange}
+        clusters={CLUSTERS}
+        selectedClusters={selectedClusters}
+        onClustersChange={setSelectedClusters}
         customerTypes={CUSTOMER_TYPES}
         selectedTypes={selectedTypes}
         onTypesChange={setSelectedTypes}
@@ -184,7 +224,7 @@ export default function Dashboard() {
       </div>
 
       {/* Regional Comparison with time slider */}
-      <RegionalChart />
+      <RegionalChart selectedClusters={selectedClusters} />
 
       {/* Footer */}
       <footer className="text-center text-xs text-slate-600 pt-4 border-t border-slate-800/50">

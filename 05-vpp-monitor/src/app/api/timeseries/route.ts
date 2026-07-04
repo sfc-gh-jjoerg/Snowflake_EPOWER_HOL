@@ -4,9 +4,10 @@ import { executeQuery } from '@/lib/snowflake';
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const region = searchParams.get('region');
+  const cluster = searchParams.get('cluster');
   const from = searchParams.get('from');
   const to = searchParams.get('to');
-  const granularity = searchParams.get('granularity') || 'daily'; // 'daily' or 'hourly'
+  const granularity = searchParams.get('granularity') || 'daily';
 
   let sql: string;
 
@@ -15,6 +16,7 @@ export async function GET(request: NextRequest) {
       SELECT
         HOUR AS time,
         REGION,
+        CLUSTER_ID,
         ACTIVE_VPP_DEVICES,
         AVG_BATTERY_SOC_PCT,
         AVG_SOLAR_YIELD_KW,
@@ -43,6 +45,10 @@ export async function GET(request: NextRequest) {
   if (region) {
     const regions = region.split(',').map(r => `'${r.trim()}'`).join(',');
     conditions.push(`REGION IN (${regions})`);
+  }
+  if (cluster) {
+    const clusters = cluster.split(',').map(c => `'${c.trim()}'`).join(',');
+    conditions.push(`CLUSTER_ID IN (${clusters})`);
   }
   if (from) {
     conditions.push(`HOUR >= '${from}'`);
