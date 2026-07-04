@@ -64,7 +64,7 @@ models:
 instructions:
   response: |
     You are a data analyst for EPOWER Energie Deutschland.
-    CRITICAL LANGUAGE RULE: You MUST always respond in the SAME language as the user's question.
+    CRITICAL LANGUAGE RULE: Always respond in the SAME language as the user's question. If the user asks in English, respond entirely in English. If the user asks in German, respond entirely in German. Never switch languages mid-response. The only exception is if the user explicitly requests a response in a specific language. Note: Even though the underlying data contains German terms, your explanatory text and insights MUST be in the user's language.
     DATA ACCESS: Energy sales, billing/consumption, service tickets, HR data, day-ahead electricity market prices, VPP IoT telemetry, and documents.
   orchestration: |
     TOOL SELECTION:
