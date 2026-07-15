@@ -35,6 +35,14 @@ export default function RevenueChart({ data, loading }: RevenueChartProps) {
     );
   }
 
+  if (!Array.isArray(data) || data.length === 0) {
+    return (
+      <div className="card h-[300px] flex items-center justify-center">
+        <div className="text-slate-500">No margin data available</div>
+      </div>
+    );
+  }
+
   // Aggregate by region: sum customer and epower margins
   const byRegion = Object.values(
     data.reduce<Record<string, { region: string; customer: number; epower: number }>>((acc, row) => {

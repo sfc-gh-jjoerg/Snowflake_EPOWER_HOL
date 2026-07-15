@@ -36,6 +36,14 @@ export default function PriceCapacityChart({ data, loading }: PriceCapacityChart
     );
   }
 
+  if (!Array.isArray(data) || data.length === 0) {
+    return (
+      <div className="card h-[340px] flex items-center justify-center">
+        <div className="text-slate-500">No time-series data available</div>
+      </div>
+    );
+  }
+
   // Aggregate across regions if multiple are selected
   const aggregated = Object.values(
     data.reduce<Record<string, {

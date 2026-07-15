@@ -40,6 +40,14 @@ export default function BatteryActionsChart({ data, loading }: BatteryActionsCha
     );
   }
 
+  if (!Array.isArray(data) || data.length === 0) {
+    return (
+      <div className="card h-[300px] flex items-center justify-center">
+        <div className="text-slate-500">No actions data available</div>
+      </div>
+    );
+  }
+
   // Pivot: group by day, sum action counts across all regions/types
   const pivoted = Object.values(
     data.reduce<Record<string, Record<string, number | string>>>((acc, row) => {

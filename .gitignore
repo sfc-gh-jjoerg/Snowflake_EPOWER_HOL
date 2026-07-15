@@ -11,19 +11,25 @@ Thumbs.db
 # Python
 __pycache__/
 *.py[cod]
-.env
 .venv/
 venv/
 
-# Credentials
+# Credentials & secrets
 *.pem
 *.key
+*.p8
 credentials.json
+connections.toml
+.env*
+!.env.example
 
 # dbt artifacts (generated at runtime)
 epower_dbt/target/
 epower_dbt/dbt_packages/
 epower_dbt/logs/
+epower_dbt_portal/target/
+epower_dbt_portal/dbt_packages/
+epower_dbt_portal/logs/
 
 # Cortex Code session artifacts
 .snowflake/
@@ -31,3 +37,6 @@ epower_dbt/logs/
 # Node.js
 node_modules/
 .next/
+
+# Logs
+*.log
