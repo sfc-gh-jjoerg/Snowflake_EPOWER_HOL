@@ -1,3 +1,10 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key=['ts', 'gateway_id']
+    )
+}}
+
 SELECT
     t.ts,
     t.gateway_id,
@@ -15,3 +22,7 @@ SELECT
 FROM {{ source('epower_bronze', 'raw_epulse_iot_telemetry') }} t
 INNER JOIN {{ ref('stg_devices') }} d
     ON t.customer_key = d.customer_key
+
+{% if is_incremental() %}
+WHERE t.ts > (SELECT MAX(ts) FROM {{ this }})
+{% endif %}
