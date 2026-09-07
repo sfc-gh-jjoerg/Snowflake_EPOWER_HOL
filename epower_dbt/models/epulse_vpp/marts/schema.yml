@@ -2,7 +2,12 @@ version: 2
 
 models:
   - name: mart_vpp_capacity_hourly
-    description: Hourly VPP capacity aggregation by region (AI-ready Gold layer)
+    description: >
+      Each row represents the aggregated VPP fleet status for one hour in one region
+      and cluster. Shows how many VPP-enrolled devices were active, their combined and
+      average battery state-of-charge, total and average solar generation, and the net
+      grid flow (positive = fleet is importing from grid, negative = fleet is exporting
+      to grid).
     columns:
       - name: hour
         description: Hour timestamp
@@ -29,9 +34,13 @@ models:
 
   - name: mart_vpp_price_optimization
     description: >
-      VPP battery arbitrage analysis joining device telemetry with day-ahead electricity prices.
-      Inspired by 1KOMMA5° Heartbeat AI strategy: charge batteries during low/negative price hours,
-      discharge to grid during high-price hours. Revenue split 70% customer / 30% EPOWER.
+      Each row represents one customer's battery performance for one hour, joined with the
+      market price for that hour. Contains the customer's average solar yield, battery SOC,
+      heat pump consumption, and grid import/export — plus the day-ahead price, a price zone
+      classification (NEGATIVE/LOW/MEDIUM/HIGH), the corresponding battery action
+      (MAX_CHARGE/CHARGE/DISCHARGE/SELF_CONSUME), and the calculated financial impact:
+      import cost, export revenue, net margin, and the 70/30 revenue split between customer
+      and EPOWER. Inspired by 1KOMMA5 Heartbeat AI strategy.
     columns:
       - name: hour
         description: Hour timestamp
@@ -64,8 +73,11 @@ models:
 
   - name: mart_vpp_cluster_map
     description: >
-      Hourly VPP cluster aggregation for geographic map visualization.
-      Aggregates import/export flows, device counts, and KPIs per cluster per hour.
+      Each row represents one VPP cluster's aggregated status for one hour. Rolls up
+      mart_vpp_price_optimization by geographic cluster, showing active device count,
+      average battery SOC, average solar yield, total grid import/export, net energy flow,
+      and the average market price. Designed for geographic map visualization — each row
+      maps to one cluster dot on the map at one point in time.
     columns:
       - name: hour
         description: Hour timestamp

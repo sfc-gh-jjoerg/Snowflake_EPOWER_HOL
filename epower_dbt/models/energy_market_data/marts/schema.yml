@@ -2,7 +2,12 @@ version: 2
 
 models:
   - name: mart_day_ahead_prices
-    description: Day-ahead electricity market prices enriched with time dimensions
+    description: >
+      Each row represents a single 15-minute price interval on the German day-ahead
+      electricity market (EPEX Spot, DE-LU bidding zone). Contains the delivery date,
+      start/end time of the interval, the wholesale price in both EUR/MWh (market unit)
+      and EUR/kWh (consumer unit), plus derived time dimensions (hour of day, day of week)
+      for pattern analysis.
     columns:
       - name: start_time
         description: Start of price interval
