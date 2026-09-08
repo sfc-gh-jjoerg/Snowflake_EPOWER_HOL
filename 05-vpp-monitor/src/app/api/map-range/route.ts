@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { executeQuery } from '@/lib/snowflake';
+import { executeQuery } from '../../../lib/snowflake';
 
 export async function GET() {
   const sql = `

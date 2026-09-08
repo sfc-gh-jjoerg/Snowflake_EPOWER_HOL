@@ -1,12 +1,12 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import FilterBar from '@/components/FilterBar';
-import KpiCard from '@/components/KpiCard';
-import RegionalChart from '@/components/RegionalChart';
-import PriceCapacityChart from '@/components/PriceCapacityChart';
-import BatteryActionsChart from '@/components/BatteryActionsChart';
-import RevenueChart from '@/components/RevenueChart';
+import FilterBar from '../components/FilterBar';
+import KpiCard from '../components/KpiCard';
+import RegionalChart from '../components/RegionalChart';
+import PriceCapacityChart from '../components/PriceCapacityChart';
+import BatteryActionsChart from '../components/BatteryActionsChart';
+import RevenueChart from '../components/RevenueChart';
 
 const REGIONS = ['North', 'South', 'East', 'West'];
 const CUSTOMER_TYPES = ['Privatkunde', 'Kleingewerbe', 'Gewerbekunde'];
