@@ -1,23 +1,23 @@
-# ePulse - Das Virtuelle Kraftwerk von EPOWER
+# EPOWER - Das Virtuelle Kraftwerk von EPOWER
 
 ## Ihr Batteriespeicher wird Teil der Energiewende
 
-### Was ist ePulse?
+### Was ist EPOWER?
 
-**ePulse** ist das Virtual Power Plant (VPP) Programm von EPOWER. Durch die intelligente Vernetzung tausender privater Batteriespeicher entsteht ein virtuelles Kraftwerk, das zur Stabilisierung des Stromnetzes beitraegt.
+**EPOWER** ist das Virtual Power Plant (VPP) Programm von EPOWER. Durch die intelligente Vernetzung tausender privater Batteriespeicher entsteht ein virtuelles Kraftwerk, das zur Stabilisierung des Stromnetzes beitraegt.
 
 ### So funktioniert es
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    ePULSE VIRTUELLES KRAFTWERK                   │
+│                    EPOWER VIRTUELLES KRAFTWERK                   │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │   Ihr Zuhause          EPOWER Leitwarte       Stromnetz        │
 │   ───────────          ───────────────        ─────────        │
 │                                                                 │
 │   ┌─────────┐          ┌─────────────┐        ┌─────────┐      │
-│   │ Batterie│◄────────►│   ePulse    │◄──────►│  Netz-  │      │
+│   │ Batterie│◄────────►│   EPOWER    │◄──────►│  Netz-  │      │
 │   │ Speicher│  Gateway │  Aggregator │        │ betrei- │      │
 │   └─────────┘          └─────────────┘        │   ber   │      │
 │       │                      │                └─────────┘      │
@@ -41,7 +41,7 @@
 ### Teilnahmevoraussetzungen
 
 1. **EPOWER Batteriespeicher** mit mindestens 5 kWh Kapazitaet
-2. **ePulse Gateway** (wird kostenlos bereitgestellt)
+2. **EPOWER Gateway** (wird kostenlos bereitgestellt)
 3. **Internetverbindung** (WLAN oder LAN)
 4. **Aktiver EPOWER Stromvertrag**
 
@@ -84,8 +84,8 @@
 
 ### Anmeldung
 
-1. **Online**: mein.eon.de/epulse
-2. **App**: EPOWER Solar App → ePulse aktivieren
+1. **Online**: mein.eon.de/epower
+2. **App**: EPOWER Solar App → EPOWER aktivieren
 3. **Telefon**: 0800 - 22 33 559
 
 ### Technische Integration
@@ -98,8 +98,8 @@ Nach Anmeldung:
 
 ---
 
-*ePulse - Gemeinsam fuer ein stabiles Stromnetz*
+*EPOWER - Gemeinsam fuer ein stabiles Stromnetz*
 
-**Kontakt**: epulse@eon.de | 0800 - 22 33 559
+**Kontakt**: epower@eon.de | 0800 - 22 33 559
 
 *Stand: Maerz 2024*

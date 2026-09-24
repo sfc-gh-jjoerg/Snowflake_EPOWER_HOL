@@ -1,161 +1,146 @@
 # EPOWER Energy Intelligence Demo — Demo Flow
 
-**EPOWER Energie Deutschland** — 20,000 customers, 360° energy strategy. At the center: the **ePulse Virtual Power Plant (VPP)** with ~4,050 home batteries that charge when electricity is cheap and discharge when it's expensive. Revenue split: 70% customer / 30% EPOWER.
+**EPOWER** is a German energy provider with 20,000 customers pursuing a 360-degree energy strategy: Supply, Generate, Store, Heat, Drive, Optimize. The centerpiece is the **EPOWER Virtual Power Plant (VPP)** — ~4,050 residential battery systems that charge when electricity is cheap and discharge when prices are high. Revenue is split 70% customer / 30% EPOWER.
 
-**The Demo Story:** EPOWER has deployed 3 domain-specific AI agents — each tailored to a different team's needs. Instead of one monolithic chatbot that tries to do everything, each team gets a purpose-built assistant that speaks their language, knows their KPIs, and delivers actionable insights.
+**Duration:** 15-20 minutes | **Agent:** `EPOWER_AGENT` in Snowflake Intelligence (Cowork)
 
 ---
 
-## Act 1 — The Commercial Team's Morning
+## Act 1 — Enterprise Intelligence in Cowork (~10 min)
 
-> **Agent: EPOWER Commercial**
-> *Audience: Sales manager reviewing business performance*
+> Open **Snowflake Intelligence** (Cowork) and select `EPOWER_AGENT`.
+> The monolithic agent has 12 tools spanning sales, billing, service, HR, VPP fleet, energy market, and document search.
 
 ### Q1 — Business Overview
 
-> EN: *"Give me an overview of our business: revenue by product category and region, contract values by customer segment."*
+> EN: *"Revenue overview by product category — which verticals are growing fastest?"*
 >
-> DE: *"Überblick über unser Geschäft: Umsatz nach Produktkategorie und Region, Vertragswerte nach Kundensegment."*
+> DE: *"Umsatzuebersicht nach Produktkategorie — welche Bereiche wachsen am staerksten?"*
 
-| What it shows | Agent routes to `energy_sales_analyst` — a single natural language question generates a multi-dimensional business summary |
-|---------------|-----|
-| **Insight** | Commercial customers are only 7% of the base but 6x contract value. South dominates solar revenue. East is growing fastest. |
+| What it shows | The agent routes to `energy_sales_analyst`, generates a chart from natural language |
+|---------------|---|
+| **Talking point** | "One question, one chart — no SQL, no dashboard builder. The semantic view defines the business vocabulary; the agent translates intent to precise SQL." |
+| **Expected insight** | Solar and battery storage lead revenue. Commercial customers are only 7% of the base but drive ~6x contract value. |
 
-### Q2 — Cross-Domain Customer Intelligence
+### Q2 — VPP Financial Performance (New Capability)
 
-> EN: *"Which high-consumption customers don't have solar yet? What does our product documentation recommend for them?"*
+> EN: *"Show the VPP fleet margin by price zone — is our arbitrage strategy profitable?"*
 >
-> DE: *"Welche Kunden mit hohem Verbrauch haben noch keine Solaranlage? Was empfiehlt unsere Produktdokumentation?"*
+> DE: *"Zeige die VPP-Marge nach Preiszone — ist unsere Arbitrage-Strategie profitabel?"*
 
-| What it shows | Agent combines SQL (`customer_energy_analyst`) with RAG (`product_docs_search`) in one answer |
-|---------------|-----|
-| **Insight** | North customers appear disproportionately (lowest solar adoption) — regional sales opportunity. Agent synthesizes data + documents. |
+| What it shows | Routes to `vpp_analyst` — the enriched semantic view now includes financial metrics (margins, costs, revenue) alongside telemetry |
+|---------------|---|
+| **Talking point** | "The VPP semantic view combines telemetry AND price optimization data. One tool answers both operational and financial questions about the fleet." |
+| **Expected insight** | HIGH price zone has highest export revenue and positive margins. NEGATIVE zone shows high import (charging) at zero or negative cost — the fleet charges when producers pay us to take electricity. |
 
-### Q3 — Service Quality Check
+### Q3 — The "Wow" Chart (German, Real Market Data)
 
-> EN: *"Which regions have the most negative service tickets? Derive concrete actions."*
+> *"Zeige Strompreis vs. Batterie-Ladezustand der letzten 7 Tage als Chart"*
 >
-> DE: *"Welche Regionen haben die meisten negativen Service-Tickets? Leite konkrete Maßnahmen ab."*
+> (Switch to German mid-demo — the agent adapts seamlessly)
 
-| What it shows | Agent goes beyond data reporting — delivers recommendations, not just numbers |
-|---------------|-----|
-| **Insight** | East stands out (installation growing pains). Winter peak in heat pump complaints visible. Agent proposes actions. |
+| What it shows | Dual-axis chart with real EPEX day-ahead prices and battery SOC. Visible inverse correlation. |
+|---------------|---|
+| **Talking point** | "These are real electricity prices from the EPEX DE-LU market, fetched daily via API. 4,050 home batteries autonomously react to market signals — high prices, low SOC (discharging); low prices, high SOC (charging). The VPP works." |
+| **Expected insight** | Clear inverse pattern. The agent produces the chart AND explains the correlation in German. |
+
+### Q4 — Cross-Domain Intelligence (SQL + RAG)
+
+> EN: *"Which high-consumption customers without solar have the most negative service tickets? What does our product documentation recommend for upsell?"*
+>
+> DE: *"Welche Kunden mit hohem Verbrauch ohne Solar haben die meisten negativen Service-Tickets? Was empfiehlt unsere Produktdokumentation?"*
+
+| What it shows | Agent invokes 3 tools in one answer: `customer_energy_analyst` (consumption by product), `service_analyst` (ticket sentiment), `product_docs_search` (RAG over product guides) |
+|---------------|---|
+| **Talking point** | "This is the real power of agentic AI — the agent doesn't just query a table. It combines structured data from two different sources AND retrieves relevant product documentation to build a recommendation. SQL + RAG in one answer." |
+| **Expected insight** | North region appears disproportionately (lowest solar adoption). Agent synthesizes a recommendation combining data patterns with product documentation. |
+
+### Q5 — Executive Summary (Cross-Domain Closer)
+
+> *"Executive summary: Umsatz, VPP-Performance, Servicelage — mit drei konkreten Massnahmen fuers naechste Quartal"*
+
+| What it shows | Agent orchestrates 4+ tools (sales, VPP, service, HR) into a strategic recommendation |
+|---------------|---|
+| **Talking point** | "One question, five data domains, three concrete actions. This is what a purpose-built enterprise agent can do — not just analytics, but strategy." |
+| **Expected insight** | Revenue growth in solar, VPP margins positive, service quality improving. Actions: expand solar in North, optimize VPP dispatch in low-price clusters, address East region installation complaints. |
 
 ---
 
-## Act 2 — The Operations Team's Control Room
+## Act 2 — VPP Monitor Dashboard (~5 min)
 
-> **Agent: EPOWER Operations**
-> *Audience: Energy trader monitoring the VPP fleet*
+> Switch to the **VPP Monitor** app (Module 2). Open the URL from `SHOW APPLICATION SERVICES` or the Snowflake Apps section.
 
-### Q4 — Price-Battery Correlation (the "Wow" Moment)
+### What to Show
 
-> EN: *"Show electricity spot price vs. battery state-of-charge for the last 7 days. Is the VPP reacting to the market?"*
->
-> DE: *"Zeige Strompreis vs. Batterie-Ladezustand der letzten 7 Tage. Reagiert das VPP auf den Markt?"*
+1. **Geographic cluster map** — 14 VPP clusters across Germany, color-coded by net energy flow. Export clusters (green) vs. import clusters (red).
+2. **Timeseries view** — hourly battery SOC, solar yield, and grid flow overlaid with electricity prices. Same correlation as Q3 but as a dedicated operational dashboard.
+3. **Action breakdown** — CHARGE/DISCHARGE/SELF_CONSUME distribution by cluster.
 
-| What it shows | Agent correlates two data sources (VPP telemetry + market prices) and visualizes the relationship |
-|---------------|-----|
-| **Insight** | Inverse correlation as a chart — proof that 4,050 batteries autonomously react to real EPEX prices. The VPP works. |
+### Talking Points
 
-### Q5 — Regional Cluster Deep-Dive
-
-> EN: *"Compare average solar yield and net grid flow between Munich Metro, Hamburg Metro, and Rhein-Ruhr clusters. Which cluster exports the most?"*
->
-> DE: *"Vergleiche die durchschnittliche Solarleistung und den Netzfluss zwischen den Clustern Munich Metro, Hamburg Metro und Rhein-Ruhr. Welches Cluster exportiert am meisten?"*
-
-| What it shows | Agent uses `CLUSTER_NAME` and `COMPASS_REGION` dimensions — granular fleet analytics down to metro-region level |
-|---------------|-----|
-| **Insight** | Southern clusters (high solar irradiation) are net exporters; northern clusters (wind-heavy, lower solar) import more. Urban vs. rural performance gap visible. |
-
-**Follow-up options:**
-- EN: *"Which cluster has the highest heat pump consumption?"* / DE: *"Welches Cluster hat den höchsten Wärmepumpenverbrauch?"*
-- EN: *"Compare battery SOC between urban and rural clusters"* / DE: *"Vergleiche den Batterie-Ladezustand zwischen urbanen und ländlichen Standorten"*
-- EN: *"What does the VPP program guide say about dispatch priorities?"* / DE: *"Was sagt das VPP-Programm über Dispatch-Prioritäten?"* (triggers RAG)
+- "This is a **Next.js app deployed via Snowflake App Runtime** — `snow app deploy`, no Docker images, no container registry, no CI/CD pipeline. From code to live URL in one command."
+- "It queries the **same Gold layer** the agent uses — same dbt models, same semantic consistency. Different UX for different users: the operations team needs a dashboard, the executive asks Cowork."
+- "The 4 backend views powering this dashboard are **managed by dbt** alongside the data models — one `dbt run` builds everything."
 
 ---
 
-## Act 3 — The HR Partner's Check-In
+## Act 3 — Behind the Scenes (3-5 min, optional)
 
-> **Agent: EPOWER People**
-> *Audience: HR business partner reviewing workforce metrics*
+> Quick technical walkthrough for deeper audiences. Show the notebook or explain the architecture verbally.
 
-### Q6 — Workforce Snapshot
+### Key Architecture Points
 
-> EN: *"How is our attrition rate distributed across departments? Which teams should I focus on?"*
->
-> DE: *"Wie verteilt sich unsere Fluktuationsrate über die Abteilungen? Auf welche Teams sollte ich mich konzentrieren?"*
+| Layer | What | How |
+|-------|------|-----|
+| **Data Pipeline** | Bronze -> Silver -> Gold (medallion) | dbt on Snowflake — `EXECUTE DBT PROJECT` |
+| **Semantic Layer** | 7 semantic views (all domains) | dbt `semantic_view` materialization via `dbt_semantic_view` package |
+| **Two-Phase dbt** | Tables first, semantic views second | `--exclude tag:semantic` then `--select tag:semantic` (search services must exist first) |
+| **AI Layer** | 4 agents (1 monolithic + 3 domain-specific) | Cortex Agent with text-to-SQL + RAG tools |
+| **Search** | 9 Cortex Search services | 4 document RAG + 5 high-cardinality column lookup |
+| **Daily Refresh** | Prices + telemetry + sales + billing + service + dbt | Snowflake Task at 17:00 CET |
+| **External Access** | MCP Server with 15 tools | Cortex Code, Claude Desktop, external AI clients |
+| **Enterprise Sources** | Customer data (Salesforce), billing (SAP), HR (Workday) | Zero-copy connectors / Openflow CDC (simulated in lab) |
 
-| What it shows | A completely separate agent with its own persona — demonstrates data isolation and specialized vocabulary |
-|---------------|-----|
-| **Insight** | Agent speaks HR language (attrition rate, FTE, span of control). Identifies high-risk departments and suggests retention analysis. |
+### For Hands-on Lab Participants
 
----
+The notebook (`01-agentic-ai-foundation/epower_hol_main.ipynb`) walks through each layer step by step:
 
-## Act 4 — The Boardroom (All Agents Converge)
-
-> **Agent: EPOWER Intelligence (monolithic)**
-> *Audience: Executive wanting a cross-domain summary*
-
-### Q7 — Executive Strategy
-
-> EN: *"Executive summary: revenue trends, VPP performance, customer satisfaction, and workforce — with three actions for next quarter."*
->
-> DE: *"Executive Summary: Umsatz, VPP-Performance, Kundenzufriedenheit, Personal — und drei Maßnahmen fürs nächste Quartal."*
-
-| What it shows | The monolithic agent orchestrates across 5 tools in one answer — demonstrating why both patterns (focused + broad) have value |
-|---------------|-----|
-| **Insight** | Agent aggregates sales, VPP, service, and HR data into a strategic recommendation. Shows that the monolith is still valuable for cross-cutting questions that span multiple domains. |
-
----
-
-## Summary
-
-| # | Agent | Domains | Cross-Domain | RAG | Action-Oriented |
-|---|-------|---------|:---:|:---:|:---:|
-| 1 | Commercial | Sales, Customers | | | |
-| 2 | Commercial | Customers, Product Docs | x | x | |
-| 3 | Commercial | Service | | | x |
-| 4 | Operations | VPP, Market Prices | x | | |
-| 5 | Operations | VPP (Clusters) | | | |
-| 6 | People | HR | | | |
-| 7 | Intelligence | Sales, VPP, Service, HR | x | x | x |
+| Section | What you learn |
+|---------|---------------|
+| 1-2 | Snowflake role-based access, warehouse setup |
+| 3 | Star schema data model, dimension/fact tables |
+| 4 | External API access from Snowflake (Energy-Charts API) |
+| 5 | IoT data generation with price-reactive patterns |
+| 6 | dbt on Snowflake — native dbt, package management, two-phase execution |
+| 7 | Cortex Search + Semantic Views — the AI-ready layer |
+| 8 | Document parsing and RAG pipeline |
+| 9 | Cortex Agent architecture — monolithic vs. domain-specific |
+| 10 | MCP Server — exposing AI capabilities to external tools |
+| 11 | Task scheduling and incremental data refresh |
 
 ---
 
 ## Demo Tips
 
-- **Start with Commercial** (Q1-Q3) — it's the most relatable business context
-- **Q4 is the "wow" moment** — the price/battery chart proves the VPP works with real market data
-- **Switch agents visibly** — the transition from Commercial → Operations → People tells the story of "right agent for the right team"
-- **Q7 wraps up** — the monolith shows both patterns have value; focused agents for daily work, broad agent for executive synthesis
-- **Language flexibility** — ask in English or German mid-demo to show the agent adapts seamlessly (no configuration needed)
-- **Follow-ups** after any question: "Break down by region" / "Aufschlüsselung nach Region", "Show as chart" / "Zeige als Chart", "Explain the VPP program" / "Erkläre das VPP-Programm" (triggers RAG)
+- **Q3 is the "wow" moment** — the price/battery chart proves the VPP works with real market data. Time your pause here.
+- **Switch to German for Q3 and Q5** — it's natural for a German energy company and shows the agent adapts without configuration.
+- **Q4 is the "enterprise AI" moment** — SQL + RAG in one answer. Emphasize that no pre-built dashboard could do this.
+- **Don't over-explain the technical stack** during Act 1 — let the questions speak. Save architecture for Act 3 or follow-up.
+- **Follow-up prompts** after any question: "Break this down by region" / "Zeige das als Chart" / "What does the VPP program guide say about this?" (triggers RAG)
 
 ---
 
-## Technical Components
+## Data Characteristics (for Q&A)
 
-| Component | Details |
+| Dimension | Pattern |
 |-----------|---------|
-| **Agents** | 4 total: `EPOWER_AGENT` (12 tools), `EPOWER_OPS_AGENT` (4), `EPOWER_COMMERCIAL_AGENT` (8), `EPOWER_PEOPLE_AGENT` (2) |
-| **Semantic Views** | 7 (Sales, Billing, Service, Customer Energy, HR, VPP Telemetry, Market Prices) |
-| **Cortex Search** | 9 services (4 document RAG + 5 column lookup) |
-| **Database** | `EPOWER_DEMO` (Medallion: Bronze → Silver → Gold) |
-| **MCP Server** | `EPOWER_MCP_SERVER` (15 tools) |
+| **Regions** | South = solar champion, North = heat pump-strong, West = commercial/e-mobility, East = fastest growth + installation challenges |
+| **VPP Clusters** | 14 metro/rural clusters. Urban: higher density. Rural: higher solar yield per device |
+| **Customer Segments** | Commercial: 6x contract value (7% of base). Residential: 1-3 contracts |
+| **Price Zones** | NEGATIVE (charge for free), LOW (charge), MEDIUM (self-consume), HIGH (discharge for profit) |
+| **Battery Actions** | MAX_CHARGE, CHARGE, SELF_CONSUME, DISCHARGE — mapped to price zones |
+| **Margin Split** | 70% customer / 30% EPOWER — visible in VPP financial metrics |
 
 ---
 
-## Data Characteristics
-
-| Dimension | Expected Pattern |
-|-----------|-----------------|
-| **Regions** | South = Solar champion, North = Heat pump-strong, West = E-Mobility/Commercial, East = Growth + installation challenges |
-| **VPP Clusters** | 14 metro/rural clusters. Urban: higher device density. Rural: higher solar yield per device. |
-| **Segments** | Commercial: 6x contract value, 3-6 contracts. Residential: 1-3 contracts |
-| **Time Trends** | YoY growth, solar peak in spring, heat pump peak in autumn |
-| **Service** | East: negative sentiment cluster. Winter: heat pump complaints +80% |
-
----
-
-*EPOWER Energy Intelligence Demo — Powered by Snowflake Cortex*
+*EPOWER Energy Intelligence Demo — Powered by Snowflake*

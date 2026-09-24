@@ -1,6 +1,6 @@
 # Batteriespeicher im Virtuellen Kraftwerk: Technischer Leitfaden
 
-## Technische Anforderungen fuer ePulse VPP
+## Technische Anforderungen fuer EPOWER VPP
 
 ### Kompatible Batteriespeicher
 
@@ -22,7 +22,7 @@
 │                                                                 │
 │   ┌─────────────┐    ┌─────────────┐    ┌─────────────────┐    │
 │   │   Batterie  │◄──►│   Gateway   │◄──►│  EPOWER Cloud   │    │
-│   │   System    │    │   ePulse    │    │   VPP Backend   │    │
+│   │   System    │    │   EPOWER    │    │   VPP Backend   │    │
 │   └─────────────┘    └─────────────┘    └─────────────────┘    │
 │         │                  │                    │               │
 │         ▼                  ▼                    ▼               │
@@ -70,7 +70,8 @@ Das Gateway sendet alle **5 Sekunden** folgende Daten:
     "battery_soc_pct": 72.5,
     "battery_power_kw": 2.3,
     "solar_yield_kw": 4.8,
-    "grid_import_export_kw": -1.2,
+    "grid_import_kw": 0.0,
+    "grid_export_kw": 1.2,
     "heatpump_consumption_kw": 0.8
   },
   "status": {
@@ -141,7 +142,7 @@ Um die Batterielebensdauer zu maximieren:
 3. **Teilzyklen bevorzugen**: 30-80% optimal
 4. **Temperaturueberwachung**: 15-25°C ideal
 
-**Jaehrliche Zyklen durch ePulse**:
+**Jaehrliche Zyklen durch EPOWER**:
 - Garantiert: max. 250 Zyklen/Jahr
 - Typisch: 150-200 Zyklen/Jahr
 - Aequivalent: ca. 0,5 Zyklen/Tag
@@ -185,7 +186,7 @@ Um die Batterielebensdauer zu maximieren:
 
 ---
 
-## Installation des ePulse Gateways
+## Installation des EPOWER Gateways
 
 ### Schritt 1: Standortwahl
 
@@ -209,7 +210,7 @@ Wechselrichter [LAN] ───► [WLAN] Gateway [WLAN] ───► Router
 ### Schritt 3: Konfiguration
 
 1. Gateway mit Strom versorgen (USB)
-2. EPOWER App oeffnen → ePulse → Gateway hinzufuegen
+2. EPOWER App oeffnen → EPOWER → Gateway hinzufuegen
 3. QR-Code auf Gateway scannen
 4. WLAN-Zugangsdaten eingeben
 5. Batteriesystem auswaehlen
@@ -248,7 +249,7 @@ Nach erfolgreicher Einrichtung:
 ### Log-Dateien
 
 Gateway-Logs koennen ueber die App eingesehen werden:
-1. App → ePulse → Gateway → Diagnose
+1. App → EPOWER → Gateway → Diagnose
 2. "Logs exportieren" waehlen
 3. Per E-Mail an Support senden
 
@@ -281,11 +282,11 @@ Bei Kommunikationsverlust > 5 Minuten:
 
 **Technische Hotline**:
 - Telefon: 0800 - 22 33 560
-- E-Mail: epulse-technik@eon.de
+- E-Mail: epower-technik@eon.de
 - Servicezeiten: Mo-Fr 7-22 Uhr, Sa 8-18 Uhr
 
 **Installateur-Support**:
-- Partner-Portal: partner.eon.de/epulse
+- Partner-Portal: partner.eon.de/epower
 - Schulungen: Online-Webinare (monatlich)
 
 ---

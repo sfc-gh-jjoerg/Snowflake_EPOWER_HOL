@@ -1,6 +1,6 @@
 {
   "title": "EPOWER Energy Intelligence",
-  "description": "Specification for generating a Wimmel-style illustration covering all 4 modules of the EPOWER Hands-On Lab. The picture visualizes EPOWER's business model as a German energy retailer and the Snowflake AI Data Cloud — the unified platform that brings together Data and AI under one governance umbrella.",
+  "description": "Specification for generating a Wimmel-style illustration covering all 5 modules of the EPOWER Hands-On Lab. The picture visualizes EPOWER's business model as a German energy retailer and the Snowflake AI Data Cloud — the unified platform that brings together Data and AI under one governance umbrella.",
   "critical_labels": {
     "NOTE": "The following labels MUST appear EXACTLY as written in the generated image. Do NOT alter spelling, numbers, or wording.",
     "platform_name": "Snowflake AI Data Cloud (NOT 'AI Data Platform', NOT 'Data Cloud Platform' — exactly 'Snowflake AI Data Cloud')",
@@ -60,18 +60,18 @@
         },
         {
           "name": "Context Layer for AI",
-          "visual": "Above the Gold layer, within the same platform boundary: Semantic Views (small tags: Sales, Service, Customer, HR, VPP Telemetry, Market Prices — NO eye or lens icons) on one side, and Cortex Search (magnifying glass over stacked documents, '9 Search Services') on the other. Together they form the Context Layer for AI. Do NOT draw eyes, lenses, or eyeball shapes for Semantic Views.",
+          "visual": "Above the Gold layer, within the same platform boundary: Semantic Views (small tags: Sales, Billing, Service, Customer, HR, VPP, Market Prices — NO eye or lens icons) on one side, and Cortex Search (magnifying glass over stacked documents, '9 Search Services') on the other. Together they form the Context Layer for AI. Do NOT draw eyes, lenses, or eyeball shapes for Semantic Views.",
           "label": "Context Layer for AI (Semantic Views + Cortex Search)"
         },
         {
           "name": "Snowflake CoWork (AI Personal Work Assistant)",
-          "visual": "Inside the platform boundary, positioned BELOW the header 'Snowflake AI Data Cloud': the Snowflake CoWork brand icon — a blue four-pointed sparkle star (#29B5E8). Speech bubbles from business users: 'Zeige mir den Umsatz nach Region', 'Show VPP margins by price zone'. CoWork is a COMPONENT inside the platform, NOT the platform header.",
+          "visual": "Inside the platform boundary, positioned BELOW the header 'Snowflake AI Data Cloud': the Snowflake CoWork brand icon — a blue four-pointed sparkle star (#29B5E8). Speech bubbles from business users: 'Wie war unser Umsatz letztes Quartal?', 'Show VPP margins by price zone'. CoWork is a COMPONENT inside the platform, NOT the platform header.",
           "label": "CoWork",
           "visual_guidelines": "Small sparkle icon, NOT the header. The header above everything is 'Snowflake AI Data Cloud'. CoWork is just one element inside."
         },
         {
           "name": "MCP Server",
-          "visual": "Universal plug/socket icon labeled 'MCP — 12+ Tools' at the edge of the platform boundary, connecting outward to external AI clients",
+          "visual": "Universal plug/socket icon labeled 'MCP — 15 Tools' at the edge of the platform boundary, connecting outward to external AI clients",
           "label": "Model Context Protocol"
         },
         {
@@ -121,16 +121,22 @@
           "departments": ["Customer Service", "Sales", "HR", "Marketing"]
         },
         {
-          "name": "Customer Portal 'Mein EPOWER' (Module 2)",
-          "visual": "A tablet/laptop screen showing the customer self-service portal. Customer submitting meter reading, switching tariff.",
-          "label": "Mein EPOWER Portal",
+          "name": "VPP Monitor Dashboard (Module 2)",
+          "visual": "A large screen showing the operational VPP Monitor dashboard: map of Germany with 14 colored cluster dots, timeseries charts with battery SOC vs. electricity price. Label: 'VPP Monitor — App Runtime'. Small note: 'Next.js • snow app deploy'. NO Docker/container icon — this uses Snowflake App Runtime.",
+          "label": "VPP Monitor",
           "module": 2
         },
         {
-          "name": "Agentic Work Assistant (Module 4)",
-          "visual": "A sleek screen/monitor showing a chat interface with streaming text appearing (like ChatGPT). Dashboard tab with sales charts and VPP KPIs. Small container/docker icon in corner.",
-          "label": "Agentic Work Assistant",
-          "module": 4
+          "name": "Customer Portal 'Mein EPOWER' (Module 3)",
+          "visual": "A tablet/laptop screen showing the customer self-service portal. Customer submitting meter reading, switching tariff.",
+          "label": "Mein EPOWER Portal",
+          "module": 3
+        },
+        {
+          "name": "VPP Agent REST App (Module 5)",
+          "visual": "A sleek screen/monitor showing a chat interface with streaming text appearing (like ChatGPT). Focused on VPP operations — shows a question about battery dispatch and a streaming answer with margin data. Simple and focused, no complex multi-tab layout.",
+          "label": "VPP Agent REST API",
+          "module": 5
         },
         {
           "name": "VPP Control Room",
@@ -197,8 +203,8 @@
   },
   "text_labels": {
     "banners_and_signs": [
-      "EPOWER — Prosumer Energy Services",
-      "Snowflake CoWork & Cortex AI",
+      "EPOWER — Retail Energy Services",
+      "Snowflake Intelligence & Cortex AI Agents",
       "Enterprise AI in Action — Agentic AI drives decisions and takes action",
       "From Data to Action — AI Grounded in Governed Data",
       "Agentic AI drives decisions and takes action"
@@ -215,23 +221,23 @@
       "pg_lake",
       "Iceberg",
       "Cortex Code",
-      "Container Runtime",
+      "App Runtime",
       "Agent REST API (internal, no label)"
     ],
     "metrics_labels": [
       "9 Search Services",
-      "8 Semantic Views",
-      "13+ MCP Tools",
-      "6 dbt Models",
+      "7 Semantic Views",
+      "15 MCP Tools",
+      "16 dbt Models",
       "6 Business Domains"
     ],
     "speech_bubbles_german_english": [
-      "Zeige mir den Umsatz nach Region",
+      "Wie war unser Umsatz letztes Quartal?",
       "Show VPP margins by price zone",
-      "Wie hoch ist die Kundigungsrate?",
-      "How many customers used the portal this week?",
-      "Welche Kunden haben Warmepumpen?",
-      "Compare NPS scores between regions"
+      "Erstelle ein WoW-Diagramm für Deutschland",
+      "How many open service tickets with negative sentiment?",
+      "Welche Kunden haben Wärmepumpen?",
+      "Write an executive summary for our board meeting"
     ]
   },
   "modules_represented": {
@@ -240,12 +246,24 @@
       "key_visuals": [
         "Clean medallion layers (Bronze/Silver/Gold)",
         "Snowflake CoWork sparkle icon with Semantic Views + Cortex Search",
-        "Snowflake dbt-projects as transformation engine",
-        "MCP Server portal",
+        "Snowflake dbt-projects as transformation engine (two-phase: tables first, semantic views after)",
+        "MCP Server portal (15 tools)",
+        "4 Intelligence Agents (1 monolithic + 3 domain-specific)",
+        "3 incremental business data generators (daily sales, billing, service)",
         "External source systems along bottom"
       ]
     },
-    "module_2_postgres_zero_etl": {
+    "module_2_vpp_monitor": {
+      "location": "Right side (prominent dashboard screen)",
+      "key_visuals": [
+        "VPP Monitor operational dashboard",
+        "Map of Germany with 14 VPP cluster dots",
+        "Timeseries: battery SOC vs. electricity price",
+        "Next.js app deployed via Snowflake App Runtime (snow app deploy)",
+        "No Docker — uses app.yml v2 format"
+      ]
+    },
+    "module_3_postgres_zero_etl": {
       "location": "Right side (portal) + Bottom pipeline",
       "key_visuals": [
         "Customer portal 'Mein EPOWER' on tablet/laptop",
@@ -255,24 +273,24 @@
         "Portal users: meter reading, tariff switch, service request"
       ]
     },
-    "module_3_cortex_code": {
+    "module_4_dbt_cortex_code": {
       "location": "Right side (developer scene near business ops)",
       "key_visuals": [
         "Developer with AI sparkle/CoCo at laptop, labeled 'Cortex Code Coding Assistant'",
         "Code materializing on screen",
         "Speech bubble with business-level prompt",
         "Cortex Code Coding Assistant label near developer",
-        "Semantic view being created conversationally"
+        "Semantic view being created conversationally via dbt_semantic_view package"
       ]
     },
-    "module_4_agent_rest_app": {
+    "module_5_agent_rest_app": {
       "location": "Right side (app screen/monitor)",
       "key_visuals": [
-        "Agentic Work Assistant with charts + KPIs",
-        "Chat interface with streaming text (typewriter effect)",
-        "Container/SPCS icon",
+        "VPP Agent REST API — focused chat interface",
+        "Chat with streaming text (typewriter effect)",
+        "Snowflake App Runtime (NOT Container/SPCS)",
         "SSE streaming arrows from Agent to UI",
-        "REST API payload hint (JSON brackets)"
+        "Simple ~200-line app, no Docker"
       ]
     }
   },
@@ -302,7 +320,7 @@
       {
         "scene": "Agentic Work Assistant with chat",
         "business_value": "Custom applications built on Agent REST API — embed intelligence anywhere.",
-        "snowflake_enabler": "Cortex Agent REST API + Container Runtime"
+        "snowflake_enabler": "Cortex Agent REST API + Snowflake App Runtime"
       },
       {
         "scene": "MCP server connecting to external tools",

@@ -7,13 +7,13 @@
 --
 -- DEPENDENCY ORDER:
 --   1. Remove agent from Snowflake Intelligence
---   2. Drop VPP Monitor app service (Module 5)
---   3. Detach network policy from Postgres instance (Module 2)
---   4. Drop Postgres instance (Module 2)
---   5. Drop network policy and rule (Module 2)
+--   2. Drop VPP Monitor app service (Module 2)
+--   3. Detach network policy from Postgres instance (Module 3)
+--   4. Drop Postgres instance (Module 3)
+--   5. Drop network policy and rule (Module 3)
 --   6. Drop integrations
 --   7. Drop database (includes all schemas, tables, views, etc.)
---   8. Drop SNOWFLAKE_APPS objects (Module 5 artifacts)
+--   8. Drop SNOWFLAKE_APPS objects (Module 2 artifacts)
 --   9. Drop warehouse
 --  10. Drop role
 -- ========================================================================
@@ -50,10 +50,10 @@ EXCEPTION
 END;
 
 -- ========================================================================
--- STEP 2: DROP VPP MONITOR APP SERVICE (Module 5)
+-- STEP 2: DROP VPP MONITOR APP SERVICE (Module 2)
 -- Must happen before dropping EPOWER_DEMO database since the app queries
 -- views in that database. Also removes the artifact repo and code stage.
--- Safe to skip if Module 5 was never deployed (IF EXISTS).
+-- Safe to skip if Module 2 was never deployed (IF EXISTS).
 -- Note: SNOWFLAKE_APPS database may not exist if App Development Setup
 -- was never run — wrap in BEGIN/EXCEPTION to handle gracefully.
 -- ========================================================================
@@ -66,23 +66,23 @@ EXCEPTION
 END;
 
 -- ========================================================================
--- STEP 3: DETACH NETWORK POLICY FROM POSTGRES INSTANCE (Module 2)
+-- STEP 3: DETACH NETWORK POLICY FROM POSTGRES INSTANCE (Module 3)
 -- Must happen BEFORE dropping the network policy. A policy cannot be
 -- dropped while still assigned to an entity.
 -- ========================================================================
 BEGIN
     ALTER POSTGRES INSTANCE MY_EPOWER_PORTAL UNSET NETWORK_POLICY;
 EXCEPTION
-    WHEN OTHER THEN NULL;  -- Instance may not exist if Module 2 was not run
+    WHEN OTHER THEN NULL;  -- Instance may not exist if Module 3 was not run
 END;
 
 -- ========================================================================
--- STEP 4: DROP POSTGRES INSTANCE (Module 2)
+-- STEP 4: DROP POSTGRES INSTANCE (Module 3)
 -- ========================================================================
 DROP POSTGRES INSTANCE IF EXISTS MY_EPOWER_PORTAL;
 
 -- ========================================================================
--- STEP 5: DROP NETWORK POLICY AND RULE (Module 2)
+-- STEP 5: DROP NETWORK POLICY AND RULE (Module 3)
 -- Now safe — policy is no longer attached to any entity.
 -- Note: USE DATABASE required because BEGIN...END resets session context.
 -- ========================================================================

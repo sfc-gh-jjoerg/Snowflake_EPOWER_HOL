@@ -32,3 +32,7 @@ models:
         description: IoT gateway identifier
         tests:
           - not_null
+      - name: grid_import_kw
+        description: Power drawn FROM grid in kW (always >= 0, high when charging from cheap grid power)
+      - name: grid_export_kw
+        description: Power fed TO grid in kW (always >= 0, high when discharging during expensive hours)

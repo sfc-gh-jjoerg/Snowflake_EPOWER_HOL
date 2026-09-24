@@ -1,0 +1,12 @@
+-- =============================================================================
+-- EPOWER VPP Monitor — Backend Views (MIGRATED TO dbt)
+-- =============================================================================
+-- These views are now managed by the epower_dbt project:
+--   - CITY_CLUSTER_MAP         → epower_dbt/seeds/city_cluster_map.csv
+--   - V_VPP_MONITOR_TIMESERIES → epower_dbt/models/epulse_vpp/presentation/
+--   - V_VPP_MONITOR_ACTIONS    → epower_dbt/models/epulse_vpp/presentation/
+--   - V_VPP_MONITOR_KPI        → epower_dbt/models/epulse_vpp/presentation/
+--   - V_VPP_MONITOR_MAP        → epower_dbt/models/epulse_vpp/presentation/
+--
+-- To deploy: cd epower_dbt && dbt seed && dbt run
+-- =============================================================================

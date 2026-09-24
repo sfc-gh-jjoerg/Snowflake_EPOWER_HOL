@@ -1,6 +1,6 @@
 # EPOWER Energy Intelligence Demo
 
-![EPOWER](images/epower_wimmel_v4.png)
+![EPOWER](images/epower_wimmel_v5.jpg)
 
 **A hands-on lab for building an Agentic AI application grounded in enterprise data — powered by Snowflake.**
 
@@ -22,10 +22,10 @@ The EPOWER Agent answers questions across 6 business domains (Sales, Billing, Se
 | Module | What You Build | Key Snowflake Features | Time |
 |--------|---------------|----------------------|------|
 | **1. Agentic AI Foundation** (required) | 4 Intelligence Agents (1 monolithic + 3 domain-specific) spanning 6 business domains | Cortex Agent, Semantic Views, Cortex Search, dbt, Tasks, External Access | ~15 min |
-| **2. Postgres Zero-ETL** (optional) | Zero-ETL pipeline from operational Postgres to analytics | Snowflake Postgres, pg_lake, Iceberg, Catalog Integration | ~10 min |
-| **3. dbt with Cortex Code** (optional) | AI-assisted dbt pipeline extension (churn + NPS analytics) | Cortex Code (CoCo), dbt project extension | ~15 min |
-| **4. Agent REST App** (optional) | Streamlit dashboard with streaming Agent REST API chat | Container Runtime (SPCS), Cortex Agent REST API, SSE | ~5 min |
-| **5. VPP Monitor** (optional) | Dark-mode Next.js dashboard deployed via Snowflake App Runtime | Snowflake App Runtime, SPCS, Next.js, Recharts | ~10 min |
+| **2. VPP Monitor** (optional) | Dark-mode Next.js dashboard deployed via Snowflake App Runtime | Snowflake App Runtime, SPCS, Next.js, Recharts | ~10 min |
+| **3. Postgres Zero-ETL** (optional) | Zero-ETL pipeline from operational Postgres to analytics | Snowflake Postgres, pg_lake, Iceberg, Catalog Integration | ~10 min |
+| **4. dbt with Cortex Code** (optional) | AI-assisted dbt pipeline extension (churn + NPS analytics) | Cortex Code (CoCo), dbt project extension | ~15 min |
+| **5. Agent REST App** (optional) | VPP Assistant — Agent REST API demo with streaming SSE | Container Runtime (SPCS), Cortex Agent REST API | ~5 min |
 
 > **Module 1 is the foundation.** Modules 2-5 are independent extensions — run any combination after Module 1.
 
@@ -160,7 +160,7 @@ Service tickets, complaints, and sentiment analysis.
 | **Semantic View** | `SERVICE_SEMANTIC_VIEW` |
 | **Cortex Search** | `SEARCH_SERVICE_DOCS`, `SEARCH_SERVICE_LOGS` |
 
-#### 4. ePulse Virtual Power Plant (VPP)
+#### 4. EPOWER Virtual Power Plant (VPP)
 
 IoT telemetry from ~4,050 battery storage systems, orchestrated as a single virtual power plant trading on day-ahead electricity markets.
 
@@ -195,7 +195,7 @@ Financial transactions and marketing campaign performance.
 
 A **Virtual Power Plant** aggregates thousands of small, distributed energy resources — residential solar panels, home batteries, heat pumps, EV chargers — and orchestrates them as if they were a single large power plant. Instead of building a gas turbine, EPOWER coordinates ~4,050 home battery systems to absorb cheap electricity and release it when prices spike.
 
-In the real world, companies like [1KOMMA5° (Heartbeat AI)](https://1komma5grad.com/), [Sonnen](https://sonnen.de/), and [Next Kraftwerke](https://www.next-kraftwerke.com/) operate VPPs that trade on European electricity markets. EPOWER's ePulse VPP follows the same model: a cloud-connected gateway in each home reads day-ahead prices and steers the battery accordingly.
+In the real world, companies like [1KOMMA5° (Heartbeat AI)](https://1komma5grad.com/), [Sonnen](https://sonnen.de/), and [Next Kraftwerke](https://www.next-kraftwerke.com/) operate VPPs that trade on European electricity markets. EPOWER's VPP follows the same model: a cloud-connected gateway in each home reads day-ahead prices and steers the battery accordingly.
 
 **Why it matters for EPOWER:**
 - **Revenue stream** — 30% of every arbitrage margin (buy low, sell high) flows to EPOWER
@@ -245,7 +245,7 @@ CALL EPOWER_OPS.FETCH_DAY_AHEAD_PRICES(CURRENT_DATE() + 1);
 
 EPOWER serves two fundamentally different customer segments:
 
-**VPP Customers (Prosumers)** are enrolled in the ePulse Virtual Power Plant program. They own solar panels, battery storage, and an ePulse gateway, actively producing, storing, and trading energy.
+**VPP Customers (Prosumers)** are enrolled in the EPOWER Virtual Power Plant program. They own solar panels, battery storage, and an EPOWER gateway, actively producing, storing, and trading energy.
 
 **Non-VPP Customers (Traditional Consumers)** receive power through the traditional electricity grid — they are pure consumers with standard electricity contracts (like "Ökostrom 100%" or "EPOWER Flex").
 
@@ -253,7 +253,7 @@ EPOWER serves two fundamentally different customer segments:
 |--------|---------------|-------------------|
 | **Power Source** | Grid + Own Solar Production | Grid Only |
 | **Energy Flow** | Bidirectional (import & export) | Unidirectional (import only) |
-| **Equipment** | Solar panels, battery, ePulse gateway | Standard smart meter |
+| **Equipment** | Solar panels, battery, EPOWER gateway | Standard smart meter |
 | **Role** | Producer & Consumer (Prosumer) | Consumer only |
 | **Grid Interaction** | Active (stabilization, flexibility) | Passive (consumption only) |
 | **Revenue** | Consumption costs − VPP earnings (€50–150/year) | Consumption costs only |
@@ -386,7 +386,7 @@ graph LR
     style MP fill:#ea4335,stroke:#c5352b,color:#fff
 ```
 
-#### 1. ePulse VPP Pipeline (`epulse_vpp/`)
+#### 1. EPOWER VPP Pipeline (`epulse_vpp/`)
 
 Transforms IoT telemetry from ~4,500 battery storage devices into VPP capacity analytics.
 
@@ -488,7 +488,7 @@ The demo includes a **Snowflake-managed MCP server** (`EPOWER_MCP_SERVER`) that 
 | `customer-energy-analyst` | `CORTEX_ANALYST_MESSAGE` | Consumption by product ownership |
 | `hr-analyst` | `CORTEX_ANALYST_MESSAGE` | HR workforce data, salaries |
 | `market-prices-analyst` | `CORTEX_ANALYST_MESSAGE` | Day-ahead electricity spot prices |
-| `vpp-telemetry-analyst` | `CORTEX_ANALYST_MESSAGE` | VPP IoT: solar, battery, grid |
+| `vpp-analyst` | `CORTEX_ANALYST_MESSAGE` | VPP fleet: telemetry, dispatch, margins |
 | `energy-docs-search` | `CORTEX_SEARCH_SERVICE_QUERY` | Energy policies, terms |
 | `product-docs-search` | `CORTEX_SEARCH_SERVICE_QUERY` | Product documentation |
 | `service-docs-search` | `CORTEX_SEARCH_SERVICE_QUERY` | Service handbook |
@@ -571,13 +571,13 @@ GRANT USAGE ON MCP SERVER EPOWER_DEMO.EPOWER_GOLD.EPOWER_MCP_SERVER TO ROLE EPOW
 
 **Full cleanup (removes everything):**
 
-Run [`01-agentic-ai-foundation/epower_cleanup.sql`](01-agentic-ai-foundation/epower_cleanup.sql) with ACCOUNTADMIN. This handles all modules — including Module 2's Postgres instance, Module 5's Application Service, and network policies — in the correct dependency order:
+Run [`01-agentic-ai-foundation/epower_cleanup.sql`](01-agentic-ai-foundation/epower_cleanup.sql) with ACCOUNTADMIN. This handles all modules — including Module 3's Postgres instance, Module 2's Application Service, and network policies — in the correct dependency order:
 
 1. Remove the agent from Snowflake Intelligence
-2. Drop VPP Monitor Application Service + artifacts (Module 5)
-3. Detach network policy from Postgres instance (Module 2)
-4. Drop Postgres instance (Module 2)
-5. Drop network policy and network rule (Module 2)
+2. Drop VPP Monitor Application Service + artifacts (Module 2)
+3. Detach network policy from Postgres instance (Module 3)
+4. Drop Postgres instance (Module 3)
+5. Drop network policy and network rule (Module 3)
 6. Drop catalog and API integrations
 7. Drop the `EPOWER_DEMO` database (all schemas, tables, views, stages)
 8. Drop the `EPOWER_COMPUTE` warehouse
@@ -591,13 +591,13 @@ If you only want to undo a specific module while keeping others intact:
 
 | Module | Cleanup | Notes |
 |--------|---------|-------|
-| Module 5 | [`05-vpp-monitor/sql/cleanup.sql`](05-vpp-monitor/sql/cleanup.sql) | Drops Application Service, artifact repo, code stage, and backend views |
-| Module 4 | Drop the STREAMLIT object in Snowsight (or `DROP STREAMLIT IF EXISTS EPOWER_DEMO.EPOWER_GOLD.EPOWER_ASSISTANT`) | No other objects to clean up |
-| Module 3 | [`03-dbt-with-cortex-code/cleanup-module3.sql`](03-dbt-with-cortex-code/cleanup-module3.sql) | Drops tables, dbt models, semantic view, removes agent tool |
-| Module 2 | [`02-postgres-zero-etl/cleanup-module2.ipynb`](02-postgres-zero-etl/cleanup-module2.ipynb) | **Must follow dependency order** — see [Module 2 README](02-postgres-zero-etl/README-module2.md#cleanup) |
+| Module 2 | [`02-vpp-monitor/sql/cleanup.sql`](02-vpp-monitor/sql/cleanup.sql) | Drops Application Service, artifact repo, code stage, and backend views |
+| Module 5 | Drop the STREAMLIT object in Snowsight (or `DROP STREAMLIT IF EXISTS EPOWER_DEMO.EPOWER_GOLD.EPOWER_ASSISTANT`) | No other objects to clean up |
+| Module 4 | [`04-dbt-with-cortex-code/cleanup-module4.sql`](04-dbt-with-cortex-code/cleanup-module4.sql) | Drops tables, dbt models, semantic view, removes agent tool |
+| Module 3 | [`03-postgres-zero-etl/cleanup-module3.ipynb`](03-postgres-zero-etl/cleanup-module3.ipynb) | **Must follow dependency order** — see [Module 3 README](03-postgres-zero-etl/README-module3.md#cleanup) |
 | Module 1 | [`01-agentic-ai-foundation/epower_cleanup.sql`](01-agentic-ai-foundation/epower_cleanup.sql) | Full teardown — drops everything |
 
-> **Important:** If Module 2 was deployed, its network policy must be detached from the Postgres instance before it can be dropped. The full cleanup script handles this automatically. If running per-module cleanup, run Module 2's cleanup **before** Module 1's.
+> **Important:** If Module 3 was deployed, its network policy must be detached from the Postgres instance before it can be dropped. The full cleanup script handles this automatically. If running per-module cleanup, run Module 3's cleanup **before** Module 1's.
 
 ---
 
@@ -613,38 +613,37 @@ Snowflake_EPOWER_HOL/
 │   ├── epower_hol_main.ipynb        # Main setup notebook — run this to build everything
 │   └── epower_cleanup.sql           # Teardown: drop all demo objects
 │
-├── 02-postgres-zero-etl/            # ── Module 2: Snowflake Postgres + pg_lake ──
-│   ├── README-module2.md            # Module 2 documentation
-│   ├── hol-module2.ipynb            # Snowsight notebook — Postgres + Iceberg pipeline
-│   ├── portal_postgres_setup.sql    # Schema, indexes, pg_lake, pg_incremental
-│   ├── portal_seed_data.sql         # 20K users + 60 days of activity data
-│   ├── cleanup-module2-snowflake.sql # Snowflake-side teardown
-│   ├── cleanup-module2-postgres.sql # Postgres-side teardown
-│   └── cleanup-module2.ipynb        # Cleanup notebook
-│
-├── 03-dbt-with-cortex-code/         # ── Module 3: AI-Assisted dbt Development ──
-│   ├── README-module3.md            # Module 3 documentation
-│   ├── hol-module3.ipynb            # Snowsight notebook — CoCo-driven dbt extension
-│   └── cleanup-module3.sql          # Module 3 teardown
-│
-├── 04-agent-rest-app/               # ── Module 4: Streamlit Agent Dashboard ──
-│   ├── README-module4.md            # Module 4 documentation
-│   ├── streamlit_app.py             # Dashboard + Agent Chat (container runtime)
-│   ├── snowflake.yml                # Deployment config (SPCS)
-│   └── .streamlit/config.toml       # Theme
-│
-├── 05-vpp-monitor/                  # ── Module 5: VPP Monitor (Snowflake App Runtime) ──
-│   ├── README-module5.md            # Module 5 documentation (SPCS, App Runtime, setup)
-│   ├── app.yml                      # App metadata (title, description, icon)
-│   ├── snowflake.yml                # SPCS deployment config (generated by snow app setup)
+├── 02-vpp-monitor/                  # ── Module 2: VPP Monitor (Snowflake App Runtime) ──
+│   ├── README-module2.md            # Module 2 documentation (SPCS, App Runtime, setup)
+│   ├── app.yml                      # App Runtime manifest (v2 format — deployment + build config)
 │   ├── package.json                 # Node.js dependencies (Next.js, Recharts, Tailwind)
 │   ├── sql/
-│   │   ├── create_views.sql         # Backend views DDL (run before deploying)
-│   │   └── cleanup.sql              # Module 5 teardown script
+│   │   ├── create_views.sql         # RETIRED — views now managed by dbt (epower_dbt/models/epulse_vpp/presentation/)
+│   │   └── cleanup.sql              # Module 2 teardown script
 │   └── src/                         # Next.js application source
 │       ├── app/                     # Pages + API routes
 │       ├── components/              # React chart components
 │       └── lib/snowflake.ts         # Snowflake SDK connection helper
+│
+├── 03-postgres-zero-etl/            # ── Module 3: Snowflake Postgres + pg_lake ──
+│   ├── README-module3.md            # Module 3 documentation
+│   ├── hol-module3.ipynb            # Snowsight notebook — Postgres + Iceberg pipeline
+│   ├── portal_postgres_setup.sql    # Schema, indexes, pg_lake, pg_incremental
+│   ├── portal_seed_data.sql         # 20K users + 60 days of activity data
+│   ├── cleanup-module3-snowflake.sql # Snowflake-side teardown
+│   ├── cleanup-module3-postgres.sql # Postgres-side teardown
+│   └── cleanup-module3.ipynb        # Cleanup notebook
+│
+├── 04-dbt-with-cortex-code/         # ── Module 4: AI-Assisted dbt Development ──
+│   ├── README-module4.md            # Module 4 documentation
+│   ├── hol-module4.ipynb            # Snowsight notebook — CoCo-driven dbt extension
+│   └── cleanup-module4.sql          # Module 4 teardown
+│
+├── 05-agent-rest-app/               # ── Module 5: Agent REST API Demo ──
+│   ├── README-module5.md            # Module 5 documentation
+│   ├── streamlit_app.py             # Dashboard + Agent Chat (container runtime)
+│   ├── snowflake.yml                # Deployment config (SPCS)
+│   └── .streamlit/config.toml       # Theme
 │
 ├── demo_data/
 │   ├── structured_data/             # 25 CSV files loaded into EPOWER_GOLD
@@ -657,8 +656,8 @@ Snowflake_EPOWER_HOL/
 │   │   ├── hr_employee_fact.csv     #   12K HR records
 │   │   ├── finance_transactions.csv #   30K financial transactions
 │   │   ├── marketing_campaign_fact.csv  # 16K campaign metrics
-│   │   ├── contract_cancellations.csv   # ~2,400 cancellations (Module 3)
-│   │   ├── customer_surveys.csv     #   5,000 NPS surveys (Module 3)
+│   │   ├── contract_cancellations.csv   # ~2,400 cancellations (Module 4)
+│   │   ├── customer_surveys.csv     #   5,000 NPS surveys (Module 4)
 │   │   └── ...                      #   + 14 dimension tables (region, channel, etc.)
 │   │
 │   └── unstructured_data/           # 14 PDF/MD documents for Cortex Search (RAG)
@@ -693,7 +692,7 @@ Snowflake_EPOWER_HOL/
 │               ├── mart_day_ahead_prices.sql # EUR/kWh, hour_of_day, day_of_week
 │               └── schema.yml                # Column docs + tests
 │
-├── epower_dbt_portal/               # dbt project for portal analytics (Module 2)
+├── epower_dbt_portal/               # dbt project for portal analytics (Module 3)
 │   ├── dbt_project.yml              #   Project config: epower_portal_analytics
 │   ├── profiles.yml                 #   Connection profile
 │   ├── macros/
@@ -708,12 +707,12 @@ Snowflake_EPOWER_HOL/
 │   ├── generate_data.py             # Regenerate structured CSV data
 │   ├── generate_docs.py             # Regenerate unstructured documents
 │   ├── create_notebook.py           # Helper: creates notebook scaffold
-│   ├── generate_module3_data.py     # Generate Module 3 CSV data (cancellations + surveys)
-│   ├── write_module3_notebook.py    # Generate Module 3 notebook
+│   ├── generate_module4_data.py     # Generate Module 4 CSV data (cancellations + surveys)
+│   ├── write_module4_notebook.py    # Generate Module 4 notebook
 │   └── wimmel-prompt.md             # Prompt used to generate the header image
 │
 └── images/
-    └── epower_wimmel_v4.png         # Header image for README
+    └── epower_wimmel_v5.jpg         # Header image for README
 ```
 
 ### Key Assets
@@ -721,10 +720,10 @@ Snowflake_EPOWER_HOL/
 | Asset | Purpose | When to Use |
 |-------|---------|-------------|
 | `01-agentic-ai-foundation/epower_hol_main.ipynb` | Creates all Snowflake objects end-to-end | Initial setup — run once |
-| `02-postgres-zero-etl/hol-module2.ipynb` | Snowflake Postgres + pg_lake pipeline | Module 2 — after Module 1 |
-| `03-dbt-with-cortex-code/hol-module3.ipynb` | Cortex Code dbt extension + semantic layer | Module 3 — after Module 1 |
-| `04-agent-rest-app/streamlit_app.py` | Streamlit dashboard + Agent REST API chat | Module 4 — after Module 1 |
-| `05-vpp-monitor/` | Next.js VPP dashboard deployed via Snowflake App Runtime | Module 5 — after Module 1 |
+| `02-vpp-monitor/` | Next.js VPP dashboard deployed via Snowflake App Runtime | Module 2 — after Module 1 |
+| `03-postgres-zero-etl/hol-module3.ipynb` | Snowflake Postgres + pg_lake pipeline | Module 3 — after Module 1 |
+| `04-dbt-with-cortex-code/hol-module4.ipynb` | Cortex Code dbt extension + semantic layer | Module 4 — after Module 1 |
+| `05-agent-rest-app/streamlit_app.py` | VPP Assistant — Agent REST API demo | Module 5 — after Module 1 |
 | `demo_flow.md` | 12-question guided demo script (4 acts) | During the demo |
 | `01-agentic-ai-foundation/epower_cleanup.sql` | Drops all demo objects | Teardown / reset |
 | `epower_dbt/` | dbt project with 6 models (medallion architecture) | Deployed by the notebook; edit models here |
@@ -739,12 +738,13 @@ Snowflake_EPOWER_HOL/
 
 ### Sign Conventions (Positive vs. Negative Values)
 
-| Field | Positive | Negative |
-|-------|----------|----------|
-| `grid_import_export_kw` | Importing from grid (consuming) | Exporting to grid (feeding back) |
-| `net_grid_kw` | Region is net-consuming | Region is net-injecting (VPP supplying power) |
-| `price_eur_mwh` | Normal market price | Oversupply — producers pay you to take electricity |
-| `net_margin_eur` | Profit (export revenue > import cost) | Loss (import cost > export revenue) |
+| Field | Meaning |
+|-------|---------|
+| `grid_import_kw` | Power drawn FROM grid in kW (always >= 0, high when charging from cheap grid power) |
+| `grid_export_kw` | Power fed TO grid in kW (always >= 0, high when discharging during expensive hours) |
+| `net_grid_kwh` | Import minus export: positive = net consumer, negative = net producer |
+| `price_eur_mwh` | Positive = normal market price. Negative = oversupply (producers pay you to take electricity) |
+| `net_margin_eur` | Positive = profit (export revenue > import cost). Negative = loss |
 
 The VPP strategy: charge when prices are negative/low, discharge when prices are high → maximizing positive `net_margin_eur`.
 

@@ -42,7 +42,7 @@ Mit einem **dynamischen Stromtarif** von EPOWER zahlen Sie den tatsaechlichen Bo
 
 - **Guenstige Stunden nutzen**: Waschmaschine mittags laufen lassen
 - **Teure Stunden meiden**: Elektroauto nachts laden
-- **Mit ePulse profitieren**: Ihr Speicher optimiert automatisch
+- **Mit EPOWER profitieren**: Ihr Speicher optimiert automatisch
 
 ---
 
@@ -80,7 +80,7 @@ Bei sehr viel Wind und Sonne und wenig Nachfrage kann der Boersenpreis **negativ
 - Feiertage (Industrie steht still)
 - Nachts bei starkem Wind
 
-**Was bedeutet das fuer ePulse?**
+**Was bedeutet das fuer EPOWER?**
 Ihr Speicher laed automatisch bei negativen Preisen:
 - Sie bekommen guenstigen Strom
 - EPOWER teilt 50% der Ersparnis mit Ihnen
@@ -163,9 +163,9 @@ Boersenpreis: 80 EUR/MWh = 8 ct/kWh
 | EPOWER Aufschlag | 2,50 ct/kWh |
 | **Endpreis** | **21,05 ct/kWh** |
 
-### Sparpotenzial mit ePulse
+### Sparpotenzial mit EPOWER
 
-Mit ePulse optimiert Ihr Speicher automatisch:
+Mit EPOWER optimiert Ihr Speicher automatisch:
 - Laden bei niedrigen Preisen
 - Eigenverbrauch bei hohen Preisen
 - Durchschnittliche Ersparnis: **15-25%** gegenueber Festpreistarif

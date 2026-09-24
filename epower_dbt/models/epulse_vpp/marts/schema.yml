@@ -29,8 +29,12 @@ models:
         description: Total solar generation in kW
       - name: avg_solar_yield_kw
         description: Average solar yield per device
-      - name: net_grid_kw
-        description: Net grid import/export (negative = export to grid)
+      - name: total_grid_import_kwh
+        description: Total grid import in kWh (always >= 0)
+      - name: total_grid_export_kwh
+        description: Total grid export in kWh (always >= 0)
+      - name: net_grid_kwh
+        description: Net grid balance in kWh (import - export; positive = net consumer, negative = net producer)
 
   - name: mart_vpp_price_optimization
     description: >
@@ -97,7 +101,7 @@ models:
         description: Total grid import in kWh
       - name: total_export_kwh
         description: Total grid export in kWh
-      - name: net_flow_kwh
-        description: Net grid flow (positive = importing, negative = exporting)
+      - name: net_grid_kwh
+        description: Net grid balance in kWh (import - export; positive = net consumer, negative = net producer)
       - name: avg_price_eur_mwh
         description: Average day-ahead price in EUR/MWh
