@@ -94,8 +94,7 @@ DROP NETWORK RULE IF EXISTS EPOWER_PG_INGRESS;
 -- STEP 6: DROP INTEGRATIONS
 -- ========================================================================
 DROP CATALOG INTEGRATION IF EXISTS PORTAL_POSTGRES_CATALOG;
-DROP EXTERNAL ACCESS INTEGRATION IF EXISTS Energy_ExternalAccess;
-DROP EXTERNAL ACCESS INTEGRATION IF EXISTS energy_charts_integration;
+DROP EXTERNAL ACCESS INTEGRATION IF EXISTS EPOWER_EXTERNAL_ACCESS;
 DROP API INTEGRATION IF EXISTS git_api_integration_energy;
 
 -- ========================================================================

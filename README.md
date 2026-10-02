@@ -37,18 +37,19 @@ The EPOWER Agent answers questions across 6 business domains (Sales, Billing, Se
 
 ### Required Privileges
 
-The setup notebook (`01-agentic-ai-foundation/epower_hol_main.ipynb`) requires elevated privileges for three specific cells (§1, §2, §10). The following account-level privileges are needed — all are inherited by default through the **ACCOUNTADMIN** role:
+The following account-level privileges are needed — all are inherited by default through the **ACCOUNTADMIN** role. Step 1 of Quick Start handles the Git integration; the notebook's §1, §2, and §10 cells also require ACCOUNTADMIN for role/warehouse, external access integrations, and agent registration.
 
-| Privilege | Actions Enabled | Notebook Section |
-|-----------|----------------|-----------------|
-| `CREATE ROLE` | Create `EPOWER_ROLE` | §1 |
-| `CREATE WAREHOUSE` | Create `EPOWER_COMPUTE` warehouse | §1 |
-| `MANAGE GRANTS` | Grant `CREATE DATABASE`, `EXECUTE TASK` on account; grant role/warehouse/integration usage | §1, §2, §10 |
-| `CREATE INTEGRATION` | Create external access integrations for API egress | §2 |
-| `CREATE SNOWFLAKE INTELLIGENCE` | Create the default Snowflake Intelligence object | §1 |
-| `MODIFY` on Snowflake Intelligence object | Register the agent with Snowflake Intelligence | §10 |
+| Privilege | Actions Enabled | Where |
+|-----------|----------------|-------|
+| `CREATE INTEGRATION` | GitHub API integration | Quick Start Step 1 |
+| `CREATE ROLE` | Create `EPOWER_ROLE` | Notebook §1 |
+| `CREATE WAREHOUSE` | Create `EPOWER_COMPUTE` warehouse | Notebook §1 |
+| `MANAGE GRANTS` | Grant role/warehouse/integration usage, `CREATE DATABASE` and `EXECUTE TASK` on account | Notebook §1, §2 |
+| `CREATE INTEGRATION` | Create external access integration for API egress and dbt package downloads | Notebook §2 |
+| `CREATE SNOWFLAKE INTELLIGENCE` | Create the default Snowflake Intelligence object | Notebook §1 |
+| `MODIFY` on Snowflake Intelligence object | Register the agent with Snowflake Intelligence | Notebook §10 |
 
-> **If you cannot use ACCOUNTADMIN:** Ask your account administrator to grant these specific privileges to your role, or have them run the three marked cells on your behalf. All other cells run under `EPOWER_ROLE` with no elevated access.
+> **If you cannot use ACCOUNTADMIN:** Ask your account administrator to run Quick Start Step 1 and the ACCOUNTADMIN-marked notebook cells (§1, §2, §10) on your behalf. All other cells run under `EPOWER_ROLE` with no elevated access.
 
 ### Step 0: Fork the Repository (Optional)
 
@@ -93,11 +94,12 @@ DESCRIBE INTEGRATION github_api_integration;
 
 The workspace clones the repository into Snowflake, making all files (notebooks, dbt project, demo data) available directly in Snowsight.
 
-### Step 3: Run Setup Notebook
+### Step 3: Configure & Run Setup Notebook
 
 1. Open `01-agentic-ai-foundation/epower_hol_main.ipynb` in the Workspace
 2. Select a warehouse (any size works; the notebook creates its own `EPOWER_COMPUTE` warehouse)
-3. **Run All** cells (~15 minutes)
+3. Enable PyPI access: Click the **Connected** dropdown → **Edit service** → select `snowflake.snowpark.pypi_shared_repository` from the **Artifact Repository** dropdown
+4. **Run All** cells (~15 minutes)
 
 The notebook creates all database objects, loads data, deploys the dbt project, and configures the Intelligence Agent.
 

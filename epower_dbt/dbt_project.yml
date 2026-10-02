@@ -17,18 +17,19 @@ models:
       staging:
         +schema: EPOWER_SILVER
         +materialized: table
+      semantic:
+        +schema: EPOWER_GOLD
+        +tags: ['semantic']
     business:
       semantic:
         +schema: EPOWER_GOLD
-        +tags: ['semantic']      marts:
+        +tags: ['semantic']
+      marts:
         +schema: EPOWER_GOLD
         +materialized: table
       presentation:
         +schema: EPOWER_GOLD
         +materialized: view
-      semantic:
-        +schema: EPOWER_GOLD
-        +tags: ['semantic']
     energy_market_data:
       staging:
         +schema: EPOWER_SILVER
