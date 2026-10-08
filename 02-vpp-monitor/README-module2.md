@@ -12,19 +12,113 @@ A dark-mode Virtual Power Plant performance dashboard deployed as a **Snowflake 
 | **Parameterized views** | Pre-aggregated SQL views that keep query latency low |
 | **Zero-credential deployment** | No database passwords in code — SPCS handles auth |
 
+By completing this module, you'll gain hands-on experience with:
+
+- **Snowflake App Runtime** — deploying a full-stack web app with a single `snow app deploy` command, no Dockerfile needed
+- **SPCS Authentication** — zero-credential data access via OAuth session tokens and Snowflake SSO for end users
+- **Next.js on Snowflake** — server-side API routes querying Snowflake directly, combined with a React + Recharts + Tailwind CSS frontend
+
 ## Features
 
-The dashboard provides three integrated views of VPP fleet performance:
+The dashboard provides five integrated views of VPP fleet performance:
 
 | Section | Metrics |
 |---------|---------|
 | **KPI Cards** | Active devices, battery SOC %, solar yield (kW), day-ahead price (EUR/MWh), customer margin, EPOWER margin |
-| **Regional Comparison** | Horizontal bar chart comparing net energy flow across 9 German VPP clusters (green=exporting, red=importing) |
 | **Time-Series Chart** | Dual-axis: battery SOC + solar yield vs. day-ahead electricity price (daily aggregation, 60-day window) |
 | **Battery Actions** | Stacked bar: CHARGE / DISCHARGE / SELF_CONSUME / MAX_CHARGE distribution over time |
 | **Revenue Breakdown** | Customer margin vs. EPOWER margin by region |
+| **Regional Comparison** | Horizontal bar chart comparing net energy flow across 14 German VPP clusters (green=exporting, red=importing), with a time slider for day/hour selection |
 
 **Filters**: Region (North/South/East/West), Customer Type (Privatkunde/Kleingewerbe/Gewerbekunde), Date Range.
+
+---
+
+## Architecture
+
+```
+Browser (Dark Mode Dashboard)
+       |
+       |  fetch /api/kpis, /api/timeseries, /api/actions, /api/map, /api/map-range
+       v
++------------------------------------------------------------------+
+|  Next.js App (SPCS Container)                                    |
+|  +-- src/app/page.tsx            <- React dashboard (client-side)|
+|  +-- src/app/api/kpis/route.ts   <- Server-side, queries SF      |
+|  +-- src/app/api/timeseries/     <- Server-side, queries SF      |
+|  +-- src/app/api/actions/        <- Server-side, queries SF      |
+|  +-- src/app/api/map/            <- Cluster regional data        |
+|  +-- src/app/api/map-range/      <- Date/hour bounds for slider  |
+|                                                                  |
+|  Authentication: /snowflake/session/token (OAuth)                |
++------------------------------------------------------------------+
+       |
+       |  Snowflake SDK (snowflake-sdk)
+       v
++------------------------------------------------------------------+
+|  EPOWER_DEMO.EPOWER_GOLD                                         |
+|  +-- V_VPP_MONITOR_TIMESERIES   (capacity + prices, hourly)     |
+|  +-- V_VPP_MONITOR_ACTIONS      (battery actions, aggregated)   |
+|  +-- V_VPP_MONITOR_KPI          (summary metrics)               |
+|  +-- V_VPP_MONITOR_MAP          (hourly cluster aggregation)    |
+|                                                                  |
+|  Base tables:                                                    |
+|  +-- MART_VPP_CAPACITY_HOURLY   (5,760 rows)                    |
+|  +-- MART_DAY_AHEAD_PRICES      (5,760 rows)                    |
+|  +-- MART_VPP_PRICE_OPTIMIZATION (23M rows, pre-aggregated)     |
+|  +-- CITY_CLUSTER_MAP            (dbt seed — city-to-cluster)   |
++------------------------------------------------------------------+
+```
+
+### File Structure
+
+```
+02-vpp-monitor/
++-- app.yml                       # App manifest v2 (deployment config + metadata)
++-- package.json                  # Node.js dependencies
++-- next.config.js                # Next.js config (standalone output)
++-- tailwind.config.js            # Dark-mode theme with energy palette
++-- tsconfig.json                 # TypeScript configuration
++-- postcss.config.js             # PostCSS for Tailwind
++-- sql/
+|   +-- cleanup.sql               # Module 2 cleanup script
++-- src/
+|   +-- app/
+|   |   +-- layout.tsx            # Root layout (dark HTML class)
+|   |   +-- page.tsx              # Main dashboard page
+|   |   +-- globals.css           # Tailwind imports + custom utilities
+|   |   +-- api/
+|   |       +-- kpis/route.ts     # KPI summary endpoint
+|   |       +-- timeseries/route.ts # Time-series endpoint
+|   |       +-- actions/route.ts  # Battery actions + margins endpoint
+|   |       +-- map/route.ts      # Regional cluster data endpoint
+|   |       +-- map-range/route.ts # Date/hour range for time slider
+|   +-- components/
+|   |   +-- FilterBar.tsx         # Region, type, date range filters
+|   |   +-- KpiCard.tsx           # Metric card with colored accent
+|   |   +-- RegionalChart.tsx     # Horizontal bar chart: net flow by cluster
+|   |   +-- PriceCapacityChart.tsx # Dual-axis line/area chart
+|   |   +-- BatteryActionsChart.tsx # Stacked bar chart
+|   |   +-- RevenueChart.tsx      # Margin comparison bar chart
+|   |   +-- TimeSlider.tsx        # Day/hour slider for regional chart
+|   +-- lib/
+|       +-- snowflake.ts          # Snowflake SDK connection helper
++-- public/
+|   +-- icon.svg                  # App icon
++-- README-module2.md             # This file
+```
+
+### Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| Framework | Next.js 14 (App Router) | SSR + API routes in one deployable |
+| UI | React 18 + Tailwind CSS | Component-based dark-mode dashboard |
+| Charts | Recharts | Lightweight, composable, responsive charts |
+| Data | Snowflake SDK (Node.js) | Direct Snowflake queries from API routes |
+| Auth | SPCS Session Token (OAuth) | Zero-credential server-side authentication |
+| Deploy | Snowflake App Runtime | Single-command container deployment |
+| Infra | SPCS Managed Compute Pool | Container execution inside Snowflake |
 
 ---
 
@@ -32,195 +126,22 @@ The dashboard provides three integrated views of VPP fleet performance:
 
 Before deploying this module, ensure the following are in place:
 
-1. **Module 1 completed** — Run `01-agentic-ai-foundation/epower_hol_main.ipynb` first. This creates the base tables:
-   - `EPOWER_DEMO.EPOWER_GOLD.MART_VPP_CAPACITY_HOURLY`
-   - `EPOWER_DEMO.EPOWER_GOLD.MART_DAY_AHEAD_PRICES`
-   - `EPOWER_DEMO.EPOWER_GOLD.MART_VPP_PRICE_OPTIMIZATION`
-   - `EPOWER_DEMO.EPOWER_GOLD.CUSTOMER_DIM`
+1. **Module 1 completed** — Run `01-agentic-ai-foundation/epower_hol_main.ipynb` first. This creates the base tables in `EPOWER_DEMO.EPOWER_GOLD` (`MART_VPP_CAPACITY_HOURLY`, `MART_DAY_AHEAD_PRICES`, `MART_VPP_PRICE_OPTIMIZATION`, `CUSTOMER_DIM`). The dbt pipeline (Module 1, Section 6) also creates the four `V_VPP_MONITOR_*` views and the `CITY_CLUSTER_MAP` seed that the dashboard queries.
 
 2. **Paid Snowflake account** — App Runtime is not available on trial accounts.
 
-3. **Snowflake CLI 3.26+** — The [Snowflake CLI](https://docs.snowflake.com/en/developer-guide/snowflake-cli) (`snow`) is a command-line tool for managing Snowflake resources, including app deployment. Version 3.26+ is required for the `app.yml` v2 manifest format used by this project — older versions will fail with `Cannot find project definition (snowflake.yml)`.
-
-   The easiest way to get started is to install **Cortex Code**, which bundles the Snowflake CLI and handles connection setup for you:
-   - [Cortex Code Desktop](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code-desktop) — VS Code-based IDE with built-in Snowflake integration
-   - [Cortex Code CLI](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code-cli) — terminal-based agent with Snowflake CLI included
-
-   If you prefer to install the Snowflake CLI standalone:
+3. **Snowflake CLI 3.26+** — Required for the `app.yml` v2 manifest format. Install via [Cortex Code Desktop](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code-desktop) (bundles the CLI) or standalone:
    ```bash
-   # macOS (Homebrew)
-   brew install snowflake-cli
-
-   # pip
-   pip install snowflake-cli
+   brew install snowflake-cli    # macOS
+   pip install snowflake-cli     # pip
+   snow --version                # must show 3.26.0 or higher
    ```
 
-   **Check your version:**
-   ```bash
-   snow --version    # must show 3.26.0 or higher
-   ```
-
-   **Upgrade:**
-   ```bash
-   brew upgrade snowflake-cli    # Homebrew
-   pip install --upgrade snowflake-cli    # pip
-   ```
-
-   > **Tip:** If `snow --version` shows an older version despite upgrading, you may have multiple installations. Run `which snow` to confirm which binary is being used.
-
-4. **Snowflake connection configured** — The Snowflake CLI needs a configured connection to your account. If you're using Cortex Code, this is handled during setup. If you installed the CLI standalone, run `snow connection add` to create a connection, or refer to the [CLI connection docs](https://docs.snowflake.com/en/developer-guide/snowflake-cli/connecting/configure-cli).
+4. **Snowflake connection configured** — If using Cortex Code, this is handled during setup. Otherwise run `snow connection add` or see the [CLI connection docs](https://docs.snowflake.com/en/developer-guide/snowflake-cli/connecting/configure-cli).
 
 5. **ACCOUNTADMIN access** — Needed once for initial account setup (Step 1).
 
-> **Important:** Unlike Module 1 (which deploy via SQL in Snowsight notebooks/worksheets), Module 2 requires the **Snowflake CLI on your local machine**. App Runtime apps involve a build step (compiling TypeScript, bundling CSS, packaging Node.js) that cannot be expressed as SQL — the CLI orchestrates the upload-build-deploy pipeline. There is currently no "deploy from Snowsight" option for App Runtime apps.
-
-### What You'll Learn
-
-By completing this module, you'll gain hands-on experience with:
-
-- **Snowflake App Runtime** — deploying a full-stack web app with a single `snow app deploy` command, no Dockerfile needed
-- **SPCS Authentication** — zero-credential data access via OAuth session tokens and Snowflake SSO for end users
-- **Next.js on Snowflake** — server-side API routes querying Snowflake directly, combined with a React + Recharts + Tailwind CSS frontend
-
----
-
-## How Snowflake App Runtime Works
-
-This section explains the platform your app runs on — read this to understand what happens when you deploy.
-
-### What Is Snowflake App Runtime?
-
-Snowflake App Runtime lets you deploy **web applications** (Next.js / Node.js) directly onto Snowflake's container infrastructure. Your app runs as a managed container service inside Snowflake's security perimeter, with direct access to your data — no API layers, no data egress, no credential management.
-
-**This is NOT the same as Snowflake Native Apps.** The two serve different purposes:
-
-| | Native App Framework | Snowflake App Runtime |
-|---|---|---|
-| **Purpose** | Package and distribute apps to other Snowflake accounts via Marketplace | Host web apps on your own Snowflake infrastructure |
-| **Technology** | SQL setup scripts + optional Streamlit UI | Next.js / Node.js containers |
-| **Distribution** | Cross-account via listings | Within your account (shareable with roles) |
-| **Object type** | APPLICATION PACKAGE + APPLICATION | APPLICATION SERVICE |
-| **Use case** | Data products for consumers | Internal dashboards, tools, custom UIs |
-
-Snowflake App Runtime is the right choice when you need a **custom web application** with full control over the UI (React components, charts, multi-page layouts) that queries Snowflake data directly.
-
-**Reference:** [Snowflake App Runtime overview](https://docs.snowflake.com/en/developer-guide/snowflake-app-runtime/about-snowflake-app-runtime)
-
-### The Problem App Runtime Solves
-
-Traditionally, deploying a web application to Snowpark Container Services (SPCS) requires:
-1. Writing a Dockerfile
-2. Building a Docker image (for linux/amd64 — not your Mac's ARM chip)
-3. Pushing the image to Snowflake's private registry
-4. Writing a container service specification YAML
-5. Running `CREATE SERVICE` with endpoint bindings and compute pool references
-6. Managing DNS and HTTPS certificates
-7. Handling credential rotation and OAuth token lifecycle
-
-**Snowflake App Runtime eliminates all of this.** You write your application code (Next.js), and a single command — `snow app deploy` — handles everything else.
-
-### What Happens When You Deploy
-
-```
-Your Code (Next.js + package.json)
-       |
-       v
-+--------------------------------------------------------------+
-|  snow app deploy                                             |
-|  +----------+   +--------------+   +---------------------+  |
-|  | 1. Upload|-> | 2. Remote    |-> | 3. Create/Update    |  |
-|  |    code  |   |    Docker    |   |    SPCS Service     |  |
-|  |    to    |   |    build on  |   |    with endpoint    |  |
-|  |    stage |   |    compute   |   |    bindings + DNS   |  |
-|  |          |   |    pool      |   |                     |  |
-|  +----------+   +--------------+   +---------------------+  |
-+--------------------------------------------------------------+
-       |
-       v
-Live HTTPS URL -> https://<app>-<account>.snowflakecomputing.app
-```
-
-**What you provide:**
-- `app.yml` — single manifest with deployment config + app metadata (v2 format, no `snowflake.yml` needed)
-- Source code (your `src/` directory + `package.json`)
-
-**What the runtime provides automatically:**
-- Dockerfile generation from your `package.json`
-- Remote Docker build on Snowflake compute (no local Docker needed)
-- Image storage in a managed artifact repository
-- SPCS service creation with health checks and auto-restart
-- HTTPS endpoint with TLS termination and SSO authentication
-- OAuth session token injection for zero-credential data access
-
-### How Authentication Works
-
-```
-Browser -> HTTPS -> SPCS Service (your Next.js app)
-                       |
-                       | API route reads /snowflake/session/token
-                       v
-               Snowflake SDK connects with OAuth token
-                       |
-                       v
-               Executes SQL as the logged-in user's role
-```
-
-No passwords, no connection strings, no secrets management. The token is injected into the container by the runtime and refreshed automatically.
-
-### Roles & Access Control
-
-App Runtime separates three concerns:
-
-| Concern | Who controls it | What it governs |
-|---------|----------------|-----------------|
-| **Deploying** | Deploy role (e.g. `SYSADMIN`) | Who can push code via `snow app deploy` |
-| **App access** | Any role granted `USAGE` | Who can open the app URL and interact with it |
-| **Data access** | Logged-in user's active role | Which tables/views the app can query at runtime |
-
-These are independent — you deploy once with your deploy role, then grant access to as many other roles as needed.
-
-**Grant another role access to the app:**
-
-```sql
-GRANT USAGE ON DATABASE SNOWFLAKE_APPS TO ROLE analyst_role;
-GRANT USAGE ON SCHEMA SNOWFLAKE_APPS.PUBLIC TO ROLE analyst_role;
-GRANT USAGE ON APPLICATION SERVICE SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR TO ROLE analyst_role;
-```
-
-**Additional privileges (optional):**
-
-| Privilege | Effect |
-|-----------|--------|
-| `USAGE` | Open and use the app |
-| `OPERATE` | Suspend, resume, and upgrade the app |
-| `MONITOR` | View runtime status and container logs |
-
-> **Note:** Users granted `USAGE` on the app still need appropriate privileges on the underlying tables/views (`EPOWER_DEMO.EPOWER_GOLD.*`) for the dashboard to display data. If a user's role lacks `SELECT` on those views, the app loads but shows empty charts.
-
-### SPCS Concepts (Reference)
-
-| Concept | Description |
-|---------|-------------|
-| **Compute Pool** | A set of managed VMs that run containers. App Runtime uses shared managed pools — you don't configure them. |
-| **Application Service** | Your running container with an HTTPS endpoint. Created by `snow app deploy`. |
-| **Artifact Repository** | A private registry inside Snowflake that stores your built images. |
-| **Session Token** | A file (`/snowflake/session/token`) injected into every container, providing OAuth credentials scoped to the logged-in user. |
-
-### App Runtime vs. Traditional SPCS
-
-| Aspect | Traditional SPCS | Snowflake App Runtime |
-|--------|-----------------|----------------------|
-| Dockerfile | Write manually | Generated from package.json |
-| Docker build | Local (requires amd64) | Remote (on managed compute pool) |
-| Image push | Manual `docker push` to registry | Automatic |
-| Service spec | Write YAML, `CREATE SERVICE` | Automatic from app.yml |
-| Endpoint DNS | Manual configuration | Automatic HTTPS URL |
-| TLS certificates | Managed by Snowflake | Same |
-| Code updates | Rebuild, push, `ALTER SERVICE` | `snow app deploy` |
-| Logs | `CALL SYSTEM$GET_SERVICE_LOGS(...)` | `snow app events` |
-| Teardown | `DROP SERVICE`, cleanup manually | `snow app teardown` |
-
-**The App Runtime reduces a ~20-step deployment process to 3 steps: setup, deploy, open.**
+> **Note:** Unlike Module 1 (which deploys via SQL in Snowsight), Module 2 requires the **Snowflake CLI on your local machine**. App Runtime apps involve a build step (compiling TypeScript, bundling CSS, packaging Node.js) that cannot be expressed as SQL.
 
 ---
 
@@ -232,21 +153,17 @@ Follow these steps in order. Steps 1-3 are one-time setup; steps 4-5 are the dep
 
 Snowflake App Runtime needs to know **where to deploy apps** on your account. This is configured via a one-time **App Development Setup** in Snowsight, which sets account-level defaults (destination database, schema, warehouse) and grants deploy permissions to selected roles.
 
-**Why this is needed:** Without this setup, `snow app deploy` falls back to deploying into your personal database (`USER$<username>`). While you can build and test there, apps in personal databases cannot be shared with other roles, and certain operations may fail with confusing errors. The setup ensures a clean, shared destination.
-
 **What "Quick start" creates:**
 - `SNOWFLAKE_APPS` database — shared location for all deployed apps on the account
 - `SNOWFLAKE_APPS_QUERY_WH` warehouse — used by apps for SQL queries at runtime
 - Account-level parameters so `snow app setup` and `snow app deploy` resolve these automatically
-
-> You can also choose "Custom" during setup to point apps at an existing database (e.g., `EPOWER_DEMO`). The `SNOWFLAKE_APPS` name is just the default — it's not a fixed system requirement.
 
 **Steps:**
 
 1. In Snowsight, switch to the **ACCOUNTADMIN** role (top-left role selector)
 2. Go to **Settings** (bottom-left) → **Account** → **Apps**
 3. Click **Begin Setup**
-4. Under "What roles will be making apps?" — select the role your Snowflake CLI connection uses (e.g., `SYSADMIN`). This becomes the **deploy role** — only this role can push code via `snow app deploy`.
+4. Under "What roles will be making apps?" — select the role your Snowflake CLI connection uses (e.g., `SYSADMIN`). This becomes the **deploy role**.
 5. Under "Resources" — pick **Quick start** (or "Custom" to use an existing database)
 6. Click **Execute Setup**
 
@@ -256,7 +173,7 @@ Snowflake App Runtime needs to know **where to deploy apps** on your account. Th
 
 ### Step 2: Additional Grants (ACCOUNTADMIN)
 
-Run these in Snowsight as `ACCOUNTADMIN`. Replace `SYSADMIN` with the deploy role you selected in the wizard (Step 1, item 4) if different:
+Run these in Snowsight as `ACCOUNTADMIN`. Replace `SYSADMIN` with your deploy role if different:
 
 ```sql
 USE ROLE ACCOUNTADMIN;
@@ -272,19 +189,19 @@ GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE SYSADMIN;
 
 ### Step 3: Create Backend Views
 
-The app queries pre-aggregated views that are now managed by dbt. These views are created automatically when running the dbt pipeline in Module 1 (Section 6). The views live in `epower_dbt/models/epulse_vpp/presentation/` and the city-cluster mapping is a dbt seed in `epower_dbt/seeds/city_cluster_map.csv`.
+The app queries pre-aggregated views managed by dbt. These are created automatically when running the dbt pipeline in Module 1 (Section 6). The view definitions live in `epower_dbt/models/epulse_vpp/presentation/` and the city-cluster mapping is a dbt seed in `epower_dbt/seeds/city_cluster_map.csv`.
 
 This creates four views in `EPOWER_DEMO.EPOWER_GOLD`:
 - `V_VPP_MONITOR_TIMESERIES` — hourly capacity + day-ahead prices
 - `V_VPP_MONITOR_ACTIONS` — battery action distribution with margins
 - `V_VPP_MONITOR_KPI` — summary KPIs by day/region/customer type
-- `V_VPP_MONITOR_MAP` — hourly cluster-level aggregation for the geographic map
+- `V_VPP_MONITOR_MAP` — hourly cluster-level aggregation for the geographic chart
 
 ### Step 4: Deploy to Snowflake
 
-> **Important:** The Snowflake CLI connection you use must be configured with the **deploy role** you selected in Step 1 (e.g., `SYSADMIN`). Check your active connection with `snow connection status` — the `role` field must match. If it doesn't, update your connection (`snow connection set -n <connection> --role SYSADMIN`) or switch connections before proceeding.
+> **Important:** Your Snowflake CLI connection must use the **deploy role** from Step 1 (e.g., `SYSADMIN`). Check with `snow connection status` — the `role` field must match.
 
-This project uses the `app.yml` v2 manifest format, which consolidates all deployment configuration into a single `app.yml` file — no `snowflake.yml` needed. The manifest is already checked into the repo.
+This project uses the `app.yml` v2 manifest format — no `snowflake.yml` needed.
 
 ```bash
 snow app deploy
@@ -307,7 +224,6 @@ This opens the live HTTPS URL in your browser. You'll authenticate via Snowflake
 ### Update code and redeploy
 
 ```bash
-# Edit source files, then:
 snow app deploy
 ```
 
@@ -321,25 +237,15 @@ snow app events --last 200
 
 Shows container stdout/stderr — useful for debugging API route errors or connection issues.
 
-### Check status
-
-```bash
-snow app open --print-only   # Print URL without opening browser
-```
-
 ### Suspend and resume (cost control)
 
-The app runs on a **Snowflake-managed shared compute pool**. While running, it consumes approximately **0.02-0.03 credits/hour** (~0.5-0.7 credits/day, or roughly $1-2/day depending on your contract).
-
-To stop costs without destroying the app:
+The app runs on a **Snowflake-managed shared compute pool**. While running, it consumes approximately **0.02-0.03 credits/hour** (~0.5-0.7 credits/day).
 
 ```sql
+-- Suspend (stops billing)
 ALTER APPLICATION SERVICE SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR SUSPEND;
-```
 
-To resume:
-
-```sql
+-- Resume
 ALTER APPLICATION SERVICE SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR RESUME;
 ```
 
@@ -348,7 +254,7 @@ Or simply open the app URL — since `auto_resume` is enabled, accessing the end
 | State | Credits/hour | What happens |
 |-------|-------------|--------------|
 | Running | ~0.03 | Container active, serving requests |
-| Suspended | 0 | Container stopped, no billing, URL shows "service unavailable" |
+| Suspended | 0 | Container stopped, no billing |
 | Auto-resuming | ~0.03 | Triggered by URL access, ~30-60s startup |
 
 ### Teardown
@@ -357,11 +263,11 @@ Or simply open the app URL — since `auto_resume` is enabled, accessing the end
 snow app teardown
 ```
 
-This drops the SPCS service and associated resources. Does **not** drop the SQL views or base tables.
+Drops the SPCS service and associated resources. Does **not** drop the SQL views or base tables.
 
 ### Full cleanup
 
-To remove everything created by Module 2 (or run `sql/cleanup.sql`):
+To remove everything created by Module 2:
 
 ```sql
 USE ROLE SYSADMIN;
@@ -401,102 +307,126 @@ Open http://localhost:3000. The app detects it's not in SPCS (no `/snowflake/ses
 
 ---
 
-## Architecture
+## How Snowflake App Runtime Works
+
+This section is a reference for understanding the platform — not required to complete the module.
+
+### What Is Snowflake App Runtime?
+
+Snowflake App Runtime lets you deploy **web applications** (Next.js / Node.js) directly onto Snowflake's container infrastructure. Your app runs as a managed container service inside Snowflake's security perimeter, with direct access to your data — no API layers, no data egress, no credential management.
+
+**This is NOT the same as Snowflake Native Apps:**
+
+| | Native App Framework | Snowflake App Runtime |
+|---|---|---|
+| **Purpose** | Package and distribute apps to other Snowflake accounts via Marketplace | Host web apps on your own Snowflake infrastructure |
+| **Technology** | SQL setup scripts + optional Streamlit UI | Next.js / Node.js containers |
+| **Distribution** | Cross-account via listings | Within your account (shareable with roles) |
+| **Object type** | APPLICATION PACKAGE + APPLICATION | APPLICATION SERVICE |
+| **Use case** | Data products for consumers | Internal dashboards, tools, custom UIs |
+
+**Reference:** [Snowflake App Runtime overview](https://docs.snowflake.com/en/developer-guide/snowflake-app-runtime/about-snowflake-app-runtime)
+
+### What Happens When You Deploy
 
 ```
-Browser (Dark Mode Dashboard)
+Your Code (Next.js + package.json)
        |
-       |  fetch /api/kpis, /api/timeseries, /api/actions, /api/map
        v
-+------------------------------------------------------------------+
-|  Next.js App (SPCS Container)                                    |
-|  +-- src/app/page.tsx            <- React dashboard (client-side)|
-|  +-- src/app/api/kpis/route.ts   <- Server-side, queries SF      |
-|  +-- src/app/api/timeseries/     <- Server-side, queries SF      |
-|  +-- src/app/api/actions/        <- Server-side, queries SF      |
-|  +-- src/app/api/map/            <- Cluster regional data        |
-|                                                                  |
-|  Authentication: /snowflake/session/token (OAuth)                |
-+------------------------------------------------------------------+
++--------------------------------------------------------------+
+|  snow app deploy                                             |
+|  +----------+   +--------------+   +---------------------+  |
+|  | 1. Upload|-> | 2. Remote    |-> | 3. Create/Update    |  |
+|  |    code  |   |    Docker    |   |    SPCS Service     |  |
+|  |    to    |   |    build on  |   |    with endpoint    |  |
+|  |    stage |   |    compute   |   |    bindings + DNS   |  |
+|  |          |   |    pool      |   |                     |  |
+|  +----------+   +--------------+   +---------------------+  |
++--------------------------------------------------------------+
        |
-       |  Snowflake SDK (snowflake-sdk)
        v
-+------------------------------------------------------------------+
-|  EPOWER_DEMO.EPOWER_GOLD                                         |
-|  +-- V_VPP_MONITOR_TIMESERIES   (capacity + prices, hourly)     |
-|  +-- V_VPP_MONITOR_ACTIONS      (battery actions, aggregated)   |
-|  +-- V_VPP_MONITOR_KPI          (summary metrics)               |
-|  +-- V_VPP_MONITOR_MAP          (hourly cluster aggregation)    |
-|                                                                  |
-|  Base tables:                                                    |
-|  +-- MART_VPP_CAPACITY_HOURLY   (5,760 rows)                    |
-|  +-- MART_DAY_AHEAD_PRICES      (5,760 rows)                    |
-|  +-- MART_VPP_PRICE_OPTIMIZATION (23M rows, pre-aggregated)     |
-+------------------------------------------------------------------+
+Live HTTPS URL -> https://<app>-<account>.snowflakecomputing.app
 ```
 
----
+**What you provide:**
+- `app.yml` — single manifest with deployment config + app metadata
+- Source code (your `src/` directory + `package.json`)
 
-## File Structure
+**What the runtime provides automatically:**
+- Dockerfile generation from your `package.json`
+- Remote Docker build on Snowflake compute (no local Docker needed)
+- Image storage in a managed artifact repository
+- SPCS service creation with health checks and auto-restart
+- HTTPS endpoint with TLS termination and SSO authentication
+- OAuth session token injection for zero-credential data access
+
+### How Authentication Works
 
 ```
-02-vpp-monitor/
-+-- app.yml                       # App manifest v2 (deployment config + metadata)
-+-- package.json                  # Node.js dependencies
-+-- next.config.js                # Next.js config (standalone output)
-+-- tailwind.config.js            # Dark-mode theme with energy palette
-+-- tsconfig.json                 # TypeScript configuration
-+-- postcss.config.js             # PostCSS for Tailwind
-+-- sql/
-|   +-- create_views.sql          # RETIRED — views now managed by dbt
-|   +-- cleanup.sql               # Module 2 cleanup script
-+-- src/
-|   +-- app/
-|   |   +-- layout.tsx            # Root layout (dark HTML class)
-|   |   +-- page.tsx              # Main dashboard page
-|   |   +-- globals.css           # Tailwind imports + custom utilities
-|   |   +-- api/
-|   |       +-- kpis/route.ts     # KPI summary endpoint
-|   |       +-- timeseries/route.ts # Time-series endpoint
-|   |       +-- actions/route.ts  # Battery actions + margins endpoint
-|   |       +-- map/route.ts      # Regional cluster data endpoint
-|   +-- components/
-|   |   +-- FilterBar.tsx         # Region, type, date range filters
-|   |   +-- KpiCard.tsx           # Metric card with colored accent
-|   |   +-- RegionalChart.tsx     # Horizontal bar chart: net flow by cluster
-|   |   +-- PriceCapacityChart.tsx # Dual-axis line/area chart
-|   |   +-- BatteryActionsChart.tsx # Stacked bar chart
-|   |   +-- RevenueChart.tsx      # Margin comparison bar chart
-|   +-- lib/
-|       +-- snowflake.ts          # Snowflake SDK connection helper
-+-- public/
-|   +-- icon.svg                  # App icon
-+-- README-module2.md             # This file
+Browser -> HTTPS -> SPCS Service (your Next.js app)
+                       |
+                       | API route reads /snowflake/session/token
+                       v
+               Snowflake SDK connects with OAuth token
+                       |
+                       v
+               Executes SQL as the logged-in user's role
 ```
 
----
+No passwords, no connection strings, no secrets management. The token is injected into the container by the runtime and refreshed automatically.
 
-## Tech Stack
+### Roles & Access Control
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| Framework | Next.js 14 (App Router) | SSR + API routes in one deployable |
-| UI | React 18 + Tailwind CSS | Component-based dark-mode dashboard |
-| Charts | Recharts | Lightweight, composable, responsive charts |
-| Data | Snowflake SDK (Node.js) | Direct Snowflake queries from API routes |
-| Auth | SPCS Session Token (OAuth) | Zero-credential server-side authentication |
-| Deploy | Snowflake App Runtime | Single-command container deployment |
-| Infra | SPCS Managed Compute Pool | Container execution inside Snowflake |
+App Runtime separates three concerns:
+
+| Concern | Who controls it | What it governs |
+|---------|----------------|-----------------|
+| **Deploying** | Deploy role (e.g. `SYSADMIN`) | Who can push code via `snow app deploy` |
+| **App access** | Any role granted `USAGE` | Who can open the app URL and interact with it |
+| **Data access** | Logged-in user's active role | Which tables/views the app can query at runtime |
+
+**Grant another role access to the app:**
+
+```sql
+GRANT USAGE ON DATABASE SNOWFLAKE_APPS TO ROLE analyst_role;
+GRANT USAGE ON SCHEMA SNOWFLAKE_APPS.PUBLIC TO ROLE analyst_role;
+GRANT USAGE ON APPLICATION SERVICE SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR TO ROLE analyst_role;
+```
+
+> Users granted `USAGE` on the app still need `SELECT` on the underlying views (`EPOWER_DEMO.EPOWER_GOLD.*`) for the dashboard to display data.
+
+### App Runtime vs. Traditional SPCS
+
+| Aspect | Traditional SPCS | Snowflake App Runtime |
+|--------|-----------------|----------------------|
+| Dockerfile | Write manually | Generated from package.json |
+| Docker build | Local (requires amd64) | Remote (on managed compute pool) |
+| Image push | Manual `docker push` to registry | Automatic |
+| Service spec | Write YAML, `CREATE SERVICE` | Automatic from app.yml |
+| Endpoint DNS | Manual configuration | Automatic HTTPS URL |
+| TLS certificates | Managed by Snowflake | Same |
+| Code updates | Rebuild, push, `ALTER SERVICE` | `snow app deploy` |
+| Logs | `CALL SYSTEM$GET_SERVICE_LOGS(...)` | `snow app events` |
+| Teardown | `DROP SERVICE`, cleanup manually | `snow app teardown` |
+
+### SPCS Concepts (Reference)
+
+| Concept | Description |
+|---------|-------------|
+| **Compute Pool** | A set of managed VMs that run containers. App Runtime uses shared managed pools — you don't configure them. |
+| **Application Service** | Your running container with an HTTPS endpoint. Created by `snow app deploy`. |
+| **Artifact Repository** | A private registry inside Snowflake that stores your built images. |
+| **Session Token** | A file (`/snowflake/session/token`) injected into every container, providing OAuth credentials scoped to the logged-in user. |
 
 ---
 
 ## Building This App with Cortex Code
 
-This entire app was built using [Cortex Code Desktop](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code-desktop) — Snowflake's AI-powered IDE. Instead of hand-coding 20+ files, the app was generated from a short natural-language prompt and then iteratively refined through conversation.
+This entire app was built using [Cortex Code Desktop](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code-desktop) — Snowflake's AI-powered IDE. Instead of hand-coding 20+ files, the app was generated from a natural-language prompt and iteratively refined through conversation.
 
 ### The Prompt
 
-The starting prompt was intentionally brief — it pointed Cortex Code at the existing data and described the desired outcome. Cortex Code explored the schema on its own, discovered the table structures, and proposed the architecture:
+The starting prompt pointed Cortex Code at the existing data and described the desired outcome. Cortex Code explored the schema, discovered the table structures, and proposed the architecture:
 
 > *I have VPP (Virtual Power Plant) data in `EPOWER_DEMO.EPOWER_GOLD` — the key tables are `MART_VPP_PRICE_OPTIMIZATION` (30M rows, hourly battery actions with import/export/margins per customer and city), `MART_VPP_CAPACITY_HOURLY`, `MART_DAY_AHEAD_PRICES`, `CUSTOMER_DIM`, and `VPP_CLUSTER_DIM`.*
 >
@@ -510,12 +440,10 @@ The starting prompt was intentionally brief — it pointed Cortex Code at the ex
 
 ### What Cortex Code Did
 
-Cortex Code didn't just generate code from the prompt — it actively explored the data model and made architectural decisions:
-
-1. **Schema discovery** — Ran `DESCRIBE TABLE` and `SELECT` queries on the gold tables to understand columns, data types, row counts, and value distributions
-2. **View design** — Proposed creating 4 pre-aggregated SQL views (`V_VPP_MONITOR_KPI`, `V_VPP_MONITOR_TIMESERIES`, `V_VPP_MONITOR_ACTIONS`, `V_VPP_MONITOR_MAP`) to keep dashboard queries fast, plus a `CITY_CLUSTER_MAP` reference table (now a dbt seed) to join cities to VPP clusters
-3. **Architecture** — Chose Next.js App Router with separate API routes per data endpoint, Recharts for charts, Tailwind CSS for dark-mode styling, and the Snowflake SDK with SPCS OAuth token auth
-4. **Code generation** — Produced the full project: scaffold, connection helper, 5 API routes, 6 React components, dashboard page, and deployment manifest
+1. **Schema discovery** — Ran `DESCRIBE TABLE` and `SELECT` queries to understand columns, data types, row counts, and value distributions
+2. **View design** — Proposed 4 pre-aggregated SQL views to keep dashboard queries fast, plus a `CITY_CLUSTER_MAP` reference table (now a dbt seed) to join cities to VPP clusters
+3. **Architecture** — Chose Next.js App Router with separate API routes per endpoint, Recharts for charts, Tailwind CSS for dark-mode styling, and the Snowflake SDK with SPCS OAuth token auth
+4. **Code generation** — Produced the full project: scaffold, connection helper, 5 API routes, 7 React components, dashboard page, and deployment manifest
 
 ### What Was Generated
 
@@ -525,7 +453,7 @@ Cortex Code didn't just generate code from the prompt — it actively explored t
 | **Snowflake connection** | `src/lib/snowflake.ts` — SPCS OAuth + local-dev fallback |
 | **API routes** | `src/app/api/kpis/`, `timeseries/`, `actions/`, `map/`, `map-range/` — parameterized SQL with filter support |
 | **Dashboard page** | `src/app/page.tsx` — state management, filter wiring, parallel data fetching |
-| **6 components** | `FilterBar`, `KpiCard`, `PriceCapacityChart`, `BatteryActionsChart`, `RevenueChart`, `RegionalChart` |
+| **7 components** | `FilterBar`, `KpiCard`, `PriceCapacityChart`, `BatteryActionsChart`, `RevenueChart`, `RegionalChart`, `TimeSlider` |
 | **Styling** | `globals.css`, `layout.tsx` — dark theme with energy-inspired color palette |
 | **Backend views** | Managed by dbt — `epower_dbt/models/epulse_vpp/presentation/` (4 views + city-cluster seed) |
 | **Deployment manifest** | `app.yml` — v2 manifest with build/install/run config |
@@ -540,9 +468,7 @@ After the initial generation, follow-up prompts refined the app:
 
 Each refinement was a single prompt — Cortex Code modified the relevant files in place, preserving the existing code.
 
-### Key Takeaway
-
-The entire app — 20+ files, ~1,500 lines of TypeScript/React/SQL — was built through conversation, not manual coding. The developer pointed at the data and described the dashboard. Cortex Code explored the schema, designed the view layer, chose the tech stack, and generated the full project. The developer's role was to steer, not to type.
+The entire app — 20+ files, ~1,500 lines of TypeScript/React/SQL — was built through conversation, not manual coding. The developer pointed at the data and described the dashboard. Cortex Code explored the schema, designed the view layer, chose the tech stack, and generated the full project.
 
 ---
 
