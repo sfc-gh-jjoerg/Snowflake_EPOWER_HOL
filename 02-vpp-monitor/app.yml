@@ -9,6 +9,10 @@ label: "EPOWER VPP Monitor"
 description: "Real-time Virtual Power Plant performance dashboard showing fleet capacity, day-ahead price optimization, and financial margins across regions and customer segments."
 icon: public/icon.svg
 
+auto_suspend_secs: 600
+min_instances: 1
+max_instances: 1
+
 ignore:
   - node_modules
   - .env*
@@ -31,3 +35,5 @@ build:
     - [rm, -rf, node_modules]
 run:
   command: [node, .next/standalone/server.js]
+dev:
+  command: [npm, run, dev]

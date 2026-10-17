@@ -1,13 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { executeQuery } from '../../../lib/snowflake';
+import { sanitizeRegions, sanitizeClusters, sanitizeCustomerTypes, sanitizeDate, sqlInList } from '../../../lib/sanitize';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
+  const conditions: string[] = [];
+
   const region = searchParams.get('region');
+  if (region) {
+    const values = sanitizeRegions(region);
+    if (values.length > 0) conditions.push(`REGION IN (${sqlInList(values)})`);
+  }
   const cluster = searchParams.get('cluster');
+  if (cluster) {
+    const values = sanitizeClusters(cluster);
+    if (values.length > 0) conditions.push(`CLUSTER_ID IN (${sqlInList(values)})`);
+  }
   const customerType = searchParams.get('type');
-  const from = searchParams.get('from');
-  const to = searchParams.get('to');
+  if (customerType) {
+    const values = sanitizeCustomerTypes(customerType);
+    if (values.length > 0) conditions.push(`CUSTOMER_TYPE IN (${sqlInList(values)})`);
+  }
+  const from = sanitizeDate(searchParams.get('from') || '');
+  if (from) conditions.push(`DAY >= '${from}'`);
+  const to = sanitizeDate(searchParams.get('to') || '');
+  if (to) conditions.push(`DAY <= '${to}'`);
 
   let sql = `
     SELECT
@@ -22,31 +39,7 @@ export async function GET(request: NextRequest) {
     FROM EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_KPI
     WHERE 1=1
   `;
-
-  const conditions: string[] = [];
-
-  if (region) {
-    const regions = region.split(',').map(r => `'${r.trim()}'`).join(',');
-    conditions.push(`REGION IN (${regions})`);
-  }
-  if (cluster) {
-    const clusters = cluster.split(',').map(c => `'${c.trim()}'`).join(',');
-    conditions.push(`CLUSTER_ID IN (${clusters})`);
-  }
-  if (customerType) {
-    const types = customerType.split(',').map(t => `'${t.trim()}'`).join(',');
-    conditions.push(`CUSTOMER_TYPE IN (${types})`);
-  }
-  if (from) {
-    conditions.push(`DAY >= '${from}'`);
-  }
-  if (to) {
-    conditions.push(`DAY <= '${to}'`);
-  }
-
-  if (conditions.length > 0) {
-    sql += ' AND ' + conditions.join(' AND ');
-  }
+  if (conditions.length > 0) sql += ' AND ' + conditions.join(' AND ');
 
   try {
     const result = await executeQuery(sql);

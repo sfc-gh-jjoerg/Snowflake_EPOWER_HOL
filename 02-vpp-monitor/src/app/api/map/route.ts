@@ -1,27 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { executeQuery } from '../../../lib/snowflake';
+import { sanitizeClusters, sanitizeDate, sqlInList } from '../../../lib/sanitize';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const date = searchParams.get('date');
-  const hour = searchParams.get('hour');
-  const cluster = searchParams.get('cluster');
+  const date = sanitizeDate(searchParams.get('date') || '');
+  const hourRaw = searchParams.get('hour');
+  const hour = hourRaw != null ? parseInt(hourRaw, 10) : null;
+  const clusterRaw = searchParams.get('cluster');
 
-  const clusterCondition = cluster
-    ? `AND CLUSTER_ID IN (${cluster.split(',').map(c => `'${c.trim()}'`).join(',')})`
+  const clusterCondition = clusterRaw
+    ? (() => { const v = sanitizeClusters(clusterRaw); return v.length > 0 ? `AND CLUSTER_ID IN (${sqlInList(v)})` : ''; })()
     : '';
 
   let sql: string;
 
-  if (date && hour != null) {
-    const hourNum = parseInt(hour, 10);
+  if (date && hour != null && hour >= 0 && hour <= 23) {
     sql = `
       SELECT
         CLUSTER_ID, CLUSTER_NAME, COMPASS_REGION,
         ACTIVE_DEVICES, AVG_SOC_PCT, AVG_SOLAR_KW,
         TOTAL_IMPORT_KWH, TOTAL_EXPORT_KWH, NET_GRID_KWH, AVG_PRICE_EUR_MWH
       FROM EPOWER_DEMO.EPOWER_GOLD.V_VPP_MONITOR_MAP
-      WHERE HOUR = '${date}T${String(hourNum).padStart(2, '0')}:00:00'::TIMESTAMP_NTZ
+      WHERE HOUR = '${date}T${String(hour).padStart(2, '0')}:00:00'::TIMESTAMP_NTZ
       ${clusterCondition}
       ORDER BY CLUSTER_ID
     `;

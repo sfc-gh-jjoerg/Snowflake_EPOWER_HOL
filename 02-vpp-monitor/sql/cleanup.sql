@@ -9,13 +9,18 @@
 -- WHAT THIS REMOVES:
 --   1. Application Service (stops the container, frees compute)
 --   2. Artifact repository (built images)
---   3. Code stage (uploaded source files)
+--   3. Code stage or workspace subdirectory (uploaded source files)
 --   4. Snowflake views in EPOWER_DEMO.EPOWER_GOLD
 --
 -- WHAT THIS DOES NOT REMOVE:
 --   - The SNOWFLAKE_APPS database (shared by all apps on the account)
 --   - The SNOWFLAKE_APPS_QUERY_WH warehouse
 --   - The base tables in EPOWER_DEMO that the views read from
+--
+-- NOTE: For a complete teardown including code storage cleanup, prefer:
+--   snow app teardown --force -p 02-vpp-monitor
+-- which drops the service and cleans up the correct code backend
+-- (stage or workspace) automatically.
 -- ========================================================================
 
 USE ROLE SYSADMIN;
@@ -23,10 +28,10 @@ USE ROLE SYSADMIN;
 -- Step 1: Drop the Application Service (stops the running container)
 DROP APPLICATION SERVICE IF EXISTS SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR;
 
--- Step 2: Drop the artifact repository (contains built Docker images)
+-- Step 2: Drop the artifact repository (contains built packages)
 DROP ARTIFACT REPOSITORY IF EXISTS SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR_REPO;
 
--- Step 3: Drop the code stage (uploaded source files)
+-- Step 3: Drop the code stage (may not exist if CLI used a workspace instead)
 DROP STAGE IF EXISTS SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR_CODE;
 
 -- Step 4: Drop the backend views
