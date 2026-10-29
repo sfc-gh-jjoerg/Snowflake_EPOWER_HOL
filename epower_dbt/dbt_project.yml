@@ -5,6 +5,11 @@ profile: default
 
 model-paths: ["models"]
 macro-paths: ["macros"]
+seed-paths: ["seeds"]
+
+seeds:
+  epower_analytics:
+    +schema: EPOWER_GOLD
 
 models:
   epower_analytics:
@@ -15,6 +20,22 @@ models:
       marts:
         +schema: EPOWER_GOLD
         +materialized: table
+      presentation:
+        +schema: EPOWER_GOLD
+        +materialized: view
+      semantic:
+        +schema: EPOWER_GOLD
+        +tags: ['semantic']
+    business:
+      semantic:
+        +schema: EPOWER_GOLD
+        +tags: ['semantic']
+      marts:
+        +schema: EPOWER_GOLD
+        +materialized: table
+      presentation:
+        +schema: EPOWER_GOLD
+        +materialized: view
     energy_market_data:
       staging:
         +schema: EPOWER_SILVER

@@ -8,7 +8,7 @@ sources:
       - name: epulse_devices
         description: Device registry linking existing customers to IoT gateways
       - name: raw_epulse_iot_telemetry
-        description: Raw IoT gateway telemetry from ePulse devices
+        description: Raw IoT gateway telemetry from ePulse devices (grid_import_kw = from grid >= 0, grid_export_kw = to grid >= 0)
       - name: raw_day_ahead_prices
         description: Raw day-ahead electricity prices from Energy-Charts API (DE-LU)
 
@@ -23,4 +23,24 @@ sources:
       - name: customer_products
         description: Existing customer product ownership data
       - name: product_dim
-        description: Existing product dimension
+        description: Product catalog (from SAP) — energy products with CAPEX/OPEX pricing
+      - name: region_dim
+        description: Geographic regions (North, South, East, West)
+      - name: sales_fact
+        description: Sales contracts (from Salesforce) — date, customer, product, rep, amount
+      - name: sales_rep_dim
+        description: Sales representatives (from Salesforce)
+      - name: vendor_dim
+        description: Installation partners and vendors (from SAP)
+      - name: billing_history
+        description: Monthly billing records (from SAP) — consumption kWh, amount, payment status
+      - name: service_logs
+        description: Service tickets (from ServiceNow) — topic, category, sentiment, priority
+      - name: department_dim
+        description: Company departments (from Workday)
+      - name: employee_dim
+        description: Employee master data (from Workday) — name, gender, hire date
+      - name: hr_employee_fact
+        description: HR records (from Workday) — salary, attrition, department/job assignments
+      - name: job_dim
+        description: Job titles and levels (from Workday)

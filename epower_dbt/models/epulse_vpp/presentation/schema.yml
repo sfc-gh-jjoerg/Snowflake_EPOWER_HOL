@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: v_vpp_monitor_timeseries
+    description: >
+      Hourly VPP fleet metrics by region and cluster. Powers the timeseries chart
+      in the VPP monitor dashboard.
+    columns:
+      - name: hour
+        tests:
+          - not_null
+      - name: net_grid_kwh
+        description: Net grid balance in kWh (import - export; positive = net consumer)
+
+  - name: v_vpp_monitor_actions
+    description: >
+      Daily battery action distribution and margin totals by region, cluster, and
+      customer type. Powers the actions breakdown in the VPP monitor dashboard.
+
+  - name: v_vpp_monitor_kpi
+    description: >
+      Daily summary KPIs by region, cluster, and customer type. Powers the KPI
+      cards in the VPP monitor dashboard.
+
+  - name: v_vpp_monitor_map
+    description: >
+      Hourly cluster-level aggregation for the geographic map visualization.
+      Each row maps to one cluster dot on the map at one point in time.
+    columns:
+      - name: hour
+        tests:
+          - not_null
+      - name: cluster_id
+        tests:
+          - not_null
+      - name: net_grid_kwh
+        description: Net grid balance in kWh (import - export; positive = net consumer)

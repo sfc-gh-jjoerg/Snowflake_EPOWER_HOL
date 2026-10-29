@@ -1,20 +1,20 @@
-# Haeufig gestellte Fragen zum ePulse VPP Programm
+# Haeufig gestellte Fragen zum EPOWER VPP Programm
 
 ## Allgemeine Fragen
 
 ### Was genau ist ein Virtuelles Kraftwerk?
 
-Ein Virtuelles Kraftwerk (VPP - Virtual Power Plant) buendelt viele kleine, dezentrale Energiequellen und -speicher zu einer grossen, steuerbaren Einheit. Bei ePulse verbinden wir tausende Batteriespeicher unserer Kunden, um gemeinsam zur Netzstabilitaet beizutragen - aehnlich wie ein grosses Kraftwerk, nur verteilt auf viele Haushalte.
+Ein Virtuelles Kraftwerk (VPP - Virtual Power Plant) buendelt viele kleine, dezentrale Energiequellen und -speicher zu einer grossen, steuerbaren Einheit. Bei EPOWER verbinden wir tausende Batteriespeicher unserer Kunden, um gemeinsam zur Netzstabilitaet beizutragen - aehnlich wie ein grosses Kraftwerk, nur verteilt auf viele Haushalte.
 
-### Warum braucht das Stromnetz ePulse?
+### Warum braucht das Stromnetz EPOWER?
 
-Mit dem Ausbau erneuerbarer Energien schwankt das Stromangebot staerker. Wenn die Sonne scheint und der Wind weht, gibt es oft zu viel Strom. Abends und bei Flaute hingegen zu wenig. ePulse hilft, diese Schwankungen auszugleichen:
+Mit dem Ausbau erneuerbarer Energien schwankt das Stromangebot staerker. Wenn die Sonne scheint und der Wind weht, gibt es oft zu viel Strom. Abends und bei Flaute hingegen zu wenig. EPOWER hilft, diese Schwankungen auszugleichen:
 - **Ueberschuss**: Speicher nehmen ueberschuessigen Strom auf
 - **Mangel**: Speicher geben Strom ab
 
 ### Wie viele Kunden nehmen bereits teil?
 
-Aktuell sind ueber **15.000 Haushalte** im ePulse Programm aktiv. Gemeinsam stellen wir eine Kapazitaet von mehr als **120 MWh** bereit - das entspricht der Leistung eines kleinen Gaskraftwerks.
+Aktuell sind ueber **15.000 Haushalte** im EPOWER Programm aktiv. Gemeinsam stellen wir eine Kapazitaet von mehr als **120 MWh** bereit - das entspricht der Leistung eines kleinen Gaskraftwerks.
 
 ---
 
@@ -22,7 +22,7 @@ Aktuell sind ueber **15.000 Haushalte** im ePulse Programm aktiv. Gemeinsam stel
 
 ### Kann ich mit jedem Batteriespeicher teilnehmen?
 
-Nein, fuer ePulse sind folgende Voraussetzungen noetig:
+Nein, fuer EPOWER sind folgende Voraussetzungen noetig:
 - EPOWER Batteriespeicher oder kompatibles System
 - Mindestkapazitaet: 5 kWh
 - Funktionierendes WLAN oder LAN
@@ -32,9 +32,9 @@ Nein, fuer ePulse sind folgende Voraussetzungen noetig:
 
 Nein, eine Solaranlage ist **nicht zwingend erforderlich**. Auch Speicher ohne PV-Anlage koennen teilnehmen. Allerdings profitieren Kunden mit Solar staerker, da sie ueberschuessigen Solarstrom einsetzen koennen.
 
-### Was ist das ePulse Gateway?
+### Was ist das EPOWER Gateway?
 
-Das Gateway ist ein kleines Geraet (ca. 12 x 8 x 3 cm), das Ihren Batteriespeicher mit unserem ePulse-System verbindet. Es:
+Das Gateway ist ein kleines Geraet (ca. 12 x 8 x 3 cm), das Ihren Batteriespeicher mit unserem EPOWER-System verbindet. Es:
 - Empfaengt Steuersignale von der EPOWER Leitwarte
 - Uebertraegt Telemetriedaten (Ladestand, Leistung)
 - Arbeitet verschluesselt und sicher
@@ -72,7 +72,7 @@ Bei einem Stromausfall wird Ihr Speicher **automatisch aus dem VPP genommen**. D
 ### Kann ich die Teilnahme pausieren?
 
 Ja, jederzeit ueber die EPOWER Solar App:
-1. App oeffnen → ePulse → Einstellungen
+1. App oeffnen → EPOWER → Einstellungen
 2. "VPP pausieren" waehlen
 3. Dauer festlegen (1 Stunde bis 7 Tage)
 
@@ -137,18 +137,18 @@ Nur das automatisierte EPOWER VPP-System kann Steuerbefehle senden. Kein Mitarbe
 3. Router neu starten
 4. Hotline kontaktieren: 0800 - 22 33 559
 
-### Mein Speicher zeigt Fehlermeldungen seit ePulse
+### Mein Speicher zeigt Fehlermeldungen seit EPOWER
 
-Das ePulse System prueft regelmaessig die Kommunikation. Manche Wechselrichter zeigen dies als "externe Verbindung" an. Dies ist normal und kein Fehler.
+Das EPOWER System prueft regelmaessig die Kommunikation. Manche Wechselrichter zeigen dies als "externe Verbindung" an. Dies ist normal und kein Fehler.
 
-### Verkuerzt ePulse die Lebensdauer meiner Batterie?
+### Verkuerzt EPOWER die Lebensdauer meiner Batterie?
 
 Nein, im Gegenteil:
 - Maximal 250 zusaetzliche Zyklen/Jahr
 - Intelligente Steuerung vermeidet Tiefentladung
 - Temperaturueberwachung schuetzt die Zellen
 
-Studien zeigen: ePulse-Teilnehmer haben im Schnitt **5% laengere Batterielebensdauer** durch optimierte Ladezyklen.
+Studien zeigen: EPOWER-Teilnehmer haben im Schnitt **5% laengere Batterielebensdauer** durch optimierte Ladezyklen.
 
 ---
 
@@ -171,14 +171,14 @@ Das Gateway muss innerhalb von 14 Tagen zurueckgesendet werden (Ruecksendelabel 
 
 ## Kontakt
 
-**ePulse Kundenservice**
+**EPOWER Kundenservice**
 - Telefon: 0800 - 22 33 559 (kostenfrei)
-- E-Mail: epulse@eon.de
-- Chat: mein.eon.de/epulse
+- E-Mail: epower@eon.de
+- Chat: mein.eon.de/epower
 
 **Technischer Support**
 - Telefon: 0800 - 22 33 560
-- E-Mail: epulse-technik@eon.de
+- E-Mail: epower-technik@eon.de
 
 **Servicezeiten**: Mo-Fr 8-20 Uhr, Sa 9-16 Uhr
 

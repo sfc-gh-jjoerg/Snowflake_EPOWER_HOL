@@ -18,9 +18,10 @@ WITH telemetry AS (
         AVG(solar_yield_kw) AS avg_solar_kw,
         AVG(battery_soc_pct) AS avg_battery_soc_pct,
         AVG(heatpump_consumption_kw) AS avg_heatpump_kw,
-        AVG(grid_import_export_kw) AS avg_grid_kw,
-        SUM(CASE WHEN grid_import_export_kw > 0 THEN grid_import_export_kw ELSE 0 END) AS total_import_kwh,
-        SUM(CASE WHEN grid_import_export_kw < 0 THEN ABS(grid_import_export_kw) ELSE 0 END) AS total_export_kwh
+        AVG(grid_import_kw) AS avg_grid_import_kw,
+        AVG(grid_export_kw) AS avg_grid_export_kw,
+        SUM(grid_import_kw) AS total_import_kwh,
+        SUM(grid_export_kw) AS total_export_kwh
     FROM {{ ref('fct_epulse_telemetry') }}
     WHERE is_vpp_enrolled = TRUE
     {% if is_incremental() %}
@@ -56,7 +57,8 @@ joined AS (
         t.avg_solar_kw,
         t.avg_battery_soc_pct,
         t.avg_heatpump_kw,
-        t.avg_grid_kw,
+        t.avg_grid_import_kw,
+        t.avg_grid_export_kw,
         t.total_import_kwh,
         t.total_export_kwh,
         p.price_eur_mwh,
