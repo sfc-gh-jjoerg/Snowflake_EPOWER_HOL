@@ -81,6 +81,7 @@ Browser (Dark Mode Dashboard)
 +-- tsconfig.json                 # TypeScript configuration
 +-- postcss.config.js             # PostCSS for Tailwind
 +-- sql/
+|   +-- setup.sql                 # One-time account grants (Step 2)
 |   +-- cleanup.sql               # Module 2 cleanup script
 +-- src/
 |   +-- app/
@@ -173,7 +174,9 @@ Snowflake App Runtime needs to know **where to deploy apps** on your account. Th
 
 ### Step 2: Additional Grants (ACCOUNTADMIN)
 
-Run these in Snowsight as `ACCOUNTADMIN`. Replace `SYSADMIN` with your deploy role if different:
+> **One-time setup only** — run once per account (and deploy role). Subsequent deploys reuse these grants.
+
+The App Development Setup wizard (Step 1) grants the schema-level privileges on `SNOWFLAKE_APPS.PUBLIC`, but **not** compute pool usage or endpoint binding. Run [`sql/setup.sql`](sql/setup.sql) in a Snowsight worksheet as `ACCOUNTADMIN`, or the equivalent commands below. Replace `SYSADMIN` with your deploy role if different:
 
 ```sql
 USE ROLE ACCOUNTADMIN;
@@ -185,7 +188,7 @@ GRANT USAGE ON COMPUTE POOL SYSTEM_COMPUTE_POOL_CPU TO ROLE SYSADMIN;
 GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE SYSADMIN;
 ```
 
-> These grants only need to be run once per account.
+> These grants only need to be run once per account. Re-running is harmless.
 
 ### Step 3: Create Backend Views
 
