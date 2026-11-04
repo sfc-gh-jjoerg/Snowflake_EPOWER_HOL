@@ -557,3 +557,53 @@ Falls der Deploy fehlschlägt oder zu lange dauert:
 - [ ] Cortex Code Desktop ist geöffnet mit dem `02-vpp-monitor`-Verzeichnis
 - [ ] Snowflake CLI Verbindung ist aktiv (`snow connection status`)
 - [ ] Terminal ist im richtigen Verzeichnis (`cd 02-vpp-monitor`)
+
+---
+
+## Compute Pools, Services & Service Instances Explained
+
+This section expands on [SPCS Concepts (Reference)](#spcs-concepts-reference) and clears up a common misconception: **a service instance is not a container** — it is one running copy of the whole service, which can hold one or more containers.
+
+### The Three Concepts
+
+| Concept | What it is |
+|---------|------------|
+| **Compute pool** | A group of 1–N virtual machines, called **nodes**. Every node uses the pool's *instance family* (machine type, e.g. `CPU_X64_S`), comparable to a warehouse size. Snowflake scales the pool between `MIN_NODES` and `MAX_NODES`. Running nodes are billed per node-hour, so a suspended pool costs nothing. |
+| **Service** | The Snowflake object that describes *what* to run. It is defined by a **specification** listing **one or more containers** (image, ports, CPU/memory, endpoints) and runs on exactly one compute pool. A *job service* is the same structure but runs to completion (`DONE` / `FAILED`) instead of serving continuously. |
+| **Service instance** | **One running copy of the whole specification**, including *all* of its containers, comparable to a Kubernetes *pod*. You set the number of copies with `MIN_INSTANCES` / `MAX_INSTANCES`. |
+
+### How It Nests
+
+```
+Compute pool (MIN_NODES..MAX_NODES)
+ ├─ Node 1 (VM)
+ │   ├─ Service A – instance 0 ─┬─ container "web"
+ │   │                          └─ container "sidecar"
+ │   └─ Service B – instance 0 ── container "api"
+ └─ Node 2 (VM)
+     └─ Service A – instance 1 ─┬─ container "web"
+                                └─ container "sidecar"
+```
+
+Rules that follow from this:
+
+- **An instance never spans nodes.** All containers of one instance run together on a single VM and share its network, so they reach each other via `localhost`.
+- **A node can host several instances**, from the same service or different ones, as long as their CPU, memory and GPU requests fit.
+- **The pool scales nodes; the service scales instances.** When new instances no longer fit on existing nodes, Snowflake adds nodes, up to `MAX_NODES`.
+- **Single-instance services have short outages during maintenance.** Snowflake replaces nodes every few weeks, mostly in weekend windows. Two or more instances avoid this.
+
+### The VPP Monitor in These Terms
+
+| Concept | VPP Monitor |
+|---------|-------------|
+| **Compute pool** | A **managed pool** provided by Snowflake App Runtime. You don't create, size or name it, and it doesn't appear in `SHOW COMPUTE POOLS` (the `compute_pool` field of `DESCRIBE APPLICATION SERVICE` is empty). `app.yml` v2 can only select the *type* via `compute_resource` (`MANAGED_COMPUTE_POOL` or `SERVERLESS`). This is fixed when the service is first created, and omitting it uses the account default. |
+| **Service** | `SNOWFLAKE_APPS.PUBLIC.EPOWER_VPP_MONITOR`, an **application service** (listed by `SHOW APPLICATION SERVICES`, not `SHOW SERVICES`). Its specification is generated from `app.yml`. |
+| **Service instances** | **1** (`min_instances: 1`, `max_instances: 1` in `app.yml`). The service auto-suspends after 600 s of inactivity and auto-resumes on the next request. |
+| **Containers per instance** | **1**: the Snowflake Node.js runtime image running `node .next/standalone/server.js` on port 8080. |
+| **Job service (build)** | Each `snow app deploy` starts a builder job (`SPCS_APP_BUILDER_JOB_…`) that runs `npm ci` and `npm run build`, publishes the result to the artifact repository `EPOWER_VPP_MONITOR_REPO`, then terminates. |
+
+> In this app, instance and container happen to be one-to-one, which is why they're easy to confuse. In general, one instance can contain several containers.
+
+For comparison, every account also has two **system compute pools** owned by ACCOUNTADMIN: `SYSTEM_COMPUTE_POOL_CPU` (`CPU_X64_S`) and `SYSTEM_COMPUTE_POOL_GPU` (`GPU_NV_S`). They are used for Notebooks, container-runtime Streamlit apps, ML jobs and model serving, not for App Runtime apps.
+
+Further reading: [Working with compute pools](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool) · [Working with services](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-services) · [Instance families](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/instance-families)
