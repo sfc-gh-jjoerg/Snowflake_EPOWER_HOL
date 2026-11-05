@@ -84,6 +84,26 @@
 
 ---
 
+## Act 2b — Interactive Dashboard (~5 min, optional)
+
+> Open the **EPOWER Energy Command Center** dashboard (Module 6) in Snowsight Workspaces, or build it live with the prompts in [`06-interactive-dashboards/README-module6.md`](06-interactive-dashboards/README-module6.md).
+
+### What to Show
+
+1. **Build by prompt** — paste one prompt, CoCo generates tiles on the VPP semantic view.
+2. **Heatmap** — margin concentrates in the HIGH price zone, 16:00-19:00.
+3. **Click a cluster** — every VPP tile filters to it. **Click DISCHARGE** in the donut — highlight, no re-query.
+4. **Commercial Pulse tab** — click South; filters carry across tabs.
+5. **CoWork follow-up** — *"Why is Berlin Metro a net importer while Freiburg exports?"*
+
+### Talking Points
+
+- "Same semantic views as the agent — the dashboard and the agent can never disagree on what 'VPP margin' means."
+- "No BI license, no extract. Tiles run live with the viewer's own privileges."
+- "Agent for the open question, dashboard for the recurring one — and the dashboard can still be questioned in CoWork."
+
+---
+
 ## Act 3 — Behind the Scenes (3-5 min, optional)
 
 > Quick technical walkthrough for deeper audiences. Show the notebook or explain the architecture verbally.

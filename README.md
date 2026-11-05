@@ -26,8 +26,9 @@ The EPOWER Agent answers questions across 6 business domains (Sales, Billing, Se
 | **3. Postgres Zero-ETL** (optional) | Zero-ETL pipeline from operational Postgres to analytics | Snowflake Postgres, pg_lake, Iceberg, Catalog Integration | ~10 min |
 | **4. dbt with Cortex Code** (optional) | AI-assisted dbt pipeline extension (churn + NPS analytics) | Cortex Code (CoCo), dbt project extension | ~15 min |
 | **5. Agent REST App** (optional) | VPP Assistant — Agent REST API demo with streaming SSE | Container Runtime (SPCS), Cortex Agent REST API | ~5 min |
+| **6. Interactive Dashboards** (optional) | Two-tab click-to-explore dashboard built by prompting CoCo — [prompts](06-interactive-dashboards/README-module6.md) | Snowflake Dashboards (Preview), chart actions, CoWork | ~10 min |
 
-> **Module 1 is the foundation.** Modules 2-5 are independent extensions — run any combination after Module 1.
+> **Module 1 is the foundation.** Modules 2-6 are independent extensions — run any combination after Module 1.
 
 > **New to the demo?** Start with [`demo_flow.md`](demo_flow.md) for a guided walkthrough with ready-to-use questions.
 
@@ -594,6 +595,7 @@ If you only want to undo a specific module while keeping others intact:
 | Module | Cleanup | Notes |
 |--------|---------|-------|
 | Module 2 | [`02-vpp-monitor/sql/cleanup.sql`](02-vpp-monitor/sql/cleanup.sql) | Drops Application Service, artifact repo, code stage, and backend views |
+| Module 6 | Delete the dashboard artifact and `.dash` file in the Workspace | No database objects |
 | Module 5 | Drop the STREAMLIT object in Snowsight (or `DROP STREAMLIT IF EXISTS EPOWER_DEMO.EPOWER_GOLD.EPOWER_ASSISTANT`) | No other objects to clean up |
 | Module 4 | [`04-dbt-with-cortex-code/cleanup-module4.sql`](04-dbt-with-cortex-code/cleanup-module4.sql) | Drops tables, dbt models, semantic view, removes agent tool |
 | Module 3 | [`03-postgres-zero-etl/cleanup-module3.ipynb`](03-postgres-zero-etl/cleanup-module3.ipynb) | **Must follow dependency order** — see [Module 3 README](03-postgres-zero-etl/README-module3.md#cleanup) |
@@ -646,6 +648,9 @@ Snowflake_EPOWER_HOL/
 │   ├── streamlit_app.py             # Dashboard + Agent Chat (container runtime)
 │   ├── snowflake.yml                # Deployment config (SPCS)
 │   └── .streamlit/config.toml       # Theme
+│
+├── 06-interactive-dashboards/       # ── Module 6: Snowflake Dashboards built with CoCo ──
+│   └── README-module6.md            # Intro, build prompts P1-P6, demo script
 │
 ├── demo_data/
 │   ├── structured_data/             # 25 CSV files loaded into EPOWER_GOLD
@@ -726,6 +731,7 @@ Snowflake_EPOWER_HOL/
 | `03-postgres-zero-etl/hol-module3.ipynb` | Snowflake Postgres + pg_lake pipeline | Module 3 — after Module 1 |
 | `04-dbt-with-cortex-code/hol-module4.ipynb` | Cortex Code dbt extension + semantic layer | Module 4 — after Module 1 |
 | `05-agent-rest-app/streamlit_app.py` | VPP Assistant — Agent REST API demo | Module 5 — after Module 1 |
+| `06-interactive-dashboards/README-module6.md` | CoCo prompts to build the interactive dashboard | Module 6 — after Module 1 |
 | `demo_flow.md` | 12-question guided demo script (4 acts) | During the demo |
 | `01-agentic-ai-foundation/epower_cleanup.sql` | Drops all demo objects | Teardown / reset |
 | `epower_dbt/` | dbt project with 6 models (medallion architecture) | Deployed by the notebook; edit models here |
