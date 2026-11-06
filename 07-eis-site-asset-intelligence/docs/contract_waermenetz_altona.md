@@ -10,7 +10,7 @@
 ---
 
 ## § 1 Scope
-The Operator runs the district heating network Hamburg-Altona with approx. 4,200 connected households. Generation consists of two CHP units (EcoPower EC2000, 2.0 MW_el / 2.6 MW_th each), three large heat pumps (ThermaFlux HP2000) using river water as heat source, two gas boilers for peak load and backup, and a **large thermal storage tank of 400 MWh**.
+The Operator runs the district heating network Hamburg-Altona with approx. 4,200 connected households. Generation consists of two CHP units (EcoPower EC2000, 2.0 MW_el / 2.6 MW_th each), five large heat pumps (ThermaFlux HP2000, 2.0 MW_th each) using river water as heat source, two gas boilers for peak load and backup, and a **large thermal storage tank of 400 MWh**.
 
 ## § 2 Remuneration
 Annual network operation fee of **EUR 3,200,000** plus a heat price per MWh delivered under Annex 2.
