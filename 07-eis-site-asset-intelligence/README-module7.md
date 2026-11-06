@@ -10,7 +10,18 @@ The demo tells one story: **unified OT and IT data → AI grounded in governed d
 
 ---
 
-## 1. The EIS Business
+## 1. The EIS Business Case and Domain
+
+### 1.1 The domain: decentralised energy infrastructure
+EIS works in the **B2B energy-infrastructure** market. Instead of selling electricity or gas, EIS **plans, finances, builds and operates energy centres on the customer's premises**: hospitals, industrial and chemical parks, housing estates, university campuses and urban district heating networks. The customer buys a **result** (reliable heat, power and cooling at an agreed price), not the plant itself.
+
+**How the business model works:**
+- **Long-term contracts (10–20 years):** energy contracting, Energy-as-a-Service or heat-supply agreements. EIS earns an annual service fee plus energy prices.
+- **Performance guarantees:** EIS guarantees **availability** (the share of time the units are not in a fault) and **efficiency** of the plants, measured per quarter. Missing a guarantee triggers a **contractual penalty (Pönale)**.
+- **Margin drivers:** uptime of the assets, fuel and electricity costs, maintenance cost, and, increasingly, the ability to run flexible assets such as heat pumps against **hourly electricity market prices**.
+- **Market trends in Germany:** decarbonisation of heat (heat pumps replacing gas), municipal heat planning, rising electricity price volatility from renewables, and growing reporting duties (ESG/CO₂).
+
+### 1.2 What EIS does
 
 | Area | What EIS does |
 |------|---------------|
@@ -21,7 +32,19 @@ The demo tells one story: **unified OT and IT data → AI grounded in governed d
 
 **The data challenge:** OT telemetry from many OEM and SCADA systems, contracts stored as PDFs, maintenance data in ERP or field-service tools, and market prices all live in separate systems. No single view answers the question *"Where are we losing money, and why?"*
 
-### 1.1 The assets in an energy centre
+### 1.3 The business case: three use cases
+
+| Use case | Business question | Before (today) | After (with the EIS agent on Snowflake) | Value lever |
+|---|---|---|---|---|
+| **1. Guarantee risk** | *Which contracts are at risk, and what is our € exposure?* | Guarantee breaches show up in the quarterly report, after the fact | Risk per contract in €, weeks before quarter end, combining OT data and contract terms | **Avoid penalties** |
+| **2. Root cause & fix** | *Why is this unit underperforming, and what should the technician do?* | Faults are reset and restarted; nobody links repeated trips to a degrading asset; the manual is a PDF somewhere | Trend, fault history and open work order plus the procedure and spare part from the OEM manual, in one answer | **Repair faster, less downtime** |
+| **3. EIS Flex** | *How much can we save by running heat pumps on cheap power, and where next?* | Heat pumps run whenever heat is needed, at any power price | Heat pumps produce the day's heat in the cheapest hours; storage covers the rest; realised and missed savings plus a ranked onboarding list and tomorrow's schedule | **Lower energy cost, roll-out business case** |
+
+**Why Snowflake:** all three use cases need the **same combination**: structured OT and business data, unstructured documents (contracts, manuals) and external market data, governed in one place and accessible in natural language. That combination is what the demo shows; the individual analyses alone are not new.
+
+**Who benefits:** operations managers (risk, maintenance planning), field service (fix instructions), commercial and energy management (flex savings, onboarding), and management (one view in €).
+
+### 1.4 The assets in an energy centre
 
 | Asset | Produces | Energy source | Part of EIS Flex? |
 |---|---|---|---|
