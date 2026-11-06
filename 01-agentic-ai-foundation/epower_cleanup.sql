@@ -2,11 +2,11 @@
 -- EPOWER Energy Demo - Full Cleanup Script
 -- Run with ACCOUNTADMIN role to ensure all objects can be dropped.
 --
--- This script handles cleanup for ALL modules (1, 2, 3, 4, 5).
+-- This script handles cleanup for ALL modules (1-7).
 -- It is safe to run even if only some modules were deployed.
 --
 -- DEPENDENCY ORDER:
---   1. Remove agent from Snowflake Intelligence
+--   1. Remove agents from Snowflake Intelligence (incl. Module 7 EIS agent)
 --   2. Drop VPP Monitor app service (Module 2)
 --   3. Detach network policy from Postgres instance (Module 3)
 --   4. Drop Postgres instance (Module 3)
@@ -45,6 +45,14 @@ END;
 BEGIN
     ALTER SNOWFLAKE INTELLIGENCE snowflake_intelligence_object_default 
         DROP AGENT EPOWER_DEMO.EPOWER_GOLD.EPOWER_PEOPLE_AGENT;
+EXCEPTION
+    WHEN OTHER THEN NULL;
+END;
+-- Module 7: EIS Operations Agent (all other Module 7 objects live in schema
+-- EPOWER_DEMO.EIS_GOLD and are removed with the database in step 7)
+BEGIN
+    ALTER SNOWFLAKE INTELLIGENCE snowflake_intelligence_object_default 
+        DROP AGENT EPOWER_DEMO.EIS_GOLD.EIS_OPERATIONS_AGENT;
 EXCEPTION
     WHEN OTHER THEN NULL;
 END;

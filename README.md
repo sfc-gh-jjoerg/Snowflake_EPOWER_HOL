@@ -27,8 +27,9 @@ The EPOWER Agent answers questions across 6 business domains (Sales, Billing, Se
 | **4. dbt with Cortex Code** (optional) | AI-assisted dbt pipeline extension (churn + NPS analytics) | Cortex Code (CoCo), dbt project extension | ~15 min |
 | **5. Agent REST App** (optional) | VPP Assistant — Agent REST API demo with streaming SSE | Container Runtime (SPCS), Cortex Agent REST API | ~5 min |
 | **6. Interactive Dashboards** (optional) | Two-tab click-to-explore dashboard built by prompting CoCo — [prompts](06-interactive-dashboards/README-module6.md) | Snowflake Dashboards (Preview), chart actions, CoWork | ~10 min |
+| **7. EIS Site & Asset Intelligence** (optional) | Second business unit (B2B energy infrastructure): contract guarantee risk, asset root cause, EIS Flex heat pump optimisation on real prices — [README](07-eis-site-asset-intelligence/README-module7.md) | AI_EXTRACT, AI_PARSE_DOCUMENT, Cortex Search, Semantic View, Cortex Agent | ~10 min |
 
-> **Module 1 is the foundation.** Modules 2-6 are independent extensions — run any combination after Module 1.
+> **Module 1 is the foundation.** Modules 2-7 are independent extensions — run any combination after Module 1.
 
 > **New to the demo?** Start with [`demo_flow.md`](demo_flow.md) for a guided walkthrough with ready-to-use questions.
 
@@ -596,6 +597,7 @@ If you only want to undo a specific module while keeping others intact:
 |--------|---------|-------|
 | Module 2 | [`02-vpp-monitor/sql/cleanup.sql`](02-vpp-monitor/sql/cleanup.sql) | Drops Application Service, artifact repo, code stage, and backend views |
 | Module 6 | Delete the dashboard artifact and `.dash` file in the Workspace | No database objects |
+| Module 7 | [`07-eis-site-asset-intelligence/cleanup-module7.sql`](07-eis-site-asset-intelligence/cleanup-module7.sql) | Removes the EIS agent from CoWork, drops the `EIS_GOLD` schema |
 | Module 5 | Drop the STREAMLIT object in Snowsight (or `DROP STREAMLIT IF EXISTS EPOWER_DEMO.EPOWER_GOLD.EPOWER_ASSISTANT`) | No other objects to clean up |
 | Module 4 | [`04-dbt-with-cortex-code/cleanup-module4.sql`](04-dbt-with-cortex-code/cleanup-module4.sql) | Drops tables, dbt models, semantic view, removes agent tool |
 | Module 3 | [`03-postgres-zero-etl/cleanup-module3.ipynb`](03-postgres-zero-etl/cleanup-module3.ipynb) | **Must follow dependency order** — see [Module 3 README](03-postgres-zero-etl/README-module3.md#cleanup) |
@@ -651,6 +653,13 @@ Snowflake_EPOWER_HOL/
 │
 ├── 06-interactive-dashboards/       # ── Module 6: Snowflake Dashboards built with CoCo ──
 │   └── README-module6.md            # Intro, build prompts P1-P6, demo script
+│
+├── 07-eis-site-asset-intelligence/  # ── Module 7: EIS business unit + EIS Flex ──
+│   ├── README-module7.md            # EIS concept, EIS Flex, architecture, demo story
+│   ├── eis_setup.ipynb              # Setup notebook (schema EIS_GOLD, data, docs, semantic view, agent)
+│   ├── cleanup-module7.sql          # Module 7 teardown
+│   ├── eis_cio_onepager.html        # Executive one-pager
+│   └── docs/                        # Contracts, OEM manuals, EIS Flex program guide
 │
 ├── demo_data/
 │   ├── structured_data/             # 25 CSV files loaded into EPOWER_GOLD
