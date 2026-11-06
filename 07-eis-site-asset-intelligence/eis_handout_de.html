@@ -295,14 +295,25 @@
     </table>
   </div>
 
-  <h2 id="vorbereitung">8. Vorbereitung (einmalig, ca. 10 Min.)</h2>
-  <ol class="check">
-    <li>Modul 1 und Modul 7 sind aufgesetzt: das Notebook <code>eis_setup.ipynb</code> lief ohne Fehler.</li>
-    <li>Den <strong>Story Check</strong> (Notebook, Abschnitt 9) ausführen und die aktuellen Zahlen notieren. Die Zahlen ändern sich mit den echten Strompreisen, also nicht auswendig lernen.</li>
-    <li>Strompreise für morgen: werden um ca. 17:00 MEZ automatisch geladen. Früher (nach 13:00 MEZ): <code>CALL EPOWER_DEMO.EPOWER_OPS.FETCH_DAY_AHEAD_PRICES(CURRENT_DATE() + 1);</code></li>
-    <li>Snowflake CoWork öffnen und den Agenten <strong>EIS Operations</strong> auswählen.</li>
-    <li>Eine Testfrage stellen, damit Warehouse und Agent „warm" sind.</li>
-  </ol>
+  <h2 id="vorbereitung">8. Vorbereitung</h2>
+  <div class="ba">
+    <div class="col" style="background:var(--card)">
+      <h3>Erledigt der Demo-Owner (am Demo-Tag)</h3>
+      <ol class="check">
+        <li>Die Demo-Umgebung ist aufgesetzt und läuft fehlerfrei.</li>
+        <li>Die aktuellen <strong>Erwartungswerte</strong> (Story Check) werden dem Presenter mitgegeben, z.&nbsp;B. Euro-Risiko je Vertrag, erzielte und entgangene Ersparnis, Top-Kandidaten. Die Zahlen ändern sich mit den echten Strompreisen.</li>
+        <li>Für Modul M4: Die Strompreise für morgen sind geladen. Das passiert automatisch gegen 17:00 MEZ; nach 13:00 MEZ kann der Demo-Owner sie auch früher laden.</li>
+      </ol>
+    </div>
+    <div class="col after">
+      <h3>Vor dem Termin (Presenter, ca. 5 Min.)</h3>
+      <ol class="check">
+        <li>Snowflake CoWork öffnen und den Agenten <strong>EIS Operations</strong> auswählen.</li>
+        <li>Eine Testfrage stellen, damit der Agent „warm" ist, z.&nbsp;B. <em>„Wie viele Standorte nehmen an EIS Flex teil?"</em></li>
+        <li>Die Erwartungswerte vom Demo-Owner bereitlegen und die Fragen der geplanten Module griffbereit haben.</li>
+      </ol>
+    </div>
+  </div>
 
   <section class="module" id="m0">
     <div class="head"><span class="badge">M0</span><h3>Business Case Pitch</h3><span class="badge time">3 Min. · ohne System</span></div>
@@ -368,7 +379,7 @@
       <dt>Im Hintergrund</dt><dd>Eine Sicht verbindet die neuesten Börsenpreise mit dem erwarteten Wärmebedarf und erstellt daraus einen Stundenplan.</dd>
       <dt>Erwartetes Ergebnis</dt><dd>Die Wärmepumpen laufen in den günstigsten Stunden (typisch nachts und mittags), der Speicher überbrückt die teuren Abendstunden. Dazu die erwartete Ersparnis des Tages.</dd>
       <dt>Wow-Satz</dt><dd class="wow">„Snowflake steuert die Anlage nicht, das bleibt beim Leitsystem. Aber es liefert die Empfehlung für morgen, auf Basis echter Marktpreise."</dd>
-      <dt>Hinweis</dt><dd>Sind die Preise für morgen noch nicht geladen, sagt der Agent korrekt „Plan für heute". Siehe Vorbereitung, Punkt 3.</dd>
+      <dt>Hinweis</dt><dd>Sind die Preise für morgen noch nicht geladen, sagt der Agent korrekt „Plan für heute". Siehe Vorbereitung (Demo-Owner, Punkt 3). Am besten die Demo nach 17:00 MEZ zeigen oder den Demo-Owner bitten, die Preise vorher zu laden.</dd>
     </dl>
   </section>
 
