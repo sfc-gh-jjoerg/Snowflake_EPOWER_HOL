@@ -149,3 +149,80 @@
 - **Bei Moment 1 Zeit lassen:** Die Kombination aus Daten und Handbuch in einer Antwort ist der stärkste Moment.
 - **EIS Flex ohne Technik erklären:** „gleiche Wärme, günstigerer Strom" und „wie das Handy nachts laden" reichen.
 - **Wenn der Agent länger braucht:** erklären, was im Hintergrund passiert (Werkzeugauswahl, SQL, Dokumentensuche).
+
+---
+
+## Anhang A: Hintergrund für Presenter
+
+### A.1 Die Anlagen in einer Energiezentrale
+
+| Anlage | Erzeugt | Energiequelle | Teil von EIS Flex? |
+|---|---|---|---|
+| **BHKW** (Blockheizkraftwerk) | Strom und Wärme gleichzeitig | Gas | Nein, läuft nach Wärmebedarf |
+| **Großwärmepumpe** | Wärme; aus 1 Teil Strom ≈ 3 Teile Wärme (COP ≈ 3) | Strom und Umweltwärme | **Ja** |
+| **Gaskessel** | nur Wärme, für Spitzenlast und Reserve | Gas | Nein, läuft nach Wärmebedarf |
+| **Wärmespeicher** | speichert Heißwasser, liefert die Wärme später | – | **Ja**, Voraussetzung |
+
+### A.2 Die Regeln von EIS Flex
+
+- **Prinzip:** Die Wärmepumpe erzeugt die Wärme des Tages in den **günstigsten Strompreisstunden** und lädt damit den Speicher. Der Speicher liefert die Wärme in den teuren Stunden. Es ist dieselbe Wärme, nur günstiger erzeugt.
+- **Preisbasis:** EPEX Day-Ahead, Gebotszone DE-LU, stündlich. Die Preise für morgen werden gegen 13:00 MEZ veröffentlicht.
+- **Feste Regel:** Der Wärmebedarf wird **immer** gedeckt. EIS Flex ändert nur, **wann** die Wärmepumpe läuft, nicht **wie viel** Wärme sie liefert. BHKW und Kessel laufen unverändert.
+- **Rollen:** EIS Flex erstellt einen **Fahrplan als Empfehlung** für den nächsten Tag. Die Anlagensteuerung vor Ort (SCADA/EMS) steuert in Echtzeit und hat das letzte Wort.
+
+### A.3 Kennzahlen
+
+| Kennzahl | Definition |
+|---|---|
+| **Flex-Marge** | Stromkosten der Wärmepumpe im Normalbetrieb minus Stromkosten mit EIS Flex, bei gleicher Wärmemenge |
+| **Erzielte Marge** | Flex-Marge an teilnehmenden Standorten, also tatsächlich gespart |
+| **Entgangene Marge** | Mögliche Flex-Marge an Standorten ohne EIS Flex, also ungenutztes Potenzial |
+| **EIS-Anteil / Kundenanteil** | Aufteilung der Marge laut § 4 „EIS Flex" im Kundenvertrag, typischerweise 60/40 oder 70/30 |
+| **COP** | Wärme-zu-Strom-Verhältnis der Wärmepumpe. In den Daten steht COP × 100, z. B. 320 = COP 3,2 |
+| **Ladestand (SOC)** | Füllstand des Speichers in % |
+
+**Vereinfachtes Beispiel (fiktive Zahlen):** Eine Wärmepumpe braucht für die Wärme eines Tages eine feste Strommenge. Läuft sie verteilt über den Tag, zahlt sie den Durchschnittspreis aller Stunden. Mit EIS Flex zahlt sie nur den Preis der günstigsten Stunden. Die Differenz ist die Flex-Marge, die laut Vertrag zwischen EIS und Kunde aufgeteilt wird.
+
+> **Was die Demo bewusst vereinfacht:** Der Speicher wird pro Tag mit höchstens 85 % seiner Kapazität genutzt. Weitere Regeln aus der Betriebsrichtlinie (`docs/om_manual_thermal_storage.md`) werden **nicht** simuliert: Nutzbarkeit nur zwischen 10 und 95 % Füllstand, höchstens 25 % Laden pro Stunde, und an Kliniken ein Mindestfüllstand von 25 % zwischen 06:00 und 22:00 Uhr. Darauf hinweisen, falls nachgefragt wird.
+
+### A.4 Wann ist ein Standort geeignet?
+
+**Ja, wenn**
+- mindestens eine Großwärmepumpe vorhanden ist,
+- der Speicher **mindestens 3 Stunden** des durchschnittlichen Wärmebedarfs abdeckt,
+- keine Versorgungsauflage die Speichernutzung einschränkt,
+- idealerweise der Speicher heute **kaum genutzt** wird.
+
+**Eher nein, wenn**
+- keine Wärmepumpe vorhanden ist (in den Demodaten haben einige nicht teilnehmende Standorte keine Wärmepumpe und damit kein Potenzial) oder der Speicher zu klein ist,
+- **kritische Versorgung** besteht (Kliniken, Pflegeheime) und der Speicher deshalb einen Mindestfüllstand halten muss,
+- die Ersparnis klein ist, weil der Standort klein ist oder der Strompreis über den Tag kaum schwankt,
+- die Anlagen oft gestört sind. Mehr Starts bedeuten mehr Verschleiß und damit ein Risiko für die garantierte Verfügbarkeit. Das Herstellerhandbuch der Wärmepumpe begrenzt die Starts auf höchstens 6 pro Stunde und empfiehlt Laufblöcke von mindestens 1 Stunde (`docs/om_manual_heatpump_thermaflux_hp2000.md`).
+
+### A.5 Kosten
+
+- **Wärmepumpe und Speicher vorhanden:** keine Anschaffung, nur Einführung, Vertragsanpassung und Überwachung.
+- **Hardware fehlt:** Dann ist es ein Investitionsprojekt, und die Flex-Marge ist nur ein Teil des Nutzens.
+
+### A.6 Offene Punkte für die nächsten Kandidaten (Folgeschritt nach der Demo)
+
+Bevor ein Kandidat aufgenommen wird, sind zu klären:
+- tatsächliche Speichergröße und heutige Speichernutzung,
+- Zustand und Störhistorie der Anlagen,
+- Margenaufteilung und Flex-Klausel im Vertrag,
+- Versorgungsauflagen am Standort.
+
+---
+
+## Anhang B: Beispiel-Ergebnisse eines Laufs (Momentaufnahme)
+
+> **Nur als Orientierung.** Die Zahlen stammen aus dem Notebook-Lauf vom **06.11.2026** (Zeitraum 07.10.–05.11.2026) und ändern sich mit jedem Lauf, weil sie auf echten Börsenstrompreisen beruhen. Für die Demo immer den aktuellen **Story Check** (Notebook, Abschnitt 9) verwenden.
+
+| | Standorte | Marge (30 Tage) | EIS-Anteil |
+|---|---|---|---|
+| **Erzielt** (EIS Flex) | 72 | ≈ 527.000 EUR | ≈ 338.000 EUR |
+| **Entgangen** (ohne EIS Flex) | 48, davon 13 ohne Wärmepumpe | ≈ 127.000 EUR | ≈ 89.000 EUR |
+
+- **Spitzenreiter:** Wärmenetz Hamburg-Altona mit ≈ 38.600 EUR in 30 Tagen. Die Wärmepumpen zahlten im Schnitt ≈ 141 statt ≈ 181 EUR/MWh.
+- **Nächste 5 Kandidaten:** Bremen S059, München S042, Bremen S021, München-Riem, Mannheim S063. Zusammen ≈ 44.000 EUR in 30 Tagen (≈ 31.000 EUR EIS-Anteil). Alle haben 2 Wärmepumpen und einen Speicher, es ist keine neue Hardware nötig.
+- **Pönale-Risiko:** Klinikum Hamburg-Nord ≈ 135.000 EUR (Verfügbarkeit ≈ 94 % statt 97 %), Campus Kiel ≈ 20.000 EUR, Chemiepark Leuna unter Beobachtung.

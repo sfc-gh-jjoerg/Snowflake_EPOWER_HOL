@@ -131,6 +131,8 @@ Documents live in [`docs/`](docs/), not in `demo_data/`, so they don't appear in
 
 ## 4. Demo Story (3 moments)
 
+> **Full demo script** with business case intro, talk track, questions (DE/EN), expected results, CIO Q&A and a pre-demo checklist: [`demo_flow_module7.md`](demo_flow_module7.md). Executive one-pager (German): [`eis_onepager_de.html`](eis_onepager_de.html).
+
 | Moment | Question to the agent | Wow moment |
 |-----|-----------------------|-----------|
 | **1. Risk & root cause** | *"Which contracts are at risk of missing their guarantee this quarter, and what is our € exposure?"* → follow-up: *"Why is Klinikum Hamburg-Nord CHP-2 below target, and what should the technician do?"* | OT telemetry + contract guarantees + OEM manual in one conversation: € at risk, root cause, concrete fix |
