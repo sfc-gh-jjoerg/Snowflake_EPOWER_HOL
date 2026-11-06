@@ -1,6 +1,6 @@
 # Module 7: EIS Site & Asset Intelligence (with EIS Flex)
 
-> **Status:** Built, awaiting first end-to-end run. Setup notebook: [`eis_setup.ipynb`](eis_setup.ipynb). Expected demo answers will be added after the first run.
+> **Status:** Ready for demo. Setup notebook: [`eis_setup.ipynb`](eis_setup.ipynb). The notebook's **story check** (section 9) shows the exact answers for your run; this README describes the story without fixed numbers, because they depend on the real day-ahead prices.
 > **Prerequisite:** Module 1 (`01-agentic-ai-foundation/epower_hol_main.ipynb`) has been run.
 > **Independent of:** Modules 2–6.
 
@@ -50,13 +50,14 @@ Per site and day:
 
 The storage size limits how much heat can be shifted. A small storage means only part of the production moves to cheap hours.
 
-**Example (one day):** the site needs 24 MWh of heat from the heat pump, i.e. 7.5 MWh of electricity at COP 3.2.
+**Example (one day):** the heat pump has to deliver the same amount of heat as always.
 
-| | Hours the heat pump runs | Average power price | Electricity cost |
+| | Hours the heat pump runs | Power price paid | Result |
 |---|---|---|---|
-| Normal operation | Spread over the day | €95/MWh | €713 |
-| **EIS Flex** | The 10 cheapest hours | €55/MWh | **€413** |
-| **Flex margin** | | | **€300 per day** |
+| Normal operation | Whenever heat is needed, including expensive hours | The price of each hour, cheap or expensive | Baseline cost |
+| **EIS Flex** | The cheapest hours of the day; storage covers the rest | Only the cheapest hours | **Same heat, lower electricity cost** |
+
+The more prices vary during a day, and the larger the storage, the bigger the saving. The demo calculates the exact amounts from the real EPEX prices.
 
 ### 2.3 The hard constraint: heat demand is always met
 **The hospital must always get its heat.** EIS Flex only shifts *when* the heat pump produces heat, never *how much* heat is delivered. CHP and boiler operation is identical with and without EIS Flex.
@@ -118,11 +119,11 @@ Planted anomalies make the demo answers come out the same every run:
 
 | Site / asset | Planted anomaly | Story |
 |---|---|---|
-| Klinikum Hamburg-Nord, CHP-2 | 3 F-217 trips (43 h in 30 days), efficiency −0.15 pp/day, open work order without spare part | Availability ~94 % vs. 97 % guarantee → penalty exposure; root cause from OEM manual |
-| Chemiepark Leuna, HP-1 | 72 h H-512 outage | Guarantee on WATCH |
-| Campus Universität Kiel, CHP-1 | 26 h F-142 outage | Availability ~96.4 % vs. 97 % → small penalty exposure |
-| Wohnquartier München-Riem | Heat pump + storage, but not in EIS Flex | Onboarding candidate (missed margin) |
-| Wärmenetz Hamburg-Altona | EIS Flex with 400 MWh storage | Highest realised margin; tomorrow's heat pump schedule |
+| Klinikum Hamburg-Nord, CHP-2 | Repeated F-217 trips, steadily falling efficiency, open work order without spare part | Below its availability guarantee → highest penalty exposure; root cause and fix from the OEM manual |
+| Chemiepark Leuna, HP-1 | Multi-day H-512 outage | Just above the guarantee → WATCH |
+| Campus Universität Kiel, CHP-1 | One longer F-142 outage | Slightly below the guarantee → smaller penalty exposure |
+| Wohnquartier München-Riem | Heat pumps + storage, but not in EIS Flex | Among the top onboarding candidates (missed saving) |
+| Wärmenetz Hamburg-Altona | EIS Flex with a very large storage tank | Highest realised saving; showcase for the heat pump schedule |
 
 Documents live in [`docs/`](docs/), not in `demo_data/`, so they don't appear in the EPOWER agents' search services.
 
@@ -135,6 +136,8 @@ Documents live in [`docs/`](docs/), not in `demo_data/`, so they don't appear in
 | **1. Risk & root cause** | *"Which contracts are at risk of missing their guarantee this quarter, and what is our € exposure?"* → follow-up: *"Why is Klinikum Hamburg-Nord CHP-2 below target, and what should the technician do?"* | OT telemetry + contract guarantees + OEM manual in one conversation: € at risk, root cause, concrete fix |
 | **2. EIS Flex value** | *"How much did EIS Flex save in the last 30 days, and what are we missing on sites that are not enrolled?"* | Real EPEX prices → realised vs. missed € margin and the next sites to onboard |
 | **3. Tomorrow** (short closer) | *"When should the Hamburg-Altona heat pumps run tomorrow?"* | Tomorrow's real market prices turned into an hourly heat pump schedule |
+
+> **Presenter tip:** tomorrow's day-ahead prices are published around 13:00 CET and loaded by the Module 1 task around 17:00 CET. Before that, the schedule is for today and the agent says so. To show a real "tomorrow" plan earlier, run `CALL EPOWER_DEMO.EPOWER_OPS.FETCH_DAY_AHEAD_PRICES(CURRENT_DATE() + 1);` after 13:00 CET.
 
 ---
 

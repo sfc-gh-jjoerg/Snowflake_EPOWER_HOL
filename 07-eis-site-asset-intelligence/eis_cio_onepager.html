@@ -16,8 +16,8 @@
     ],
     "sections": [
       { "id": "worum", "title": "Worum geht es?", "producerNotes": "Plain-language description of the EIS business, from README section 1." },
-      { "id": "vorher-nachher", "title": "Vorher / Nachher", "producerNotes": "Klinikum Hamburg-Nord CHP-2 storyline (planted demo scenario). Penalty example: 3 missed points x EUR 45,000 per contract document; illustrative." },
-      { "id": "flex", "title": "EIS Flex", "producerNotes": "Illustrative 24h price profile (not real data). Example: 7.5 MWh electricity, avg EUR 88 vs EUR 60 per MWh = EUR 660 vs EUR 450. Replace with real demo outputs after the first notebook run if desired." },
+      { "id": "vorher-nachher", "title": "Vorher / Nachher", "producerNotes": "Klinikum Hamburg-Nord CHP-2 storyline (planted demo scenario). Deliberately without specific figures; the demo computes exact values live." },
+      { "id": "flex", "title": "EIS Flex", "producerNotes": "Illustrative 24h price profile shape (not real data, no axis values). Deliberately without specific EUR figures; the demo computes them from real EPEX prices." },
       { "id": "nutzen", "title": "Business Case", "producerNotes": "Three value levers; no invented totals." },
       { "id": "snowflake", "title": "Rolle von Snowflake", "producerNotes": "From README section 2.6." },
       { "id": "next", "title": "Nächste Schritte", "producerNotes": "Discussion proposals for the meeting." }
@@ -104,7 +104,7 @@
   </div>
 
   <h2 id="vorher-nachher"><span class="num">2</span>Vorher / Nachher: ein Tag im Klinikum Hamburg-Nord</h2>
-  <p class="lead">Ein BHKW im Klinikum verschmutzt schleichend und fällt dreimal in drei Wochen aus. Der Vertrag garantiert 97&nbsp;% Verfügbarkeit, und jeder verfehlte Prozentpunkt kostet 45.000&nbsp;€ pro Quartal.</p>
+  <p class="lead">Ein BHKW im Klinikum verschmutzt schleichend und fällt innerhalb weniger Wochen mehrfach aus. Der Vertrag garantiert eine Mindestverfügbarkeit, und jeder verfehlte Prozentpunkt kostet eine empfindliche Vertragsstrafe.</p>
   <div class="ba">
     <div class="col before">
       <h3>Vorher: manuell und reaktiv</h3>
@@ -112,9 +112,9 @@
         <li>Die Anlage meldet einen Fehler, der Techniker quittiert ihn und startet neu.</li>
         <li>Niemand verbindet die drei Ausfälle mit dem sinkenden Wirkungsgrad.</li>
         <li>Die Garantie-Klausel steht im Vertrags-PDF und ist nicht mit den Betriebsdaten verknüpft.</li>
-        <li>Am Quartalsende zeigt der Bericht: 94&nbsp;% statt 97&nbsp;%.</li>
+        <li>Am Quartalsende zeigt der Bericht: Garantie verfehlt.</li>
       </ol>
-      <p class="result">Ergebnis: rund 135.000&nbsp;€ Pönale, erst im Nachhinein erkannt.</p>
+      <p class="result">Ergebnis: eine hohe Pönale, erst im Nachhinein erkannt.</p>
     </div>
     <div class="col after">
       <h3>Nachher: mit dem EIS-Agenten</h3>
@@ -144,9 +144,9 @@
     <div class="legend"><span><i style="background: light-dark(#c7d0db, #3a4656)"></i>Strompreis pro Stunde (Beispiel)</span><span><i style="background: var(--good)"></i>Mit EIS Flex: Wärmepumpe läuft in den 10 günstigsten Stunden</span></div>
   </div>
   <div class="compare">
-    <div class="kpi"><div class="label">Vorher: Wärmepumpe läuft, wenn Wärme gebraucht wird</div><div class="value">660&nbsp;€</div><div class="label">Ø 88&nbsp;€/MWh Strom</div></div>
-    <div class="kpi"><div class="label">Nachher: Wärmepumpe läuft in den günstigsten Stunden</div><div class="value">450&nbsp;€</div><div class="label">Ø 60&nbsp;€/MWh Strom</div></div>
-    <div class="kpi good hl"><div class="label">Ersparnis an einem Tag, bei gleicher Wärmemenge</div><div class="value">210&nbsp;€ (≈ 30&nbsp;%)</div><div class="label">je Standort; Beispiel: 7,5&nbsp;MWh Strom pro Tag</div></div>
+    <div class="kpi"><div class="label">Vorher</div><div class="value" style="font-size:20px">Strom zum Preis der Stunde</div><div class="label">Die Wärmepumpe läuft, wenn Wärme gebraucht wird, auch in teuren Stunden</div></div>
+    <div class="kpi"><div class="label">Nachher</div><div class="value" style="font-size:20px">Strom zu den günstigsten Stunden</div><div class="label">Die Wärmepumpe läuft, wenn Strom billig ist; der Speicher überbrückt den Rest</div></div>
+    <div class="kpi good hl"><div class="label">Ergebnis</div><div class="value" style="font-size:20px">Gleiche Wärme, niedrigere Stromkosten</div><div class="label">Ohne neue Anlagen; nur die Fahrweise ändert sich</div></div>
   </div>
   <p class="quote">Die Demo rechnet das mit echten Börsenstrompreisen für alle Standorte. Sie zeigt, was die Standorte im Programm bereits sparen, was den übrigen Standorten entgeht und welche Standorte als Nächstes aufgenommen werden sollten. Für morgen erstellt sie direkt den Stundenplan der Wärmepumpen.</p>
 
@@ -154,7 +154,7 @@
   <div class="grid levers">
     <div class="card"><h3>Pönalen vermeiden</h3><p>Garantierisiken Wochen vor Quartalsende erkennen, in Euro beziffert und mit Ursache.</p></div>
     <div class="card"><h3>Schneller reparieren</h3><p>Diagnose aus den Betriebsdaten plus Anleitung aus dem Handbuch. Weniger Fehlversuche und Neustarts, weniger Ausfallzeit.</p></div>
-    <div class="card"><h3>Energiekosten senken</h3><p>Wärmepumpen nach dem Börsenpreis steuern. Gleiche Wärme, rund ein Drittel weniger Stromkosten im Beispiel.</p></div>
+    <div class="card"><h3>Energiekosten senken</h3><p>Wärmepumpen nach dem Börsenpreis steuern. Gleiche Wärme, geringere Stromkosten, und die Demo zeigt, welche Standorte als Nächstes den größten Hebel haben.</p></div>
   </div>
 
   <h2 id="snowflake"><span class="num">5</span>Was Snowflake dazu beiträgt</h2>
@@ -175,7 +175,7 @@
     <li>Proof of Value auf einer Auswahl echter Standorte durchführen.</li>
   </ul>
 
-  <p class="note">Die Demo nutzt fiktive Daten („EPOWER Infrastructure Solutions"; Standorte, Anlagen und Verträge sind erfunden) und echte EPEX-Day-Ahead-Strompreise (Energy-Charts API, Fraunhofer ISE). Alle Euro-Beträge auf dieser Seite sind Beispielrechnungen.</p>
+  <p class="note">Die Demo nutzt fiktive Daten („EPOWER Infrastructure Solutions"; Standorte, Anlagen und Verträge sind erfunden) und echte EPEX-Day-Ahead-Strompreise (Energy-Charts API, Fraunhofer ISE). Konkrete Euro-Beträge berechnet die Demo live mit diesen echten Preisen.</p>
 
 </body>
 </html>
