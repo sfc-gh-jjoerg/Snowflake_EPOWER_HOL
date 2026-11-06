@@ -658,7 +658,8 @@ Snowflake_EPOWER_HOL/
 │   ├── README-module7.md            # EIS concept, EIS Flex, architecture, demo story
 │   ├── eis_setup.ipynb              # Setup notebook (schema EIS_GOLD, data, docs, semantic view, agent)
 │   ├── cleanup-module7.sql          # Module 7 teardown
-│   ├── eis_cio_onepager.html        # Executive one-pager
+│   ├── demo_flow_module7.md         # Demo script: business case intro + guided demo (DE/EN)
+│   ├── eis_onepager_de.html         # Executive one-pager (German)
 │   └── docs/                        # Contracts, OEM manuals, EIS Flex program guide
 │
 ├── demo_data/
