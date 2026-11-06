@@ -660,6 +660,7 @@ Snowflake_EPOWER_HOL/
 │   ├── cleanup-module7.sql          # Module 7 teardown
 │   ├── demo_flow_module7.md         # Demo script: business case intro + guided demo (DE/EN)
 │   ├── eis_onepager_de.html         # Executive one-pager (German)
+│   ├── eis_handout_de.html          # Hand-out: business case + modular demo guide (German)
 │   └── docs/                        # Contracts, OEM manuals, EIS Flex program guide
 │
 ├── demo_data/

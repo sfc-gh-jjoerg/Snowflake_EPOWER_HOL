@@ -3,7 +3,7 @@
 **Zielgruppe:** CIO / Management, keine Domänen-Experten
 **Dauer:** 20–25 Minuten (5 Min. Einstieg, 15 Min. Demo, 5 Min. Abschluss)
 **Agent:** **EIS Operations** (`EPOWER_DEMO.EIS_GOLD.EIS_OPERATIONS_AGENT`) in Snowflake CoWork
-**Begleitmaterial:** [One-Pager (DE)](eis_onepager_de.html), [README-module7.md](README-module7.md)
+**Begleitmaterial:** [One-Pager (DE)](eis_onepager_de.html), [Hand-out für Kollegen mit modularer Demo (DE)](eis_handout_de.html), [README-module7.md](README-module7.md)
 
 > Die Fragen sind jeweils auf Deutsch und Englisch angegeben. Der Agent antwortet in der Sprache der Frage. Ein Sprachwechsel mitten in der Demo ist ein kleiner Wow-Moment.
 

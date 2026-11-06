@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="snowflake-source" content="cortex-agent-authored" />
+  <title>Hand-out: EIS Site &amp; Asset Intelligence – Business Case &amp; Demo</title>
+  <script type="application/json" id="snowflake-report-metadata">
+  {
+    "generated": "2026-11-06",
+    "intent": "German hand-out for colleagues: business case, concepts and a modular demo guide (independent modules of max. 5 minutes) for Module 7 EIS Site & Asset Intelligence",
+    "dataSources": [
+      { "type": "file", "path": "07-eis-site-asset-intelligence/eis_onepager_de.html" },
+      { "type": "file", "path": "07-eis-site-asset-intelligence/demo_flow_module7.md" },
+      { "type": "file", "path": "07-eis-site-asset-intelligence/README-module7.md" }
+    ],
+    "sections": [
+      { "id": "ueberblick", "title": "Auf einen Blick", "producerNotes": "Narrative; no fixed figures." },
+      { "id": "anlagen", "title": "Die Anlagen", "producerNotes": "From README 1.1." },
+      { "id": "garantien", "title": "Konzept 1: Garantien und Pönalen", "producerNotes": "From README 3.1; Klinikum storyline." },
+      { "id": "flex", "title": "Konzept 2: EIS Flex", "producerNotes": "Illustrative price shape only, no real values." },
+      { "id": "module", "title": "Demo-Module", "producerNotes": "Questions identical to demo_flow_module7.md. Module M5 intentionally omitted." },
+      { "id": "faq", "title": "Häufige Fragen", "producerNotes": "From demo_flow_module7.md Q&A." }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --ink: light-dark(#14213d, #e8edf5);
+      --muted: light-dark(#5b6472, #9aa4b2);
+      --accent: light-dark(#0b6bcb, #5aa9ff);
+      --accent-soft: light-dark(#e6f1fc, #13304d);
+      --bad: light-dark(#b42318, #ff8a80);
+      --bad-soft: light-dark(#fdecea, #3a1715);
+      --good: light-dark(#067647, #6ee7a8);
+      --good-soft: light-dark(#e7f6ee, #12301f);
+      --card: light-dark(#f6f8fb, #1a212b);
+      --line: light-dark(#dde3ea, #2c3644);
+    }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, system-ui, "Segoe UI", sans-serif; max-width: 1000px; width: 100%; margin: 0 auto; padding: clamp(16px, 4vw, 32px); color: var(--ink); line-height: 1.55; }
+    img, svg { max-width: 100%; height: auto; }
+    a { color: var(--accent); }
+    .hero { background: linear-gradient(135deg, light-dark(#0b6bcb, #0d3b66), light-dark(#29b5e8, #145a8c)); color: #fff; border-radius: 14px; padding: clamp(20px, 4vw, 32px); }
+    .hero .kicker { text-transform: uppercase; letter-spacing: .08em; font-size: 12px; opacity: .85; margin: 0 0 6px; }
+    .hero h1 { margin: 0 0 8px; font-size: clamp(24px, 4.5vw, 34px); line-height: 1.2; }
+    .hero p { margin: 0; font-size: clamp(15px, 2.2vw, 18px); opacity: .95; }
+    .toc { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-top: 18px; font-size: 14px; }
+    .toc ol { margin: 6px 0 0; padding-left: 20px; columns: 2; column-gap: 28px; }
+    .toc li { break-inside: avoid; margin-bottom: 2px; }
+    .part { margin: 40px 0 6px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 700; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+    h2 { font-size: 21px; margin: 26px 0 10px; }
+    h3 { font-size: 16px; margin: 18px 0 8px; }
+    .lead { font-size: 16px; margin: 0 0 12px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+    .card h3 { margin: 0 0 6px; font-size: 15px; }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-top: 8px; }
+    .tag.yes { background: var(--good-soft); color: var(--good); }
+    .tag.no { background: var(--card); color: var(--muted); border: 1px solid var(--line); }
+    .ba { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+    .ba .col { border-radius: 12px; padding: 16px 18px; border: 1px solid var(--line); }
+    .ba .before { background: var(--bad-soft); }
+    .ba .after { background: var(--good-soft); }
+    .ba h3 { margin: 0 0 8px; }
+    .ba .before h3 { color: var(--bad); }
+    .ba .after h3 { color: var(--good); }
+    .ba ol, .ba ul { margin: 0; padding-left: 20px; font-size: 14px; }
+    .ba .result { margin: 10px 0 0; font-weight: 700; font-size: 14px; }
+    .quote { border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 10px 14px; border-radius: 6px; margin: 14px 0; font-size: 14px; }
+    .table-wrap { overflow-x: auto; margin: 10px 0; }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+    th { background: var(--card); }
+    .chart { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 12px 0; }
+    .bars { display: flex; align-items: flex-end; gap: 3px; height: 130px; }
+    .bar { flex: 1; background: light-dark(#c7d0db, #3a4656); border-radius: 3px 3px 0 0; }
+    .bar.on { background: var(--good); }
+    .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--muted); margin-top: 10px; }
+    .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .steps li { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px 12px 46px; position: relative; font-size: 14px; }
+    .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 12px; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; text-align: center; line-height: 24px; font-weight: 700; font-size: 13px; }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+    summary { cursor: pointer; font-weight: 600; }
+    .module { border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 18px 20px; margin: 22px 0; }
+    .module .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+    .module .head h3 { margin: 0; font-size: 18px; }
+    .badge { background: var(--accent); color: #fff; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700; }
+    .badge.time { background: var(--accent-soft); color: var(--accent); }
+    .goal { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
+    .q { background: var(--accent-soft); border-radius: 8px; padding: 10px 14px; margin: 8px 0; font-size: 14px; }
+    .q .lang { font-weight: 700; font-size: 12px; color: var(--accent); margin-right: 6px; }
+    .kv { display: grid; grid-template-columns: minmax(130px, 170px) 1fr; gap: 6px 14px; font-size: 14px; margin-top: 10px; }
+    .kv dt { font-weight: 700; color: var(--muted); }
+    .kv dd { margin: 0; }
+    .wow { color: var(--good); font-weight: 700; }
+    .check li { margin-bottom: 4px; font-size: 14px; }
+    code { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; font-size: 12.5px; word-break: break-word; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 30px; border-top: 1px solid var(--line); padding-top: 10px; }
+    @media (max-width: 560px) { .toc ol { columns: 1; } .kv { grid-template-columns: 1fr; } }
+    @media print {
+      body { max-width: none; padding: 0; font-size: 12px; }
+      .toc { display: none; }
+      .module { break-before: page; break-inside: avoid; }
+      #teil-b, #teil-c { break-before: page; }
+      details { display: block; }
+      details > summary { list-style: none; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <p class="kicker">Hand-out für Kollegen · EPOWER Infrastructure Solutions</p>
+    <h1>EIS Site &amp; Asset Intelligence: Business Case verstehen und Demo zeigen</h1>
+    <p>Lesezeit ca. 15 Minuten. Danach kannst du den Business Case erklären und die Demo in unabhängigen Modulen von je höchstens 5 Minuten zeigen.</p>
+  </div>
+
+  <nav class="toc" aria-label="Inhalt">
+    <strong>Inhalt</strong>
+    <ol>
+      <li><a href="#ueberblick">Auf einen Blick</a></li>
+      <li><a href="#problem">Unternehmen und Problem</a></li>
+      <li><a href="#anlagen">Die Anlagen</a></li>
+      <li><a href="#garantien">Konzept 1: Garantien und Pönalen</a></li>
+      <li><a href="#flex">Konzept 2: EIS Flex</a></li>
+      <li><a href="#snowflake">Rolle von Snowflake</a></li>
+      <li><a href="#moduluebersicht">Modulübersicht</a></li>
+      <li><a href="#vorbereitung">Vorbereitung</a></li>
+      <li><a href="#m0">M0 Business Case Pitch</a></li>
+      <li><a href="#m1">M1 Pönale-Risiko erkennen</a></li>
+      <li><a href="#m2">M2 Ursache und Reparatur</a></li>
+      <li><a href="#m3">M3 EIS Flex: Wert und Rollout</a></li>
+      <li><a href="#m4">M4 Fahrplan für morgen</a></li>
+      <li><a href="#kombis">Kombinationen</a></li>
+      <li><a href="#abschluss">Abschluss</a></li>
+      <li><a href="#faq">Häufige Fragen</a></li>
+      <li><a href="#glossar">Glossar</a></li>
+      <li><a href="#dateien">Wo finde ich was?</a></li>
+    </ol>
+  </nav>
+
+  <!-- ===================== TEIL A ===================== -->
+  <p class="part" id="teil-a">Teil A · Verstehen</p>
+
+  <h2 id="ueberblick">1. Auf einen Blick</h2>
+  <p class="lead">Ein Energiedienstleister betreibt Anlagen bei Kunden und <strong>garantiert</strong>, dass sie laufen. Die Daten dazu liegen verstreut, Probleme fallen spät auf, und günstige Strompreise bleiben ungenutzt. Eine <strong>Daten- und KI-Plattform</strong> bringt Betriebsdaten, Verträge, Handbücher und Strompreise zusammen. Ein Agent beantwortet Fragen in normaler Sprache, mit Euro-Betrag und konkreter Empfehlung.</p>
+  <div class="grid">
+    <div class="card"><h3>Pönalen vermeiden</h3><p>Garantierisiken Wochen vor dem Quartalsende erkennen, in Euro beziffert.</p></div>
+    <div class="card"><h3>Schneller reparieren</h3><p>Ursache aus den Betriebsdaten und Anleitung aus dem Handbuch, in einer Antwort.</p></div>
+    <div class="card"><h3>Energiekosten senken</h3><p>Wärmepumpen in den günstigsten Stunden laufen lassen: gleiche Wärme, weniger Stromkosten.</p></div>
+  </div>
+  <p class="quote"><strong>Kernbotschaft:</strong> Betriebsdaten, Verträge und Handbücher auf einer Plattform. Ein Agent, der in Euro antwortet und konkrete Maßnahmen empfiehlt.</p>
+
+  <h2 id="problem">2. Das Unternehmen und das Problem</h2>
+  <p><strong>EPOWER Infrastructure Solutions (EIS)</strong> ist ein fiktiver B2B-Energiedienstleister in Deutschland. EIS plant, finanziert und betreibt Energiezentralen bei Kunden, z.&nbsp;B. in Krankenhäusern, Industrieparks, Wohnquartieren, auf Campus-Geländen und in Fernwärmenetzen. Die Verträge laufen 10–20 Jahre. EIS garantiert darin Verfügbarkeit und Effizienz der Anlagen; wird eine Garantie verfehlt, fällt eine <strong>Vertragsstrafe (Pönale)</strong> an.</p>
+  <div class="grid">
+    <div class="card"><h3>Daten in Silos</h3><p>Betriebsdaten in vielen Leitsystemen, Wartung im ERP, Verträge und Handbücher als PDF, Strompreise an der Börse.</p></div>
+    <div class="card"><h3>Späte Erkennung</h3><p>Ob eine Garantie verfehlt wird, zeigt sich oft erst im Quartalsbericht.</p></div>
+    <div class="card"><h3>Ungenutztes Potenzial</h3><p>Strompreise schwanken stündlich. Viele Wärmepumpen laufen trotzdem unabhängig vom Preis.</p></div>
+  </div>
+
+  <h2 id="anlagen">3. Die Anlagen in einer Energiezentrale</h2>
+  <div class="grid">
+    <div class="card"><h3>BHKW (Blockheizkraftwerk)</h3><p>Erzeugt mit Gas gleichzeitig Strom und Wärme. Läuft nach Wärmebedarf.</p><span class="tag no">nicht Teil von EIS Flex</span></div>
+    <div class="card"><h3>Großwärmepumpe</h3><p>Macht aus 1 Teil Strom (plus Umweltwärme) rund 3 Teile Wärme (COP ≈ 3).</p><span class="tag yes">Hebel von EIS Flex</span></div>
+    <div class="card"><h3>Gaskessel</h3><p>Nur Wärme, für Spitzenlast und als Reserve.</p><span class="tag no">nicht Teil von EIS Flex</span></div>
+    <div class="card"><h3>Wärmespeicher</h3><p>Großer Heißwassertank: speichert Wärme und gibt sie später ab.</p><span class="tag yes">Voraussetzung für EIS Flex</span></div>
+  </div>
+  <p style="font-size:14px;margin-top:10px"><strong>Normalbetrieb:</strong> Jede Stunde deckt zuerst die Wärmepumpe den Bedarf (Grundlast), dann das BHKW, zuletzt der Kessel.</p>
+
+  <h2 id="garantien">4. Konzept 1: Garantien und Pönalen</h2>
+  <p>Verträge garantieren die <strong>Verfügbarkeit</strong> (Anteil der Zeit ohne Störung) und den <strong>Wirkungsgrad</strong> der Anlagen, gemessen pro Quartal. Jeder verfehlte oder angefangene Prozentpunkt kostet eine im Vertrag festgelegte Pönale.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Begriff</th><th>Bedeutung in der Demo</th></tr></thead>
+      <tbody>
+        <tr><td>Messfenster</td><td>Die <strong>letzten 30 Tage</strong> als Frühindikator: „Wenn es so weitergeht, ist das die Pönale für das Quartal."</td></tr>
+        <tr><td>Status</td><td><strong>AT_RISK</strong> = unter der Garantie · <strong>WATCH</strong> = weniger als 1 Punkt Abstand · <strong>OK</strong></td></tr>
+        <tr><td>Vertragsbasis</td><td>Je Anlage (jede Einheit muss die Garantie erfüllen), im Durchschnitt aller Einheiten oder auf Ebene der Wärmeversorgung</td></tr>
+        <tr><td>Health Score</td><td>0–100 je Anlage aus Verfügbarkeit, anhaltendem Wirkungsgradverlust, Störungen und Warnungen (CRITICAL / WARNING / GOOD)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Vorher / Nachher: das BHKW im Klinikum Hamburg-Nord</h3>
+  <div class="ba">
+    <div class="col before">
+      <h3>Vorher: manuell und reaktiv</h3>
+      <ol>
+        <li>Die Anlage meldet einen Fehler, der Techniker quittiert ihn und startet neu.</li>
+        <li>Niemand verbindet die wiederholten Ausfälle mit dem sinkenden Wirkungsgrad.</li>
+        <li>Die Garantie-Klausel steht im Vertrags-PDF, getrennt von den Betriebsdaten.</li>
+        <li>Am Quartalsende zeigt der Bericht: Garantie verfehlt.</li>
+      </ol>
+      <p class="result">Ergebnis: eine hohe Pönale, erst im Nachhinein erkannt.</p>
+    </div>
+    <div class="col after">
+      <h3>Nachher: mit dem EIS-Agenten</h3>
+      <ol>
+        <li>Frage in normaler Sprache: <em>„Welche Verträge sind gefährdet?"</em></li>
+        <li>Der Agent nennt das Klinikum, beziffert das Risiko in Euro und zeigt die Ursache: verschmutzter Abgaswärmetauscher (Fehler F-217).</li>
+        <li>Er liefert Reinigungsanleitung und Ersatzteil aus dem Herstellerhandbuch.</li>
+        <li>Die Wartung wird geplant, bevor die Garantie verfehlt wird.</li>
+      </ol>
+      <p class="result">Ergebnis: Risiko Wochen vorher erkannt, Pönale vermeidbar.</p>
+    </div>
+  </div>
+
+  <h2 id="flex">5. Konzept 2: EIS Flex, gleiche Wärme, günstigerer Strom</h2>
+  <p class="lead">Der Strompreis an der Börse ändert sich jede Stunde. Mit einem Wärmespeicher muss die Wärmepumpe nicht genau dann laufen, wenn Wärme gebraucht wird. <strong>Sie erzeugt die Wärme des Tages in den günstigsten Stunden und speichert sie</strong>, so wie man das Handy nachts lädt.</p>
+  <div class="chart" aria-label="Beispielhafter Strompreisverlauf über 24 Stunden, die günstigsten Stunden markiert">
+    <div class="bars">
+      <div class="bar" style="height:54%"></div><div class="bar" style="height:50%"></div><div class="bar on" style="height:47%"></div><div class="bar on" style="height:45%"></div>
+      <div class="bar on" style="height:44%"></div><div class="bar on" style="height:48%"></div><div class="bar" style="height:66%"></div><div class="bar" style="height:83%"></div>
+      <div class="bar" style="height:79%"></div><div class="bar" style="height:62%"></div><div class="bar on" style="height:48%"></div><div class="bar on" style="height:38%"></div>
+      <div class="bar on" style="height:33%"></div><div class="bar on" style="height:31%"></div><div class="bar on" style="height:34%"></div><div class="bar on" style="height:43%"></div>
+      <div class="bar" style="height:59%"></div><div class="bar" style="height:90%"></div><div class="bar" style="height:100%"></div><div class="bar" style="height:93%"></div>
+      <div class="bar" style="height:76%"></div><div class="bar" style="height:66%"></div><div class="bar" style="height:61%"></div><div class="bar" style="height:57%"></div>
+    </div>
+    <div class="legend"><span><i style="background: light-dark(#c7d0db, #3a4656)"></i>Strompreis pro Stunde, 0–23 Uhr (Beispielverlauf)</span><span><i style="background: var(--good)"></i>Mit EIS Flex: Wärmepumpe läuft in den günstigsten Stunden</span></div>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Die Regel in 4 Schritten</h3><p>1. Wärmemenge des Tages bestimmen · 2. Stunden nach Börsenpreis sortieren · 3. Wärmepumpe in den günstigsten Stunden voll laufen lassen · 4. Der Speicher gleicht aus: laden, wenn mehr erzeugt wird als gebraucht, entladen, wenn weniger.</p></div>
+    <div class="card"><h3>Feste Regel</h3><p>Der Wärmebedarf wird <strong>immer</strong> gedeckt. EIS Flex ändert nur, <em>wann</em> die Wärmepumpe läuft, nicht <em>wie viel</em> Wärme geliefert wird. BHKW und Kessel laufen unverändert.</p></div>
+    <div class="card"><h3>Empfehlung, keine Steuerung</h3><p>EIS Flex erstellt einen Fahrplan für den nächsten Tag. Die Anlagensteuerung vor Ort (SCADA/EMS) steuert in Echtzeit und hat das letzte Wort.</p></div>
+  </div>
+  <h3>Kennzahlen</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Kennzahl</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Flex-Marge</strong></td><td>Stromkosten der Wärmepumpe im Normalbetrieb minus Stromkosten mit EIS Flex, bei gleicher Wärmemenge</td></tr>
+        <tr><td><strong>Erzielte Marge</strong></td><td>Flex-Marge an teilnehmenden Standorten: tatsächlich gespart</td></tr>
+        <tr><td><strong>Entgangene Marge</strong></td><td>Mögliche Flex-Marge an Standorten ohne EIS Flex: der Business Case für den Rollout</td></tr>
+        <tr><td><strong>EIS- / Kundenanteil</strong></td><td>Aufteilung der Marge laut EIS-Flex-Klausel im Vertrag, typischerweise 60/40 oder 70/30</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ba">
+    <div class="col after">
+      <h3>Wann lohnt sich EIS Flex?</h3>
+      <ul>
+        <li>Mindestens eine Großwärmepumpe am Standort.</li>
+        <li>Speicher für mindestens rund 3 Stunden Wärmebedarf, der heute kaum genutzt wird.</li>
+        <li>Keine Versorgungsauflage, die die Speichernutzung einschränkt.</li>
+      </ul>
+      <p class="result">Sind Wärmepumpe und Speicher vorhanden, ist keine neue Hardware nötig. Nur die Fahrweise ändert sich.</p>
+    </div>
+    <div class="col" style="background:var(--card)">
+      <h3>Eher nicht geeignet, wenn …</h3>
+      <ul>
+        <li>keine Wärmepumpe oder nur ein sehr kleiner Speicher vorhanden ist,</li>
+        <li>der Strompreis über den Tag kaum schwankt oder der Standort sehr klein ist,</li>
+        <li>kritische Versorgung (z.&nbsp;B. Klinik) einen Mindestfüllstand verlangt,</li>
+        <li>die Anlagen oft gestört sind (zusätzliche Starts erhöhen den Verschleiß).</li>
+      </ul>
+      <p class="result">Fehlt die Hardware, wird daraus ein Investitionsprojekt.</p>
+    </div>
+  </div>
+
+  <h2 id="snowflake">6. Die Rolle von Snowflake</h2>
+  <ul class="steps">
+    <li><strong>Zusammenführen:</strong> Betriebsdaten, Verträge, Handbücher und Strompreise auf einer gesicherten Plattform, mit klaren Zugriffsrechten.</li>
+    <li><strong>Verstehen:</strong> KI liest Verträge und Handbücher und verknüpft sie mit den Anlagendaten. Fragen auf Deutsch oder Englisch.</li>
+    <li><strong>Handeln:</strong> Konkrete Empfehlungen: welche Wartung, welches Ersatzteil, wann die Wärmepumpe laufen soll.</li>
+  </ul>
+  <p class="quote">Snowflake ist die <strong>Daten-, Analyse- und Empfehlungsebene</strong>. Die Echtzeit-Steuerung der Anlagen bleibt bei den Leitsystemen vor Ort. Snowflake ersetzt sie nicht.</p>
+  <details>
+    <summary>Was die Demo bewusst vereinfacht</summary>
+    <ul>
+      <li>Standorte, Anlagen, Verträge und Störungen sind <strong>fiktiv</strong> und mit festen Mustern erzeugt, damit die Story bei jedem Lauf stimmt. Die <strong>Strompreise sind echt</strong> (EPEX Day-Ahead, DE-LU, Energy-Charts API / Fraunhofer ISE).</li>
+      <li>Der Speicher wird pro Tag mit höchstens 85&nbsp;% seiner Kapazität genutzt. Weitere Regeln der Betriebsrichtlinie (10–95&nbsp;% Füllstand, max. 25&nbsp;% Laden pro Stunde, Mindestfüllstand in Kliniken) werden nicht simuliert.</li>
+      <li>Der Fahrplan ist regelbasiert. Er ließe sich zu mathematischer Optimierung oder ML-Prognosen erweitern.</li>
+    </ul>
+  </details>
+
+  <!-- ===================== TEIL B ===================== -->
+  <p class="part" id="teil-b">Teil B · Zeigen</p>
+
+  <h2 id="moduluebersicht">7. Modulübersicht</h2>
+  <p>Jedes Modul steht für sich: Es hat einen eigenen Einstiegssatz und dauert höchstens 5 Minuten. Die Module lassen sich frei kombinieren.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Modul</th><th>Dauer</th><th>Kernaussage</th><th>System nötig?</th></tr></thead>
+      <tbody>
+        <tr><td><a href="#m0">M0 Business Case Pitch</a></td><td>3 Min.</td><td>Warum das Thema relevant ist</td><td>Nein</td></tr>
+        <tr><td><a href="#m1">M1 Pönale-Risiko erkennen</a></td><td>4 Min.</td><td>Risiko in Euro, Wochen vor dem Quartalsende</td><td>Ja</td></tr>
+        <tr><td><a href="#m2">M2 Ursache und Reparatur</a></td><td>5 Min.</td><td>Daten + Handbuch in einer Antwort</td><td>Ja</td></tr>
+        <tr><td><a href="#m3">M3 EIS Flex: Wert und Rollout</a></td><td>5 Min.</td><td>Gleiche Wärme, günstigerer Strom, nächste Standorte</td><td>Ja</td></tr>
+        <tr><td><a href="#m4">M4 Fahrplan für morgen</a></td><td>3 Min.</td><td>Von echten Börsenpreisen zum Stundenplan</td><td>Ja</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="vorbereitung">8. Vorbereitung (einmalig, ca. 10 Min.)</h2>
+  <ol class="check">
+    <li>Modul 1 und Modul 7 sind aufgesetzt: das Notebook <code>eis_setup.ipynb</code> lief ohne Fehler.</li>
+    <li>Den <strong>Story Check</strong> (Notebook, Abschnitt 9) ausführen und die aktuellen Zahlen notieren. Die Zahlen ändern sich mit den echten Strompreisen, also nicht auswendig lernen.</li>
+    <li>Strompreise für morgen: werden um ca. 17:00 MEZ automatisch geladen. Früher (nach 13:00 MEZ): <code>CALL EPOWER_DEMO.EPOWER_OPS.FETCH_DAY_AHEAD_PRICES(CURRENT_DATE() + 1);</code></li>
+    <li>Snowflake CoWork öffnen und den Agenten <strong>EIS Operations</strong> auswählen.</li>
+    <li>Eine Testfrage stellen, damit Warehouse und Agent „warm" sind.</li>
+  </ol>
+
+  <section class="module" id="m0">
+    <div class="head"><span class="badge">M0</span><h3>Business Case Pitch</h3><span class="badge time">3 Min. · ohne System</span></div>
+    <p class="goal">Ziel: in drei Minuten klarmachen, wo Geld verloren geht und was möglich ist. Eignet sich als Einstieg vor jedem anderen Modul.</p>
+    <p class="q"><span class="lang">Talk Track</span>„Stellen Sie sich ein Unternehmen vor, das Energieanlagen bei seinen Kunden baut und betreibt: Blockheizkraftwerke im Krankenhaus, Wärmepumpen im Fernwärmenetz, Speicher im Industriepark. Die Verträge laufen 15, 20 Jahre, und das Unternehmen <strong>garantiert</strong>, dass die Anlagen laufen. Wird die Garantie verfehlt, zahlt es eine Vertragsstrafe. Die nötigen Informationen liegen verstreut: Betriebsdaten in den Leitsystemen, Wartung im ERP, Garantien im Vertrags-PDF, Anleitungen im Herstellerhandbuch, Strompreise an der Börse. Probleme fallen oft erst im Quartalsbericht auf, und Wärmepumpen laufen unabhängig davon, ob Strom gerade teuer oder billig ist. Heute zeige ich, wie eine Daten- und KI-Plattform drei Fragen beantwortet: <strong>Wo verlieren wir Geld? Warum? Und wo können wir sofort sparen?</strong>"</p>
+    <dl class="kv"><dt>Hilfsmittel</dt><dd>Abschnitte 1–3 dieses Hand-outs oder der One-Pager</dd></dl>
+  </section>
+
+  <section class="module" id="m1">
+    <div class="head"><span class="badge">M1</span><h3>Pönale-Risiko erkennen</h3><span class="badge time">4 Min.</span></div>
+    <p class="goal">Ziel: zeigen, dass Garantierisiken in Euro sichtbar werden, bevor das Quartal vorbei ist.</p>
+    <p><strong>Einstieg:</strong> „EIS garantiert seinen Kunden Verfügbarkeit, und jeder verfehlte Prozentpunkt kostet Geld. Fragen wir, wo wir gerade gefährdet sind."</p>
+    <p class="q"><span class="lang">DE</span>Welche Verträge laufen Gefahr, in diesem Quartal ihre Garantie zu verfehlen, und wie hoch ist unser Pönale-Risiko?</p>
+    <p class="q"><span class="lang">EN</span>Which contracts are at risk of missing their guarantee this quarter, and what is our € exposure?</p>
+    <dl class="kv">
+      <dt>Im Hintergrund</dt><dd>Der Agent nutzt die semantische Sicht (Text-zu-SQL) und verbindet Betriebsdaten mit den Garantien aus den Verträgen.</dd>
+      <dt>Erwartetes Ergebnis</dt><dd>Klinikum Hamburg-Nord mit dem größten Risiko (BHKW-2 unter der garantierten Verfügbarkeit), ein kleinerer Fall am Campus Kiel, Chemiepark Leuna unter Beobachtung. Jeweils mit Euro-Betrag.</dd>
+      <dt>Wow-Satz</dt><dd class="wow">„Eine Frage in normaler Sprache, die Antwort in Euro, und zwar jetzt, nicht am Quartalsende."</dd>
+      <dt>Optionale Nachfrage</dt><dd><em>„Zeige das Risiko je Vertrag als Balkendiagramm."</em></dd>
+      <dt>Fallback</dt><dd>Kommt keine Euro-Zahl: nachfragen <em>„Wie hoch ist die Pönale je Vertrag in Euro?"</em></dd>
+    </dl>
+  </section>
+
+  <section class="module" id="m2">
+    <div class="head"><span class="badge">M2</span><h3>Ursache und Reparatur</h3><span class="badge time">5 Min.</span></div>
+    <p class="goal">Ziel: der stärkste Moment. Messdaten, Arbeitsauftrag und Herstellerhandbuch fließen in eine Antwort.</p>
+    <p><strong>Einstieg</strong> (wenn ohne M1 gezeigt): „Im Klinikum Hamburg-Nord ist ein Blockheizkraftwerk mehrfach ausgefallen, und die Garantie ist gefährdet. Fragen wir nach der Ursache."</p>
+    <p class="q"><span class="lang">DE</span>Warum liegt das BHKW-2 im Klinikum Hamburg-Nord unter Plan, und was soll der Techniker tun?</p>
+    <p class="q"><span class="lang">EN</span>Why is Klinikum Hamburg-Nord CHP-2 below target, and what should the technician do?</p>
+    <dl class="kv">
+      <dt>Im Hintergrund</dt><dd>Zwei Werkzeuge nacheinander: die Datenanalyse findet sinkenden Wirkungsgrad, wiederholte Störungen F-217 und einen offenen Arbeitsauftrag. Die Dokumentensuche holt Reinigungsanleitung und Ersatzteil aus dem Herstellerhandbuch.</dd>
+      <dt>Erwartetes Ergebnis</dt><dd>Ursache: verschmutzter Abgaswärmetauscher. Maßnahme: Reinigung nach Handbuch, Ersatzteil-Kit bestellen. Bisher wurde nur neu gestartet, ein Ersatzteil wurde nicht bestellt.</dd>
+      <dt>Wow-Satz</dt><dd class="wow">„Daten aus der Anlage, Klausel aus dem Vertrag, Anleitung aus dem Handbuch, in einer Antwort. Der Techniker weiß, was zu tun ist, bevor die Pönale fällig wird."</dd>
+      <dt>Optionale Nachfrage</dt><dd><em>„Zeige den Wirkungsgrad-Verlauf von BHKW-2 als Chart."</em> Der Verlauf fällt deutlich ab.</dd>
+      <dt>Fallback</dt><dd>Fehlt die Anleitung: nachfragen <em>„Was sagt das Herstellerhandbuch zu Fehler F-217?"</em></dd>
+    </dl>
+  </section>
+
+  <section class="module" id="m3">
+    <div class="head"><span class="badge">M3</span><h3>EIS Flex: Wert und Rollout</h3><span class="badge time">5 Min.</span></div>
+    <p class="goal">Ziel: zeigen, dass dieselbe Wärme günstiger erzeugt werden kann, und welche Standorte als Nächstes dran sind.</p>
+    <p><strong>Einstieg:</strong> „Strom kostet an der Börse jede Stunde etwas anderes. Mit einem Wärmespeicher kann die Wärmepumpe die Wärme des Tages in den günstigsten Stunden erzeugen, wie beim Handy, das man nachts lädt. Gleiche Wärme, niedrigere Stromkosten, ohne neue Anlagen."</p>
+    <p class="q"><span class="lang">DE</span>Wie viel hat EIS Flex in den letzten 30 Tagen eingespart, und was entgeht uns bei den Standorten, die noch nicht teilnehmen?</p>
+    <p class="q"><span class="lang">EN</span>How much did EIS Flex save in the last 30 days, and what are we missing on sites that are not enrolled?</p>
+    <p class="q"><span class="lang">DE</span>Welche fünf Standorte sollten wir als Nächstes in EIS Flex aufnehmen?</p>
+    <p class="q"><span class="lang">EN</span>Which five sites should we onboard to EIS Flex next?</p>
+    <dl class="kv">
+      <dt>Im Hintergrund</dt><dd>Die Datenanalyse vergleicht die Stromkosten der Wärmepumpen im Normalbetrieb und mit EIS Flex, auf Basis echter Börsenpreise.</dd>
+      <dt>Erwartetes Ergebnis</dt><dd>Eine erzielte Ersparnis an den Flex-Standorten (Spitzenreiter: Wärmenetz Hamburg-Altona), eine entgangene Ersparnis an den übrigen Standorten und eine Liste der besten Kandidaten, darunter das Wohnquartier München-Riem.</dd>
+      <dt>Wow-Satz</dt><dd class="wow">„Aus einer Analyse wird eine Entscheidungsliste: der Business Case für den Rollout, Standort für Standort."</dd>
+      <dt>Talking Point</dt><dd>„Das sind echte Börsenpreise, täglich automatisch geladen. Dieselbe Datenquelle nutzt bereits ein anderer Geschäftsbereich."</dd>
+      <dt>Fallback</dt><dd>Wird nur ein Teil beantwortet: die zweite Frage separat stellen.</dd>
+    </dl>
+  </section>
+
+  <section class="module" id="m4">
+    <div class="head"><span class="badge">M4</span><h3>Fahrplan für morgen</h3><span class="badge time">3 Min.</span></div>
+    <p class="goal">Ziel: von der Analyse zur konkreten Handlung für den nächsten Tag.</p>
+    <p><strong>Einstieg</strong> (wenn ohne M3 gezeigt): „Die Wärmepumpen im Fernwärmenetz Hamburg-Altona sollen in den günstigsten Stunden laufen. Lassen wir uns den Plan für morgen erstellen."</p>
+    <p class="q"><span class="lang">DE</span>Wann sollen die Wärmepumpen im Wärmenetz Hamburg-Altona morgen laufen? Zeige es als Chart zusammen mit dem Strompreis.</p>
+    <p class="q"><span class="lang">EN</span>When should the Hamburg-Altona heat pumps run tomorrow? Show it as a chart with the power price.</p>
+    <dl class="kv">
+      <dt>Im Hintergrund</dt><dd>Eine Sicht verbindet die neuesten Börsenpreise mit dem erwarteten Wärmebedarf und erstellt daraus einen Stundenplan.</dd>
+      <dt>Erwartetes Ergebnis</dt><dd>Die Wärmepumpen laufen in den günstigsten Stunden (typisch nachts und mittags), der Speicher überbrückt die teuren Abendstunden. Dazu die erwartete Ersparnis des Tages.</dd>
+      <dt>Wow-Satz</dt><dd class="wow">„Snowflake steuert die Anlage nicht, das bleibt beim Leitsystem. Aber es liefert die Empfehlung für morgen, auf Basis echter Marktpreise."</dd>
+      <dt>Hinweis</dt><dd>Sind die Preise für morgen noch nicht geladen, sagt der Agent korrekt „Plan für heute". Siehe Vorbereitung, Punkt 3.</dd>
+    </dl>
+  </section>
+
+  <h2 id="kombis">9. Vorschläge für Kombinationen</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Verfügbare Zeit</th><th>Module</th><th>Geeignet für</th></tr></thead>
+      <tbody>
+        <tr><td>5 Min.</td><td>M0 + M1 · oder nur M3</td><td>Elevator Pitch, Messestand</td></tr>
+        <tr><td>10 Min.</td><td>M1 + M2</td><td>Betrieb und Service, „Daten + Dokumente"</td></tr>
+        <tr><td>15 Min.</td><td>M0 + M1 + M2 + M3</td><td>Management-Termin</td></tr>
+        <tr><td>20 Min.</td><td>M0 – M4 + Abschluss</td><td>Vollständige Story</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="abschluss">10. Abschluss und nächste Schritte</h2>
+  <p class="q"><span class="lang">Talk Track</span>„Wir haben gesehen: Risiken früh erkennen, in Euro. Schneller reparieren, mit Ursache und Anleitung in einer Antwort. Kosten senken, mit gleicher Wärme und günstigerem Strom. Alles auf einer gesicherten Plattform mit klaren Zugriffsrechten, Fragen auf Deutsch oder Englisch."</p>
+  <ul class="steps">
+    <li>1–2 Prioritäten wählen: Garantierisiko, Anlagenzustand oder Flexibilität.</li>
+    <li>Echte Datenquellen benennen: Leitsysteme, ERP/Wartung, Vertragsablage, Marktdaten.</li>
+    <li>Proof of Value auf einer Auswahl echter Standorte.</li>
+  </ul>
+
+  <!-- ===================== TEIL C ===================== -->
+  <p class="part" id="teil-c">Teil C · Nachschlagen</p>
+
+  <h2 id="faq">11. Häufige Fragen</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Frage</th><th>Antwort</th></tr></thead>
+      <tbody>
+        <tr><td>Ersetzt das unsere Leitsysteme / unser EMS?</td><td>Nein. Snowflake ist die Daten-, Analyse- und Empfehlungsebene. Die Echtzeit-Steuerung bleibt vor Ort.</td></tr>
+        <tr><td>Wie kommen die Betriebsdaten hinein?</td><td>Über Standard-Anbindungen (z.&nbsp;B. Streaming, Konnektoren, Dateien aus dem Historian). In der Demo sind sie simuliert.</td></tr>
+        <tr><td>Sind die Zahlen echt?</td><td>Standorte, Anlagen und Verträge sind fiktiv. Die Strompreise sind echte EPEX-Day-Ahead-Preise.</td></tr>
+        <tr><td>Wer darf was sehen?</td><td>Zugriffsrechte über Rollen; jeder Geschäftsbereich hat sein eigenes Schema. Der Agent sieht nur, was die Rolle des Nutzers sehen darf.</td></tr>
+        <tr><td>Wie verlässlich sind die KI-Antworten?</td><td>Der Agent arbeitet auf definierten Kennzahlen (semantische Sicht) und zitiert Dokumente. Er rechnet über nachvollziehbares SQL, das sich anzeigen lässt.</td></tr>
+        <tr><td>Geht das auch mit Optimierung statt Regeln?</td><td>Ja. Die regelbasierte Planung lässt sich zu mathematischer Optimierung (z.&nbsp;B. in Snowpark Python) oder ML-Prognosen erweitern.</td></tr>
+        <tr><td>Warum nur die Wärmepumpe?</td><td>Sie ist der einfachste und wirkungsvollste Hebel: Ihr Strombedarf lässt sich mit einem Speicher zeitlich verschieben, ohne dass sich die gelieferte Wärme ändert.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="glossar">12. Glossar</h2>
+  <div class="table-wrap">
+    <table>
+      <tbody>
+        <tr><td><strong>BHKW</strong></td><td>Blockheizkraftwerk; erzeugt mit Gas gleichzeitig Strom und Wärme (engl. CHP)</td></tr>
+        <tr><td><strong>COP</strong></td><td>Leistungszahl der Wärmepumpe: Wärme geteilt durch Strom (≈ 3). In den Daten als COP × 100 (320 = 3,2)</td></tr>
+        <tr><td><strong>Day-Ahead / EPEX</strong></td><td>Börsenhandel für Strom des Folgetags; Preise je Stunde für die Zone DE-LU, veröffentlicht gegen 13:00 MEZ</td></tr>
+        <tr><td><strong>Pönale</strong></td><td>Vertragsstrafe bei verfehlter Garantie</td></tr>
+        <tr><td><strong>SOC</strong></td><td>Ladestand (State of Charge) des Wärmespeichers in %</td></tr>
+        <tr><td><strong>SCADA / EMS</strong></td><td>Leit- und Energiemanagementsysteme, die die Anlagen in Echtzeit steuern</td></tr>
+        <tr><td><strong>Semantische Sicht</strong></td><td>Geschäftsvokabular in Snowflake, mit dem der Agent Fragen in korrektes SQL übersetzt</td></tr>
+        <tr><td><strong>Cortex Search</strong></td><td>Suche über Dokumente (Verträge, Handbücher), damit der Agent Inhalte zitieren kann</td></tr>
+        <tr><td><strong>Cortex Agent / CoWork</strong></td><td>Der KI-Agent „EIS Operations" und die Chat-Oberfläche, in der er genutzt wird</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="dateien">13. Wo finde ich was?</h2>
+  <p>Alle Dateien im Repository unter <code>07-eis-site-asset-intelligence/</code>:</p>
+  <div class="table-wrap">
+    <table>
+      <tbody>
+        <tr><td><code>eis_setup.ipynb</code></td><td>Setup-Notebook inkl. Story Check (Abschnitt 9)</td></tr>
+        <tr><td><code>README-module7.md</code></td><td>Konzept, Architektur, Logik im Detail (Englisch)</td></tr>
+        <tr><td><code>demo_flow_module7.md</code></td><td>Ausführliches Demo-Skript mit Hintergrund für Presenter und einem Beispiel-Lauf</td></tr>
+        <tr><td><code>eis_onepager_de.html</code></td><td>One-Pager für das Management</td></tr>
+        <tr><td><code>docs/</code></td><td>Verträge, Herstellerhandbücher, Programmleitfaden EIS Flex</td></tr>
+        <tr><td><code>cleanup-module7.sql</code></td><td>Entfernt alle Objekte von Modul 7</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note">Fiktive Daten („EPOWER Infrastructure Solutions": Standorte, Anlagen und Verträge sind erfunden) mit echten EPEX-Day-Ahead-Strompreisen (Energy-Charts API, Fraunhofer ISE). Konkrete Euro-Beträge berechnet die Demo live; dieses Hand-out enthält deshalb bewusst keine festen Zahlen.</p>
+
+</body>
+</html>

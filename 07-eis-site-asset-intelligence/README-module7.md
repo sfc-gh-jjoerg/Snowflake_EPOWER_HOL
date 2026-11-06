@@ -188,7 +188,7 @@ Documents live in [`docs/`](docs/), not in `demo_data/`, so they don't appear in
 
 ## 5. Demo Story (3 moments)
 
-> **Full demo script** with business case intro, talk track, questions (DE/EN), expected results, CIO Q&A and a pre-demo checklist: [`demo_flow_module7.md`](demo_flow_module7.md). Executive one-pager (German): [`eis_onepager_de.html`](eis_onepager_de.html).
+> **Full demo script** with business case intro, talk track, questions (DE/EN), expected results, CIO Q&A and a pre-demo checklist: [`demo_flow_module7.md`](demo_flow_module7.md). Executive one-pager (German): [`eis_onepager_de.html`](eis_onepager_de.html). **Hand-out for colleagues (German)** combining business case, concepts and a modular demo (independent modules of max. 5 minutes, print-friendly): [`eis_handout_de.html`](eis_handout_de.html).
 
 | Moment | Question to the agent | Wow moment |
 |-----|-----------------------|-----------|
